@@ -1,5 +1,3 @@
-console.log(process.env.PRISMIC_ACCESS_TOKEN)
-
 export default {
   head: {
     title: 'Funky Pickle',
