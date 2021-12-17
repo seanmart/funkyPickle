@@ -1,5 +1,5 @@
 <template lang="html">
-  <main id="now" class="learn">
+  <main id="now" class="page-margin">
     Happening Now
   </main>
 </template>
@@ -13,5 +13,4 @@ export default {
 </script>
 
 <style lang="scss">
-
 </style>
