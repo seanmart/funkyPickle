@@ -1,0 +1,31 @@
+$light-grey:#F7F7F9;
+$pink:#D11C9A;
+$violet: #4A5CE9;
+$lime: #E4FE57;
+$black:#0A0A0E;
+$max:1000px;
+$nav:15rem;
+$y: 7.5rem;
+$yhalf:3.75rem;
+$ydouble:15rem;
+$x: 5rem;
+$xhalf:1.5rem;
+$xdouble:6rem;
+$xMargin: calc((100vw - #{$max}) / 2);
+
+:export{
+  lightGrey: $light-grey;
+  pink: $pink;
+  violet: $violet;
+  lime: $lime;
+  black: $black;
+  max: $max;
+  nav: $nav;
+  y: $y;
+  yHalf: $yhalf;
+  yDouble: $ydouble;
+  x: $x;
+  xHalf:$xhalf;
+  xDouble: $xdouble;
+  xMargin: $xMargin;
+}

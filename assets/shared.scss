@@ -1,0 +1,19 @@
+html{
+  background: $light-grey;
+  fill: $black;
+  color: $black;
+}
+
+.block{
+  padding-top:7.5rem;
+  padding-bottom:7.5rem;
+  max-width: 80%;
+}
+
+.block.block--first{
+  padding-top:15rem;
+}
+
+.block.block--fullwidth{
+  max-width: none;
+}
