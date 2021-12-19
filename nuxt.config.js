@@ -38,7 +38,7 @@ export default {
         generatedRoutes.push(
           {
             route: `/${page.uid == 'home' ? '' : page.uid}`,
-            payload: page
+            payload: page.data.body
           }
         )
       })

@@ -33,16 +33,6 @@ export default {
 
       commit('set',{key:'events',data:events})
 
-    },
-    async getPage({state,commit},page){
-      if (!state.pages[page]){
-        let data = await this.$prismic.api.getByUID('page',page)
-        data && commit('setPage',{page,data})
-      }
-      setTimeout(()=>commit('setTransition',false),500)
-    },
-    async getLearn({commit}){
-      setTimeout(()=>commit('setTransition',false),500)
     }
   }
 }
