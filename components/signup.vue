@@ -2,7 +2,7 @@
   <section class="signup block block--fullwidth block--no-top">
     <div class="signup--wrapper">
       <div class="content--wrapper">
-        <h2 class="title title--ft" v-html="signup.title"/>
+        <h2 class="title title--ft" v-html="signupTitle"/>
         <form class="form">
           <input class="field" type="text" name="" value="" placeholder="Name">
           <input class="field" type="text" name="" value="" placeholder="Email">
@@ -17,7 +17,7 @@
 import {mapState} from 'vuex'
 export default {
   computed: mapState({
-    signup: state => state.signup.data || {}
+    signupTitle: state => state.settings.signup_title || {}
   })
 }
 </script>
