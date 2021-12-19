@@ -1,5 +1,5 @@
 <template lang="html">
-  <section class="highlights">
+  <section class="highlights" ref="container">
     <div class="highlights--wrapper block">
       <div class="highlights-carousel--wrapper" ref="carousel">
 
@@ -31,7 +31,9 @@
               <div class="image" v-image:cover="slide.image.url" />
             </div>
 
-            <fancyImage class="image--wrapper" :image="slide.image.url" :distance="200" />
+            <div class="image--wrapper">
+              <div class="image" v-image:cover="slide.image.url"/>
+            </div>
 
           </template>
         </carousel>
@@ -42,9 +44,29 @@
 </template>
 
 <script>
+import {uid} from '../assets/js/helpers'
 export default {
   props:{
     data:Object
+  },
+  data:()=>({
+    id:null
+  }),
+  mounted(){
+    this.id = uid()
+    this.$nextTick(()=>{
+      let imgs = this.$refs.container.querySelectorAll('.image')
+      gsap.to(imgs,1,{y:200,ease:'none',scrollTrigger:{
+        id: this.id,
+        trigger:this.$refs.container,
+        start: 'top bottom',
+        scrub: true
+      }})
+    })
+
+  },
+  destroyed(){
+    ScrollTrigger.getById(this.id).kill()
   }
 }
 </script>
@@ -64,6 +86,15 @@ export default {
     bottom: 0px;
     right: 0px;
     z-index: -1;
+    overflow: hidden;
+
+    .image{
+      position:absolute;
+      top: -200px;
+      left: 0px;
+      bottom: 0px;
+      right: 0px;
+    }
   }
 
   .link{

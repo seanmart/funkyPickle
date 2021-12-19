@@ -20,6 +20,7 @@ export default {
   height: 100vh;
   z-index: -1;
   opacity: .1;
+  opacity: 0;
 
   .rail{
     position: absolute;

@@ -5,10 +5,12 @@
       <nuxt/>
     </div>
     <rails/>
+    <columns/>
   </div>
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
   mounted(){
 
@@ -17,7 +19,7 @@ export default {
       scrollBuddy.init({
         el:'#scroller',
         event: ScrollTrigger.update,
-        inertia: .15
+        inertia: .12
       })
 
       ScrollTrigger.scrollerProxy('#scroller', {
@@ -35,13 +37,32 @@ export default {
       });
 
       ScrollTrigger.defaults({scroller: '#scroller'});
-
     }
   },
+  computed: mapState(['transition']),
   watch:{
-    $route(){
-      !isMobile && scrollBuddy.reset
+    transition(on){
+      if(on) return
+      //entering animation
+      gsap.timeline()
+          .set('#scroller',{clearProps:'all'})
+          .to('#columns .column',.85,{x:'101%',ease:'power2.out',stagger:-.075})
+          .set('#columns',{clearProps:'all'})
+          .set('#columns .column',{clearProps:'all'})
     }
+  },
+  middleware({store}){
+    if (process.server) return
+    store.commit('setTransition',true)
+
+    //leaving animation
+    return new Promise((res)=>{
+      gsap.timeline({onComplete:res})
+          .set('#columns',{zIndex:99})
+          .to('#columns .column',.85,{x:0,ease:'power2.out',stagger:.075})
+          .set('#scroller',{opacity:0})
+    })
+
   }
 }
 </script>

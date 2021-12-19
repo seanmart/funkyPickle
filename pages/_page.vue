@@ -2,7 +2,7 @@
   <main v-if="data" class="page--margin">
     <div class="page--content">
       <template v-for="(item,a) in data">
-        <component :is="item.slice_type.replace(/_/g, '-')" :data="item" />
+        <component v-if="item.primary.publish" :is="item.slice_type.replace(/_/g, '-')" :data="item" />
       </template>
     </div>
     <signup/>

@@ -1,7 +1,7 @@
 <template lang="html">
   <section class="big-quote block" ref="container">
     <div class="big-quote--wrapper" ref="quote" :class="{hide}">
-      <split-text :text="data.primary.text[0].text">
+      <split-text :text="quoteText">
         <template #default="{word,line}">
           <div class="line--wrapper" :key="line">
             <h1 class="title title--ft" v-html="word"/>
@@ -21,6 +21,11 @@ export default {
   }),
   mounted(){
     this.fit()
+  },
+  computed:{
+    quoteText(){
+      return `"${this.data.primary.text[0].text}"`
+    }
   },
   methods:{
     fit(){

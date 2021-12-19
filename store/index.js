@@ -12,9 +12,11 @@ export default {
     pages:{},
     preloader: true,
     events:[],
-    signup:{}
+    signup:{},
+    transition:false
   }),
   mutations:{
+    setTransition:(state,x)=> (state.transition = x),
     setPage:(state,{page,data}) => (state.pages[page] = data),
     set:(state,{key,data})=> (state[key] = data)
   },
@@ -28,6 +30,7 @@ export default {
         let data = await this.$prismic.api.getSingle(page)
         data && commit('setPage',{page,data})
       }
+      setTimeout(()=>commit('setTransition',false),500)
     },
     getEvents({commit}){
       commit('set',{key:'events',data:events})

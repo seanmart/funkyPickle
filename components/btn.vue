@@ -1,14 +1,16 @@
 <template lang="html">
-  <button type="button" name="button" :class="`btn btn--${type} btn--${size} fnt--header`">
+  <button type="button" name="button" :class="`btn btn--${type} btn--${size} title--ft`">
 
     <template v-if="link">
-      <nuxt-link :to="link">
+      <nuxt-link :to="link" class="btn--wrapper">
         <slot/>
       </nuxt-link>
     </template>
 
     <template v-else>
-      <slot/>
+      <div class="btn--wrapper">
+        <slot/>
+      </div>
     </template>
 
     <div class="bg"/>
@@ -31,7 +33,11 @@ export default {
     font-size: 1.75rem;
     border: none;
 
-    &.btn--md{padding: 10px 20px}
+    .btn--wrapper{
+      display: block;
+    }
+
+    &.btn--md .btn--wrapper{padding: 10px 20px}
 
     &.btn--pink{background:$pink;color:white}
     &.btn--lime{background:$lime;color:$black}

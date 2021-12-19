@@ -32,7 +32,7 @@ export default {
     {src: '@/plugins/scrollBuddy.js',ssr: false},
     {src: '@/plugins/directives.js',ssr: false}
   ],
-
+  loading: false,
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
