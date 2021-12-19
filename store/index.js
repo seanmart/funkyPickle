@@ -26,7 +26,7 @@ export default {
         data && commit('setPage',{page,data})
       }
       setTimeout(()=>commit('setTransition',false),500)
-      console.log(state.pages)
+      console.log(state)
     },
     async getLearn({commit}){
       setTimeout(()=>commit('setTransition',false),500)
