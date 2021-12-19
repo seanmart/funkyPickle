@@ -1,9 +1,6 @@
 <template lang="html">
   <section class="sponsors block">
-    <div class="header--wrapper">
-      <div class="bar"/>
-      <h4 class="title subtitle--rg" v-html="data.primary.title"/>
-    </div>
+    <section-title :title="data.primary.title"/>
     <div class="content--wrapper">
       <template v-for="(logo,i) in data.items">
         <div :key="i" class="item--wrapper">
@@ -28,18 +25,6 @@ export default {
 
 <style lang="scss">
   .sponsors{
-    .header--wrapper{
-
-      .bar{
-        height: 5px;
-        background: $pink;
-      }
-
-      .title{
-        margin: 3rem 0px;
-      }
-
-    }
 
     .content--wrapper{
       display: flex;

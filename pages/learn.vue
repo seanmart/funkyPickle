@@ -6,8 +6,8 @@
 
 <script>
 export default {
-  mounted(){
-    !isMobile && scrollBuddy.reset()
+  fetch({ store }) {
+    return store.dispatch("getLearn");
   }
 }
 </script>

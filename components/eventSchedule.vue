@@ -1,7 +1,7 @@
 <template lang="html">
   <section class="event-schedule block" v-if="events.length > 0">
     <header class="header--wrapper">
-      <h4 class="title subtitle--rg" v-html="data.primary.title"/>
+      <h4 class="title title--sm" v-html="data.primary.title"/>
       <btn class="link" link="/events">View All</btn>
     </header>
     <div class="content--wrapper">

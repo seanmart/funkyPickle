@@ -17,9 +17,6 @@ export default {
     if (key == "") key = "home"
     return store.dispatch("getPage",key);
   },
-  mounted(){
-    !isMobile && scrollBuddy.reset()
-  },
   computed:{
     data(){
       let state = this.$store.state

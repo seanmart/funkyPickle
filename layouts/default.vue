@@ -46,9 +46,10 @@ export default {
       //entering animation
       gsap.timeline()
           .set('#scroller',{clearProps:'all'})
-          .to('#columns .column',.85,{x:'101%',ease:'power2.out',stagger:-.075})
+          .to('#columns .column',.5,{x:'101%',ease:'power2.out',stagger:.05})
           .set('#columns',{clearProps:'all'})
           .set('#columns .column',{clearProps:'all'})
+      this.$nextTick(()=>!isMobile && scrollBuddy.reset())
     }
   },
   middleware({store}){
@@ -59,7 +60,7 @@ export default {
     return new Promise((res)=>{
       gsap.timeline({onComplete:res})
           .set('#columns',{zIndex:99})
-          .to('#columns .column',.85,{x:0,ease:'power2.out',stagger:.075})
+          .to('#columns .column',.5,{x:0,ease:'power2.out',stagger:.05})
           .set('#scroller',{opacity:0})
     })
 

@@ -2,13 +2,7 @@ import events from '../assets/placeholders/events'
 
 export default {
   state:()=>({
-    nav:[
-      {label:'About',url:'/about'},
-      {label:'Events',url:'/events'},
-      {label:'Happening Now',url:'/now'},
-      {label:'Pickleball 101',url:'/learn'},
-      {label:'Shop',url:'/'}
-    ],
+    nav:[],
     pages:{},
     preloader: true,
     events:[],
@@ -22,18 +16,32 @@ export default {
   },
   actions:{
     nuxtServerInit({commit,dispatch}){
+      dispatch('getNav')
       dispatch('getEvents')
       dispatch('getSignup')
     },
     async getPage({state,commit},page){
       if (!state.pages[page]){
-        let data = await this.$prismic.api.getSingle(page)
+        let data = await this.$prismic.api.getByUID('page',page)
         data && commit('setPage',{page,data})
       }
       setTimeout(()=>commit('setTransition',false),500)
     },
+    async getLearn({commit}){
+      setTimeout(()=>commit('setTransition',false),500)
+    },
     getEvents({commit}){
       commit('set',{key:'events',data:events})
+    },
+    async getNav({commit}){
+      let nav = []
+      let data = await this.$prismic.api.query(this.$prismic.predicates.at('document.type', 'page'))
+      if(data){
+        data.results.forEach(page => page.uid !== 'home' && nav.push({route:`/${page.uid}`, label: page.uid}))
+        nav.push({route:`/learn`, label: 'Learn'})
+        nav.push({url:`https://www.google.com`, label: 'Shop'})
+        commit('set',{key:'nav',data: nav})
+      }
     },
     async getSignup({commit}){
       let data = await this.$prismic.api.getSingle('signup')

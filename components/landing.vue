@@ -7,9 +7,12 @@
 
     <nav v-if="data.primary.nav" ref="nav">
       <template v-for="(link,a) in nav">
-        <nuxt-link class="link--wrapper" :to="link.url">
+        <nuxt-link v-if="link.route" class="link--wrapper" :to="link.route">
           <span class="label" v-html="link.label"/>
         </nuxt-link>
+        <a v-if="link.url" class="link--wrapper" :href="link.url" target="_blank">
+          <span class="label" v-html="link.label"/>
+        </a>
       </template>
     </nav>
   </section>
