@@ -1,6 +1,7 @@
 const Prismic = require('@prismicio/client')
 
 export default {
+  ssr: true,
   head: {
     title: 'Funky Pickle',
     htmlAttrs: {
