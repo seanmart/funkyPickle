@@ -12,10 +12,11 @@
 <script>
 export default {
   fetch({ store,route,payload }) {
-    if (payload) return store.commit('setPage',payload)
-    
     let key = route.path.replace('/','')
     if (key == "") key = "home"
+
+    if (payload) return store.commit('setPage',{page:key, data:payload})
+
     return store.dispatch("getPage",key);
   },
   computed:{
