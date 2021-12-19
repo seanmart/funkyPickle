@@ -27,6 +27,7 @@ export default {
     ]
   },
   generate:{
+    crawler: false,
     async routes(){
       let generatedRoutes = []
       const client = Prismic.client(process.env.PRISMIC_END_POINT, {

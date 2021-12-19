@@ -7,12 +7,13 @@
     </div>
     <signup/>
   </main>
-  <page-404 v-else />
 </template>
 
 <script>
 export default {
-  fetch({ store,route }) {
+  fetch({ store,route,payload }) {
+    if (payload) return store.commit('setPage',payload)
+    
     let key = route.path.replace('/','')
     if (key == "") key = "home"
     return store.dispatch("getPage",key);
