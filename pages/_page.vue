@@ -1,5 +1,6 @@
 <template lang="html">
-  <main v-if="data" class="page--margin">
+  <main class="page--margin">
+    {{$store.state.pages}}
     <div class="page--content">
       <template v-for="(item,a) in data">
         <component v-if="item.primary.publish" :is="item.slice_type.replace(/_/g, '-')" :data="item" />
@@ -7,7 +8,6 @@
     </div>
     <signup/>
   </main>
-  <page-404 v-else />
 </template>
 
 <script>
