@@ -15,10 +15,10 @@ export default {
     set:(state,{key,data})=> (state[key] = data)
   },
   actions:{
-    nuxtServerInit({commit,dispatch}){
-      dispatch('getNav')
-      dispatch('getEvents')
-      dispatch('getSignup')
+    async nuxtServerInit({commit,dispatch}){
+      await dispatch('getNav')
+      await dispatch('getEvents')
+      await dispatch('getSignup')
     },
     async getPage({state,commit},page){
       if (!state.pages[page]){
