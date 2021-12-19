@@ -1,0 +1,58 @@
+html{
+  font-family: 'Open Sans', sans-serif;
+  font-size: calc(6px + 100vw / 300);
+}
+
+body{
+  font-size: 1.25rem;
+}
+
+.title--ft{
+  font-family: 'Saira', sans-serif;
+  font-style: normal;
+  line-height: initial;
+  font-variation-settings: "wght" 500;
+}
+
+.title--bg{
+  font-family: 'Saira', sans-serif;
+  font-size: 11vw;
+  line-height: .85;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-variation-settings: "wdth" 56,"wght" 600;
+}
+
+.title--rg{
+  font-family: 'Saira', sans-serif;
+  font-size: 5rem;
+  line-height:.85;
+  font-weight: 600;
+  font-variation-settings: "wght" 600;
+}
+
+.subtitle--rg{
+  font-size: 2.5rem;
+  line-height: 1.4;
+  font-weight: 400;
+  font-variation-settings: "wght" 400;
+}
+
+.text--bg{
+  font-size: 2rem;
+  line-height: 1.4;
+  font-variation-settings: "wght" 400;
+}
+
+p.text--rg,
+.text--rg p{
+  font-size: 1.3rem;
+  line-height: 1.6;
+  font-variation-settings: "wght" 500;
+  margin-bottom: 1rem;
+}
+
+p.text--rg:last-child,
+.text--rg p:last-child{
+  margin-bottom: 0px;
+}

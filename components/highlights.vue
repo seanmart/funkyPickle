@@ -9,19 +9,19 @@
               <nuxt-link class="link" :to="`/${slide.link.slug}`"/>
             </template>
 
-            <div class="content" v-if="slide.title || slide.description.length > 0">
-              <div class="content--wrapper">
+            <div class="content--wrapper" v-if="slide.title || slide.description.length > 0">
+              <div class="content">
 
                 <template v-if="slide.link.slug">
                   <icon class="arrow" arrow/>
                 </template>
 
                 <template v-if="slide.title">
-                  <h3 class="title fnt--header" v-html="slide.title"/>
+                  <h3 class="title title--rg" v-html="slide.title"/>
                 </template>
 
                 <template v-if="slide.description.length > 0">
-                  <div class="description" v-html="$prismic.asHtml(slide.description)"/>
+                  <div class="description text--rg" v-html="$prismic.asHtml(slide.description)"/>
                 </template>
 
               </div>
@@ -30,6 +30,8 @@
             <div v-if="slide.image.url" class="image--wrapper">
               <div class="image" v-image:cover="slide.image.url" />
             </div>
+
+            <fancyImage class="image--wrapper" :image="slide.image.url" :distance="200" />
 
           </template>
         </carousel>
@@ -43,24 +45,6 @@
 export default {
   props:{
     data:Object
-  },
-  mounted(){
-    this.$nextTick(this.init)
-  },
-  methods:{
-    init(){
-      let imgs = this.$refs.carousel.querySelectorAll('.image')
-
-      gsap.to(imgs,1,{y:200,ease: 'none', scrollTrigger:{
-        id: 'highlights',
-        trigger: this.$refs.carousel,
-        start: 'top bottom',
-        scrub: true,
-      }})
-    }
-  },
-  destroyed(){
-    ScrollTrigger.getById('highlights').kill()
   }
 }
 </script>
@@ -73,23 +57,13 @@ export default {
     height: 45rem;
   }
 
-  .image--wrapper,
-  .image{
+  .image--wrapper{
     position: absolute;
     top: 0px;
     left: 0px;
     bottom: 0px;
     right: 0px;
     z-index: -1;
-  }
-
-  .image--wrapper{
-    overflow: hidden;
-  }
-
-  .image{
-    top: -200px;
-    will-change: transform;
   }
 
   .link{
@@ -102,7 +76,7 @@ export default {
     z-index: 1;
   }
 
-  .content{
+  .content--wrapper{
     position: absolute;
     top: 0px;
     bottom: 0px;
@@ -111,7 +85,7 @@ export default {
     align-items: center;
   }
 
-  .content--wrapper{
+  .content{
     background: $lime;
     flex: 0 0 auto;
     max-width: 40rem;
@@ -130,19 +104,16 @@ export default {
 
     .title{
       text-transform: uppercase;
-      font-size: 5rem;
-      line-height: .9;
       margin-bottom: 2rem;
     }
 
     .description{
       max-width: 90ch;
-      line-height: 1.4;
     }
   }
 
-  .swiper-slide-active .slide--wrapper .content--wrapper,
-  .swiper-slide-duplicate-active .slide--wrapper .content--wrapper{
+  .swiper-slide-active .slide--wrapper .content,
+  .swiper-slide-duplicate-active .slide--wrapper .content{
     opacity: 1;
   }
 }

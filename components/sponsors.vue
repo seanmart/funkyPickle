@@ -2,7 +2,7 @@
   <section class="sponsors block">
     <div class="header--wrapper">
       <div class="bar"/>
-      <h4 class="title title--sm" v-html="data.primary.title"/>
+      <h4 class="title subtitle--rg" v-html="data.primary.title"/>
     </div>
     <div class="content--wrapper">
       <template v-for="(logo,i) in data.items">

@@ -19,14 +19,14 @@ export default {
   right:0px;
   height: 100vh;
   z-index: -1;
-  opacity: .05;
+  opacity: .1;
 
   .rail{
     position: absolute;
     top:0px;
     bottom:0px;
     width:1px;
-    background: black;
+    background: $pink;
     z-index: 2;
 
     &:nth-child(5n+1){left:16.666%}

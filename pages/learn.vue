@@ -1,6 +1,6 @@
 <template lang="html">
   <main id="now" class="learn">
-    Happening Now
+    learn
   </main>
 </template>
 

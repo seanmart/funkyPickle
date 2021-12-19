@@ -1,8 +1,8 @@
 <template lang="html">
-  <section class="signup block block--fullwidth">
+  <section class="signup block block--fullwidth block--no-top">
     <div class="signup--wrapper">
       <div class="content--wrapper">
-        <h2 class="title fnt--header" v-html="signup.title"/>
+        <h2 class="title title--ft" v-html="signup.title"/>
         <form class="form">
           <input class="field" type="text" name="" value="" placeholder="Name">
           <input class="field" type="text" name="" value="" placeholder="Email">
@@ -14,9 +14,11 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapState} from 'vuex'
 export default {
-  computed: mapGetters(['signup'])
+  computed: mapState({
+    signup: state => state.signup.data || {}
+  })
 }
 </script>
 

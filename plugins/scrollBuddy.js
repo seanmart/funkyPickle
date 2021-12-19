@@ -77,6 +77,10 @@ function initScrollBuddy(){
       this.updateDocument()
     }
 
+    update(){
+      this.updateDocument()
+    }
+
     handleWheel(e){
       e.stopPropagation();
       this.window.scrollTop += e.deltaY * 0.75;
