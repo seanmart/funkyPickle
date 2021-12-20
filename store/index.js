@@ -4,7 +4,6 @@ export default {
   state:()=>({
     nav:[],
     pages:{},
-    preloader: true,
     events:[],
     settings:{},
     transition:false
@@ -15,6 +14,16 @@ export default {
     set:(state,{key,data})=> (state[key] = data)
   },
   actions:{
+    async getPage({state,commit},page){
+      if (state.pages[page]) return
+      let results = await this.$prismic.api.getByUID('page', page)
+      results && commit('setPage',{page, data: results.data.body })
+    },
+    async getSingle({state,commit},page){
+      if (state.pages[page]) return
+      let results = await this.$prismic.api.getSingle(page)
+      results && commit('setPage',{page, data: results.data.body })
+    },
     async nuxtServerInit({commit,dispatch}){
 
       let links = []

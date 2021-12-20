@@ -73,8 +73,10 @@ function initScrollBuddy(){
     }
 
     reset(){
+      this.busy = false
       scrollBuddy.updateScroll(0,0)
       this.updateDocument()
+      this.window.scrollTop = 0
     }
 
     update(){

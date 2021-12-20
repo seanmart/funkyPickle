@@ -6,8 +6,8 @@
 
 <script>
 export default {
-  fetch({ store }) {
-    return store.dispatch("getLearn");
+  mounted(){
+    store.commit('setTransition',false)
   }
 }
 </script>

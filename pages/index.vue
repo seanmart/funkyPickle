@@ -9,26 +9,16 @@
 
 <script>
 export default {
+  data:()=>({data:[]}),
   async asyncData({ $prismic, params, error, store, payload }) {
 
     if (payload) return {data:payload}
 
-    let data = null
-
-    if (store.state.pages.home){
-      data = store.state.pages.home
-    } else {
-      try{
-        const results = (await $prismic.api.getSingle('home')).data
-        data = results.body
-        store.commit('setPage',{page: 'home', data })
-      } catch (e) {
-        error({ statusCode: 404, message: 'Page not found' })
-      }
-    }
-    setTimeout(()=>store.commit('setTransition',false),500)
-    return {data}
+    await store.dispatch('getSingle','home')
+    return {data: store.state.pages.home}
   },
-  data:()=>({data:[]})
+  mounted(){
+    this.$store.commit('setTransition',false)
+  }
 }
 </script>

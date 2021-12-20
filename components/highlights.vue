@@ -1,9 +1,9 @@
 <template lang="html">
-  <section class="highlights" ref="container">
-    <div class="highlights--wrapper block">
+  <section class="highlights block block--fullwidth" ref="container">
+    <div class="highlights--wrapper block block--no-top block--no-bottom">
       <div class="highlights-carousel--wrapper" ref="carousel">
 
-        <carousel class="highlights-carousel" :slides="data.items" loop :autoplay="5000" :speed="500">
+        <carousel class="highlights-carousel" :slides="data.items" loop :autoplay="5000" :speed="500" height="45rem">
           <template #default="slide">
             <template v-if="slide.link.slug">
               <nuxt-link class="link" :to="`/${slide.link.slug}`"/>
@@ -74,10 +74,6 @@ export default {
 <style lang="scss">
 .highlights{
   overflow: hidden;
-
-  .highlights-carousel{
-    height: 45rem;
-  }
 
   .image--wrapper{
     position: absolute;

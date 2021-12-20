@@ -1,6 +1,6 @@
 <template lang="html">
   <div ref="carousel" class="swiper" v-if="slides.length > 0">
-    <div class="swiper-wrapper">
+    <div class="swiper-wrapper" :style="{height}">
       <template v-for="(slide,i) in slides">
         <div :key="i" class="swiper-slide">
           <div class="slide--wrapper">
@@ -19,7 +19,8 @@ export default {
     slides:{type:Array, default:()=>[]},
     loop:{type:Boolean,default:false},
     autoplay:{type:Number,default:0},
-    speed:{type: Number,default:400}
+    speed:{type: Number,default:400},
+    height:{type:String,default:'50rem'}
   },
   mounted(){
     let options = {

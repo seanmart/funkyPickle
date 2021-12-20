@@ -9,27 +9,16 @@
 
 <script>
 export default {
+  data:()=>({data:[]}),
   async asyncData({ $prismic, params, error, store, payload }) {
 
     if (payload) return {data:payload}
 
-    let data = null
-    let page = !params.page ? 'home' : params.page
-
-    if (store.state.pages[page]){
-      data = store.state.pages[page]
-    } else {
-      try{
-        const results = (await $prismic.api.getByUID('page', page)).data
-        data = results.body
-        store.commit('setPage',{page, data })
-      } catch (e) {
-        error({ statusCode: 404, message: 'Page not found' })
-      }
-    }
-    setTimeout(()=>store.commit('setTransition',false),500)
-    return {data}
+    await store.dispatch('getPage',params.page)
+    return {data: store.state.pages[params.page]}
   },
-  data:()=>({data:[]})
+  mounted(){
+    this.$store.commit('setTransition',false)
+  }
 }
 </script>
