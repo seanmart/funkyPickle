@@ -4,6 +4,11 @@ html{
   color: $black;
 }
 
+#scroller{
+  width: 100vw;
+  overflow: hidden;
+}
+
 .page--margin{
   padding-left: $menu-width;
 }

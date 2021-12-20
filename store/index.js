@@ -17,21 +17,20 @@ export default {
   actions:{
     async nuxtServerInit({commit,dispatch}){
 
+      let links = []
       let navData = await this.$prismic.api.query(this.$prismic.predicates.at('document.type', 'page'))
+      let settingsData = await this.$prismic.api.getSingle('global_settings')
+      let eventsData = {data: events}
+
       if (navData){
-        let links = []
-        navData.results.forEach(page => page.uid !== 'home' && links.push({route:`/${page.uid}`, label: page.uid}))
+        navData.results.forEach(page => links.push({route:`/${page.uid}`,label: page.data.page_label}))
         links.push({route:`/learn`, label: 'Learn'})
         links.push({url:`https://www.google.com`, label: 'Shop'})
         commit('set',{key:'nav',data: links})
       }
 
-      let settingsData = await this.$prismic.api.getSingle('global_settings')
-      if (settingsData){
-        commit('set',{key:'settings',data: settingsData.data})
-      }
-
-      commit('set',{key:'events',data:events})
+      if (settingsData) commit('set',{key:'settings',data: settingsData.data})
+      if(eventsData) commit('set',{key:'events',data:eventsData.data})
 
     }
   }

@@ -14,15 +14,14 @@ export default {
     if (payload) return {data:payload}
 
     let data = null
-    let page = !params.page ? 'home' : params.page
 
-    if (store.state.pages[page]){
-      data = store.state.pages[page]
+    if (store.state.pages.home){
+      data = store.state.pages.home
     } else {
       try{
-        const results = (await $prismic.api.getByUID('page', page)).data
+        const results = (await $prismic.api.getSingle('home')).data
         data = results.body
-        store.commit('setPage',{page, data })
+        store.commit('setPage',{page: 'home', data })
       } catch (e) {
         error({ statusCode: 404, message: 'Page not found' })
       }
