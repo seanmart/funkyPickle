@@ -2,7 +2,7 @@
   <div>
     <main-menu/>
     <div id="scroller">
-      <nuxt/>
+      <nuxt :key="$router.path"/>
     </div>
     <rails/>
     <columns/>
