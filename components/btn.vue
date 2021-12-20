@@ -41,5 +41,6 @@ export default {
 
     &.btn--pink{background:$pink;color:white}
     &.btn--lime{background:$lime;color:$black}
+    &.btn--black{background:$black;color:white}
   }
 </style>

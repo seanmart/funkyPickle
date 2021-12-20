@@ -1,8 +1,8 @@
 <template lang="html">
-  <section class="event-schedule block" v-if="events.length > 0">
+  <section class="event-schedule block page-margin--right" v-if="events.length > 0">
     <header class="header--wrapper">
       <h4 class="title title--sm" v-html="data.primary.title"/>
-      <btn class="link" link="/events">View All</btn>
+      <btn class="link" type="black" link="/events">View All</btn>
     </header>
     <div class="content--wrapper">
       <template v-for="(evnt,i) in events.slice(0,data.primary.count)">
@@ -12,8 +12,8 @@
             <h3 class="month" v-html="new Intl.DateTimeFormat('en-US', {month:'long'}).format(evnt.date)"/>
           </div>
           <div class="info--wrapper">
-            <h5 class="title--ft location" v-html="evnt.location"/>
-            <div class="description--wrapper">
+            <div class="text--wrapper">
+              <h5 class="title--ft location" v-html="evnt.location"/>
               <p class="text--rg" v-html="evnt.description"/>
             </div>
             <div class="arrow--wrapper">
@@ -61,13 +61,17 @@ export default {
     display: flex;
     flex-direction: row;
     margin-bottom: 1rem;
+    color: $black;
 
     .date--wrapper{
       flex: 0 0 25%;
       padding: 2rem 0px;
-      background: $black;
-      color: white;
+      background: $pink;
+      color: $lime;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
 
       .day{
         font-size: 6rem;
@@ -84,30 +88,23 @@ export default {
       flex: 1 1 auto;
       background: white;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-left:3rem;
-      padding-right: 9rem;
-      position: relative;
+      flex-direction: row;
+      padding: 3rem;
+
+      .text--wrapper{
+        flex: 1 1 100%;
+      }
 
       .location{
         text-transform: uppercase;
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
+        font-size: 3rem;
       }
 
       .arrow--wrapper{
-        position: absolute;
-        top:0px;
-        bottom:0px;
-        right:0px;
-        width: 6rem;
-        display: flex;
-        align-items: center;
+        flex: 0 0 auto;
 
         .arrow{
           width: 3rem;
-          fill:$pink;
         }
       }
     }

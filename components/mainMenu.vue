@@ -1,11 +1,11 @@
 <template lang="html">
   <nav id="main-menu">
-    <nuxt-link to="/" class="logo--wrapper">
-      <logo class="logo"/>
+    <nuxt-link to="/" class="logo-side--wrapper">
+      <logo class="logo-side"/>
     </nuxt-link>
     <div class="menu-button">
       <div v-for="i in 3" :key="i" class="bar"/>
-      <span>menu</span>
+      <span class="menu-text">menu</span>
     </div>
     <div class="social">
       social
@@ -28,18 +28,18 @@ export default {
   top: 0px;
   left: 0px;
   bottom: 0px;
-  width: 16.666vw;
+  width: $menu-width;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
   padding: 2rem;
 
-  .logo--wrapper{
+  .logo-side--wrapper{
     display: block;
   }
 
-  .logo{
+  .logo-side{
     width: 100%;
     max-width: 12rem;
     display: block;
@@ -61,8 +61,23 @@ export default {
       background: black;
     }
 
-    span{
+    .menu-text{
       margin-left: 10px;
+    }
+  }
+
+  @media screen and (max-width: 700px){
+
+  width: $mobile-menu-width;
+
+    .logo-side{
+      display: none;
+    }
+
+    .menu-button{
+      .menu-text{
+        display: none;
+      }
     }
   }
 }

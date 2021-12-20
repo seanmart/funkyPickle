@@ -1,5 +1,5 @@
 <template lang="html">
-  <main class="page--margin">
+  <main class="page-margin--left">
     <div class="page--content">
       <slices :data="data"/>
     </div>

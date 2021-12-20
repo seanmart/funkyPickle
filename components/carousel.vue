@@ -1,6 +1,6 @@
 <template lang="html">
   <div ref="carousel" class="swiper" v-if="slides.length > 0">
-    <div class="swiper-wrapper" :style="{height}">
+    <div class="swiper-wrapper">
       <template v-for="(slide,i) in slides">
         <div :key="i" class="swiper-slide">
           <div class="slide--wrapper">

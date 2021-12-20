@@ -65,3 +65,9 @@ p.text--rg:last-child,
 .text--rg p:last-child{
   margin-bottom: 0px;
 }
+
+@media screen and (max-width:$mobile){
+  html{
+    font-size: 10px;
+  }
+}

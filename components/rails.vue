@@ -1,8 +1,10 @@
 <template lang="html">
-  <div id="rails">
+  <div id="rails" class="page-margins">
+    <div class="rails--wrapper">
     <template v-for="i in 5">
-      <div class="rail"/>
+      <div class="rail" :class="`rail--${i}`"/>
     </template>
+    </div>
   </div>
 </template>
 
@@ -19,21 +21,28 @@ export default {
   right:0px;
   height: 100vh;
   z-index: -1;
-  opacity: .1;
+  opacity: .05;
+
+  .rails--wrapper{
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
   .rail{
-    position: absolute;
-    top:0px;
-    bottom:0px;
     width:1px;
-    background: $pink;
+    flex: 0 0 auto;
+    height: 100%;
+    background: $black;
     z-index: 2;
+  }
 
-    &:nth-child(5n+1){left:16.666%}
-    &:nth-child(5n+2){left:33.333%}
-    &:nth-child(5n+3){left:50%}
-    &:nth-child(5n+4){left:66.666%}
-    &:nth-child(5n+5){left:83.333%}
+
+  @media screen and (max-width: $mobile){
+    .rail--4{display: none}
+    .rail--5{display: none}
   }
 
 }

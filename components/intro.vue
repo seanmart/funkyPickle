@@ -1,10 +1,10 @@
 <template lang="html">
-  <section class="intro block">
+  <section class="intro block page-margin--right">
     <header class="header--wrapper">
       <split-text :text="data.primary.title[0].text">
         <template #default="{word,line}">
           <div class="line--wrapper" :key="line">
-            <h1 class="title--bg" v-html="word"/>
+            <h1 class="title title--bg" v-html="word"/>
           </div>
         </template>
       </split-text>
@@ -30,44 +30,47 @@ export default {
 <style lang="scss">
 .intro{
 
-  .header--wrapper{
-    .line--wrapper{
-
-      &:last-child{
-        color: $pink;
-      }
-    }
-
+  .line--wrapper:last-child{
+      color: $pink;
   }
-
 
   .content--wrapper{
     display: flex;
     flex-direction: row;
     padding-top: 5rem;
+  }
 
+  .arrows--wrapper{
+    flex: 0 0 50%;
+  }
+
+  .arrows{
+    width: 1rem;
+    opacity: .25;
+  }
+
+  .text--wrapper{
+    flex: 1 1 auto;
+    position: relative;
+    padding-top: 4rem;
+  }
+
+  .bar{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: .5rem;
+    background: $pink;
+  }
+
+  @media screen and (max-width: $mobile){
     .arrows--wrapper{
-      flex: 0 0 50%;
+      display: none;
     }
 
-    .arrows{
-      width: 1rem;
-      opacity: .25;
-    }
-
-    .text--wrapper{
-      flex: 0 0 50%;
-      position: relative;
-      padding-top: 4rem;
-    }
-
-    .bar{
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      right: 0px;
-      height: .5rem;
-      background: $pink;
+    .title{
+      font-size: 15vw;
     }
   }
 }

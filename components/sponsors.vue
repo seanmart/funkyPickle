@@ -1,5 +1,5 @@
 <template lang="html">
-  <section class="sponsors block">
+  <section class="sponsors block page-margin--right">
     <section-title :title="data.primary.title"/>
     <div class="content--wrapper">
       <template v-for="(logo,i) in data.items">
@@ -33,8 +33,6 @@ export default {
 
       .item--wrapper{
         flex: 0 0 25%;
-        padding-right: 10px;
-        padding-bottom: 10px;
       }
 
       .item{
@@ -49,6 +47,7 @@ export default {
         right: 0px;
         bottom: 0px;
         background: white;
+        border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -57,6 +56,13 @@ export default {
       .logo{
         width: 80%;
       }
+
+      @media screen and (max-width: $mobile){
+        .item--wrapper{
+          flex: 0 0 50%;
+        }
+      }
     }
+
   }
 </style>

@@ -1,10 +1,11 @@
 <template lang="html">
   <section class="highlights block block--fullwidth" ref="container">
-    <div class="highlights--wrapper block block--no-top block--no-bottom">
+    <div class="highlights--wrapper page-margin--right">
       <div class="highlights-carousel--wrapper" ref="carousel">
 
-        <carousel class="highlights-carousel" :slides="data.items" loop :autoplay="5000" :speed="500" height="45rem">
+        <carousel :slides="data.items" loop :autoplay="5000" :speed="500">
           <template #default="slide">
+
             <template v-if="slide.link.slug">
               <nuxt-link class="link" :to="`/${slide.link.slug}`"/>
             </template>
@@ -75,6 +76,10 @@ export default {
 .highlights{
   overflow: hidden;
 
+  .swiper-wrapper{
+    height: 50rem;
+  }
+
   .image--wrapper{
     position: absolute;
     top: 0px;
@@ -110,6 +115,8 @@ export default {
     left: 0px;
     display: flex;
     align-items: center;
+    color: $black;
+    fill: $black;
   }
 
   .content{
@@ -142,6 +149,13 @@ export default {
   .swiper-slide-active .slide--wrapper .content,
   .swiper-slide-duplicate-active .slide--wrapper .content{
     opacity: 1;
+  }
+
+  @media screen and (max-width: $mobile){
+    .swiper-wrapper{
+      height: 80vh;
+      min-height: 500px;
+    }
   }
 }
 </style>

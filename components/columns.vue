@@ -25,7 +25,8 @@ export default {
   z-index: -2;
 
   .column--wrapper{
-    flex: 0 0 16.6666%;
+    flex: 0 0 auto;
+    width: 16.6666vw;
     position: relative;
     overflow: hidden;
 
@@ -35,7 +36,7 @@ export default {
       bottom:0px;
       right:0px;
       left:0px;
-      background: white;
+      background: $lime;
       transform: translateX(-101%);
     }
   }

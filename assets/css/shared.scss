@@ -9,8 +9,15 @@ html{
   overflow: hidden;
 }
 
-.page--margin{
+
+.page-margins,
+.page-margin--left{
   padding-left: $menu-width;
+}
+
+.page-margins,
+.page-margin--right{
+  padding-right: $menu-width;
 }
 
 .page--content{
@@ -21,11 +28,6 @@ html{
 .block{
   padding-top:7.5rem;
   padding-bottom:7.5rem;
-  max-width: 80%;
-}
-
-.block.block--fullwidth{
-  max-width: none;
 }
 
 .block:first-child{
@@ -41,4 +43,16 @@ html{
 }
 .block.block--no-bottom{
   padding-bottom:0px;
+}
+
+@media screen and (max-width: $mobile){
+
+  .page-margins,
+  .page-margin--left{
+    padding-left: $mobile-menu-width;
+  }
+  .page-margins,
+  .page-margin--right{
+    padding-right: 15px;
+  }
 }
