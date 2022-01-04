@@ -28,7 +28,7 @@ export default {
 
   .c-intro-header{
     .c-intro-line--wrapper{
-      &:last-child{
+      &:last-child .c-intro-line{
         @include rainbow-gradient;
         -webkit-background-clip: text;
         -webkit-text-fill-color: rgba(255, 255, 255, 0);
