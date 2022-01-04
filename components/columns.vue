@@ -35,5 +35,10 @@ export default {
     width: 100%;
     transform: translateX(-101%);
   }
+
+  @media screen and (max-width: $tablet){
+    left: 0px;
+    top: $navigation-height;
+  }
 }
 </style>

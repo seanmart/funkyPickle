@@ -7,6 +7,8 @@ html{
 
 #scroller{
   padding-left: $navigation-width;
+  width: 100vw;
+  overflow: hidden;
 }
 
 @media screen and (max-width: $tablet){

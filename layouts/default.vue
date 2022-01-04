@@ -14,6 +14,8 @@ import {mapState} from 'vuex'
 export default {
   mounted(){
 
+    console.log(isMobile)
+
     if (!isMobile){
       ScrollTrigger.scrollerProxy('#scroller', {
         scrollTop: (value) => scrollBuddy.top,
@@ -29,6 +31,7 @@ export default {
   data:()=>({first:true}),
   watch:{
     render(r){
+      if (isMobile) return
       this.$nextTick(()=>{
         scrollBuddy.init({
           el:'#scroller',

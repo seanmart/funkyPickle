@@ -1,5 +1,5 @@
 <template lang="html">
-  <aside id="c-navigation">
+  <header id="c-navigation">
     <div class="c-background"/>
 
     <nuxt-link class="c-logo" to="/">
@@ -16,7 +16,7 @@
         </template>
       </ul>
     </nav>
-  </aside>
+  </header>
 </template>
 
 <script>
@@ -28,7 +28,6 @@ export default {
 
 <style lang="scss">
 #c-navigation{
-
   $nav-space: $navigation-width / 6;
   $nav-width: $nav-space * 4;
 
@@ -40,7 +39,7 @@ export default {
     height:100vh;
     width: $navigation-width;
     background: white;
-    //box-shadow: 3px 0px 8px rgba($blue,.2);
+    box-shadow: 3px 0px 8px rgba($blue,.2);
   }
 
   .c-logo-desktop{
