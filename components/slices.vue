@@ -1,5 +1,5 @@
 <template lang="html">
-  <div v-fragments>
+  <div class="page-content">
     <template v-for="(item,a) in data">
       <component v-if="item.hasComponent" :is="item.component" :data="item" />
     </template>
