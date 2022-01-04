@@ -32,6 +32,9 @@
               </div>
             </div>
         </div>
+
+        <nuxt-link class="c-event-link" :to="`/events/${event.uid}`"/>
+
       </div>
 
     </template>
@@ -73,6 +76,7 @@ export default {
     border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
+    position: relative;
   }
 
   .c-event-date--wrapper{
@@ -169,6 +173,11 @@ export default {
     background-size: 100% 200%;
     opacity: 0;
     transition: opacity .25s;
+  }
+
+  .c-event-link{
+    @include cover;
+    z-index: 1;
   }
 
   &.wide{
