@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="slices">
+  <div v-fragments>
     <template v-for="(item,a) in data">
       <component v-if="item.hasComponent" :is="item.component" :data="item" />
     </template>
@@ -8,6 +8,6 @@
 
 <script>
 export default {
-  props:{data:Array}
+  props:['data']
 }
 </script>

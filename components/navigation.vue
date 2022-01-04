@@ -40,7 +40,7 @@ export default {
     height:100vh;
     width: $navigation-width;
     background: white;
-    box-shadow: 3px 0px 8px rgba($blue,.2);
+    //box-shadow: 3px 0px 8px rgba($blue,.2);
   }
 
   .c-logo-desktop{

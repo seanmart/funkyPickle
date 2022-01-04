@@ -1,5 +1,5 @@
 <template lang="html">
-  <section class="c-event-schedule o-container o-top o-bottom" :class="{wide}">
+  <section class="c-event-schedule o-container o-top o-bottom">
 
     <h2 class="t-headline-rg u-gap-btm-rg" v-html="data.primary.title"/>
 
@@ -8,21 +8,21 @@
       <div class="c-event">
 
         <div class="c-event-date--wrapper">
-          <h3 class="c-event-date month" v-html="month(event.date)"/>
-          <h3 class="c-event-date day" v-html="day(event.date)"/>
+          <h3 class="c-event-date month" v-html="month(event.data.date)"/>
+          <h3 class="c-event-date day" v-html="day(event.data.date)"/>
           <div class="c-event-rainbow c-event-date-bar"/>
         </div>
 
-        <div class="c-event-image--wrapper">
-          <div class="c-event-image" v-image:cover="event.image"/>
+        <div class="c-event-logo--wrapper" v-if="event.data.logo.url">
+          <div class="c-event-logo" v-image:cover="event.data.logo.url"/>
         </div>
 
         <div class="c-event-info--wrapper">
           <div class="c-event-info-fade"/>
           <text-scroll>
-            <h3 class="c-event-info-title" v-html="event.title"/>
+            <h3 class="c-event-info-title" v-html="event.data.title"/>
           </text-scroll>
-          <span class="c-event-location"><icon wayfinder/>{{event.location}}</span>
+          <span class="c-event-location"><icon wayfinder/>{{`${event.data.city}, ${event.data.state}`}}</span>
         </div>
 
         <div class="c-event-link--wrapper">
@@ -39,22 +39,32 @@
 
     </template>
 
-    <btn class="u-gap-top-rg" rainbow arrow>view all events</btn>
+    <btn class="u-gap-top-rg" to="/events" rainbow arrow>view all events</btn>
 
   </section>
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import queries from '@/assets/js/queries'
+let name = "eventSchedule"
+
 export default {
   props:['data'],
-  computed: mapState(['events']),
-  data:()=>({wide:true}),
+  data:()=>({events:[]}),
+  async fetch(){
+    if (!this.$store.state.components[name]){
+      let results = await this.$prismic.api.query(this.$prismic.predicates.at('document.type', 'event'),{'graphQuery':queries.events})
+      results && this.$store.commit('component',{name,data: results.results})
+    }
+    this.events = this.$store.state.components[name]
+  },
   methods:{
     day(date){
+      date = new Date(`${date}T00:00:00-07:00`)
       return date.getDate().toString().padStart(2, '0')
     },
     month(date){
+      date = new Date(`${date}T00:00:00-07:00`)
       return new Intl.DateTimeFormat('en-US', {month:'short'}).format(date)
     }
   }
@@ -99,14 +109,15 @@ export default {
     }
   }
 
-  .c-event-image--wrapper{
+  .c-event-logo--wrapper{
     flex: 0 0 auto;
     padding: $event-space;
     padding-right: $event-space / 2;
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    .c-event-image{
+    .c-event-logo{
       width: 8rem;
       padding-bottom: 100%;
       border-radius: 50%;
@@ -173,6 +184,7 @@ export default {
     background-size: 100% 200%;
     opacity: 0;
     transition: opacity .25s;
+    animation: animate-gradient-vertical 5s infinite;
   }
 
   .c-event-link{
@@ -180,34 +192,29 @@ export default {
     z-index: 1;
   }
 
-  &.wide{
-    flex-direction: row;
+  .c-event:hover{
+    box-shadow: 0px 5px 8px rgba($blue,.2);
+    .c-event-date--wrapper{
 
-    .c-event:hover{
-      box-shadow: 0px 5px 8px rgba($blue,.2);
-      .c-event-date--wrapper{
-
-        animation: animate-gradient-vertical 5s infinite;
+      animation: animate-gradient-vertical 5s infinite;
+    }
+    .c-event-logo--wrapper{
+      .c-event-logo{
+        transform: scale(1.1);
       }
-      .c-event-image--wrapper{
-        .c-event-image{
-          transform: scale(1.1);
-        }
+    }
+    .c-event-info--wrapper{
+      .c-event-info-title{
+        color: $purple;
       }
-      .c-event-info--wrapper{
-        .c-event-info-title{
-          color: $purple;
-        }
-        .c-event-location{opacity: 1;}
-        svg{fill: $pink}
-      }
-      .c-event-link-bar--wrapper{
-        transform: translateX(0px);
-      }
-      .c-event-rainbow{
-        opacity: 1;
-        animation: animate-gradient-vertical 5s infinite;
-      }
+      .c-event-location{opacity: 1;}
+      svg{fill: $pink}
+    }
+    .c-event-link-bar--wrapper{
+      transform: translateX(0px);
+    }
+    .c-event-rainbow{
+      opacity: 1;
     }
   }
 }
