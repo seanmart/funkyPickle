@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="split-text">
+  <div class="c-split-text">
     <template v-for="(word,line) in split(text)">
         <slot v-bind="{word,line}"/>
     </template>

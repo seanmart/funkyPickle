@@ -1,44 +1,39 @@
 <template lang="html">
-  <div id="columns">
-    <template v-for="i in 6">
-      <div class="column--wrapper">
-        <div class="column"/>
-      </div>
-    </template>
+  <div id="c-columns" :class="{['is-on']:transition}">
+    <div v-for="i in 4" :key="i" class="c-column--wrapper">
+      <div :class="`c-column c-column-${i+1}`"/>
+    </div>
   </div>
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
+  computed: mapState(['transition'])
 }
 </script>
 
 <style lang="scss">
-#columns{
+#c-columns{
   position: fixed;
-  top:0px;
-  left:0px;
-  right:0px;
-  height: 100vh;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: $navigation-width;
+  z-index: -1;
   display: flex;
   flex-direction: row;
-  z-index: -2;
 
-  .column--wrapper{
-    flex: 0 0 auto;
-    width: 16.6666vw;
-    position: relative;
+  .c-column--wrapper{
+    flex: 1 1 auto;
     overflow: hidden;
+  }
 
-    .column{
-      position: absolute;
-      top:0px;
-      bottom:0px;
-      right:0px;
-      left:0px;
-      background: $lime;
-      transform: translateX(-101%);
-    }
+  .c-column{
+    @include lime-gradient(50);
+    height: 100%;
+    width: 100%;
+    transform: translateX(-101%);
   }
 }
 </style>

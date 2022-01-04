@@ -1,0 +1,36 @@
+
+.o-container{
+  margin: 0px auto;
+  max-width: $max-width;
+}
+
+.o-top{
+  padding-top: $space;
+}
+.o-bottom{
+  padding-bottom: $space;
+}
+
+.o-bottom:last-child{
+  padding-bottom: $space * 2;
+}
+
+
+@media screen and (max-width: $navigation-width + $max-width + ($margins * 2)){
+  .o-container{
+    margin: 0px $margins;
+  }
+}
+
+@media screen and (max-width: $tablet){
+  .o-container{
+    margin: 0px auto;
+    max-width: $m-max-width
+  }
+}
+
+@media screen and (max-width: $m-max-width + ($m-margins * 2)){
+  .o-container{
+    margin: 0px $m-margins;
+  }
+}

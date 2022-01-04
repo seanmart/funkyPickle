@@ -1,77 +1,54 @@
 <template lang="html">
-  <section class="intro block page-margin--right">
-    <header class="header--wrapper">
-      <split-text :text="data.primary.title[0].text">
-        <template #default="{word,line}">
-          <div class="line--wrapper" :key="line">
-            <h1 class="title title--bg" v-html="word"/>
-          </div>
-        </template>
-      </split-text>
-    </header>
-    <div class="content--wrapper">
-      <div class="arrows--wrapper">
-        <icon arrows/>
-      </div>
-      <div class="text--wrapper">
-          <div class="bar"/>
-          <div class="text--bg" v-html="$prismic.asHtml(data.primary.text)"/>
-      </div>
-    </div>
+  <section class="c-intro o-container o-top o-bottom">
+
+    <split-text :text="data.primary.title[0].text" class="c-intro-header">
+      <template #default="{word,line}">
+        <div class="c-intro-line--wrapper" :key="line">
+          <h1 class="c-intro-line t-header-xl" v-html="word"/>
+        </div>
+      </template>
+    </split-text>
+
+    <div class="c-intro-text t-body-xl u-gap-top-rg" v-html="$prismic.asHtml(data.primary.text)"/>
+
+    <div class="c-intro-ball" v-distance="-400"/>
+
   </section>
 </template>
 
 <script>
 export default {
-  props:{data:Object}
+  props:['data']
 }
 </script>
 
 <style lang="scss">
-.intro{
+.c-intro{
+  position: relative;
 
-  .line--wrapper:last-child{
-      color: $pink;
+  .c-intro-header{
+    .c-intro-line--wrapper{
+      &:last-child{
+        @include rainbow-gradient;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
   }
 
-  .content--wrapper{
-    display: flex;
-    flex-direction: row;
-    padding-top: 5rem;
+  .c-intro-text{
+    max-width: 35ch;
   }
 
-  .arrows--wrapper{
-    flex: 0 0 50%;
-  }
-
-  .arrows{
-    width: 1rem;
-    opacity: .25;
-  }
-
-  .text--wrapper{
-    flex: 1 1 auto;
-    position: relative;
-    padding-top: 4rem;
-  }
-
-  .bar{
+  .c-intro-ball{
+    @include lime-gradient(45);
+    width: 70vw;
+    height:70vw;
+    border-radius: 50%;
     position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    height: .5rem;
-    background: $pink;
-  }
-
-  @media screen and (max-width: $mobile){
-    .arrows--wrapper{
-      display: none;
-    }
-
-    .title{
-      font-size: 15vw;
-    }
+    top:$space + 100;
+    left: 60%;
+    z-index: -1;
   }
 }
 </style>

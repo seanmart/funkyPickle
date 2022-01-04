@@ -1,6 +1,6 @@
 <template lang="html">
-  <div class="fancy-image" v-if="image" :style="{paddingBottom:height}" ref="container">
-    <div class="image" v-image:cover="image" :style="{top:`${-distance}px`}" ref="image"/>
+  <div class="c-fancy-image" v-if="image" ref="container">
+    <div class="c-fancy-image-media" v-image:cover="image" :style="{top:`${-distance}px`}" ref="image"/>
   </div>
 </template>
 
@@ -9,15 +9,17 @@ import {uid} from '../assets/js/helpers'
 export default {
   props:{
     image: {type: String, default: null},
-    height: {type: String,default: null},
     distance: {type: Number, default:0},
     scale:{type: Number, defualt: 0},
-    start:{type:String,default:'top bottom'}
+    start:{type:String,default:'top bottom'},
+    trigger: {type: [Object,String], default: null}
   },
   data:()=>({
     id:null
   }),
   mounted(){
+    if(!this.image) return
+    
     this.id = uid()
     let props = {ease:'none'}
     if (this.scale) props.scale = this.scale
@@ -25,7 +27,7 @@ export default {
 
     props.scrollTrigger = {
       id: this.id,
-      trigger:this.$refs.container,
+      trigger:this.trigger || this.$refs.container,
       start: this.start,
       scrub: true
     }
@@ -39,11 +41,12 @@ export default {
 </script>
 
 <style lang="scss">
-  .fancy-image{
+  .c-fancy-image{
     position: relative;
     overflow: hidden;
+    height: 100%;
 
-    .image{
+    .c-fancy-image-media{
       position: absolute;
       top: 0px;
       left: 0px;

@@ -1,161 +1,51 @@
 <template lang="html">
-  <section class="highlights block block--fullwidth" ref="container">
-    <div class="highlights--wrapper page-margin--right">
-      <div class="highlights-carousel--wrapper" ref="carousel">
+  <section class="c-highlights o-top o-bottom">
+    <div class="o-container c-highlights--wrapper">
 
-        <carousel :slides="data.items" loop :autoplay="5000" :speed="500">
-          <template #default="slide">
-
-            <template v-if="slide.link.slug">
-              <nuxt-link class="link" :to="`/${slide.link.slug}`"/>
-            </template>
-
-            <div class="content--wrapper" v-if="slide.title || slide.description.length > 0">
-              <div class="content">
-
-                <template v-if="slide.link.slug">
-                  <icon class="arrow" arrow/>
-                </template>
-
-                <template v-if="slide.title">
-                  <h3 class="title title--rg" v-html="slide.title"/>
-                </template>
-
-                <template v-if="slide.description.length > 0">
-                  <div class="description text--rg" v-html="$prismic.asHtml(slide.description)"/>
-                </template>
-
-              </div>
+      <carousel class="c-highlights-carousel" :slides="data.items" loop :autoplay="5">
+        <template #default="slide">
+          <div class="c-slide">
+            <div class="c-slide-image" v-image:cover="slide.image.url"/>
+            <div class="c-slide-card">
+              hello
             </div>
+          </div>
+        </template>
+      </carousel>
 
-            <div v-if="slide.image.url" class="image--wrapper">
-              <div class="image" v-image:cover="slide.image.url" />
-            </div>
-
-            <div class="image--wrapper">
-              <div class="image" v-image:cover="slide.image.url"/>
-            </div>
-
-          </template>
-        </carousel>
-
-      </div>
     </div>
   </section>
 </template>
 
 <script>
-import {uid} from '../assets/js/helpers'
 export default {
-  props:{
-    data:Object
-  },
-  data:()=>({
-    id:null
-  }),
-  mounted(){
-    this.id = uid()
-    this.$nextTick(()=>{
-      let imgs = this.$refs.container.querySelectorAll('.image')
-      gsap.to(imgs,1,{y:200,ease:'none',scrollTrigger:{
-        id: this.id,
-        trigger:this.$refs.container,
-        start: 'top bottom',
-        scrub: true
-      }})
-    })
-
-  },
-  destroyed(){
-    ScrollTrigger.getById(this.id).kill()
-  }
+  props:['data']
 }
 </script>
 
 <style lang="scss">
-.highlights{
+.c-highlights{
   overflow: hidden;
-
-  .swiper-wrapper{
-    height: 50rem;
+  .c-highlights-carousel{
+    overflow: visible;
   }
-
-  .image--wrapper{
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    bottom: 0px;
-    right: 0px;
-    z-index: -1;
-    overflow: hidden;
-
-    .image{
-      position:absolute;
-      top: -200px;
-      left: 0px;
-      bottom: 0px;
-      right: 0px;
-    }
+  .c-slide{
+    height: 500px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    @include rainbow-gradient;
   }
-
-  .link{
-    display: block;
-    position: absolute;
-    top:0px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
+  .c-slide-image{
+    @include cover;
     z-index: 1;
   }
-
-  .content--wrapper{
-    position: absolute;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    display: flex;
-    align-items: center;
-    color: $black;
-    fill: $black;
-  }
-
-  .content{
-    background: $lime;
-    flex: 0 0 auto;
-    max-width: 40rem;
-    padding: 5rem;
-    position: relative;
-    opacity: 0;
-    transition: opacity .25s;
-
-    .arrow{
-      display: block;
-      position: absolute;
-      top: 2rem;
-      right: 2rem;
-      width: 3rem;
-    }
-
-    .title{
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-    }
-
-    .description{
-      max-width: 90ch;
-    }
-  }
-
-  .swiper-slide-active .slide--wrapper .content,
-  .swiper-slide-duplicate-active .slide--wrapper .content{
-    opacity: 1;
-  }
-
-  @media screen and (max-width: $mobile){
-    .swiper-wrapper{
-      height: 80vh;
-      min-height: 500px;
-    }
+  .c-slide-card{
+    @include lime-gradient;
+    z-index: 2;
+    padding: $space;
   }
 }
 </style>

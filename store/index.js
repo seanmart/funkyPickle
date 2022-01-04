@@ -1,28 +1,53 @@
 import events from '../assets/placeholders/events'
 
+function camelize(str) {
+  return str.indexOf("_") > 0
+  ? str.split('_').map((w,i) => i > 0 ? w.charAt(0).toUpperCase() + w.slice(1) : w).join("")
+  : str
+}
+
+async function checkComponents(data){
+  for (let i = 0; i < data.length; i++){
+    data[i].component = camelize(data[i].slice_type)
+    data[i].hasComponent = await import(`@/components/${data[i].component}`)
+      .then((_res) => {return true})
+      .catch((_error) => {return false})
+  }
+  return data
+}
+
 export default {
   state:()=>({
-    nav:[],
+    transition: false,
+    render: false,
+    ready:false,
     pages:{},
-    events:[],
-    settings:{},
-    transition:false
+    nav:[],
+    events:[]
   }),
   mutations:{
-    setTransition:(state,x)=> (state.transition = x),
-    setPage:(state,{page,data}) => (state.pages[page] = data),
+    transition:(state,x)=> state.transition = x,
+    render:(state)=> state.render = true,
+    ready:(state,x)=> state.ready = x,
+    page:(state,{page,data}) => (state.pages[page] = data),
     set:(state,{key,data})=> (state[key] = data)
   },
   actions:{
-    async getPage({state,commit},page){
+    async page({state,commit,dispatch},page){
       if (state.pages[page]) return
       let results = await this.$prismic.api.getByUID('page', page)
-      results && commit('setPage',{page, data: results.data.body })
+      if (results){
+        let data = await checkComponents(results.data.body)
+        commit('page',{page, data})
+      }
     },
-    async getSingle({state,commit},page){
+    async single({state,commit,dispatch},page){
       if (state.pages[page]) return
       let results = await this.$prismic.api.getSingle(page)
-      results && commit('setPage',{page, data: results.data.body })
+      if (results){
+        let data = await checkComponents(results.data.body)
+        commit('page',{page, data})
+      }
     },
     async nuxtServerInit({commit,dispatch}){
 
@@ -32,9 +57,9 @@ export default {
       let eventsData = {data: events}
 
       if (navData){
-        navData.results.forEach(page => links.push({route:`/${page.uid}`,label: page.data.page_label}))
-        links.push({route:`/learn`, label: 'Learn'})
-        links.push({url:`https://www.google.com`, label: 'Shop'})
+        navData.results.forEach(page => links.push({to:`/${page.uid}`,label: page.data.page_label}))
+        links.push({to:`/learn`, label: 'Learn'})
+        links.push({href:settingsData.data.shop_link.url, label: 'Shop'})
         commit('set',{key:'nav',data: links})
       }
 

@@ -1,0 +1,40 @@
+// colors
+$light-grey:#F7F7F9;
+$dark-grey:#282833;
+$pink:#FF0093;
+$purple: #5600F7;
+$blue:#00AEEF;
+$orange:#FE692C;
+$lime: #E4FE57;
+$lime2: #C2FA45;
+$black:#0A0A0E;
+
+
+// nav
+$navigation-width: 220px;
+$navigation-height: 70px;
+
+// screen
+$mobile: 480px;
+$tablet: 768px;
+
+// objects
+$max-width: 900px;
+$margins: 60px;
+$space: 70px;
+
+// mobile-objects
+$m-margins: 20px;
+$m-max-width: 600px;
+
+:export{
+  lightGrey: $light-grey;
+  darkGrey: $dark-grey;
+  pink: $pink;
+  purple: $purple;
+  blue: $blue;
+  orange: $orange;
+  lime: $lime;
+  lime2: $lime2;
+  black: $black;
+}

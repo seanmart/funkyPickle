@@ -1,0 +1,50 @@
+html{
+  font-size: calc(6px + 100vw / 300);
+}
+
+body{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.t-header-xl{
+  @include header;
+  font-size: 11vw;
+}
+
+.t-headline-rg{
+  font-size: 3rem;
+  font-weight: lighter;
+  font-variation-settings: "wdth" 59,"wght" 400;
+  letter-spacing: .05rem;
+  position: relative;
+}
+
+.t-body-xl{
+  font-size: 2.5rem;
+  line-height: 1.4;
+}
+
+
+
+
+@media screen and (min-width: 1200px){
+  html{
+    font-size: 10px;
+  }
+}
+
+@media screen and (min-width: $navigation-width + $max-width + ($margins * 2)){
+  .t-header-xl{
+    font-size: ($navigation-width + $max-width + ($margins * 2))/100 * 11;
+  }
+}
+
+@media screen and (max-width:$tablet){
+
+  .t-header-xl{
+    font-size: 16vw;
+  }
+}

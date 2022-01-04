@@ -1,9 +1,7 @@
 <template lang="html">
-  <main class="page--margin">
-    <div class="page--content">
-      <slices :data="data"/>
-    </div>
-    <signup/>
+  <main>
+    <slices :data="data"/>
+    <!--<signup/>-->
   </main>
 </template>
 
@@ -14,11 +12,13 @@ export default {
 
     if (payload) return {data:payload}
 
-    await store.dispatch('getPage',params.page)
-    return {data: store.state.pages[params.page]}
+    await store.dispatch('page',params.page)
+    let data = store.state.pages[params.page]
+    if (data) return {data}
+    error({ statusCode: 404 })
   },
   mounted(){
-    this.$store.commit('setTransition',false)
+    this.$store.commit('ready',true)
   }
 }
 </script>

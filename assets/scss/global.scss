@@ -1,0 +1,17 @@
+html{
+  background: linear-gradient(90deg, lighten($blue,51%) 0%, lighten($pink,48%) 100%);
+  background-repeat: no-repeat;
+  fill: $black;
+  color: $black;
+}
+
+#scroller{
+  padding-left: $navigation-width;
+}
+
+@media screen and (max-width: $tablet){
+  #scroller{
+    padding-left: 0px;
+    padding-top: $navigation-height
+  }
+}

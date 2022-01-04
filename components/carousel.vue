@@ -1,33 +1,33 @@
 <template lang="html">
-  <div ref="carousel" class="swiper" v-if="slides.length > 0">
-    <div class="swiper-wrapper">
+  <div ref="carousel" class="c-carousel swiper">
+    <div class="c-carousel--wrapper swiper-wrapper">
       <template v-for="(slide,i) in slides">
-        <div :key="i" class="swiper-slide">
-          <div class="slide--wrapper">
-            <slot v-bind="slide"/>
-          </div>
+        <div class="c-carousel-slide swiper-slide" :key="i">
+          <slot v-bind="slide"/>
         </div>
       </template>
     </div>
-    <div class="dots"/>
+    <div class="c-carousel-dots"/>
   </div>
 </template>
 
 <script>
 export default {
   props:{
-    slides:{type:Array, default:()=>[]},
+    slides: {type:Array,default:()=>([])},
+    next: {type:String, default: null},
+    prev: {type:String, default: null},
     loop:{type:Boolean,default:false},
     autoplay:{type:Number,default:0},
     speed:{type: Number,default:400},
-    height:{type:String,default:'50rem'}
   },
   mounted(){
     let options = {
       longSwipesRatio: .15,
       speed: this.speed,
       pagination:{
-        el: '.dots',
+        el: '.c-carousel-dots',
+        clickable: true,
         type: 'bullets'
       }
     }
@@ -39,7 +39,7 @@ export default {
 
     this.autoplay && (
       options.autoplay = {
-        delay: this.autoplay,
+        delay: this.autoplay < 1000 ? this.autoplay * 1000 : this.autoplay,
         disableOnInteraction: false,
         pauseOnMouseEnter: true
       }
@@ -51,41 +51,19 @@ export default {
 </script>
 
 <style lang="scss">
-.swiper{
-  overflow: visible;
-
-  .slide--wrapper{
-    position: relative;
-    height: 100%;
-    background: white;
-    transform: scale(.95);
-    transform-origin: top left;
-    transition: transform .25s;
+.c-carousel{
+  .c-carousel--wrapper{
+    height:100%;
+    display: flex;
+    flex-direction: row;
   }
-
-  .swiper-slide-active .slide--wrapper,
-  .swiper-slide-duplicate-active .slide--wrapper,
-  .swiper-slide-prev .slide--wrapper,
-  .swiper-slide-duplicate-prev .slide--wrapper{
-    transform: scale(1);
+  .c-carousel-slide{
+    flex: 0 0 auto;
+    height:100%;
+    width:100%;
   }
-
-  .dots{
-    padding-top: 2rem;
-  }
-
-  .swiper-pagination-bullet{
-    background: none;
-    border: 1px solid $black;
-    opacity: 1;
-
-    &.swiper-pagination-bullet-active{
-      background: $black;
-    }
-
-    &:first-child{
-      margin-left: 0px;
-    }
+  .c-carousel-dots{
+    margin-top: 3rem;
   }
 }
 </style>
