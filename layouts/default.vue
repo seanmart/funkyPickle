@@ -38,6 +38,7 @@ export default {
       })
     },
     ready(ready){
+      console.log('ready',ready)
       if(!ready) return
 
       if(this.first){
