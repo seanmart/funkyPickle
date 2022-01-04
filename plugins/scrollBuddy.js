@@ -21,6 +21,7 @@ function initScrollBuddy(){
     },
     reset:()=>{
       smoothScroll && smoothScroll.reset()
+      console.log('scrollbuddy reset')
     },
     isMobile:()=>{
       let { userAgent, maxTouchPoints, platform } = navigator

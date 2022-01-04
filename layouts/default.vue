@@ -48,6 +48,7 @@ export default {
           .set('#c-columns',{clearProps:'all'})
           .set('#c-columns .c-column',{clearProps:'all'})
 
+      this.first && !isMobile && setTimeout(scrollBuddy.reset,500)
       this.first = false
     }
   },
