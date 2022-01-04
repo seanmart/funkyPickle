@@ -1,5 +1,5 @@
 <template lang="html">
-  <section class="c-highlights o-top o-bottom">
+  <section class="c-highlights o-top o-bottom" ref="container">
     <div class="o-container c-highlights--wrapper">
 
       <carousel class="c-highlights-carousel" :slides="data.items" loop :autoplay="5">
@@ -18,8 +18,24 @@
 </template>
 
 <script>
+
 export default {
-  props:['data']
+  props:['data'],
+  data:()=>({anim:null}),
+  mounted(){
+    this.$nextTick(()=>{
+      let imgs = this.$refs.container.querySelectorAll('.c-slide-image')
+      this.anim = gsap.to(imgs,1,{y:200,ease:'none',scrollTrigger:{
+        id: this.id,
+        trigger:this.$refs.container,
+        start: 'top bottom',
+        scrub: true
+      }})
+    })
+  },
+  destroyed(){
+    this.anim.kill()
+  }
 }
 </script>
 
@@ -36,10 +52,11 @@ export default {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    @include rainbow-gradient;
+    overflow: hidden;
   }
   .c-slide-image{
     @include cover;
+    top:-200px;
     z-index: 1;
   }
   .c-slide-card{

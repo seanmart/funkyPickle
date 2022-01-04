@@ -8,8 +8,8 @@
       <div class="c-event">
 
         <div class="c-event-date--wrapper">
-          <h3 class="c-event-date month" v-html="month(event.data.date)"/>
-          <h3 class="c-event-date day" v-html="day(event.data.date)"/>
+          <h3 class="c-event-date month t-header" v-html="month(event.data.date)"/>
+          <h3 class="c-event-date day t-header" v-html="day(event.data.date)"/>
           <div class="c-event-rainbow c-event-date-bar"/>
         </div>
 
@@ -20,7 +20,7 @@
         <div class="c-event-info--wrapper">
           <div class="c-event-info-fade"/>
           <text-scroll>
-            <h3 class="c-event-info-title" v-html="event.data.title"/>
+            <h3 class="c-event-info-title t-header" v-html="event.data.title"/>
           </text-scroll>
           <span class="c-event-location"><icon wayfinder/>{{`${event.data.city}, ${event.data.state}`}}</span>
         </div>
@@ -75,7 +75,6 @@ export default {
 
 .c-event-schedule{
   $event-space: 2.5rem;
-  @include header;
 
   .c-event{
     display: flex;
@@ -139,14 +138,12 @@ export default {
     }
     .c-event-info-title{
       font-size: 4rem;
-      padding: 0px 1rem;
+      padding: 0px 2rem;
       transition: color .25s;
     }
     .c-event-location{
       opacity: .5;
       transition: opacity .25s;
-      font-size: 1.75rem;
-      font-weight: 400;
       svg{
         display: inline-block;
         height: 1.3rem;

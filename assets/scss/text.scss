@@ -9,15 +9,18 @@ body{
   font-weight: 400;
 }
 
+.t-header{
+  @include header;
+}
+
 .t-header-xl{
   @include header;
   font-size: 11vw;
+  letter-spacing: -.2vw;
 }
 
 .t-headline-rg{
   font-size: 3rem;
-  font-weight: lighter;
-  font-variation-settings: "wdth" 59,"wght" 400;
   letter-spacing: .05rem;
   position: relative;
 }
@@ -26,8 +29,6 @@ body{
   font-size: 2.5rem;
   line-height: 1.4;
 }
-
-
 
 
 @media screen and (min-width: 1200px){
@@ -43,8 +44,7 @@ body{
 }
 
 @media screen and (max-width:$tablet){
-
   .t-header-xl{
-    font-size: 16vw;
+    font-size: 18vw;
   }
 }

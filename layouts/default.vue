@@ -14,8 +14,6 @@ import {mapState} from 'vuex'
 export default {
   mounted(){
 
-    console.log(isMobile)
-
     if (!isMobile){
       ScrollTrigger.scrollerProxy('#scroller', {
         scrollTop: (value) => scrollBuddy.top,

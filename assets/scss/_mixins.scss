@@ -24,11 +24,10 @@
 }
 
 @mixin header{
-  font-family: 'Saira', sans-serif;
+  font-family: 'Saira Extra Condensed', sans-serif;
   text-transform: uppercase;
   line-height: .85;
-  font-weight: 600;
-  font-variation-settings: "wdth" 56,"wght" 600;
+  font-weight: 700;
 }
 
 @mixin cover{
