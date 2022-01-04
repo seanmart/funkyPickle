@@ -31,7 +31,7 @@ export default {
       &:last-child{
         @include rainbow-gradient;
         -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        -webkit-text-fill-color: rgba(255, 255, 255, 0);
       }
     }
   }
