@@ -38,21 +38,17 @@ export default {
       })
     },
     ready(ready){
-      console.log('ready',ready)
       if(!ready) return
 
-      if(this.first){
-        this.first = false
-        return
-      }
+      !isMobile && scrollBuddy.reset()
 
-      gsap.timeline()
+      !this.first && gsap.timeline()
           .set('#scroller',{clearProps:'all'})
           .to('#c-columns .c-column',.5,{x:'101%',ease:'power2.out',stagger:.05})
           .set('#c-columns',{clearProps:'all'})
           .set('#c-columns .c-column',{clearProps:'all'})
 
-      !isMobile && scrollBuddy.reset()
+      this.first = false
     }
   },
   middleware({store}){
