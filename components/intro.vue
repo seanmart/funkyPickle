@@ -11,14 +11,18 @@
 
     <div class="c-intro-text t-body-xl u-gap-top-rg" v-html="$prismic.asHtml(data.primary.text)"/>
 
-    <div class="c-intro-ball" v-distance="-400"/>
+    <div class="c-intro-ball" ref="ball"/>
 
   </section>
 </template>
 
 <script>
 export default {
-  props:['data']
+  props:['data'],
+  data:()=>({anim:null}),
+  mounted(){
+
+  }
 }
 </script>
 
@@ -46,9 +50,17 @@ export default {
     height:70vw;
     border-radius: 50%;
     position: absolute;
-    top:$space + 100;
+    top:$space ;
     left: 60%;
     z-index: -1;
   }
+
+  @media screen and (max-width:$tablet){
+    .c-intro-ball{
+      width: 140vw;
+      height:140vw;
+    }
+  }
+
 }
 </style>

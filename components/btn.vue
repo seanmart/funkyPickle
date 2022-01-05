@@ -86,8 +86,14 @@ export default {
       padding: 1.5rem 5rem;
     }
 
+    @media screen and (max-width:$mobile){
 
+      border-radius: 4rem;
 
+      .c-btn--wrapper{
+        padding: 2.5rem 6rem;
+      }
+    }
 
   }
 </style>

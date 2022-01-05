@@ -11,25 +11,3 @@ Vue.directive("image", {
     }
   }
 });
-
-Vue.directive("distance", {
-  inserted: function(el, { value, arg }) {
-    let id = uid()
-    let elem = el
-    let dist = value || 200
-
-    arg == 'child' && (elem == el.childNodes)
-    el.setAttribute('data-speed-id',id)
-    gsap.to(elem,1,{y: dist,ease:'none',scrollTrigger:{
-      id,
-      trigger: el,
-      start:'top bottom',
-      scrub: true
-    }})
-  },
-  unbind: function(el){
-    let id = el.getAttribute('data-speed-id')
-    let st = ScrollTrigger.getById(id)
-    st && st.kill()
-  }
-});

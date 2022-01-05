@@ -21,20 +21,8 @@
 
 export default {
   props:['data'],
-  data:()=>({anim:null}),
   mounted(){
-    this.$nextTick(()=>{
-      let imgs = this.$refs.container.querySelectorAll('.c-slide-image')
-      this.anim = gsap.to(imgs,1,{y:200,ease:'none',scrollTrigger:{
-        id: this.id,
-        trigger:this.$refs.container,
-        start: 'top bottom',
-        scrub: true
-      }})
-    })
-  },
-  destroyed(){
-    this.anim.kill()
+
   }
 }
 </script>
@@ -57,11 +45,11 @@ export default {
   .c-slide-image{
     @include cover;
     top:-200px;
-    z-index: 1;
+    z-index: -1;
   }
   .c-slide-card{
     @include lime-gradient;
-    z-index: 2;
+    z-index: 1;
     padding: $space;
   }
 }

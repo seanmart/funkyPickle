@@ -39,7 +39,9 @@
 
     </template>
 
-    <btn class="u-gap-top-rg" to="/events" rainbow arrow>view all events</btn>
+    <div class="c-event-schedule-btn u-gap-top-rg">
+      <btn to="/events" rainbow arrow>view all events</btn>
+    </div>
 
   </section>
 </template>
@@ -74,7 +76,8 @@ export default {
 <style lang="scss">
 
 .c-event-schedule{
-  $event-space: 2.5rem;
+  $event-space: 2.75rem;
+  $m-event-space: 10px;
 
   .c-event{
     display: flex;
@@ -111,7 +114,6 @@ export default {
   .c-event-logo--wrapper{
     flex: 0 0 auto;
     padding: $event-space;
-    padding-right: $event-space / 2;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -127,15 +129,18 @@ export default {
 
   .c-event-info--wrapper{
     flex: 1 1 auto;
-    padding: $event-space $event-space / 3;
+    padding: $event-space 0px;
     position: relative;
     display: flex;
     flex-direction: column;
+
     .c-event-info-fade{
       @include cover;
+      right: -1px;
       z-index: 1;
       background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 85%, rgba(255,255,255,1) 95%);
     }
+
     .c-event-info-title{
       font-size: 4rem;
       padding: 0px 2rem;
@@ -212,6 +217,29 @@ export default {
     }
     .c-event-rainbow{
       opacity: 1;
+    }
+  }
+
+  @media screen and (max-width: $mobile){
+    .c-event-date--wrapper{
+      padding: $event-space $m-event-space;
+      .c-event-date{
+        width: 5rem;
+        &.month{font-size: 3.5rem}
+        &.day{font-size: 4.5rem}
+      }
+    }
+    .c-event-logo--wrapper{
+      padding: $event-space $m-event-space;
+      .c-event-logo{
+        width: 6rem;
+      }
+    }
+    .c-event-link--wrapper{
+      display: none;
+    }
+    .c-event-schedule-btn{
+      text-align: center;
     }
   }
 }
