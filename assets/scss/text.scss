@@ -19,6 +19,11 @@ body{
   letter-spacing: -.2vw;
 }
 
+.t-header-lg{
+  @include header;
+  font-size: 5rem;
+}
+
 .t-headline-rg{
   font-size: 3rem;
   letter-spacing: .05rem;

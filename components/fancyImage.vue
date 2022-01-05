@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="c-fancy-image" v-if="image" ref="container">
-    <div class="c-fancy-image-media" v-image:cover="image" :style="{top:`${-distance}px`}" ref="image"/>
+    <div class="c-fancy-image-media" v-image="image" :style="{top:`${-distance}px`}" ref="image"/>
   </div>
 </template>
 
@@ -19,7 +19,7 @@ export default {
   }),
   mounted(){
     if(!this.image) return
-    
+
     this.id = uid()
     let props = {ease:'none'}
     if (this.scale) props.scale = this.scale
@@ -52,6 +52,8 @@ export default {
       left: 0px;
       right: 0px;
       bottom: 0px;
+      background-size: cover;
+      background-position: top center;
     }
   }
 </style>

@@ -20,17 +20,23 @@ export default {
     loop:{type:Boolean,default:false},
     autoplay:{type:Number,default:0},
     speed:{type: Number,default:400},
+    gap:{type:Number,default:0}
   },
   mounted(){
     let options = {
       longSwipesRatio: .15,
       speed: this.speed,
+      slideDuplicateActiveClass: 'swiper-slide-active',
+      slideDuplicateNextClass: 'swiper-slide-next',
+      slideDuplicatePrevClass: 'swiper-slide-prev',
       pagination:{
         el: '.c-carousel-dots',
         clickable: true,
         type: 'bullets'
       }
     }
+
+    this.gap && (options.spaceBetween = this.gap)
 
     this.loop && (
       options.loop = this.loop,
@@ -61,6 +67,8 @@ export default {
     flex: 0 0 auto;
     height:100%;
     width:100%;
+    position: relative;
+    z-index: 0;
   }
   .c-carousel-dots{
     margin-top: 3rem;
