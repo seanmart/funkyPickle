@@ -220,6 +220,19 @@ export default {
     }
   }
 
+  @media screen and (max-width: $tablet){
+
+    .c-event-info--wrapper{
+      .c-event-info-title{
+        font-size: 3rem;
+        padding: 0px 1.5rem;
+      }
+    }
+    .c-event-schedule-btn{
+      text-align: center;
+    }
+  }
+
   @media screen and (max-width: $mobile){
     .c-event-date--wrapper{
       padding: $event-space $m-event-space;
@@ -237,9 +250,6 @@ export default {
     }
     .c-event-link--wrapper{
       display: none;
-    }
-    .c-event-schedule-btn{
-      text-align: center;
     }
   }
 }

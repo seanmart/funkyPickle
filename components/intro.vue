@@ -21,7 +21,14 @@ export default {
   props:['data'],
   data:()=>({anim:null}),
   mounted(){
-
+    this.anim = gsap.to(this.$refs.ball,{y:'-15%',scrollTrigger:{
+      trigger: this.$refs.ball,
+      start: 'top bottom',
+      scrub: true
+    }})
+  },
+  destroyed(){
+      this.anim && this.anim.kill()
   }
 }
 </script>
@@ -50,7 +57,7 @@ export default {
     height:70vw;
     border-radius: 50%;
     position: absolute;
-    top:$space ;
+    top:$space + 100;
     left: 60%;
     z-index: -1;
   }

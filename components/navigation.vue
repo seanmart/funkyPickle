@@ -3,8 +3,10 @@
     <div class="c-background"/>
 
     <nuxt-link class="c-logo" to="/">
-      <logo-vertical rainbow class="c-logo-desktop"/>
+      <logo vertical rainbow class="c-logo-desktop"/>
+      <logo horizontal rainbow class="c-logo-mobile"/>
     </nuxt-link>
+
 
     <nav class="c-links">
       <ul class="c-links--wrapper">
@@ -29,7 +31,9 @@ export default {
 <style lang="scss">
 #c-navigation{
   $nav-space: $navigation-width / 6;
+  $m-nav-space:$navigation-height / 5;
   $nav-width: $nav-space * 4;
+  $nav-height: $m-nav-space * 3;
 
   .c-background{
     z-index: 100;
@@ -42,16 +46,26 @@ export default {
     box-shadow: 3px 0px 8px rgba($blue,.2);
   }
 
-  .c-logo-desktop{
+  .c-logo{
     z-index: 101;
     position: fixed;
     top: $nav-space;
     left: $nav-space;
-    width: $nav-width;
+
+    .c-logo-mobile{
+      display: none;
+      height: $nav-height;
+    }
+    .c-logo-desktop{
+      display: block;
+      width: $nav-width;
+    }
 
     svg{
-      width:100%;
+      max-height: 100%;
+      max-width: 100%;
     }
+
   }
 
   .c-links{
@@ -81,8 +95,17 @@ export default {
       box-shadow: 0px 3px 8px rgba($blue,.2);
     }
 
-    .c-logo-desktop{
-      display: none;
+    .c-logo{
+      top: $m-nav-space;
+      left: 50%;
+      transform: translateX(-50%);
+
+      .c-logo-mobile{
+        display: block;
+      }
+      .c-logo-desktop{
+        display: none;
+      }
     }
 
     .c-links{

@@ -86,7 +86,7 @@ export default {
       padding: 1.5rem 5rem;
     }
 
-    @media screen and (max-width:$mobile){
+    @media screen and (max-width:$tablet){
 
       border-radius: 4rem;
 
