@@ -21,6 +21,13 @@ export default {
   props:['data'],
   data:()=>({anim:null}),
   mounted(){
+
+    gsap.fromTo('.c-intro-line',1,{y:'100%'},{y:0,stagger:.07, ease: 'power4.out', scrollTrigger:{
+      trigger:'.c-intro',
+      start: 'top 50%'
+    }})
+
+
     this.anim = gsap.to(this.$refs.ball,{y:'-15%',scrollTrigger:{
       trigger: this.$refs.ball,
       start: 'top bottom',
@@ -39,6 +46,8 @@ export default {
 
   .c-intro-header{
     .c-intro-line--wrapper{
+    overflow: hidden;
+
       &:last-child .c-intro-line{
         @include rainbow-gradient;
         -webkit-background-clip: text;

@@ -30,7 +30,7 @@ export default {
   }
 
   .c-column{
-    @include lime-gradient(50);
+    background: white;
     height: 100%;
     width: 100%;
     transform: translateX(-101%);

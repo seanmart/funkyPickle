@@ -1,5 +1,5 @@
 <template lang="html">
-  <svg v-if="vertical" class="fp-logo vertical" :class="{rainbow}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 299.99 489.56">
+  <svg v-if="vertical" class="fp-logo vertical" :class="{rainbow,animate}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 299.99 489.56">
 
     <path fill="none" d="M300,244.64a149,149,0,0,1-11.6,57.89v187H11.59v-187a150.75,150.75,0,0,1,0-115.92V0H288.32V186.68a149.42,149.42,0,0,1,11.67,58Z"/>
     <path d="M209.87,373.22c-2.69,1.27-5.44,2.48-8.27,3.54s-5.45,2.05-8.28,3V472h33.37V455.5H209.87Z"/>
@@ -47,14 +47,15 @@ export default {
   props:{
     rainbow:{type:Boolean,default:false},
     horizontal:{type:Boolean,default:false},
-    vertical:{type:Boolean,default:false}
+    vertical:{type:Boolean,default:false},
+    animate:{type:Boolean,default:false}
   }
 }
 </script>
 
 <style lang="scss">
 .fp-logo{
-  .ball{
+  &.animate .ball{
     animation: rotate 30s linear infinite;
     transform-origin: center center;
   }

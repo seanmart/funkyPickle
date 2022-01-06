@@ -16,18 +16,16 @@ async function checkComponents(data){
 
 export default {
   state:()=>({
-    transition: false,
-    render: false,
     ready:false,
+    reveal: false,
     nav:[],
     events:{},
     pages:{},
     components:{}
   }),
   mutations:{
-    transition:(state,x)=> state.transition = x,
-    render:(state)=> state.render = true,
     ready:(state,x)=> state.ready = x,
+    reveal:(state,x)=> state.reveal = x,
     page:(state,{page,data}) => (state.pages[page] = data),
     set:(state,{key,data})=> (state[key] = data),
     component:(state,{name,data}) => state.components[name] = data,

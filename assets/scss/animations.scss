@@ -21,3 +21,8 @@
     50%{background-position:50% 100%}
     100%{background-position:50% 0%}
 }
+
+@keyframes animate-scroll-left {
+    0%{transform: translateX(0px)}
+    100%{transform: translateX(-100%)}
+}

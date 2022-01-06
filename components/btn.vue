@@ -1,25 +1,19 @@
 <template lang="html">
-  <button type="button" name="button" class="c-btn" :class="{['is-rainbow']:rainbow,['has-arrow']:arrow}">
 
-    <template v-if="to">
-      <nuxt-link :to="to" class="c-btn--wrapper">
+      <nuxt-link v-if="to" :to="to" class="c-btn" :class="{['is-rainbow']:rainbow,['has-arrow']:arrow}">
         <div class="c-btn-text">
           <slot/>
         </div>
         <icon v-if="arrow" class="c-btn-arrow" arrow/>
       </nuxt-link>
-    </template>
 
-    <template v-else>
-      <div class="c-btn--wrapper">
+      <button v-else type="button" name="button" class="c-btn" :class="{['is-rainbow']:rainbow,['has-arrow']:arrow}">
         <div class="c-btn-text">
           <slot/>
         </div>
         <icon v-if="arrow" class="c-btn-arrow" arrow/>
-      </div>
-    </template>
+      </button>
 
-  </button>
 </template>
 
 <script>
@@ -40,6 +34,8 @@ export default {
     font-size: 2rem;
     font-weight: 400;
     letter-spacing: .1rem;
+    padding: 1.5rem 5rem;
+    display: inline-block;
 
     &.is-rainbow{
       @include rainbow-gradient;
@@ -49,9 +45,21 @@ export default {
       box-shadow: 0 0 0 $blue;
       color: white;
       fill: white;
-      &:hover{
+      &:hover,
+      &:active,
+      &:focus{
+        outline: none;
         @include tropical-gradient;
         background-size: 200% 100%;
+        &.has-arrow{
+          .c-btn-text{
+            transform: translateX(-2rem);
+          }
+          .c-btn-arrow{
+            transform: translateX(-2rem);
+            opacity: 1;
+          }
+        }
       }
     }
     &.has-arrow{
@@ -64,15 +72,6 @@ export default {
         height: 30%;
         opacity: 0;
       }
-      &:hover{
-        .c-btn-text{
-          transform: translateX(-2rem);
-        }
-        .c-btn-arrow{
-          transform: translateX(-2rem);
-          opacity: 1;
-        }
-      }
     }
     .c-btn-text,
     .c-btn-arrow{
@@ -80,10 +79,6 @@ export default {
     }
     .c-btn-arrow{
       fill: inherit !important;
-    }
-    .c-btn--wrapper{
-      display: block;
-      padding: 1.5rem 5rem;
     }
 
     @media screen and (max-width:$tablet){

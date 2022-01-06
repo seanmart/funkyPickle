@@ -25,7 +25,7 @@ export default {
   mounted(){
     let options = {
       longSwipesRatio: .15,
-      speed: this.speed,
+      speed: this.speed < 100 ? this.speed * 1000 : this.speed,
       slideDuplicateActiveClass: 'swiper-slide-active',
       slideDuplicateNextClass: 'swiper-slide-next',
       slideDuplicatePrevClass: 'swiper-slide-prev',
@@ -45,7 +45,7 @@ export default {
 
     this.autoplay && (
       options.autoplay = {
-        delay: this.autoplay < 1000 ? this.autoplay * 1000 : this.autoplay,
+        delay: this.autoplay < 100 ? this.autoplay * 1000 : this.autoplay,
         disableOnInteraction: false,
         pauseOnMouseEnter: true
       }

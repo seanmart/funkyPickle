@@ -5,7 +5,7 @@
 
     <template v-for="(event,i) in events.slice(0,data.primary.count)">
 
-      <div class="c-event">
+      <nuxt-link class="c-event" :to="`/events/${event.uid}`">
 
         <div class="c-event-date--wrapper">
           <h3 class="c-event-date month t-header" v-html="month(event.data.date)"/>
@@ -33,9 +33,7 @@
             </div>
         </div>
 
-        <nuxt-link class="c-event-link" :to="`/events/${event.uid}`"/>
-
-      </div>
+      </nuxt-link>
 
     </template>
 
@@ -123,7 +121,7 @@ export default {
       padding-bottom: 100%;
       border-radius: 50%;
       box-shadow: 0px 2px 5px rgba($blue,.2);
-      transition: transform .25s;
+      transition: transform .25s, box-shadow .25s;
     }
   }
 
@@ -139,6 +137,7 @@ export default {
       right: -1px;
       z-index: 1;
       background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 85%, rgba(255,255,255,1) 95%);
+      display: none;
     }
 
     .c-event-info-title{
@@ -189,13 +188,11 @@ export default {
     animation: animate-gradient-vertical 5s infinite;
   }
 
-  .c-event-link{
-    @include cover;
-    z-index: 1;
-  }
-
-  .c-event:hover{
-    box-shadow: 0px 5px 8px rgba($blue,.2);
+  .c-event:hover,
+  .c-event:active,
+  .c-event:focus{
+    outline: none;
+    box-shadow: 0px 5px 8px rgba($blue,.3);
     .c-event-date--wrapper{
 
       animation: animate-gradient-vertical 5s infinite;
@@ -203,6 +200,7 @@ export default {
     .c-event-logo--wrapper{
       .c-event-logo{
         transform: scale(1.1);
+        box-shadow: 0px 5px 8px rgba($blue,.3);
       }
     }
     .c-event-info--wrapper{

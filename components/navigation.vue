@@ -3,8 +3,8 @@
     <div class="c-background"/>
 
     <nuxt-link class="c-logo" to="/">
-      <logo vertical rainbow class="c-logo-desktop"/>
-      <logo horizontal rainbow class="c-logo-mobile"/>
+      <logo vertical rainbow animate class="c-logo-desktop"/>
+      <logo horizontal rainbow animate class="c-logo-mobile"/>
     </nuxt-link>
 
 
@@ -24,7 +24,19 @@
 <script>
 import {mapState} from 'vuex'
 export default {
-  computed:mapState(['nav'])
+  computed:mapState(['nav','reveal']),
+  mounted(){
+    if (!this.reveal){
+      gsap.timeline()
+      .set('#c-navigation .c-link',{x:'-100%'})
+    }
+  },
+  watch:{
+    reveal(){
+      gsap.timeline()
+      .to('#c-navigation .c-link',.75,{x:0,stagger:.1})
+    }
+  }
 }
 </script>
 
@@ -43,7 +55,7 @@ export default {
     height:100vh;
     width: $navigation-width;
     background: white;
-    box-shadow: 3px 0px 8px rgba($blue,.2);
+    box-shadow: 3px 0px 8px rgba($blue,.3);
   }
 
   .c-logo{
@@ -74,6 +86,7 @@ export default {
     top: 360px;
     left: $nav-space;
     width: $nav-width;
+    overflow: hidden;
 
     .c-link{
       @include header;

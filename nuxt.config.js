@@ -47,6 +47,10 @@ export default {
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['@/assets/scss/main.scss'],
+  modules: ['@nuxtjs/style-resources'],
+  styleResources: {
+    scss: ['assets/scss/_variables.scss','assets/scss/_mixins.scss']
+  },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -69,12 +73,6 @@ export default {
     apiOptions: {
       accessToken: process.env.PRISMIC_ACCESS_TOKEN
     }
-  },
-
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/style-resources'],
-  styleResources: {
-    scss: ['assets/scss/_variables.scss','assets/scss/_mixins.scss']
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

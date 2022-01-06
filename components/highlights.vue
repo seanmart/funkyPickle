@@ -2,7 +2,7 @@
   <section class="c-highlights o-top o-bottom" ref="container">
     <div class="o-container c-highlights--wrapper">
 
-      <carousel class="c-highlights-carousel" :slides="data.items" loop :autoplay="5" :gap="10">
+      <carousel class="c-highlights-carousel" :slides="data.items" loop :speed="700" :autoplay="5" :gap="10">
         <template #default="slide">
           <div class="c-slide">
             <div class="c-slide-image" v-image:cover="slide.image.url"/>
@@ -41,11 +41,13 @@ export default {
     overflow: hidden;
     transition: transform .5s, box-shadow .5s;
     border-radius: 8px;
+    box-shadow: 0px 3px 5px -2px rgba($blue,.2);
   }
   .c-slide-image{
     @include cover;
-    top:-200px;
     z-index: -1;
+    transition: transform .5s;
+    background-position: top center;
   }
   .c-slide-card{
     @include lime-gradient;
@@ -72,7 +74,11 @@ export default {
   }
   .swiper-slide-active{
     .c-slide{
-      box-shadow: 0px 10px 7px rgba($blue,.2);
+      box-shadow: 0px 30px 10px -15px rgba($blue,.3);
+    }
+    .c-slide-image{
+      transform: scale(1.2);
+      transition: transform 1s;
     }
   }
 }
