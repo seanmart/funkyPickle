@@ -51,7 +51,6 @@ function initScrollBuddy(){
       this.document = null;
       this.window = null;
       this.event = props.event || null
-      this.left = this.el.offsetLeft
 
       this.setup()
     }
@@ -86,7 +85,6 @@ function initScrollBuddy(){
 
     handleWheel(e){
       e.stopPropagation();
-      if (e.pageX - this.left < 0) return
       this.window.scrollTop += e.deltaY * 0.75;
     }
 
@@ -96,7 +94,6 @@ function initScrollBuddy(){
 
     updateDocument(){
       this.document.style.height = `${this.el.offsetHeight}px`
-      this.left = this.el.offsetLeft
     }
 
     updateScroll(){

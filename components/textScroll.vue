@@ -13,15 +13,19 @@ export default {
     let text = this.$slots.default[0].elm
     let count = Math.ceil(text.offsetWidth / container.offsetWidth) + 1
     let wrapper = this.$refs.wrapper
-    //let clones = [text]
+    let clones = [text]
 
     for (let i = 0; i < count; i++){
       let clone = text.cloneNode(true)
-      //clones.push(clone)
+      clones.push(clone)
       wrapper.appendChild(clone)
     }
 
-    //gsap.to(clones,20,{x:'-100%',ease:'none',repeat:-1})
+    gsap.to(clones,20,{x:'-100%',ease:'none',repeat:-1,scrollTrigger:{
+      trigger: this.$refs.container,
+      start: 'top bottom',
+      toggleActions:'play pause resume none'
+    }})
 
   }
 }
@@ -43,7 +47,7 @@ export default {
       > *{
         white-space: nowrap;
         flex: 0 0 auto;
-        animation: animate-scroll-left 20s infinite linear;
+        //animation: animate-scroll-left 20s infinite linear;
       }
     }
   }

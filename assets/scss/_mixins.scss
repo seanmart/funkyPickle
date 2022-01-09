@@ -5,7 +5,7 @@
 
 @mixin tropical-gradient($dir: 90){
   background: $pink;
-  background: linear-gradient(#{$dir}deg, $pink 0%, $orange 80%, $lime2 100%);
+  background: linear-gradient(#{$dir}deg, $lime2 0%, $orange 20%, $pink 100%);
 }
 
 @mixin dark-gradient($dir: 90){
@@ -20,7 +20,7 @@
 
 @mixin tropical-fade($dir: 90){
   background: $lime;
-  background: linear-gradient(#{$dir}deg,$pink 0%,rgba($orange,.5) 50%,rgba($lime,0) 80%);
+  background: linear-gradient(#{$dir}deg,$lime 0%,rgba($orange,.5) 30%,rgba($pink,0) 80%);
 }
 
 @mixin header{

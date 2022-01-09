@@ -1,3 +1,5 @@
+import queries from '@/assets/js/queries'
+
 function camelize(str) {
   return str.indexOf("_") > 0
   ? str.split('_').map((w,i) => i > 0 ? w.charAt(0).toUpperCase() + w.slice(1) : w).join("")
@@ -20,16 +22,16 @@ export default {
     reveal: false,
     nav:[],
     events:{},
+    eventsMetaData:[],
     pages:{},
-    components:{}
   }),
   mutations:{
     ready:(state,x)=> state.ready = x,
     reveal:(state,x)=> state.reveal = x,
     page:(state,{page,data}) => (state.pages[page] = data),
     set:(state,{key,data})=> (state[key] = data),
-    component:(state,{name,data}) => state.components[name] = data,
-    event:(state,{id,data}) => state.events[id] = data
+    eventData:(state,{id,data}) => state.events[id] = data,
+    eventsMetaData:(state,data) => state.eventsMetaData = data
   },
   actions:{
     async page({state,commit,dispatch},page){
@@ -48,28 +50,53 @@ export default {
         commit('page',{page, data})
       }
     },
-    async getEvent({state,commit},id){
+    async event({state,commit},id){
       if(state.events[id]) return
-      let results = await this.$prismic.api.getByUID(page)
+      let results = await this.$prismic.api.getByUID(id)
       if (results){
         let data = await checkComponents(results.data.body)
         commit('page',{page, data})
       }
     },
+    async eventsMetaData({state,commit}){
+      if (state.eventsMetaData.length > 0) return true
+
+      let date = new Date()
+      date.setDate(date.getDate() - 1)
+      
+      let results = await this.$prismic.api.query([
+        this.$prismic.predicates.at('document.type', 'event'),
+        this.$prismic.predicates.date.after('my.event.date', date.toISOString().split('T')[0])
+      ],
+        {graphQuery:queries.events,orderings:'[my.event.date]'}
+      )
+
+      results
+      ? commit('eventsMetaData',results.results)
+      : console.log(results)
+      return !!results
+    },
     async nuxtServerInit({commit,dispatch}){
 
-      let links = []
-      let navData = await this.$prismic.api.query(this.$prismic.predicates.at('document.type', 'page'))
-      let settingsData = await this.$prismic.api.getSingle('global_settings')
+      let results = await this.$prismic.api.getSingle('global_settings',{fetchLinks:[
+        'page.uid','page.label','learn.uid','learn.label','shop.uid','shop.label'
+      ]})
+      let pages =[]
 
-      if (navData){
-        navData.results.forEach(page => links.push({to:`/${page.uid}`,label: page.data.page_label}))
-        links.push({to:`/learn`, label: 'Learn'})
-        links.push({href:settingsData.data.shop_link.url, label: 'Shop'})
-        commit('set',{key:'nav',data: links})
+      if(results){
+        results.data.nav.forEach(item => {
+          if (item.page.data){
+            pages.push({to:`/${item.page.data.uid}`, label: item.page.data.label})
+          } else {
+            console.log(`item type ${item.type} has no nav data`)
+          }
+        })
+        commit('set',{key:'nav',data: pages})
+
       }
 
-      if (settingsData) commit('set',{key:'settings',data: settingsData.data})
+
+      //if (settingsData) commit('set',{key:'settings',data: settingsData.data})
 
     }
   }

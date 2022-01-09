@@ -1,6 +1,6 @@
 <template lang="html">
-  <main id="event">
-    this is an event
+  <main id="news-list">
+    news list
   </main>
 </template>
 

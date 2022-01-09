@@ -38,7 +38,7 @@ export default {
 
     this.gap && (options.spaceBetween = this.gap)
 
-    this.loop && (
+    this.loop && (this.slides.length > 2) && (
       options.loop = this.loop,
       options.loopedSlides = 2
     )

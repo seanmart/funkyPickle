@@ -1,5 +1,5 @@
 <template lang="html">
-  <section class="c-landing o-bottom">
+  <section class="c-landing o-bottom" v-reveal="{before,after}">
     <div class="o-wrapper">
       <div class="c-reveal"/>
       <fancy-image class="c-image" :image="data.primary.image.url" :scale="1.3" start="top top" :trigger="'.c-landing'" />
@@ -8,21 +8,15 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
 export default {
   props:['data'],
-  computed: mapState(['reveal']),
-  mounted(){
-    if (!this.reveal){
+  methods:{
+    before(){
       gsap.timeline()
       .set('.c-landing .c-reveal',{scaleY:0,transformOrigin:'top',display:'block'})
       .set('.c-landing .c-image',{scale:1.2,opacity:0})
-    } else{
-      gsap.fromTo('.c-landing .c-image',2,{scale:1.2},{scale:1,ease:'power4.out'})
-    }
-  },
-  watch:{
-    reveal(r){
+    },
+    after(){
       gsap.timeline()
       .to('.c-landing .c-reveal',.75,{scaleY:1,ease:'power4.in'})
       .set('.c-landing .c-image',{opacity:1})

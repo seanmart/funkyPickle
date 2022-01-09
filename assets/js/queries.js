@@ -1,6 +1,5 @@
 export default{
-  events:`
-  {
+  events:`{
   event
   {
   title
@@ -10,6 +9,5 @@ export default{
   uid
   date
   }
-  }
-  `
+  }`
 }

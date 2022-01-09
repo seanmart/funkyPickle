@@ -14,19 +14,25 @@ Vue.directive("image", {
 Vue.directive("reveal", {
   inserted: function(el, { value = {}, arg },{context:{$store}}) {
 
+    value.before && value.before()
     if (!value.after) return
 
-    let anim = value.after()
-    anim && anim.progress(0).pause()
-
-    value.before && value.before()
-
-    let unwatch = $store.watch((e)=>{
+    let unwatch = null
+    unwatch = $store.watch((e)=>{
       if(e.reveal){
-        anim && anim.play()
-        unwatch()
+        value.after()
+        unwatch && unwatch()
       }
     })
+
+  }
+});
+
+Vue.directive("wordsplit", {
+  inserted: function(el, { value, arg }) {
+    let html = ""
+    el.innerText.split(' ').forEach(w => html += `<div class="word--wrapper" style="display:inline-block;overflow:hidden"><div class="word">${w}&nbsp</div></div>`)
+    el.innerHTML = html
 
   }
 });

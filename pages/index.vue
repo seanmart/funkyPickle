@@ -10,7 +10,7 @@ export default {
   data:()=>({data:[]}),
   async asyncData({ $prismic, params, error, store, payload }) {
     if (payload) return {data:payload}
-    await store.dispatch('single','home')
+    await store.dispatch('page','home')
     return {data: store.state.pages.home}
   },
   mounted(){
