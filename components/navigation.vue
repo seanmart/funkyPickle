@@ -1,5 +1,5 @@
 <template lang="html">
-  <header id="c-navigation">
+  <header id="c-navigation" v-reveal="reveal">
     <div class="c-background"/>
 
     <nuxt-link class="c-logo" to="/">
@@ -24,14 +24,12 @@
 <script>
 import {mapState} from 'vuex'
 export default {
-  computed:mapState(['nav','reveal']),
+  computed:mapState(['nav']),
   mounted(){
-    if (!this.reveal){
-      gsap.timeline()
-      .set('#c-navigation .c-link',{x:'-100%'})
-    }
+    gsap.timeline()
+    .set('#c-navigation .c-link',{x:'-100%'})
   },
-  watch:{
+  methods:{
     reveal(){
       gsap.timeline()
       .to('#c-navigation .c-link',.75,{x:0,stagger:.1})

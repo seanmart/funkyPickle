@@ -1,5 +1,5 @@
 <template lang="html">
-  <section class="c-big-ball" v-reveal="{before,after}">
+  <section class="c-big-ball" v-reveal="reveal">
     <div class="c-ball--wrapper" ref="ballWrapper">
       <div class="c-ball" ref="ball"/>
     </div>
@@ -10,25 +10,15 @@
 export default {
   props:['data'],
   mounted(){
-    this.anim = gsap.to(this.$refs.ballWrapper,{y:'-20%',scrollTrigger:{
-      trigger: this.$refs.ballWrapper,
-      start: 'top bottom',
-      scrub: true
-    }})
+    gsap.set(this.$refs.ball,{scale:.5,opacity:0})
   },
   methods:{
-    before(){
-      gsap.set(this.$refs.ball,{scale:.5,opacity:0})
-    },
-    after(){
+    reveal(){
       gsap.to(this.$refs.ball,1,{scale:1,opacity:1, ease: 'power4.out',scrollTrigger:{
         trigger:this.$refs.ballWrapper,
         start: 'top 50%'
       }})
     }
-  },
-  destroyed(){
-    this.anim && this.anim.kill()
   }
 }
 </script>
@@ -39,7 +29,7 @@ export default {
 
   .c-ball--wrapper{
     position: absolute;
-    top:$space + 100;
+    top:$space;
     left: 60%;
     z-index: -1;
   }

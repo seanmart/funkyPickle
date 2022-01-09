@@ -18,52 +18,56 @@ async function checkComponents(data){
 
 export default {
   state:()=>({
-    ready:false,
+    pageLoaded: false,
     reveal: false,
+    columns:{
+      show:false,
+      complete:false
+    },
     nav:[],
-    events:{},
-    eventsMetaData:[],
-    pages:{},
+    event:{},
+    events:[],
+    page:{},
   }),
   mutations:{
-    ready:(state,x)=> state.ready = x,
+    pageLoaded:(state,x)=> state.pageLoaded = x,
     reveal:(state,x)=> state.reveal = x,
-    page:(state,{page,data}) => (state.pages[page] = data),
-    set:(state,{key,data})=> (state[key] = data),
-    eventData:(state,{id,data}) => state.events[id] = data,
-    eventsMetaData:(state,data) => state.eventsMetaData = data
+    page:(state,{page,data}) => state.page[page] = data,
+    set:(state,{key,data})=> state[key] = data,
+    event:(state,{id,data}) => state.event[id] = data,
+    events:(state,data) => state.events = data,
+    columnsComplete:(state,x)=> state.columns.complete = x,
+    columnsShow:(state,x)=> state.columns = {show:x,complete:false}
   },
   actions:{
-    async page({state,commit,dispatch},page){
-      if (state.pages[page]) return
-      let results = await this.$prismic.api.getByUID('page', page)
-      if (results){
-        let data = await checkComponents(results.data.body)
-        commit('page',{page, data})
+    async page({state,commit},page){
+      if (!state.page[page]){
+        let results = await this.$prismic.api.getByUID('page', page)
+        if (results){
+          let data = await checkComponents(results.data.body)
+          commit('page',{page, data})
+        } else {
+          return null
+        }
       }
-    },
-    async single({state,commit,dispatch},page){
-      if (state.pages[page]) return
-      let results = await this.$prismic.api.getSingle(page)
-      if (results){
-        let data = await checkComponents(results.data.body)
-        commit('page',{page, data})
-      }
+      return state.page[page]
     },
     async event({state,commit},id){
-      if(state.events[id]) return
-      let results = await this.$prismic.api.getByUID(id)
-      if (results){
-        let data = await checkComponents(results.data.body)
-        commit('page',{page, data})
+      if (!state.event[id]){
+        let results = await this.$prismic.api.getByUID('event', id)
+        if (results){
+          commit('event',{id, data: results.data.body})
+        } else {
+          return null
+        }
       }
+      return state.event[id]
     },
-    async eventsMetaData({state,commit}){
-      if (state.eventsMetaData.length > 0) return true
+    async events({commit}){
 
       let date = new Date()
       date.setDate(date.getDate() - 1)
-      
+
       let results = await this.$prismic.api.query([
         this.$prismic.predicates.at('document.type', 'event'),
         this.$prismic.predicates.date.after('my.event.date', date.toISOString().split('T')[0])
@@ -71,33 +75,28 @@ export default {
         {graphQuery:queries.events,orderings:'[my.event.date]'}
       )
 
-      results
-      ? commit('eventsMetaData',results.results)
-      : console.log(results)
-      return !!results
-    },
-    async nuxtServerInit({commit,dispatch}){
-
-      let results = await this.$prismic.api.getSingle('global_settings',{fetchLinks:[
-        'page.uid','page.label','learn.uid','learn.label','shop.uid','shop.label'
-      ]})
-      let pages =[]
-
-      if(results){
-        results.data.nav.forEach(item => {
-          if (item.page.data){
-            pages.push({to:`/${item.page.data.uid}`, label: item.page.data.label})
-          } else {
-            console.log(`item type ${item.type} has no nav data`)
-          }
-        })
-        commit('set',{key:'nav',data: pages})
-
+      if (results){
+        commit('events',results.results)
+      } else {
+        return null
       }
 
+    },
+    async nav({commit}){
+      let results = await this.$prismic.api.getSingle('settings')
+      let links =[]
 
-      //if (settingsData) commit('set',{key:'settings',data: settingsData.data})
-
+      if(results){
+        results.data.links.forEach(item => item.page.uid && links.push({
+          to:`/${item.page.uid}`,
+          label: item.label
+        }))
+        commit('set',{key:'nav',data: links})
+      }
+    },
+    async nuxtServerInit({dispatch}){
+      await dispatch('nav')
+      await dispatch('events')
     }
   }
 }

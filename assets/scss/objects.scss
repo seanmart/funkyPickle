@@ -20,6 +20,10 @@
   padding-bottom: $space * 2;
 }
 
+.o-top:first-child{
+  padding-top: $space * 2;
+}
+
 
 @media screen and (max-width: $navigation-width + $max-width + ($margins * 2)){
   .o-container{

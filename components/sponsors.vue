@@ -1,6 +1,10 @@
 <template lang="html">
   <section class="c-sponsors o-container o-top o-bottom">
-    <h2 class="t-headline-rg u-gap-btm-rg" v-html="data.primary.title"/>
+
+    <div class="c-header--wrapper u-gap-bottom-rg" v-if="data.primary.title" >
+      <h2 class="t-headline-rg" v-html="data.primary.title" ref="title"/>
+    </div>
+
     <div class="c-sponsors--wrapper">
       <template v-for="(logo,i) in data.items">
         <div :key="i" class="c-sponsor">
@@ -10,6 +14,7 @@
         </div>
       </template>
     </div>
+
   </section>
 
 </template>
@@ -29,7 +34,7 @@ export default {
     margin: 0px -$space / 4;
   }
   .c-sponsor{
-    flex: 0 0 50%;
+    flex: 0 0 33.333%;
     padding: $space / 4;
   }
   .c-sponsor-logo--wrapper{

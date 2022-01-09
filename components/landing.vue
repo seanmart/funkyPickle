@@ -1,5 +1,5 @@
 <template lang="html">
-  <section class="c-landing o-bottom" v-reveal="{before,after}">
+  <section class="c-landing o-bottom" v-reveal="reveal">
     <div class="o-wrapper">
       <div class="c-reveal"/>
       <fancy-image class="c-image" :image="data.primary.image.url" :scale="1.3" start="top top" :trigger="'.c-landing'" />
@@ -10,13 +10,13 @@
 <script>
 export default {
   props:['data'],
+  mounted(){
+    gsap.timeline()
+    .set('.c-landing .c-reveal',{scaleY:0,transformOrigin:'top',display:'block'})
+    .set('.c-landing .c-image',{scale:1.2,opacity:0})
+  },
   methods:{
-    before(){
-      gsap.timeline()
-      .set('.c-landing .c-reveal',{scaleY:0,transformOrigin:'top',display:'block'})
-      .set('.c-landing .c-image',{scale:1.2,opacity:0})
-    },
-    after(){
+    reveal(){
       gsap.timeline()
       .to('.c-landing .c-reveal',.75,{scaleY:1,ease:'power4.in'})
       .set('.c-landing .c-image',{opacity:1})

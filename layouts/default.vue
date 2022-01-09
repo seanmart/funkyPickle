@@ -1,7 +1,7 @@
 <template lang="html">
   <div id="site">
     <svg-gradients/>
-    <preloader v-if="first" :hide="ready" @hidden="handleFinished"/>
+    <preloader v-if="first" :hide="pageLoaded" @hidden="afterPreloaderHidden"/>
     <columns/>
     <navigation/>
     <div id="scroller">
@@ -21,7 +21,7 @@ export default {
     this.handleInit()
     this.render = true
   },
-  computed: mapState(['ready']),
+  computed: mapState(['pageLoaded']),
   methods:{
     handleInit(){
       if(!isMobile){
@@ -48,37 +48,35 @@ export default {
       }
 
     },
-    handleFinished(){
+    afterPreloaderHidden(){
       this.first = false
-      this.handleReady()
-    },
-    handleReady(){
       this.$store.commit('reveal',true)
       !isMobile && scrollBuddy.reset()
     }
   },
   watch:{
-    ready(ready){
-      if (ready && !this.first){
-        gsap.timeline()
-        .set('#scroller',{clearProps:'all'})
-        .to('#c-columns .c-column',.5,{x:'101%',ease:'power2.out',stagger:.07},0)
-        .add(this.handleReady,0)
-        .set('#c-columns',{clearProps:'all'})
-        .set('#c-columns .c-column',{clearProps:'all'})
-      }
+    pageLoaded(pageLoaded){
+      if (this.first || !pageLoaded ) return
+      this.$store.commit('columnsShow',false)
+      setTimeout(()=>{
+        this.$store.commit('reveal',true)
+        !isMobile && scrollBuddy.reset()
+      },250)
     }
   },
   middleware({store}){
     if (process.server) return
-    store.commit('ready',false)
-    store.commit('reveal',false)
-
     return new Promise((res)=>{
-      gsap.timeline({onComplete:res})
-          .set('#c-columns',{zIndex:99})
-          .to('#c-columns .c-column',.5,{x:0,ease:'power2.out',stagger:.07})
-          .set('#scroller',{opacity:0})
+      store.commit('columnsShow',true)
+      store.commit('pageLoaded',false)
+      store.commit('reveal',false)
+
+      let unwatch = store.watch((e)=>{
+        if (e.columns.complete){
+          unwatch && unwatch()
+          res()
+        }
+      })
     })
   }
 }

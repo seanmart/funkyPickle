@@ -12,15 +12,14 @@ Vue.directive("image", {
 });
 
 Vue.directive("reveal", {
-  inserted: function(el, { value = {}, arg },{context:{$store}}) {
+  inserted: function(el, { value = null, arg },{context:{$store}}) {
 
-    value.before && value.before()
-    if (!value.after) return
+    if (!value) return
 
     let unwatch = null
     unwatch = $store.watch((e)=>{
       if(e.reveal){
-        value.after()
+        value()
         unwatch && unwatch()
       }
     })
@@ -31,8 +30,21 @@ Vue.directive("reveal", {
 Vue.directive("wordsplit", {
   inserted: function(el, { value, arg }) {
     let html = ""
-    el.innerText.split(' ').forEach(w => html += `<div class="word--wrapper" style="display:inline-block;overflow:hidden"><div class="word">${w}&nbsp</div></div>`)
-    el.innerHTML = html
+    let children = el.children
+    let split = (text)=>{
+      text.split(' ').forEach(w => html += `<div class="word--wrapper" style="display:inline-block;overflow:hidden"><div class="word">${w}&nbsp</div></div>`)
+    }
+
+    if (children.length > 0){
+      for (let i = 0; i < children.length; i++){
+        split(children[i].innerText)
+        children[i].innerHTML = html
+        html = ""
+      }
+    } else {
+      split(el.innerText)
+      el.innerHTML = html
+    }
 
   }
 });

@@ -1,10 +1,10 @@
-.u-gap-btm-sm{
+.u-gap-bottom-sm{
   margin-bottom: 2rem;
 }
-.u-gap-btm-rg{
+.u-gap-bottom-rg{
   margin-bottom: 5rem;
 }
-.u-gap-btm-lg{
+.u-gap-bottom-lg{
   margin-bottom: 7rem;
 }
 .u-gap-top-sm{
@@ -15,4 +15,11 @@
 }
 .u-gap-top-lg{
   margin-top: 7rem;
+}
+
+.u-text-gap-rg > *{
+  margin-bottom: 2.5rem;
+  &:last-child{
+    margin-bottom: 0px;
+  }
 }

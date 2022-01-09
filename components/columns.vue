@@ -1,5 +1,5 @@
 <template lang="html">
-  <div id="c-columns" :class="{['is-on']:transition}">
+  <div id="c-columns">
     <div v-for="i in 4" :key="i" class="c-column--wrapper">
       <div :class="`c-column c-column-${i+1}`"/>
     </div>
@@ -9,7 +9,27 @@
 <script>
 import {mapState} from 'vuex'
 export default {
-  computed: mapState(['transition'])
+  computed: mapState({
+    show: state => state.columns.show
+  }),
+  watch:{
+    show(show){
+      show ? this.showColumns() : this.hideColumns()
+    }
+  },
+  methods:{
+    showColumns(){
+      gsap.timeline({onComplete:()=> this.$store.commit('columnsComplete',true)})
+      .set('#c-columns',{zIndex:99})
+      .to('#c-columns .c-column',.5,{x:0,ease:'power2.out',stagger:.07})
+    },
+    hideColumns(){
+      gsap.timeline({onComplete:()=> this.$store.commit('columnsComplete',true)})
+      .to('#c-columns .c-column',.5,{x:'101%',ease:'power2.out',stagger:.07},0)
+      .set('#c-columns',{clearProps:'all'})
+      .set('#c-columns .c-column',{clearProps:'all'})
+    }
+  }
 }
 </script>
 
