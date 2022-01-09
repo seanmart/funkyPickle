@@ -1,11 +1,11 @@
 <template lang="html">
-  <section class="c-event-schedule o-container o-top o-bottom" v-reveal="reveal">
+  <section class="c-events-list o-container o-top o-bottom" v-reveal="reveal">
 
     <div class="c-header--wrapper u-gap-bottom-rg" v-if="data.primary.title" >
       <h2 class="t-headline-rg" v-html="data.primary.title" ref="title"/>
     </div>
 
-    <div class="c-event-list">
+    <div class="c-list">
       <template v-for="(event,i) in eventList">
         <div class="c-event" ref="events">
           <nuxt-link :to="`/event/${event.uid}`" class="c-event--wrapper">
@@ -102,7 +102,7 @@ export default {
 }
 </script>
 <style lang="scss">
-  .c-event-schedule{
+  .c-events-list{
 
     $event-list-space: 2.5rem;
     $event-list-duration: .25s;
