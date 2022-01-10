@@ -26,7 +26,7 @@ export default {
       {src:'https://unpkg.com/swiper/swiper-bundle.min.js'}
     ]
   },
-  
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['@/assets/scss/main.scss'],
   modules: ['@nuxtjs/style-resources'],
@@ -59,5 +59,18 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    html: {
+      minify: {
+        collapseBooleanAttributes: true,
+        decodeEntities: true,
+        minifyCSS: false,
+        minifyJS: false,
+        processConditionalComments: true,
+        removeEmptyAttributes: true,
+        removeRedundantAttributes: true,
+        trimCustomFragments: true,
+        useShortDoctype: true,
+      }
+    }
   }
 }

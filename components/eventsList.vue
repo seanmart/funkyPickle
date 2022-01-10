@@ -43,11 +43,31 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {yesterday} from '@/assets/js/helpers'
 export default {
+  async fetch(){
+
+    let events = this.$store.state.events
+
+    if (!events){
+      let yesterdayDate = yesterday().toISOString().split('T')[0]
+      let results = await this.$prismic.api.query([
+        this.$prismic.predicates.at('document.type', 'event'),
+        this.$prismic.predicates.date.after('my.event.date',yesterdayDate)
+      ],
+        {graphQuery:queries.events,orderings:'[my.event.date]'}
+      )
+      if (results) {
+        events = results.results
+        this.$store.commit('events',events)
+      }
+    }
+
+    this.events = events
+  },
   props:['data'],
+  data:()=>({events:[]}),
   computed:{
-    ...mapState(['events']),
     eventList(){
       return this.data.primary.limit ? this.events.slice(0,this.data.primary.limit) : this.events
     }
