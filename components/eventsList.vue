@@ -265,33 +265,6 @@ export default {
       }
     }
 
-    .c-event:hover,
-    .c-event:active,
-    .c-event:focus{
-      outline: none;
-      box-shadow: 0px 5px 8px rgba($blue,.3);
-
-      .c-rainbow{
-        opacity: 1;
-        animation-play-state: running;
-      }
-      .c-logo{
-        box-shadow: 0px 5px 8px rgba($blue,.3);
-      }
-      .c-bg{
-        transform: translateX(0px);
-      }
-      .c-location{
-        opacity: 1;
-        svg{
-          fill: $pink;
-        }
-      }
-      .c-title{
-        color: $purple;
-      }
-    }
-
     @media screen and (max-width: $mobile){
 
       .c-event-btn{
@@ -317,6 +290,33 @@ export default {
           opacity: 1;
         }
       }
+    }
+  }
+
+  .c-events-list .c-event--wrapper:hover,
+  .c-events-list .c-event--wrapper:active,
+  .is-desktop .c-events-list .c-event--wrapper:focus{
+    outline: none;
+    box-shadow: 0px 5px 8px rgba($blue,.3);
+
+    .c-rainbow{
+      opacity: 1;
+      animation-play-state: running;
+    }
+    .c-logo{
+      box-shadow: 0px 5px 8px rgba($blue,.3);
+    }
+    .c-bg{
+      transform: translateX(0px);
+    }
+    .c-location{
+      opacity: 1;
+      svg{
+        fill: $pink;
+      }
+    }
+    .c-title{
+      color: $purple;
     }
   }
 </style>

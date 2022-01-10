@@ -28,6 +28,7 @@ export default {
 </script>
 
 <style lang="scss">
+
   .c-btn{
     border: none;
     border-radius: 3rem;
@@ -43,12 +44,6 @@ export default {
       background: $lime;
       color: $black;
       transition: background .25s;
-      &:hover,
-      &:active,
-      &:focus{
-        outline: none;
-        background: white;
-      }
     }
 
     &.is-rainbow{
@@ -59,22 +54,6 @@ export default {
       box-shadow: 0 0 0 $blue;
       color: white;
       fill: white;
-      &:hover,
-      &:active,
-      &:focus{
-        outline: none;
-        @include tropical-gradient;
-        background-size: 200% 100%;
-        &.has-arrow{
-          .c-btn-text{
-            transform: translateX(-2rem);
-          }
-          .c-btn-arrow{
-            transform: translateX(-2rem);
-            opacity: 1;
-          }
-        }
-      }
     }
     &.has-arrow{
       position:relative;
@@ -96,13 +75,34 @@ export default {
     }
 
     @media screen and (max-width:$tablet){
-
       border-radius: 4rem;
-
-      .c-btn{
-        padding: 2.5rem 6rem;
-      }
+      padding: 2.5rem 6rem;
     }
 
   }
+
+  .c-btn.is-rainbow:hover,
+  .c-btn.is-rainbow:active,
+  .is-desktop .c-btn.is-rainbow:focus{
+    outline: none;
+    @include tropical-gradient;
+    background-size: 200% 100%;
+    &.has-arrow{
+      .c-btn-text{
+        transform: translateX(-2rem);
+      }
+      .c-btn-arrow{
+        transform: translateX(-2rem);
+        opacity: 1;
+      }
+    }
+  }
+
+  .c-btn.is-lime:hover,
+  .c-btn.is-lime:active,
+  .is-desktop .c-btn.is-lime:focus{
+    outline: none;
+    background: white;
+  }
+
 </style>
