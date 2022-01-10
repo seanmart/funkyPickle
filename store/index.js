@@ -1,5 +1,3 @@
-import queries from '@/assets/js/queries'
-
 export default {
   state:()=>({
     pageLoaded: false,

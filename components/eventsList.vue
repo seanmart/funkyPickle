@@ -44,6 +44,7 @@
 
 <script>
 import {yesterday} from '@/assets/js/helpers'
+import queries from '@/assets/js/queries'
 export default {
   async fetch(){
 
@@ -65,6 +66,7 @@ export default {
 
     this.events = events
   },
+  fetchKey: 'event-list',
   props:['data'],
   data:()=>({events:[]}),
   computed:{
@@ -73,15 +75,21 @@ export default {
     }
   },
   mounted(){
-    if(this.$refs.events){
-      gsap.set(this.$refs.events,{y:100,opacity:0})
-    }
     if(this.$refs.title){
       gsap.set(this.$refs.title,{x:'-100%'})
     }
     if(this.$refs.btn){
       this.btnEl = this.$refs.btn.children
       gsap.set(this.btnEl,{scale:.5,opacity:0})
+    }
+  },
+  watch:{
+    eventList(){
+      this.$nextTick(()=>{
+        if(this.$refs.events){
+          gsap.set(this.$refs.events,{y:100,opacity:0})
+        }
+      })
     }
   },
   methods:{
