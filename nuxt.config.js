@@ -29,7 +29,9 @@ export default {
     ]
   },
   generate:{
-    crawler: false,
+    fallback: "404.html",
+    interval: 500,
+    concurrency: 100,
     async routes(){
       let generatedRoutes = []
       const client = Prismic.client(process.env.PRISMIC_END_POINT, {
