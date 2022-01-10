@@ -14,9 +14,8 @@ export default {
 
     let page = route.path.replace('/','')
 
-    if (payload){
+    if (payload && payload.data){
       let payloadData = await checkComponents(payload.data.body)
-      console.log(payloadData)
       return {data: payloadData}
     }
 
