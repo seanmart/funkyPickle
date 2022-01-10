@@ -40,7 +40,6 @@ export default {
           payload: page.data.body
         })
       })
-      console.log(generatedRoutes)
       return generatedRoutes
     }
   },
