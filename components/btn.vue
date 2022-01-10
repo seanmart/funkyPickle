@@ -1,13 +1,13 @@
 <template lang="html">
 
-      <nuxt-link v-if="to" :to="to" class="c-btn" :class="{['is-rainbow']:rainbow,['has-arrow']:arrow}">
+      <nuxt-link v-if="to" :to="to" class="c-btn" :class="{['is-rainbow']:rainbow,['is-lime']:lime,['has-arrow']:arrow}">
         <div class="c-btn-text">
           <slot/>
         </div>
         <icon v-if="arrow" class="c-btn-arrow" arrow/>
       </nuxt-link>
 
-      <button v-else type="button" name="button" class="c-btn" :class="{['is-rainbow']:rainbow,['has-arrow']:arrow}">
+      <button v-else type="button" name="button" class="c-btn" :class="{['is-rainbow']:rainbow,['is-lime']:lime,['has-arrow']:arrow}">
         <div class="c-btn-text">
           <slot/>
         </div>
@@ -20,6 +20,7 @@
 export default {
   props:{
     rainbow:Boolean,
+    lime:Boolean,
     to: String,
     arrow: Boolean
   }
@@ -36,6 +37,10 @@ export default {
     letter-spacing: .1rem;
     padding: 1.5rem 5rem;
     display: inline-block;
+
+    &.is-lime{
+      background: $lime;
+    }
 
     &.is-rainbow{
       @include rainbow-gradient;

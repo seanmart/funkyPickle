@@ -1,19 +1,19 @@
 <template lang="html">
   <section class="c-sponsors o-container o-top o-bottom">
 
-    <div class="c-header--wrapper u-gap-bottom-rg" v-if="data.primary.title" >
-      <h2 class="t-headline-rg" v-html="data.primary.title" ref="title"/>
-    </div>
+      <div class="c-header--wrapper u-gap-bottom-rg" v-if="data.primary.title" >
+        <h2 class="t-headline-rg" v-html="data.primary.title" ref="title"/>
+      </div>
 
-    <div class="c-sponsors--wrapper">
-      <template v-for="(logo,i) in data.items">
-        <div :key="i" class="c-sponsor">
-          <div class="c-sponsor-logo--wrapper">
-            <img class="c-sponsor-logo" :src="logo.logo.url" :alt="logo.logo.alt">
+      <div class="c-sponsors--wrapper">
+        <template v-for="(logo,i) in data.items">
+          <div :key="i" class="c-sponsor">
+            <div class="c-sponsor-logo--wrapper">
+              <img class="c-sponsor-logo" :src="logo.logo.url" :alt="logo.logo.alt">
+            </div>
           </div>
-        </div>
-      </template>
-    </div>
+        </template>
+      </div>
 
   </section>
 
@@ -27,6 +27,7 @@ export default {
 
 <style lang="scss">
 .c-sponsors{
+
   .c-sponsors--wrapper{
     display: flex;
     flex-direction: row;
@@ -41,10 +42,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: white;
     overflow: hidden;
-    border-radius: 8px;
-    padding: $space / 2;
     .c-sponsor-logo{
       max-width: 100%;
     }

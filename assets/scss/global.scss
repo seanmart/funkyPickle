@@ -5,6 +5,10 @@ html{
   color: $black;
 }
 
+main{
+  min-height: 100vh;
+}
+
 #scroller{
   padding-left: $navigation-width;
   width: 100vw;

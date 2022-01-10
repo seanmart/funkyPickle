@@ -8,6 +8,11 @@
   background: linear-gradient(#{$dir}deg, $lime2 0%, $orange 20%, $pink 100%);
 }
 
+@mixin dark-tropical-gradient($dir: 90){
+  background: $pink;
+  background: linear-gradient(#{$dir}deg,$orange 0%, $pink 100%);
+}
+
 @mixin dark-gradient($dir: 90){
   background: $black;
   background: linear-gradient(#{$dir}deg, #000000 0%,$dark-grey 100%);
