@@ -26,23 +26,7 @@ export default {
       {src:'https://unpkg.com/swiper/swiper-bundle.min.js'}
     ]
   },
-  generate:{
-    crawler: false,
-    async routes(){
-      let generatedRoutes = []
-      const client = Prismic.client(process.env.PRISMIC_END_POINT, {
-        accessToken: process.env.PRISMIC_ACCESS_TOKEN
-      })
-      const pages = await client.query(Prismic.Predicates.at('document.type', 'page'))
-      pages.results.forEach(page => {
-        generatedRoutes.push({
-          route: page.uid == 'home' ? '/' : `/${page.uid}`,
-          payload: page.data.body
-        })
-      })
-      return generatedRoutes
-    }
-  },
+  
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['@/assets/scss/main.scss'],
   modules: ['@nuxtjs/style-resources'],
