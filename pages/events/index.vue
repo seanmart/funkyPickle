@@ -10,8 +10,7 @@ export default {
   async asyncData({ $prismic, params, error, store, payload }) {
     if (payload) return {data:payload}
 
-    let page = params.page || 'home'
-    let data = await store.dispatch('page',page)
+    let data = await store.dispatch('page','events')
     if (data) return {data}
 
     error({ statusCode: 404, message: 'Page not found'})
