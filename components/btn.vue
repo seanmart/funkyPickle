@@ -37,9 +37,18 @@ export default {
     letter-spacing: .1rem;
     padding: 1.5rem 5rem;
     display: inline-block;
+    cursor: pointer;
 
     &.is-lime{
       background: $lime;
+      color: $black;
+      transition: background .25s;
+      &:hover,
+      &:active,
+      &:focus{
+        outline: none;
+        background: white;
+      }
     }
 
     &.is-rainbow{
@@ -90,7 +99,7 @@ export default {
 
       border-radius: 4rem;
 
-      .c-btn--wrapper{
+      .c-btn{
         padding: 2.5rem 6rem;
       }
     }
