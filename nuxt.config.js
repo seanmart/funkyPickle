@@ -26,12 +26,6 @@ export default {
       {src:'https://unpkg.com/swiper/swiper-bundle.min.js'}
     ]
   },
-  router: {
-    trailingSlash: true
-  },
-  sitemap: {
-    trailingSlash: true
-  },
   generate:{
     crawler: false,
     async routes(){
