@@ -35,13 +35,12 @@ export default {
       })
       const pages = await client.query(Prismic.Predicates.at('document.type', 'page'))
       pages.results.forEach(page => {
-        generatedRoutes.push(
-          {
-            route: `/${page.uid == 'home' ? '' : page.uid}`,
-            payload: page.data.body
-          }
-        )
+        generatedRoutes.push({
+          route: page.uid == 'home' ? '/' : `/${page.uid}/`,
+          payload: page.data.body
+        })
       })
+      console.log(generatedRoutes)
       return generatedRoutes
     }
   },
