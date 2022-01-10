@@ -26,6 +26,12 @@ export default {
       {src:'https://unpkg.com/swiper/swiper-bundle.min.js'}
     ]
   },
+  router: {
+    trailingSlash: true
+  },
+  sitemap: {
+    trailingSlash: true
+  },
   generate:{
     crawler: false,
     async routes(){
@@ -36,7 +42,7 @@ export default {
       const pages = await client.query(Prismic.Predicates.at('document.type', 'page'))
       pages.results.forEach(page => {
         generatedRoutes.push({
-          route: page.uid == 'home' ? '/' : `/${page.uid}/`,
+          route: page.uid == 'home' ? '/' : `/${page.uid}`,
           payload: page.data.body
         })
       })
