@@ -1,6 +1,8 @@
 const Prismic = require('@prismicio/client')
 
 export default {
+  target: "static",
+  components: true,
   ssr: true,
   head: {
     title: 'Funky Pickle',
@@ -25,6 +27,25 @@ export default {
       {src:'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/ScrollTrigger.min.js'},
       {src:'https://unpkg.com/swiper/swiper-bundle.min.js'}
     ]
+  },
+  generate:{
+    crawler: false,
+    async routes(){
+      let generatedRoutes = []
+      const client = Prismic.client(process.env.PRISMIC_END_POINT, {
+        accessToken: process.env.PRISMIC_ACCESS_TOKEN
+      })
+      const pages = await client.query(Prismic.Predicates.at('document.type', 'page'))
+      pages.results.forEach(page => {
+        generatedRoutes.push(
+          {
+            route: `/${page.uid == 'home' ? '' : page.uid}`,
+            payload: page
+          }
+        )
+      })
+      return generatedRoutes
+    }
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
