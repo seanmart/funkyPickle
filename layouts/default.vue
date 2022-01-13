@@ -5,9 +5,7 @@
     <columns/>
     <navigation/>
     <div id="scroller">
-      <div id="page-content">
-        <nuxt v-if="render"/>
-      </div>
+      <nuxt v-if="render"/>
       <end-matter/>
     </div>
   </div>

@@ -20,16 +20,17 @@
         {{formatDate(data.start_date)}} {{data.start_date && data.end_date ? ' - ' : ''}} {{formatDate(data.end_date)}}</span>
     </div>
   </section>
-
-  <sticky-header class="c-event-header" endTrigger="#c-event-content">
-    <div class="c-header--wrapper">
-      <div class="c-header-btns--wrapper o-container">
-        <btn class="c-header-btn c-header-btn-left" knockout>Register</btn>
-        <btn class="c-header-btn" knockout tight icon="facebook"/>
-        <btn class="c-header-btn" knockout tight icon="instagram"/>
+  <section class="c-event-header">
+    <sticky-header endTrigger="#c-event-content">
+      <div class="c-header--wrapper">
+        <div class="c-header-btns--wrapper o-container">
+          <btn class="c-header-btn c-header-btn-left" knockout>Register</btn>
+          <btn class="c-header-btn" knockout icon="facebook"/>
+          <btn class="c-header-btn" knockout icon="instagram"/>
+        </div>
       </div>
-    </div>
-  </sticky-header>
+    </sticky-header>
+  </section>
 
   <section id="c-event-content" class="c-event-content o-container o-top o-bottom">
     content
@@ -137,7 +138,7 @@ export default {
   .c-event-header{
 
     .c-header--wrapper{
-      padding: 20px;
+      height: 80px;
       @include tropical-gradient;
       width:100%;
     }

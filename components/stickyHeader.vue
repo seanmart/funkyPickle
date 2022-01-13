@@ -16,11 +16,13 @@ export default {
     this.$nextTick(()=>{
       let scroller = document.getElementById('scroller')
       let el = this.$slots.default[0].elm
+
       let props = {
         pin:true,
         trigger: this.$refs.header,
         pinSpacing: false,
-        start: ()=>`top-=${this.top + parseInt(getStyle(scroller,'padding-top'))}`,
+        anticipatePin:1,
+        start: ()=>`top top+=${this.top + getStyle(scroller,'padding-top')}`,
         end: ()=> `bottom top+=${el.offsetHeight}`
       }
 

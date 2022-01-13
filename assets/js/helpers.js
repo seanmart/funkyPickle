@@ -60,5 +60,5 @@ export function getStyle(e, s){
         });
         sv = e.currentStyle[s];
     }
-    return sv;
+    return parseFloat(sv);
 }

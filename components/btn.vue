@@ -58,7 +58,8 @@ export default {
     display: inline-block;
     cursor: pointer;
 
-    &.is-tight{
+    &.is-tight,
+    &.is-circle{
       padding: 1.5rem;
     }
 
@@ -117,11 +118,18 @@ export default {
     }
     .c-btn-icon{
       height: 2rem;
+      display: block;
     }
 
     @media screen and (max-width:$tablet){
       border-radius: 4rem;
       padding: 2.5rem 6rem;
+
+      &.is-tight,
+      &.is-circle{
+        padding: 2.5rem;
+      }
+
     }
 
   }

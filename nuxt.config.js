@@ -31,7 +31,13 @@ export default {
   generate:{
     fallback: "404.html",
     interval: 500,
-    concurrency: 100
+    async routes(){
+      let routes = []
+      let client = Prismic.client(process.env.PRISMIC_END_POINT, {accessToken: process.env.PRISMIC_ACCESS_TOKEN})
+      let events = await client.query(Prismic.Predicates.at('document.type', 'event'))
+      events.results.forEach(data => routes.push({route: `/events/${data.uid}`,payload: data}))
+      return routes
+    }
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
