@@ -2,7 +2,7 @@
   <section class="c-landing o-bottom" v-reveal="reveal">
     <div class="o-wrapper">
       <div class="c-reveal"/>
-      <fancy-image class="c-image" :image="data.primary.image.url" :scale="1.3" start="top top" :trigger="'.c-landing'" />
+      <fancy-image class="c-image" :image="data.primary.image.url" :scale="1.3" :start="0" :trigger="'.c-landing'" />
     </div>
   </section>
 </template>

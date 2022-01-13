@@ -2,8 +2,8 @@
 <main id="c-event">
 
   <section class="c-event-landing">
-    <div class="c-image">
-      <fancy-image :scale="1.3" start="top top" v-if="data.image.url" :image="data.image.url" />
+    <div class="c-image" ref="img">
+      <fancy-image :scale="1.3" :start="0" v-if="data.image.url" :image="data.image.url" />
     </div>
     <div class="c-logo--wrapper">
       <div class="c-logo" v-if="data.logo.url" v-image:cover="data.logo.url"/>
@@ -75,7 +75,7 @@ export default {
 
   .c-event-landing{
     .c-image{
-      height: 200px;
+      height: 257px;
       @include dark-gradient(0);
     }
     .c-logo--wrapper{
@@ -121,6 +121,7 @@ export default {
     .c-date{
       flex:0 0 auto;
       text-transform: uppercase;
+      font-size: 2rem;
     }
   }
 

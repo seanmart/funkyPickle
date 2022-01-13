@@ -11,7 +11,7 @@ export default {
     image: {type: String, default: null},
     distance: {type: Number, default:0},
     scale:{type: Number, defualt: 0},
-    start:{type:String,default:'top bottom'},
+    start:{type:[String,Number],default:'top bottom'},
     trigger: {type: [Object,String], default: null}
   },
   data:()=>({
@@ -20,14 +20,15 @@ export default {
   mounted(){
     if(!this.image) return
 
-    this.id = uid()
     let props = {ease:'none'}
+    this.id = uid()
+
     if (this.scale) props.scale = this.scale
     if (this.distance) props.y = this.distance
 
     props.scrollTrigger = {
       id: this.id,
-      trigger:this.trigger || this.$refs.container,
+      trigger: this.trigger || this.$refs.container,
       start: this.start,
       scrub: true
     }
