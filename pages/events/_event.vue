@@ -1,16 +1,4 @@
-<template lang="html">
-  <main id="event">
-    this is an event
-  </main>
-</template>
-
 <script>
-export default {
-  mounted(){
-    this.$store.commit('pageLoaded',true)
-  }
-}
+import event from '@/templates/event'
+export default event
 </script>
-
-<style lang="scss">
-</style>

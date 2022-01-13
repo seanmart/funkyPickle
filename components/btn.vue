@@ -1,13 +1,13 @@
 <template lang="html">
 
-      <nuxt-link v-if="to" :to="to" class="c-btn" :class="{['is-rainbow']:rainbow,['is-lime']:lime,['has-arrow']:arrow}">
+      <nuxt-link v-if="to" :to="to" class="c-btn" :class="classes">
         <div class="c-btn-text">
           <slot/>
         </div>
         <icon v-if="arrow" class="c-btn-arrow" arrow/>
       </nuxt-link>
 
-      <button v-else type="button" name="button" class="c-btn" :class="{['is-rainbow']:rainbow,['is-lime']:lime,['has-arrow']:arrow}">
+      <button v-else type="button" name="button" class="c-btn" :class="classes">
         <div class="c-btn-text">
           <slot/>
         </div>
@@ -22,7 +22,18 @@ export default {
     rainbow:Boolean,
     lime:Boolean,
     to: String,
+    knockout:Boolean,
     arrow: Boolean
+  },
+  computed:{
+    classes(){
+      return{
+        'is-rainbow': this.rainbow,
+        'is-lime': this.lime,
+        'is-knockout': this.knockout,
+        'has-arrow': this.arrow
+      }
+    }
   }
 }
 </script>
@@ -55,6 +66,12 @@ export default {
       color: white;
       fill: white;
     }
+
+    &.is-knockout{
+      background: white;
+      color: $purple;
+    }
+
     &.has-arrow{
       position:relative;
       .c-btn-arrow{

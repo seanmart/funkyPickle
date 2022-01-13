@@ -9,28 +9,25 @@
 <script>
 import {checkComponents} from '@/assets/js/helpers'
 export default {
+  name: 'Page',
   data:()=>({data:[]}),
   async asyncData({ $prismic, route, error, store, payload }) {
 
     let page = route.path.replace('/','')
+    let data = null
 
-    if (payload && payload.data){
-      let payloadData = await checkComponents(payload.data.body)
-      return {data: payloadData}
+    if (payload && payload.data) data = await checkComponents(payload.data.body)
+    if (store.state.page[page])  data = store.state.page[page]
+
+    if (!data){
+      let results = await $prismic.api.getByUID('page', page || 'home')
+      if (results){
+        data = await checkComponents(results.data.body)
+        store.commit('page',{page,data})
+      }
     }
 
-    if (store.state.page[page]){
-      return {data:store.state.page[page]}
-    }
-
-    let results = await $prismic.api.getByUID('page', page || 'home')
-
-    if (results){
-      let data = await checkComponents(results.data.body)
-      store.commit('page',{page,data})
-      return {data}
-    }
-
+    if (data) return {data}
     error({ statusCode: 404, message: 'Page not found'})
   },
   mounted(){

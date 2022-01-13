@@ -5,7 +5,9 @@
     <columns/>
     <navigation/>
     <div id="scroller">
-      <nuxt v-if="render"/>
+      <div id="page-content">
+        <nuxt v-if="render"/>
+      </div>
       <end-matter/>
     </div>
   </div>
@@ -58,6 +60,7 @@ export default {
   watch:{
     pageLoaded(pageLoaded){
       if (this.first || !pageLoaded ) return
+      gsap.set('#scroller',{clearProps:'all'})
       this.$store.commit('columnsShow',false)
       setTimeout(()=>{
         this.$store.commit('reveal',true)
@@ -74,6 +77,7 @@ export default {
 
       let unwatch = store.watch((e)=>{
         if (e.columns.complete){
+          gsap.set('#scroller',{opacity:0})
           unwatch && unwatch()
           res()
         }

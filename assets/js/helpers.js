@@ -18,8 +18,37 @@ export async function checkComponents(data){
   return data
 }
 
-export function yesterday(){
-  let date = new Date()
-  date.setDate(date.getDate() - 1)
-  return date
+export function getDate(o = 0){
+  let d = new Date()
+  d.setDate(d.getDate() + o)
+
+  let month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+  if (month.length < 2)
+      month = '0' + month;
+  if (day.length < 2)
+      day = '0' + day;
+
+  return [year, month, day].join('-');
+}
+
+export function toDate(date){
+  return new Date(`${date}T00:00:00-07:00`)
+}
+
+export function getDay(date){
+  date = toDate(date)
+  return date.getDate().toString().padStart(2, '0')
+}
+
+export function getMonth(date,format = 'long'){
+  date = toDate(date)
+  return new Intl.DateTimeFormat('en-US', {month:format}).format(date)
+}
+
+export function getYear(date){
+  date = toDate(date)
+  return date.getFullYear()
 }

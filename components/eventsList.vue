@@ -5,13 +5,13 @@
       <h2 class="t-headline-rg" v-html="data.primary.title" ref="title"/>
     </div>
 
-    <div class="c-list">
+    <div class="c-list" v-if="eventList.length > 0">
       <template v-for="(event,i) in eventList">
         <div class="c-event" ref="events">
-          <nuxt-link :to="`/event/${event.uid}`" class="c-event--wrapper">
+          <nuxt-link :to="`/events/${event.uid}`" class="c-event--wrapper">
             <div class="c-date--wrapper">
-              <h3 class="c-date c-month t-header" v-html="month(event.data.date)"/>
-              <h3 class="c-date c-day t-header" v-html="day(event.data.date)"/>
+              <h3 class="c-date c-month t-header" v-html="getMonth(event.data.start_date,'short')"/>
+              <h3 class="c-date c-day t-header" v-html="getDay(event.data.start_date)"/>
               <div class="c-rainbow"/>
             </div>
             <div class="c-logo--wrapper">
@@ -34,6 +34,9 @@
         </div>
       </template>
     </div>
+    <div v-else class="c-no-list">
+      No events found
+    </div>
 
     <div class="u-gap-top-rg c-event-btn" v-if="data.primary.link.uid" ref="btn">
       <btn :to="`/${data.primary.link.uid}`" rainbow arrow>view all events</btn>
@@ -43,20 +46,30 @@
 </template>
 
 <script>
-import {yesterday} from '@/assets/js/helpers'
-import queries from '@/assets/js/queries'
+import {getDate,getDay,getMonth} from '@/assets/js/helpers'
 export default {
   async fetch(){
 
     let events = this.$store.state.events
 
     if (!events){
-      let yesterdayDate = yesterday().toISOString().split('T')[0]
+      let date = getDate(-1)
       let results = await this.$prismic.api.query([
         this.$prismic.predicates.at('document.type', 'event'),
-        this.$prismic.predicates.date.after('my.event.date',yesterdayDate)
+        this.$prismic.predicates.date.after('my.event.end_date',date)
       ],
-        {graphQuery:queries.events,orderings:'[my.event.date]'}
+        {graphQuery:`{
+        event
+        {
+        title
+        state
+        city
+        logo
+        uid
+        start_date
+        }
+        }`,
+        orderings:'[my.event.start_date]'}
       )
       if (results) {
         events = results.results
@@ -64,11 +77,11 @@ export default {
       }
     }
 
-    this.events = events
+    this.events = events || []
   },
   fetchKey: 'event-list',
   props:['data'],
-  data:()=>({events:[]}),
+  data:()=>({events:[],getDay,getMonth}),
   computed:{
     eventList(){
       return this.data.primary.limit ? this.events.slice(0,this.data.primary.limit) : this.events
@@ -117,14 +130,6 @@ export default {
           once:true
         }})
       }
-    },
-    day(date){
-      date = new Date(`${date}T00:00:00-07:00`)
-      return date.getDate().toString().padStart(2, '0')
-    },
-    month(date){
-      date = new Date(`${date}T00:00:00-07:00`)
-      return new Intl.DateTimeFormat('en-US', {month:'short'}).format(date)
     }
   }
 }

@@ -35,7 +35,7 @@ export default {
     this.$nextTick(()=> gsap.to(this.$refs.image,1,props))
   },
   destroyed(){
-    ScrollTrigger.getById(this.id).kill()
+    this.image && ScrollTrigger.getById(this.id).kill()
   }
 }
 </script>
@@ -53,7 +53,9 @@ export default {
       right: 0px;
       bottom: 0px;
       background-size: cover;
-      background-position: top center;
+      background-position: center center;
+      background-repeat: no-repeat;
+      will-change: transform;
     }
   }
 </style>
