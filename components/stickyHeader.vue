@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="slicky-header">
+  <div class="slicky-header" ref="header">
     <slot/>
   </div>
 </template>
@@ -10,7 +10,6 @@ export default {
   props:{
     top:{type:Number,default:0},
     endTrigger:{type:[String,Function],default:null},
-
   },
   mounted(){
 
@@ -19,7 +18,7 @@ export default {
       let el = this.$slots.default[0].elm
       let props = {
         pin:true,
-        trigger: el,
+        trigger: this.$refs.header,
         pinSpacing: false,
         start: ()=>`top-=${this.top + parseInt(getStyle(scroller,'padding-top'))}`,
         end: ()=> `bottom top+=${el.offsetHeight}`
