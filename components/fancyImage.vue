@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="c-fancy-image" v-if="image" ref="container">
+  <div class="c-fancy-image" ref="container">
     <div class="c-fancy-image-media" v-image="image" :style="{top:`${-distance}px`}" ref="image"/>
   </div>
 </template>

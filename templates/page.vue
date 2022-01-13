@@ -31,7 +31,7 @@ export default {
     error({ statusCode: 404, message: 'Page not found'})
   },
   mounted(){
-    this.$store.commit('pageLoaded',true)
+    this.$nextTick(()=>this.$store.commit('pageLoaded',true))
   }
 }
 </script>

@@ -1,10 +1,10 @@
 <template lang="html">
 
-  <svg v-if="arrow" class="arrow" :class="{['rainbow-hover']:rainbowHover}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 371.45 371.43">
+  <svg v-if="arrow || icon == 'arrow'" class="arrow" :class="{['rainbow-hover']:rainbowHover}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 371.45 371.43">
     <path d="M43.83,0V37.77H307L0,344.73l26.71,26.7,307-307V327.6h37.77V0Z"/>
   </svg>
 
-  <svg v-else-if="arrows" class="arrows" :class="{['rainbow-hover']:rainbowHover}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 84.5 603.57">
+  <svg v-else-if="arrows || icon == 'arrows'" class="arrows" :class="{['rainbow-hover']:rainbowHover}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 84.5 603.57">
     <polygon class="cls-1" points="42.25 603.57 84.5 531.14 0 531.14 42.25 603.57"/>
     <polygon class="cls-1" points="42.25 470.79 84.5 398.36 0 398.36 42.25 470.79"/>
     <polygon class="cls-1" points="42.25 338 84.5 265.57 0 265.57 42.25 338"/>
@@ -12,19 +12,19 @@
     <polygon class="cls-1" points="84.5 0 0 0 42.25 72.43 84.5 0"/>
   </svg>
 
-  <svg v-else-if="wayfinder" class="wayfinder" :class="{['rainbow-hover']:rainbowHover}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900.08 1199.9">
+  <svg v-else-if="wayfinder || icon == 'wayfinder'" class="wayfinder" :class="{['rainbow-hover']:rainbowHover}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900.08 1199.9">
     <path d="M450,0C201.83,0,0,199.35,0,450c0,262.5,225,531,389.1,719.77,37.67,40.28,84.45,40,121.84,0C675.08,981.07,900.08,712.57,900.08,450,900.08,199.35,698.22,0,450,0Zm.06,628c-103.43,0-187.5-84.07-187.5-187.5,10.24-248.76,364.8-248.68,375,0C637.57,543.91,553.5,628,450.07,628Z"/>
   </svg>
 
-  <svg v-else-if="instagram" class="instagram" :class="{['rainbow-hover']:rainbowHover}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 301.29 301.31">
+  <svg v-else-if="instagram || icon == 'instagram'" class="instagram" :class="{['rainbow-hover']:rainbowHover}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 301.29 301.31">
     <path d="M88.53,300.38a110.44,110.44,0,0,1-36.57-7A73.81,73.81,0,0,1,25.28,276,73.87,73.87,0,0,1,7.9,249.32a110.64,110.64,0,0,1-7-36.57c-.73-16.06-.9-21.19-.9-62.1s.17-46,.91-62.12A110.69,110.69,0,0,1,7.91,52,74,74,0,0,1,25.29,25.28,74,74,0,0,1,52,7.9a110.67,110.67,0,0,1,36.56-7C104.61.17,109.73,0,150.65,0s46,.17,62.1.91a110.64,110.64,0,0,1,36.57,7A74,74,0,0,1,276,25.29,73.81,73.81,0,0,1,293.38,52a110.44,110.44,0,0,1,7,36.57c.73,16.09.91,21.2.91,62.12s-.17,46-.91,62.1a110.39,110.39,0,0,1-7,36.57,77,77,0,0,1-44.06,44.06,110.39,110.39,0,0,1-36.57,7c-16.08.73-21.2.92-62.1.92S104.61,301.12,88.53,300.38ZM89.76,28a83.35,83.35,0,0,0-28,5.27A49.37,49.37,0,0,0,33.25,61.79a83.26,83.26,0,0,0-5.19,28c-.73,15.89-.88,20.66-.88,60.88s.15,45,.88,60.87a83.32,83.32,0,0,0,5.19,28,46.56,46.56,0,0,0,11.27,17.32,46.61,46.61,0,0,0,17.27,11.3,83.26,83.26,0,0,0,28,5.19c15.89.73,20.65.88,60.88.88s45-.15,60.87-.88a83.32,83.32,0,0,0,28-5.19,49.87,49.87,0,0,0,28.62-28.62,83.26,83.26,0,0,0,5.19-28c.73-15.88.88-20.64.88-60.87s-.15-45-.88-60.88a83.37,83.37,0,0,0-5.19-28,46.56,46.56,0,0,0-11.27-17.32,46.67,46.67,0,0,0-17.35-11.22,83.26,83.26,0,0,0-28-5.19c-15.88-.73-20.64-.88-60.87-.88s-45,.11-60.87.84ZM73.29,150.65A77.36,77.36,0,1,1,150.65,228a77.35,77.35,0,0,1-77.36-77.35Zm27.15,0a50.21,50.21,0,1,0,50.21-50.21,50.21,50.21,0,0,0-50.21,50.21ZM213,70.21A18.08,18.08,0,1,1,231.07,88.3h0A18.09,18.09,0,0,1,213,70.23Z"/>
   </svg>
 
-  <svg v-else-if="facebook" class="facebook" :class="{['rainbow-hover']:rainbowHover}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 359.57 357.36">
+  <svg v-else-if="facebook || icon == 'facebook'" class="facebook" :class="{['rainbow-hover']:rainbowHover}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 359.57 357.36">
     <path d="M359.57,179.78a179.79,179.79,0,1,0-207.88,177.6V231.75H106v-52h45.65V140.17c0-45.06,26.88-69.94,67.91-69.94a275.41,275.41,0,0,1,40.24,3.5V118H237.17A26,26,0,0,0,208,140.31a25.15,25.15,0,0,0-.12,5.75v33.72h49.91l-8,52H207.88V357.38a179.84,179.84,0,0,0,151.69-177.6"/>
   </svg>
 
-  <svg v-else-if="calendar" class="calendar" :class="{['rainbow-hover']:rainbowHover}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 442.6 470.26">
+  <svg v-else-if="calendar || icon == 'calendar'" class="calendar" :class="{['rainbow-hover']:rainbowHover}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 442.6 470.26">
     <rect x="72.56" y="206.39" width="85.83" height="85.83"/>
     <rect x="72.56" y="312.22" width="85.83" height="85.82"/>
     <rect x="178.39" y="206.39" width="85.82" height="85.83"/>
@@ -50,7 +50,8 @@ export default {
     instagram:Boolean,
     facebook:Boolean,
     calendar:Boolean,
-    rainbowHover:Boolean
+    rainbowHover:Boolean,
+    icon:{type: String,default: null}
   },
 }
 </script>

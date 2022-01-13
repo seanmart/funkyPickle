@@ -8,7 +8,12 @@
 
 <script>
 export default {
+  props:{
+    duration:{type:Number,default:20}
+  },
   mounted(){
+    if (Object.keys(this.$slots).length == 0) return
+    
     let container = this.$refs.container
     let text = this.$slots.default[0].elm
     let count = Math.ceil(text.offsetWidth / container.offsetWidth) + 1
@@ -21,7 +26,7 @@ export default {
       wrapper.appendChild(clone)
     }
 
-    gsap.to(clones,20,{x:'-100%',ease:'none',repeat:-1,scrollTrigger:{
+    gsap.to(clones,this.duration,{x:'-100%',ease:'none',repeat:-1,scrollTrigger:{
       trigger: this.$refs.container,
       start: 'top bottom',
       toggleActions:'play pause resume none'

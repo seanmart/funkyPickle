@@ -55,6 +55,7 @@ export default {
       this.first = false
       this.$store.commit('reveal',true)
       !isMobile && scrollBuddy.reset()
+      ScrollTrigger.refresh(true)
     }
   },
   watch:{
@@ -65,7 +66,8 @@ export default {
       setTimeout(()=>{
         this.$store.commit('reveal',true)
         !isMobile && scrollBuddy.reset()
-      },250)
+        ScrollTrigger.refresh(true)
+      },500)
     }
   },
   middleware({store}){

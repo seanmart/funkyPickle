@@ -2,6 +2,7 @@
 
       <nuxt-link v-if="to" :to="to" class="c-btn" :class="classes">
         <div class="c-btn-text">
+          <icon v-if="icon" class="c-btn-icon" :icon="icon"/>
           <slot/>
         </div>
         <icon v-if="arrow" class="c-btn-arrow" arrow/>
@@ -9,6 +10,7 @@
 
       <button v-else type="button" name="button" class="c-btn" :class="classes">
         <div class="c-btn-text">
+          <icon v-if="icon" class="c-btn-icon" :icon="icon"/>
           <slot/>
         </div>
         <icon v-if="arrow" class="c-btn-arrow" arrow/>
@@ -23,7 +25,9 @@ export default {
     lime:Boolean,
     to: String,
     knockout:Boolean,
-    arrow: Boolean
+    arrow: Boolean,
+    tight: Boolean,
+    icon: {type: String, default: null},
   },
   computed:{
     classes(){
@@ -31,7 +35,10 @@ export default {
         'is-rainbow': this.rainbow,
         'is-lime': this.lime,
         'is-knockout': this.knockout,
-        'has-arrow': this.arrow
+        'is-tight': this.tight,
+        'is-circle': this.icon && Object.keys(this.$slots).length == 0,
+        'has-arrow': this.arrow,
+        'has-icon': !!this.icon,
       }
     }
   }
@@ -51,9 +58,14 @@ export default {
     display: inline-block;
     cursor: pointer;
 
+    &.is-tight{
+      padding: 1.5rem;
+    }
+
     &.is-lime{
       background: $lime;
       color: $black;
+      fill: $black;
       transition: background .25s;
     }
 
@@ -70,6 +82,7 @@ export default {
     &.is-knockout{
       background: white;
       color: $purple;
+      fill: $purple
     }
 
     &.has-arrow{
@@ -83,12 +96,27 @@ export default {
         opacity: 0;
       }
     }
+
+    &.has-icon{
+      display: inline-flex;
+      align-items: center;
+      &.is-circle{
+        justify-content: center;
+        height:2rem;
+        width: 2rem;
+        box-sizing: content-box;
+      }
+    }
+
     .c-btn-text,
     .c-btn-arrow{
       transition: transform .25s, opacity .25s;
     }
     .c-btn-arrow{
       fill: inherit !important;
+    }
+    .c-btn-icon{
+      height: 2rem;
     }
 
     @media screen and (max-width:$tablet){

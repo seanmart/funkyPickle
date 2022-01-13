@@ -60,12 +60,22 @@ export default {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     max-width: 40rem;
-    transition: opacity .5s;
+    transition-duration: .8s;
+    transition-property: transform opacity;
+    transition-timing-function: cubic-bezier(.22,.55,.46,1.01);
     opacity: 0;
+    transform: scale(.9);
+    transform-origin: left center;
+  }
+  .swiper-slide-next{
+    .c-card{
+      transition: none;
+    }
   }
   .swiper-slide-prev,
   .swiper-slide-active{
     .c-card{
+      transform: scale(1);
       opacity: 1;
     }
     .c-image{

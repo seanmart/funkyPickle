@@ -8,47 +8,57 @@ export function camelize(str) {
   : str
 }
 
-export async function checkComponents(data){
-  for (let i = 0; i < data.length; i++){
-    data[i].component = camelize(data[i].slice_type)
-    data[i].hasComponent = await import(`@/components/${data[i].component}`)
+export async function checkComponents(d){
+  for (let i = 0; i < d.length; i++){
+    d[i].component = camelize(d[i].slice_type)
+    d[i].hasComponent = await import(`@/components/${d[i].component}`)
       .then((_res) => {return true})
       .catch((_error) => {return false})
   }
-  return data
+  return d
 }
 
 export function getDate(o = 0){
   let d = new Date()
   d.setDate(d.getDate() + o)
 
-  let month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate(),
-      year = d.getFullYear();
+  let m = '' + (d.getMonth() + 1),
+      w = '' + d.getDate(),
+      y = d.getFullYear();
 
-  if (month.length < 2)
-      month = '0' + month;
-  if (day.length < 2)
-      day = '0' + day;
+  if (m.length < 2)
+      m = '0' + m;
+  if (w.length < 2)
+      w = '0' + w;
 
-  return [year, month, day].join('-');
+  return [y, m, w].join('-');
 }
 
-export function toDate(date){
-  return new Date(`${date}T00:00:00-07:00`)
+export function toDate(d){
+  return new Date(`${d}T00:00:00-07:00`)
 }
-
-export function getDay(date){
-  date = toDate(date)
-  return date.getDate().toString().padStart(2, '0')
+export function getDay(d){
+  d = toDate(d)
+  return d.getDate().toString().padStart(2, '0')
 }
-
-export function getMonth(date,format = 'long'){
-  date = toDate(date)
-  return new Intl.DateTimeFormat('en-US', {month:format}).format(date)
+export function getMonth(d,f = 'long'){
+  d = toDate(d)
+  return new Intl.DateTimeFormat('en-US', {month:f}).format(d)
 }
-
-export function getYear(date){
-  date = toDate(date)
-  return date.getFullYear()
+export function getYear(d){
+  d = toDate(d)
+  return d.getFullYear()
+}
+export function getStyle(e, s){
+    let sv = "";
+    if(document.defaultView && document.defaultView.getComputedStyle){
+        sv = document.defaultView.getComputedStyle(e, "").getPropertyValue(s);
+    }
+    else if(e.currentStyle){
+        s = s.replace(/\-(\w)/g, function (sm, p1){
+            return p1.toUpperCase();
+        });
+        sv = e.currentStyle[s];
+    }
+    return sv;
 }

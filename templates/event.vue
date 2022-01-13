@@ -2,31 +2,36 @@
 <main id="c-event">
 
   <section class="c-event-landing">
-    <div class="c-image" ref="img">
-      <fancy-image :scale="1.3" :start="0" v-if="data.image.url" :image="data.image.url" />
+    <div class="c-image">
+      <fancy-image :scale="1.3" :start="0" :image="data.image.url" />
     </div>
     <div class="c-logo--wrapper">
-      <div class="c-logo" v-if="data.logo.url" v-image:cover="data.logo.url"/>
+      <div class="c-logo" v-image:cover="data.logo.url"/>
     </div>
   </section>
 
-  <section class="c-event-info o-container o-top o-bottom">
-    <text-scroll class="c-title--wrapper">
-      <h1 class="t-header c-title" v-html="data.title"/>
+  <section class="c-event-info o-container">
+    <text-scroll class="c-title--wrapper" :duration="45">
+      <h1 v-if="data.title" class="t-header c-title" v-html="data.title"/>
     </text-scroll>
     <div class="c-date--wrapper">
       <icon calendar class="c-date-icon"/>
-      <span class="c-date">{{formatDate(data.start_date)}} - {{formatDate(data.end_date)}}</span>
+      <span class="c-date">
+        {{formatDate(data.start_date)}} {{data.start_date && data.end_date ? ' - ' : ''}} {{formatDate(data.end_date)}}</span>
     </div>
   </section>
 
-  <section class="c-event-register">
-    <div class="c-register--wrapper">
-      <btn class="c-register-btn" knockout>Register</btn>
+  <sticky-header class="c-event-header" endTrigger="#c-event-content">
+    <div class="c-header--wrapper">
+      <div class="c-header-btns--wrapper o-container">
+        <btn class="c-header-btn c-header-btn-left" knockout>Register</btn>
+        <btn class="c-header-btn" knockout tight icon="facebook"/>
+        <btn class="c-header-btn" knockout tight icon="instagram"/>
+      </div>
     </div>
-  </section>
+  </sticky-header>
 
-  <section class="c-event-content o-container o-top o-bottom">
+  <section id="c-event-content" class="c-event-content o-container o-top o-bottom">
     content
   </section>
 
@@ -58,10 +63,11 @@ export default {
     error({ statusCode: 404, message: 'Page not found'})
   },
   mounted(){
-    this.$store.commit('pageLoaded',true)
+    setTimeout(()=>this.$store.commit('pageLoaded',true),500)
   },
   methods:{
     formatDate(date){
+      if(!date) return
       let month = getMonth(date,'long')
       let day = getDay(date)
       return `${month} ${day}`
@@ -79,18 +85,18 @@ export default {
       @include dark-gradient(0);
     }
     .c-logo--wrapper{
-      height: 20px;
+      height: 2rem;
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
       z-index: 1;
-      @include dark-gradient(0);
-      margin-bottom: 50px;
+      background: $black;
+      margin-bottom: 5rem;
     }
     .c-logo{
-      width: 120px;
-      height: 120px;
+      width: 12rem;
+      height: 12rem;
       border-radius: 50%;
       background-position: center center;
       box-shadow: 0px 2px 5px rgba($blue,.2);
@@ -98,9 +104,11 @@ export default {
   }
 
   .c-event-info{
+    padding: 5vw 0px;
+
     .c-title--wrapper{
       height: 5vw;
-      margin-bottom: 20px;
+      margin-bottom: 3rem;
     }
     .c-title{
       font-size: 6vw;
@@ -114,31 +122,42 @@ export default {
     }
     .c-date-icon{
       flex:0 0 auto;
-      height: 20px;
+      height: 1.6rem;
       fill:$pink;
-      margin-right: 20px;
+      margin-right: 1.6rem;
     }
     .c-date{
       flex:0 0 auto;
       text-transform: uppercase;
-      font-size: 2rem;
+      font-size: 1.6rem;
+      font-weight: 500;
     }
   }
 
-  .c-event-register{
-    height: 80px;
-    position: relative;
-    .c-register--wrapper{
-      @include cover;
-      @include rainbow-gradient;
+  .c-event-header{
+
+    .c-header--wrapper{
+      padding: 20px;
+      @include tropical-gradient;
+      width:100%;
+    }
+    .c-header-btns--wrapper{
+      height:100%;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
+    }
+    .c-header-btn{
+      margin-left: 1rem;
+      &.c-header-btn-left{
+        margin-right:auto;
+        margin-left: 0px;
+      }
     }
   }
 
   .c-event-content{
-    min-height: 50vh;
+    min-height: 150vh;
   }
 
 
