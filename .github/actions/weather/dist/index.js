@@ -9400,20 +9400,27 @@ async function getWeather(){
   let events = await client.getAllByType("event")
 
   if (events){
-    for(const event of events){
-      let map = event.data.map
+
+    const getData = async (map)=>{
       let lon = map.longitude
       let lat = map.latitude
       let exclude = 'minutely,hourly,daily,alerts'
 
       if(lon && lat){
-        let res = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=${exclude}&appid=${WEATHER_ACCESS_TOKEN}`)
-        if(res.ok){
-          //let data = res.json()
-          console.log(event.data.title)
-          console.log(res)
+        let query = `lat=${lat}&lon=${lon}&exclude=${exclude}&appid=${WEATHER_ACCESS_TOKEN}`
+        let res = await fetch(`https://api.openweathermap.org/data/2.5/onecall?${query}`)
+        if (res.ok){
+          return res.json()
         }
       }
+    }
+
+    for(const event of events){
+      getData(event.data.map)
+      .then(data =>{
+        console.log(event.data.title)
+        console.log(data)
+      })
     }
   }
 }
