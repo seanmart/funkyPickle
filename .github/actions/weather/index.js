@@ -1,5 +1,11 @@
+import {getInput} from '@actions/core'
+
 async function getWeather(){
-  console.log(secrets)
+  const PRISMIC_ACCESS_TOKEN = JSON.parse(getInput('PRISMIC_ACCESS_TOKEN'))
+  const PRISMIC_END_POINT = JSON.parse(getInput('PRISMIC_END_POINT'))
+  const WEATHER_ACCESS_TOKEN = JSON.parse(getInput('WEATHER_ACCESS_TOKEN'))
+
+  console.log(!!PRISMIC_ACCESS_TOKEN,!!PRISMIC_END_POINT,!!WEATHER_ACCESS_TOKEN)
 }
 
 getWeather()
