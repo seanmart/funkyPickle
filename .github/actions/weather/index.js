@@ -1,5 +1,5 @@
 async function getWeather(){
-  console.log('getting weather')
+  console.log(secrets)
 }
 
 getWeather()
