@@ -7,14 +7,14 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name: get prismic data
-        uses: seanmart/query_prismic_data_action
+        uses: seanmart/query_prismic_data_action@master
         with:
           ACCESS_TOKEN: ${{secrets.PRISMIC_ACCESS_TOKEN}}
           END_POINT: ${{secrets.PRISMIC_END_POINT}}
           TYPE: event
           FIELDS: id:uid,latitude:data.map.latitude,longitude:data.map.longitude
       - name: get weather data
-        uses: seanmart/get_open_weather_action
+        uses: seanmart/get_open_weather_action@master
         with:
           API_KEY: ${{secrets.WEATHER_ACCESS_TOKEN}}
           EXCLUDE: minutely,hourly,daily,alerts
