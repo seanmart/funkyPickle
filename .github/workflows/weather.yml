@@ -4,6 +4,10 @@ on:
     - cron: '15 0 * * *'
     - cron: '15 12 * * *'
 
-runs:
-  using: 'node16'
-  main:  'actions/weather.js'
+jobs:
+  weather:
+    runs-on: ubuntu-latest
+    steps:
+      - with:
+          node-version: "16"
+      - run: 'actions/weather.js'
