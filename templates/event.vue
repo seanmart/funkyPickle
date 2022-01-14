@@ -1,5 +1,5 @@
 <template lang="html">
-<main id="c-event">
+<main id="c-event" v-if="data">
 
   <section class="c-event-landing">
     <div class="c-image">
@@ -43,13 +43,14 @@
 import {getDay,getMonth} from '@/assets/js/helpers'
 export default {
   name: 'Event',
-  data:()=>({data:{}}),
+  data:()=>({data:null}),
   async asyncData({ $prismic, $axios, params, error, store, payload }) {
 
     let id = params.event
 
     if (payload && payload.data) return {data:payload.data}
-    if (store.state.event[id])  return {data:store.state.page[id]}
+    
+    if (store.state.event[id])  return {data:store.state.event[id]}
 
     let res = await $prismic.api.getByUID('event',id)
     if (res){
@@ -60,7 +61,7 @@ export default {
     error({ statusCode: 404, message: 'Page not found'})
   },
   mounted(){
-    setTimeout(()=>this.$store.commit('pageLoaded',true),500)
+    this.$nextTick(()=>this.$store.commit('pageLoaded',true))
   },
   methods:{
     formatDate(date){

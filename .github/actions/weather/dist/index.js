@@ -9397,8 +9397,23 @@ async function getWeather(){
       if (res.ok) return res
     }
   })
-  let results = await client.getAllByType("event")
-  console.log(results)
+  let events = await client.getAllByType("event")
+
+  if (events){
+    for(const event of events){
+      let map = event.data.map
+      let lon = map.longitude
+      let lat = map.latitude
+
+      if(lon && lat){
+        let weather = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${WEATHER_ACCESS_TOKEN}`)
+        if(weather){
+          console.log(event.title)
+          console.log(weather)
+        }
+      }
+    }
+  }
 }
 
 getWeather()
