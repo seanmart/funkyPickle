@@ -19,7 +19,10 @@ async function getWeather(){
       let data = await getWeatherData(event.data.map,WEATHER_ACCESS_TOKEN)
       doc[event.uid] = data
     }
-    await fs.writeFile('eventsWeatherData/index.json', doc)
+    await fs.writeFile('eventsWeatherData/index.json', doc,(err)=>{
+      if (err) throw err;
+      console.log('The file has been saved!');
+    })
   }
 }
 
