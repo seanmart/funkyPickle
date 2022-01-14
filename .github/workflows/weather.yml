@@ -8,6 +8,7 @@ jobs:
         uses: actions/checkout@v2
       - name: get prismic data
         uses: seanmart/query-prismic-data-action@master
+        id: get-prismic-data
         with:
           ACCESS_TOKEN: ${{secrets.PRISMIC_ACCESS_TOKEN}}
           END_POINT: ${{secrets.PRISMIC_END_POINT}}
@@ -17,5 +18,5 @@ jobs:
         uses: seanmart/get-open-weather-action@master
         with:
           API_KEY: ${{secrets.WEATHER_ACCESS_TOKEN}}
-          EXCLUDE: minutely,hourly,daily,alerts
-          COORDINATES: ${{steps.get_prismic_data.outputs.*}}
+          EXCLUDE: 'minutely,hourly,daily,alerts'
+          COORDINATES: ${{steps.get-prismic-data.outputs.DATA}}
