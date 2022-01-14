@@ -21,12 +21,14 @@ async function getWeather(){
       let map = event.data.map
       let lon = map.longitude
       let lat = map.latitude
+      let exclude = 'minutely,hourly,daily,alerts'
 
       if(lon && lat){
-        let weather = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${WEATHER_ACCESS_TOKEN}`)
-        if(weather){
-          console.log(event.title)
-          console.log(weather)
+        let res = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=${exclude}&appid=${WEATHER_ACCESS_TOKEN}`)
+        if(res.ok){
+          let data = res.json()
+          console.log(event.data.title)
+          console.log(data)
         }
       }
     }
