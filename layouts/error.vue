@@ -7,12 +7,6 @@
   </main>
 </template>
 
-<script>
-export default {
-  layout:'empty'
-}
-</script>
-
 <style lang="scss">
   #page-404{
     height: 100vh;

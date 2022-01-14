@@ -6,6 +6,7 @@
     <navigation/>
     <div id="scroller">
       <nuxt v-if="render"/>
+      <signup/>
       <end-matter/>
     </div>
   </div>

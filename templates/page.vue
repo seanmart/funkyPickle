@@ -14,20 +14,21 @@ export default {
   async asyncData({ $prismic, route, error, store, payload }) {
 
     let page = route.path.replace('/','')
-    let data = null
 
-    if (payload && payload.data) data = await checkComponents(payload.data.body)
-    if (store.state.page[page])  data = store.state.page[page]
+    if (payload && payload.data){
+      let data = await checkComponents(payload.data.body)
+      return{data}
+    }
+    
+    if (store.state.page[page])  return {data:store.state.page[page]}
 
-    if (!data){
-      let results = await $prismic.api.getByUID('page', page || 'home')
-      if (results){
-        data = await checkComponents(results.data.body)
-        store.commit('page',{page,data})
-      }
+    let res = await $prismic.api.getByUID('page', page || 'home')
+    if (res){
+      let data = await checkComponents(res.data.body)
+      store.commit('page',{page,data})
+      return {data}
     }
 
-    if (data) return {data}
     error({ statusCode: 404, message: 'Page not found'})
   },
   mounted(){

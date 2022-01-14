@@ -43,24 +43,20 @@
 import {getDay,getMonth} from '@/assets/js/helpers'
 export default {
   name: 'Event',
-  data:()=>({data:[]}),
-  async asyncData({ $prismic, params, error, store, payload }) {
+  data:()=>({data:{}}),
+  async asyncData({ $prismic, $axios, params, error, store, payload }) {
 
     let id = params.event
-    let data = null
 
-    if (payload && payload.data) data = payload.data
-    if (store.state.event[id])  data = store.state.page[id]
+    if (payload && payload.data) return {data:payload.data}
+    if (store.state.event[id])  return {data:store.state.page[id]}
 
-    if (!data){
-      let results = await $prismic.api.getByUID('event',id)
-      if (results){
-        data = results.data
-        store.commit('event',{id,data})
-      }
+    let res = await $prismic.api.getByUID('event',id)
+    if (res){
+      store.commit('event',{id,data: res.data})
+      return {data: res.data}
     }
 
-    if (data) return {data}
     error({ statusCode: 404, message: 'Page not found'})
   },
   mounted(){

@@ -42,7 +42,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['@/assets/scss/main.scss'],
-  modules: ['@nuxtjs/style-resources'],
+  modules: ['@nuxtjs/style-resources','@nuxtjs/axios'],
   styleResources: {
     scss: ['assets/scss/_variables.scss','assets/scss/_mixins.scss']
   },
