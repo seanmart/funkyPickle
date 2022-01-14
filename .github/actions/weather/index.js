@@ -14,7 +14,7 @@ async function getWeather(){
 
   if (events){
     for(const event of events){
-      let data = getWeatherData(event.data.map,WEATHER_ACCESS_TOKEN)
+      let data = await getWeatherData(event.data.map,WEATHER_ACCESS_TOKEN)
       doc[event.uid] = data
     }
     console.log(doc)
