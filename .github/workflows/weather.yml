@@ -6,15 +6,16 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-      - name: get weather
-        uses: ./.github/actions/weather
+      - name: get prismic data
+        uses: @seanmart/query_prismic_data_action
         with:
-          PRISMIC_ACCESS_TOKEN: ${{secrets.PRISMIC_ACCESS_TOKEN}}
-          PRISMIC_END_POINT: ${{secrets.PRISMIC_END_POINT}}
-          WEATHER_ACCESS_TOKEN: ${{secrets.WEATHER_ACCESS_TOKEN}}
-      - name: push to repo
-        uses: JamesIves/github-pages-deploy-action@v4.2.2
+          ACCESS_TOKEN: ${{secrets.PRISMIC_ACCESS_TOKEN}}
+          END_POINT: ${{secrets.PRISMIC_END_POINT}}
+          TYPE: event
+          FIELDS: id:uid,latitude:data.map.latitude,longitude:data.map.longitude
+      - name: get weather data
+        uses: @seanmart/get_open_weather_action
         with:
-          branch: master
-          folder: dist
-          target-folder: assets/eventsWeatherData
+          API_KEY: ${{secrets.WEATHER_ACCESS_TOKEN}}
+          EXCLUDE: minutely,hourly,daily,alerts
+          COORDINATES: ${{steps.get_prismic_data.outputs.*}}
