@@ -17,7 +17,7 @@ async function getWeather(){
       let data = await getWeatherData(event.data.map,WEATHER_ACCESS_TOKEN)
       doc[event.uid] = data
     }
-    console.log(doc)
+    await fs.writeFile('eventsWeatherData/index.json', doc, 'utf8')
   }
 }
 
