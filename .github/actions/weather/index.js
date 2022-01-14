@@ -1,4 +1,4 @@
-import {getInput} from '@actions/core'
+const core = require('@actions/core');
 
 async function getWeather(){
   const PRISMIC_ACCESS_TOKEN = JSON.parse(getInput('PRISMIC_ACCESS_TOKEN'))
