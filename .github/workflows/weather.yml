@@ -4,4 +4,4 @@ jobs:
   weather:
     runs-on: ubuntu-latest
     steps:
-      - run: 'actions/weather.js'
+      - uses: actions/weather
