@@ -1,4 +1,11 @@
 name: weather
+inputs:
+  PRISMIC_ACCESS_TOKEN:
+    required: true
+  PRISMIC_END_POINT:
+    required: true
+  WEATHER_ACCESS_TOKEN:
+    required: true
 runs:
   using: 'node16'
-  main: index.js 
+  main: index.js
