@@ -9395,14 +9395,14 @@ async function getWeather(){
 
   let client = getPrismicClient(PRISMIC_END_POINT,PRISMIC_ACCESS_TOKEN)
   let events = await client.getAllByType("event")
-  let doc = {}
+  let obj = {}
 
   if (events){
     for(const event of events){
       let data = await getWeatherData(event.data.map,WEATHER_ACCESS_TOKEN)
-      doc[event.uid] = data
+      obj[event.uid] = data
     }
-    await fs.writeFile('eventsWeatherData/index.json', doc,(err)=>{
+    await fs.writeFile('eventsWeatherData/index.js',obj,(err)=>{
       if (err) throw err;
       console.log('The file has been saved!');
     })
