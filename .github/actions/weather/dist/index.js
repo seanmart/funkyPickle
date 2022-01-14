@@ -9405,7 +9405,7 @@ async function getWeather(){
     }
 
     let fileJSON = JSON.stringify(obj);
-    await fs.writeFile('eventsWeatherData/index.js',fileJSON,(err)=>{
+    await fs.writeFile('weather/index.json',fileJSON,(err)=>{
       if (err) throw err;
       console.log('The file has been saved!');
     })
