@@ -2,6 +2,8 @@ import {getInput} from "@actions/core"
 import * as prismic from "@prismicio/client"
 import fetch from "node-fetch";
 
+const fs = require('fs')
+
 async function getWeather(){
 
   const PRISMIC_ACCESS_TOKEN = getInput('PRISMIC_ACCESS_TOKEN')

@@ -9385,6 +9385,8 @@ function fixResponseChunkedTransferBadEnding(request, errorCallback) {
 
 
 
+const fs = __nccwpck_require__(147)
+
 async function getWeather(){
 
   const PRISMIC_ACCESS_TOKEN = (0,core.getInput)('PRISMIC_ACCESS_TOKEN')
