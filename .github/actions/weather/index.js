@@ -22,7 +22,7 @@ async function getWeather(){
     }
 
     let fileJSON = JSON.stringify(obj);
-    await fs.writeFile('dist/index.json',fileJSON,(err)=>{
+    await fs.writeFile('../file/index.json',fileJSON,(err)=>{
       if (err) throw err;
       console.log('The file has been saved!');
     })
