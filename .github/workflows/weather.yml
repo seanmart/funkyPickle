@@ -28,4 +28,4 @@ jobs:
           COORDINATES: ${{steps.get-prismic-data.outputs.DATA}}
       - name: replace file
         run: |
-              ls
+          echo "${{steps.get-weather-data.outputs.DATA}}" > assets/weather/index.json
