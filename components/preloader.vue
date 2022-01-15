@@ -7,17 +7,12 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
 export default {
   mounted(){
     this.handleShow()
     this.complete = false
-  },
-  computed:mapState(['status']),
-  watch:{
-    status(status){
-      if (status == 'HIDE_PRELOADER') this.handleHide()
-    }
+
+    this.$bus.$once('HIDE_PRELOADER',this.handleHide)
   },
   methods:{
     handleShow(){

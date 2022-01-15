@@ -1,10 +1,15 @@
 function initScrollBuddy(){
 
+  const { userAgent, maxTouchPoints, platform } = navigator
+  const conditional = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
   let smoothScroll = null
   let lerp = (s,e,a)=>{
     let l = (1 - a) * s + a * e;
     return Math.abs(l - e) < 0.0001 ? e : l;
   }
+
+  window.isMobile = conditional.test(userAgent) || (platform === "MacIntel" && maxTouchPoints > 1);
+  document.documentElement.classList.add(isMobile ? 'is-mobile' : 'is-desktop')
 
   window.scrollBuddy = {
     top:0,

@@ -7,27 +7,21 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 export default {
-  computed:mapState(['status']),
-  watch:{
-    status(status){
-      status == 'SHOW_COLUMNS_LAYOUT' && this.showColumns('COLUMNS_VISIBLE_LAYOUT')
-      status == 'HIDE_COLUMNS_LAYOUT' && this.hideColumns('COLUMNS_HIDDEN_LAYOUT')
-      status == 'SHOW_COLUMNS_NAV' && this.showColumns('COLUMNS_VISIBLE_NAV')
-      status == 'HIDE_COLUMNS_NAV' && this.hideColumns('COLUMNS_HIDDEN_NAV')
-    }
+  mounted(){
+    this.$bus.$on('SHOW_COLUMNS',(sender)=>this.showColumns(sender))
+    this.$bus.$on('HIDE_COLUMNS',(sender)=>this.hideColumns(sender))
   },
   methods: {
-    showColumns(status) {
+    showColumns(sender) {
       gsap
-        .timeline({ onComplete: () => this.$store.commit("status", status) })
+        .timeline({ onComplete: () => this.$bus.$emit('COLUMNS_VISIBLE',sender)})
         .set("#c-columns", { zIndex: 99 })
         .to("#c-columns .c-column", 0.5, { x: 0, ease: "power2.out", stagger: 0.07 });
     },
-    hideColumns(status) {
+    hideColumns(sender) {
       gsap
-        .timeline({ onComplete: () => this.$store.commit("status", status) })
+        .timeline({ onComplete: () => this.$bus.$emit('COLUMNS_HIDDEN',sender) })
         .to("#c-columns .c-column", 0.5, { x: "101%", ease: "power2.out", stagger: 0.07 }, 0)
         .set("#c-columns", { clearProps: "all" })
         .set("#c-columns .c-column", { clearProps: "all" });

@@ -44,9 +44,9 @@
 <script>
 import { getDate, getDay, getMonth } from "@/assets/js/helpers";
 export default {
+  props: ["data"],
+  fetchKey: "event-list",
   async fetch() {
-
-    this.$store.dispatch('loading',true)
 
     let data = this.$store.state.fetchData.events;
 
@@ -74,16 +74,17 @@ export default {
 
     this.events = data || [];
   },
-  fetchKey: "event-list",
-  props: ["data"],
   data: () => ({
     events: [],
     getDay,
     getMonth,
   }),
+  created(){
+    this.$bus.$emit('LOADING',true)
+  },
   watch:{
     events(){
-      this.$store.dispatch('loading',false)
+      this.$bus.$emit('LOADING',false)
     }
   },
   computed: {

@@ -11,7 +11,7 @@
 export default {
   props: ["data"],
   mounted() {
-    gsap.timeline();
+    
   },
 };
 </script>

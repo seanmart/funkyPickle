@@ -12,8 +12,6 @@ export default {
   name: "Page",
   async asyncData({ $prismic, route, error, store, payload }) {
 
-    store.dispatch('loading',true)
-
     let page = route.path.replace("/", "");
     let data = null
 
@@ -33,8 +31,11 @@ export default {
 
     error({ statusCode: 404, message: "Page not found" });
   },
+  created(){
+    this.$bus.$emit('LOADING',true)
+  },
   mounted(){
-    this.$store.dispatch('loading',false)
+    this.$bus.$emit('LOADING',false)
   },
   data: () => ({
     data: [],
