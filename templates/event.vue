@@ -1,5 +1,5 @@
 <template lang="html">
-  <main id="c-event" v-if="data">
+  <main id="c-event" :key="$route.path">
     <section class="c-event-landing">
       <div class="c-image">
         <fancy-image :scale="1.3" :start="0" :image="data.image.url" />
@@ -31,7 +31,7 @@
     </section>
 
     <section id="c-event-content" class="c-event-content o-container o-top o-bottom">
-      <weather :eventId="id" />
+      <weather :uid="data.uid" />
     </section>
   </main>
 </template>
@@ -43,22 +43,22 @@ export default {
   async asyncData({ $prismic, $axios, params, error, store, payload }) {
     store.commit("loading", true);
 
-    let id = params.event;
+    let uid = params.event;
 
     if (payload && payload.data) return { data: payload.data };
-    if (store.state.events[id]) return { data: store.state.events[id] };
+    if (store.state.events[uid]) return { data: store.state.events[uid] };
 
-    let res = await $prismic.api.getByUID("event", id);
+    let res = await $prismic.api.getByUID("event", uid);
     if (res) {
-      store.commit("events", { id, data: res.data });
-      return { id, data: res.data };
+      let data = { ...res.data, uid };
+      store.commit("events", { uid, data });
+      return { data };
     }
 
     error({ statusCode: 404, message: "Page not found" });
   },
   data: () => ({
     data: null,
-    id: null,
   }),
   mounted() {
     this.$nextTick(() => this.$store.dispatch("loadingComplete"));

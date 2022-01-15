@@ -1,5 +1,5 @@
 <template lang="html">
-  <main>
+  <main :key="$route.path">
     <template v-for="(item, a) in data">
       <component v-if="item.hasComponent && item.primary.publish" :is="item.component" :data="item" />
     </template>
@@ -25,7 +25,7 @@ export default {
     let res = await $prismic.api.getByUID("page", page || "home");
     if (res) {
       let data = await checkComponents(res.data.body);
-      store.commit("page", { page, data });
+      store.commit("pages", { page, data });
       return { data };
     }
 

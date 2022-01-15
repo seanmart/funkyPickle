@@ -45,9 +45,9 @@
 import { getDate, getDay, getMonth } from "@/assets/js/helpers";
 export default {
   async fetch() {
-    let events = this.$store.state.fetchData.events;
+    let data = this.$store.state.fetchData.events;
 
-    if (!events) {
+    if (!data) {
       this.$store.dispatch("fetchingStarted");
 
       let date = getDate(-1);
@@ -66,14 +66,14 @@ export default {
         orderings: "[my.event.start_date]",
       });
       if (results) {
-        events = results.results;
-        this.$store.commit("fetchData", { key: "events", data: events });
+        data = results.results;
+        this.$store.commit("fetchData", { key: "events", data });
       }
 
       this.$store.dispatch("fetchingComplete");
     }
 
-    this.events = events || [];
+    this.events = data || [];
   },
   fetchKey: "event-list",
   props: ["data"],

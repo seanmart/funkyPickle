@@ -1,24 +1,24 @@
 <template lang="html">
-  <div class="c-weather">
-    {{ weather[eventId] }}
+  <div class="c-weather" v-if="uid">
+    {{ weather[uid] }}
   </div>
 </template>
 
 <script>
 const getWeather = () => import("~/data/weather.json").then((m) => m.default || m);
 export default {
-  props: ["eventId"],
+  props: ["uid"],
   async fetch() {
-    let weather = this.$store.state.fetchData.weather;
+    let data = this.$store.state.fetchData.weather;
 
-    if (!weather) {
+    if (!data) {
       this.$store.dispatch("fetchingStarted");
-      weather = await getWeather();
-      this.$store.commit("fetchData", { key: "weather", data: weather });
+      data = await getWeather();
+      this.$store.commit("fetchData", { key: "weather", data });
       this.$store.dispatch("fetchingComplete");
     }
 
-    this.weather = weather;
+    this.weather = data;
   },
   data: () => ({
     weather: {},
