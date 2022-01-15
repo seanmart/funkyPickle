@@ -2,7 +2,7 @@ name: 'weather'
 on:
   schedule:
       - cron: '15 0,12 * * *'
-      - cron: '11 0 21 * * *'
+      - cron: '15 21 * * *'
 jobs:
   weather:
     runs-on: ubuntu-latest
