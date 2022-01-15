@@ -1,4 +1,4 @@
-const weather = require("~/assets/weather");
+const weather = require("~/assets/weather/index.json");
 
 export default {
   state: () => ({
