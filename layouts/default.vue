@@ -29,9 +29,9 @@ export default {
     })
 
     this.$bus.$on('LOADED',()=>{
+      this.$bus.$once('COLUMNS_HIDDEN',()=>this.$bus.$emit('REVEAL'))
       this.first && setTimeout(()=>this.$bus.$emit('HIDE_PRELOADER'),1500)
       !this.first && setTimeout(()=>this.$bus.$emit('HIDE_COLUMNS','layout'),500)
-      this.$bus.$once('COLUMNS_HIDDEN',()=>this.$bus.$emit('REVEAL'))
       this.handleScrollReset()
       this.first = false
     })
@@ -73,8 +73,8 @@ export default {
     if (process.server) return;
 
     return new Promise((next)=>{
-      $bus.$emit('SHOW_COLUMNS')
       $bus.$once('COLUMNS_VISIBLE',next)
+      $bus.$emit('SHOW_COLUMNS')
     })
   },
 };
