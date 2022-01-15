@@ -1,5 +1,5 @@
 <template lang="html">
-  <main>shop</main>
+  <main>article</main>
 </template>
 
 <script>

@@ -31,7 +31,7 @@
     </section>
 
     <section id="c-event-content" class="c-event-content o-container o-top o-bottom">
-      {{$store.state.weather[id]}}
+      {{ $store.state.weather[id] }}
     </section>
   </main>
 </template>
@@ -42,6 +42,8 @@ export default {
   name: "Event",
   data: () => ({ data: null, id: null }),
   async asyncData({ $prismic, $axios, params, error, store, payload }) {
+    store.commit("loading", true);
+
     let id = params.event;
 
     if (payload && payload.data) return { data: payload.data };
@@ -57,7 +59,7 @@ export default {
     error({ statusCode: 404, message: "Page not found" });
   },
   mounted() {
-    this.$nextTick(() => this.$store.commit("pageLoaded", true));
+    this.$nextTick(() => this.$store.dispatch("loadingComplete"));
   },
   methods: {
     formatDate(date) {

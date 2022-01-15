@@ -1,16 +1,4 @@
-<template lang="html">
-  <main id="article">
-    this is an article
-  </main>
-</template>
-
 <script>
-export default {
-  mounted(){
-    this.$store.commit('pageLoaded',true)
-  }
-}
+import article from "@/templates/article";
+export default article;
 </script>
-
-<style lang="scss">
-</style>
