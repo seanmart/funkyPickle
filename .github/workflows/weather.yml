@@ -29,8 +29,4 @@ jobs:
       - name: replace file
         run: |
           echo "${{steps.get-weather-data.outputs.DATA}}" > assets/weather/index.json
-          git checkout temp
-          git add assets/weather/index.json
-          git commit -m "updating weather"
-          git push -u origin temp
-          
+          git remove -v
