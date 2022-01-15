@@ -1,7 +1,7 @@
 export default {
   state: () => ({
     fetching: 0,
-    loading: false,
+    loading: true,
     pageLoaded: false,
     reveal: false,
     columns: {
@@ -9,21 +9,21 @@ export default {
       complete: false,
     },
     nav: [],
-    event: {},
-    events: null,
-    page: {},
+    events: {},
+    pages: {},
+    fetchData: {},
   }),
   mutations: {
     fetching: (state, x) => (state.fetching = x),
     loading: (state, x) => (state.loading = x),
     pageLoaded: (state, x) => (state.pageLoaded = x),
     reveal: (state, x) => (state.reveal = x),
-    page: (state, { page, data }) => (state.page[page] = data),
-    set: (state, { key, data }) => (state[key] = data),
-    event: (state, { id, data }) => (state.event[id] = data),
-    events: (state, data) => (state.events = data),
     columnsComplete: (state, x) => (state.columns.complete = x),
     columnsShow: (state, x) => (state.columns = { show: x, complete: false }),
+    pages: (state, { page, data }) => (state.pages[page] = data),
+    events: (state, { id, data }) => (state.events[id] = data),
+    nav: (state, data) => (state.nav = data),
+    fetchData: (state, { key, data }) => (state.fetchData[key] = data),
   },
   actions: {
     fetchingStarted({ commit, state }) {
@@ -31,7 +31,7 @@ export default {
     },
     fetchingComplete({ state, commit }) {
       commit("fetching", state.fetching - 1);
-      !state.fetching && !state.loading && commit("pageLoaded", true);
+      if (!state.fetching && !state.loading) setTimeout(() => commit("pageLoaded", true), 1000);
     },
     loadingComplete({ state, commit }) {
       commit("loading", false);
@@ -59,7 +59,7 @@ export default {
               label: item.label,
             })
         );
-        commit("set", { key: "nav", data: links });
+        commit("nav", links);
       }
     },
     async weatherInit() {},

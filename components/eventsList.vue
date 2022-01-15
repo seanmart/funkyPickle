@@ -45,11 +45,11 @@
 import { getDate, getDay, getMonth } from "@/assets/js/helpers";
 export default {
   async fetch() {
-    this.$store.dispatch("fetchingStarted");
-
-    let events = this.$store.state.events;
+    let events = this.$store.state.fetchData.events;
 
     if (!events) {
+      this.$store.dispatch("fetchingStarted");
+
       let date = getDate(-1);
       let results = await this.$prismic.api.query([this.$prismic.predicates.at("document.type", "event"), this.$prismic.predicates.date.after("my.event.end_date", date)], {
         graphQuery: `{
@@ -67,12 +67,13 @@ export default {
       });
       if (results) {
         events = results.results;
-        this.$store.commit("events", events);
+        this.$store.commit("fetchData", { key: "events", data: events });
       }
+
+      this.$store.dispatch("fetchingComplete");
     }
 
     this.events = events || [];
-    setTimeout(() => this.$store.dispatch("fetchingComplete"), 250);
   },
   fetchKey: "event-list",
   props: ["data"],

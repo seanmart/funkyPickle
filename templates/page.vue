@@ -10,7 +10,6 @@
 import { checkComponents } from "@/assets/js/helpers";
 export default {
   name: "Page",
-  data: () => ({ data: [] }),
   async asyncData({ $prismic, route, error, store, payload }) {
     store.commit("loading", true);
 
@@ -21,7 +20,7 @@ export default {
       return { data };
     }
 
-    if (store.state.page[page]) return { data: store.state.page[page] };
+    if (store.state.pages[page]) return { data: store.state.pages[page] };
 
     let res = await $prismic.api.getByUID("page", page || "home");
     if (res) {
@@ -32,6 +31,9 @@ export default {
 
     error({ statusCode: 404, message: "Page not found" });
   },
+  data: () => ({
+    data: [],
+  }),
   mounted() {
     this.$nextTick(() => this.$store.dispatch("loadingComplete"));
   },
