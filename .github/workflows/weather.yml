@@ -23,7 +23,7 @@ jobs:
           COORDINATES: ${{steps.get-prismic-data.outputs.DATA}}
       - name: replace file
         run: |
-          echo "${{steps.get-weather-data.outputs.DATA}}" > assets/weather/index.json
+          echo "${{toJson(steps.get-weather-data.outputs.DATA)}}" > assets/weather/index.json
           git add assets/weather/index.json
           git config --global user.name 'Sean Metcalf'
           git config --global user.email 'sean@seanmart.com'
