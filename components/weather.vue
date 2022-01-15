@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="c-weather" v-if="!$fetchState.pending">
+  <div class="c-weather">
     {{ weather[uid] }}
   </div>
 </template>
@@ -9,13 +9,14 @@ const getWeather = () => import("~/data/weather.json").then((m) => m.default || 
 export default {
   props: ["uid"],
   async fetch() {
+
+    this.$store.dispatch('loading',true)
+    
     let data = this.$store.state.fetchData.weather;
 
     if (!data) {
-      this.$store.dispatch("fetchingStarted");
       data = await getWeather();
       this.$store.commit("fetchData", { key: "weather", data });
-      this.$store.dispatch("fetchingComplete");
     }
 
     this.weather = data;
@@ -23,11 +24,11 @@ export default {
   data: () => ({
     weather: {},
   }),
-  watch: {
-    weather() {
-      console.log(this.weather);
-    },
-  },
+  watch:{
+    weather(){
+      this.$store.dispatch('loading',false)
+    }
+  }
 };
 </script>
 

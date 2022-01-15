@@ -7,6 +7,16 @@
   </main>
 </template>
 
+<script>
+export default {
+  mounted(){
+    if (!!this.$store.state.loading){
+      this.$store.commit('loading',0)
+    }
+  }
+}
+</script>
+
 <style lang="scss">
   #page-404{
     height: 100vh;

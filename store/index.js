@@ -1,50 +1,24 @@
 export default {
   state: () => ({
-    fetching: 0,
-    loading: true,
-    pageLoaded: false,
-    reveal: false,
-    columns: {
-      show: false,
-      complete: false,
-    },
     nav: [],
     events: {},
     pages: {},
     fetchData: {},
+    loading: 0,
+    status: ""
   }),
   mutations: {
-    fetching: (state, x) => (state.fetching = x),
-    loading: (state, x) => (state.loading = x),
-    pageLoaded: (state, x) => (state.pageLoaded = x),
-    reveal: (state, x) => (state.reveal = x),
-    columnsComplete: (state, x) => (state.columns.complete = x),
-    columnsShow: (state, x) => (state.columns = { show: x, complete: false }),
+    loading:(state,x)=> state.loading = x,
+    nav: (state, data) => (state.nav = data),
     pages: (state, { page, data }) => (state.pages[page] = data),
     events: (state, { id, data }) => (state.events[id] = data),
-    nav: (state, data) => (state.nav = data),
     fetchData: (state, { key, data }) => (state.fetchData[key] = data),
+    status: (state, status) => (state.status = status),
   },
   actions: {
-    fetchingStarted({ commit, state }) {
-      commit("fetching", state.fetching + 1);
-    },
-    fetchingComplete({ state, commit }) {
-      commit("fetching", state.fetching - 1);
-      if (!state.fetching && !state.loading) setTimeout(() => commit("pageLoaded", true), 1000);
-    },
-    loadingComplete({ state, commit }) {
-      commit("loading", false);
-      !state.fetching && commit("pageLoaded", true);
-    },
-    enteringPage({ commit }) {
-      commit("columnsShow", false);
-    },
-    leavingPage({ commit }) {
-      commit("columnsShow", true);
-      commit("pageLoaded", false);
-      commit("fetching", 0);
-      commit("reveal", false);
+    loading({commit,state},isLoading){
+      commit('loading',state.loading + (isLoading ? 1 : -1) )
+      if(state.loading == 0) commit('status','LOADED')
     },
     async settingsInit({ commit }) {
       let results = await this.$prismic.api.getSingle("settings");

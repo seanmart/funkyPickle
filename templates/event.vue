@@ -41,28 +41,35 @@ import { getDay, getMonth } from "@/assets/js/helpers";
 export default {
   name: "Event",
   async asyncData({ $prismic, $axios, params, error, store, payload }) {
-    store.commit("loading", true);
+
+    store.dispatch('loading',true)
 
     let uid = params.event;
+    let data = null
 
-    if (payload && payload.data) return { data: payload.data };
-    if (store.state.events[uid]) return { data: store.state.events[uid] };
-
-    let res = await $prismic.api.getByUID("event", uid);
-    if (res) {
-      let data = { ...res.data, uid };
-      store.commit("events", { uid, data });
-      return { data };
+    if (payload && payload.data){
+      data = payload.data
+    } else if (store.state.events[uid]){
+      data = store.state.events[uid]
+    } else {
+      let res = await $prismic.api.getByUID("event", uid);
+      if (res) {
+        data = { ...res.data, uid };
+        store.commit("events", { uid, data });
+      }
     }
 
+    if(data) return {data}
+
     error({ statusCode: 404, message: "Page not found" });
+
+  },
+  mounted(){
+    this.$store.dispatch('loading',false)
   },
   data: () => ({
     data: null,
   }),
-  mounted() {
-    this.$nextTick(() => this.$store.dispatch("loadingComplete"));
-  },
   methods: {
     formatDate(date) {
       if (!date) return;

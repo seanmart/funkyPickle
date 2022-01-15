@@ -1,5 +1,5 @@
 <template lang="html">
-  <section class="c-events-list o-container o-top o-bottom" v-reveal="reveal">
+  <section class="c-events-list o-container o-top o-bottom">
     <div class="c-header--wrapper u-gap-bottom-rg" v-if="data.primary.title">
       <h2 class="t-headline-rg" v-html="data.primary.title" ref="title" />
     </div>
@@ -45,11 +45,12 @@
 import { getDate, getDay, getMonth } from "@/assets/js/helpers";
 export default {
   async fetch() {
+
+    this.$store.dispatch('loading',true)
+
     let data = this.$store.state.fetchData.events;
 
     if (!data) {
-      this.$store.dispatch("fetchingStarted");
-
       let date = getDate(-1);
       let results = await this.$prismic.api.query([this.$prismic.predicates.at("document.type", "event"), this.$prismic.predicates.date.after("my.event.end_date", date)], {
         graphQuery: `{
@@ -69,8 +70,6 @@ export default {
         data = results.results;
         this.$store.commit("fetchData", { key: "events", data });
       }
-
-      this.$store.dispatch("fetchingComplete");
     }
 
     this.events = data || [];
@@ -82,69 +81,14 @@ export default {
     getDay,
     getMonth,
   }),
+  watch:{
+    events(){
+      this.$store.dispatch('loading',false)
+    }
+  },
   computed: {
     eventList() {
       return this.data.primary.limit ? this.events.slice(0, this.data.primary.limit) : this.events;
-    },
-  },
-  mounted() {
-    if (this.$refs.title) {
-      gsap.set(this.$refs.title, { x: "-100%" });
-    }
-    if (this.$refs.btn) {
-      this.btnEl = this.$refs.btn.children;
-      gsap.set(this.btnEl, { scale: 0.5, opacity: 0 });
-    }
-  },
-  watch: {
-    eventList() {
-      this.$nextTick(() => {
-        if (this.$refs.events) {
-          gsap.set(this.$refs.events, { y: 100, opacity: 0 });
-        }
-      });
-    },
-  },
-  methods: {
-    reveal() {
-      if (this.$refs.events) {
-        for (let i = 0; i < this.$refs.events.length; i++) {
-          gsap.to(this.$refs.events[i], 1, {
-            y: 0,
-            opacity: 1,
-            ease: "power2.out",
-            stagger: 0.1,
-            scrollTrigger: {
-              trigger: this.$refs.events[i],
-              start: "top bottom",
-              once: true,
-            },
-          });
-        }
-      }
-      if (this.$refs.title) {
-        gsap.to(this.$refs.title, 1, {
-          x: 0,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: this.$refs.title,
-            start: "top 90%",
-            once: true,
-          },
-        });
-      }
-      if (this.btnEl) {
-        gsap.to(this.btnEl, 1, {
-          scale: 1,
-          opacity: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: this.btnEl,
-            start: "top 90%",
-            once: true,
-          },
-        });
-      }
     },
   },
 };
