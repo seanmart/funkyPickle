@@ -27,7 +27,7 @@ jobs:
       - name: replace file
         run: |
           $data = "${{toJson(steps.get-weather-data.outputs.DATA)}}"
-          echo $data > data/weather.json
+          $data > data/weather.json
           git add data/weather.json
           git config --global user.name 'Sean Metcalf'
           git config --global user.email 'sean@seanmart.com'
