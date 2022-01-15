@@ -4,6 +4,8 @@ jobs:
   weather:
     runs-on: ubuntu-latest
     steps:
+      - name: checkout
+        uses: actions/checkout@v2
       - name: replace file
         run: |
           git branch -a
