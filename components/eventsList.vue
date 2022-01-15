@@ -45,7 +45,7 @@
 import { getDate, getDay, getMonth } from "@/assets/js/helpers";
 export default {
   async fetch() {
-    this.$store.commit("fetching", true);
+    this.$store.dispatch("fetchingStarted");
 
     let events = this.$store.state.events;
 
@@ -76,7 +76,11 @@ export default {
   },
   fetchKey: "event-list",
   props: ["data"],
-  data: () => ({ events: [], getDay, getMonth }),
+  data: () => ({
+    events: [],
+    getDay,
+    getMonth,
+  }),
   computed: {
     eventList() {
       return this.data.primary.limit ? this.events.slice(0, this.data.primary.limit) : this.events;

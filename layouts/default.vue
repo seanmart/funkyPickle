@@ -66,7 +66,7 @@ export default {
         this.$store.commit("reveal", true);
         !isMobile && scrollBuddy.reset();
         ScrollTrigger.refresh(true);
-      }, 500);
+      }, 250);
     },
   },
   middleware({ store }) {

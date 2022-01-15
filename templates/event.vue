@@ -31,7 +31,7 @@
     </section>
 
     <section id="c-event-content" class="c-event-content o-container o-top o-bottom">
-      {{ $store.state.weather[id] }}
+      <weather />
     </section>
   </main>
 </template>
@@ -47,7 +47,6 @@ export default {
     let id = params.event;
 
     if (payload && payload.data) return { data: payload.data };
-
     if (store.state.event[id]) return { data: store.state.event[id] };
 
     let res = await $prismic.api.getByUID("event", id);

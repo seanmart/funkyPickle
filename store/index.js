@@ -1,9 +1,6 @@
-const weather = require("~/assets/weather/index.json");
-
 export default {
   state: () => ({
-    weather,
-    fetching: false,
+    fetching: 0,
     loading: false,
     pageLoaded: false,
     reveal: false,
@@ -29,9 +26,12 @@ export default {
     columnsShow: (state, x) => (state.columns = { show: x, complete: false }),
   },
   actions: {
+    fetchingStarted({ commit, state }) {
+      commit("fetching", state.fetching + 1);
+    },
     fetchingComplete({ state, commit }) {
-      commit("fetching", false);
-      !state.loading && commit("pageLoaded", true);
+      commit("fetching", state.fetching - 1);
+      !state.fetching && !state.loading && commit("pageLoaded", true);
     },
     loadingComplete({ state, commit }) {
       commit("loading", false);
@@ -43,10 +43,10 @@ export default {
     leavingPage({ commit }) {
       commit("columnsShow", true);
       commit("pageLoaded", false);
-      commit("fetching", false);
+      commit("fetching", 0);
       commit("reveal", false);
     },
-    async nuxtServerInit({ commit }) {
+    async settingsInit({ commit }) {
       let results = await this.$prismic.api.getSingle("settings");
       let links = [];
 
@@ -61,6 +61,10 @@ export default {
         );
         commit("set", { key: "nav", data: links });
       }
+    },
+    async weatherInit() {},
+    async nuxtServerInit({ dispatch }) {
+      await dispatch("settingsInit");
     },
   },
 };
