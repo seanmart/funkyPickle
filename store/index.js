@@ -1,5 +1,8 @@
+import weather from '@/assets/weather'
+
 export default {
   state:()=>({
+    weather,
     pageLoaded: false,
     reveal: false,
     columns:{
@@ -9,7 +12,7 @@ export default {
     nav:[],
     event:{},
     events:null,
-    page:{},
+    page:{}
   }),
   mutations:{
     pageLoaded:(state,x)=> state.pageLoaded = x,

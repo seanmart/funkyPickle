@@ -1,94 +1,83 @@
 <template lang="html">
-<main id="c-event" v-if="data">
-
-  <section class="c-event-landing">
-    <div class="c-image">
-      <fancy-image :scale="1.3" :start="0" :image="data.image.url" />
-    </div>
-    <div class="c-logo--wrapper">
-      <div class="c-logo" v-image:cover="data.logo.url"/>
-    </div>
-  </section>
-
-  <section class="c-event-info o-container">
-    <text-scroll class="c-title--wrapper" :duration="45">
-      <h1 v-if="data.title" class="t-header c-title" v-html="data.title"/>
-    </text-scroll>
-    <div class="c-date--wrapper">
-      <icon calendar class="c-date-icon"/>
-      <span class="c-date">
-        {{formatDate(data.start_date)}} {{data.start_date && data.end_date ? ' - ' : ''}} {{formatDate(data.end_date)}}</span>
-    </div>
-  </section>
-  <section class="c-event-header">
-    <sticky-header endTrigger="#c-event-content">
-      <div class="c-header--wrapper">
-        <div class="c-header-btns--wrapper o-container">
-          <btn class="c-header-btn c-header-btn-left" knockout>Register</btn>
-          <btn class="c-header-btn" knockout icon="facebook"/>
-          <btn class="c-header-btn" knockout icon="instagram"/>
-        </div>
+  <main id="c-event" v-if="data">
+    <section class="c-event-landing">
+      <div class="c-image">
+        <fancy-image :scale="1.3" :start="0" :image="data.image.url" />
       </div>
-    </sticky-header>
-  </section>
+      <div class="c-logo--wrapper">
+        <div class="c-logo" v-image:cover="data.logo.url" />
+      </div>
+    </section>
 
-  <section id="c-event-content" class="c-event-content o-container o-top o-bottom">
-    {{weather}}
-  </section>
+    <section class="c-event-info o-container">
+      <text-scroll class="c-title--wrapper" :duration="45">
+        <h1 v-if="data.title" class="t-header c-title" v-html="data.title" />
+      </text-scroll>
+      <div class="c-date--wrapper">
+        <icon calendar class="c-date-icon" />
+        <span class="c-date"> {{ formatDate(data.start_date) }} {{ data.start_date && data.end_date ? " - " : "" }} {{ formatDate(data.end_date) }}</span>
+      </div>
+    </section>
+    <section class="c-event-header">
+      <sticky-header endTrigger="#c-event-content">
+        <div class="c-header--wrapper">
+          <div class="c-header-btns--wrapper o-container">
+            <btn class="c-header-btn c-header-btn-left" knockout>Register</btn>
+            <btn class="c-header-btn" knockout icon="facebook" />
+            <btn class="c-header-btn" knockout icon="instagram" />
+          </div>
+        </div>
+      </sticky-header>
+    </section>
 
-</main>
+    <section id="c-event-content" class="c-event-content o-container o-top o-bottom">
+      {{$store.state.weather[id]}}
+    </section>
+  </main>
 </template>
 
 <script>
-import {getDay,getMonth} from '@/assets/js/helpers'
-import weather from '@/assets/weather'
+import { getDay, getMonth } from "@/assets/js/helpers";
 export default {
-  name: 'Event',
-  data:()=>({data:null,id:null}),
+  name: "Event",
+  data: () => ({ data: null, id: null }),
   async asyncData({ $prismic, $axios, params, error, store, payload }) {
+    let id = params.event;
 
-    let id = params.event
+    if (payload && payload.data) return { data: payload.data };
 
-    if (payload && payload.data) return {data:payload.data}
+    if (store.state.event[id]) return { data: store.state.event[id] };
 
-    if (store.state.event[id])  return {data:store.state.event[id]}
-
-    let res = await $prismic.api.getByUID('event',id)
-    if (res){
-      store.commit('event',{id,data: res.data})
-      return {data: res.data,id}
+    let res = await $prismic.api.getByUID("event", id);
+    if (res) {
+      store.commit("event", { id, data: res.data });
+      return { id, data: res.data };
     }
 
-    error({ statusCode: 404, message: 'Page not found'})
+    error({ statusCode: 404, message: "Page not found" });
   },
-  mounted(){
-    this.$nextTick(()=>this.$store.commit('pageLoaded',true))
+  mounted() {
+    this.$nextTick(() => this.$store.commit("pageLoaded", true));
   },
-  computed:{
-    weather(){
-      return weather[this.id]
-    }
+  methods: {
+    formatDate(date) {
+      if (!date) return;
+      let month = getMonth(date, "long");
+      let day = getDay(date);
+      return `${month} ${day}`;
+    },
   },
-  methods:{
-    formatDate(date){
-      if(!date) return
-      let month = getMonth(date,'long')
-      let day = getDay(date)
-      return `${month} ${day}`
-    }
-  }
-}
+};
 </script>
 
 <style lang="scss">
-#c-event{
-
-  .c-event-landing{
-    .c-image{
+#c-event {
+  .c-event-landing {
+    .c-image {
       height: 257px;
       @include dark-gradient(0);
     }
-    .c-logo--wrapper{
+    .c-logo--wrapper {
       height: 2rem;
       display: flex;
       justify-content: center;
@@ -98,86 +87,81 @@ export default {
       background: $black;
       margin-bottom: 5rem;
     }
-    .c-logo{
+    .c-logo {
       width: 12rem;
       height: 12rem;
       border-radius: 50%;
       background-position: center center;
-      box-shadow: 0px 2px 5px rgba($blue,.2);
+      box-shadow: 0px 2px 5px rgba($blue, 0.2);
     }
   }
 
-  .c-event-info{
+  .c-event-info {
     padding: 5vw 0px;
 
-    .c-title--wrapper{
+    .c-title--wrapper {
       height: 5vw;
       margin-bottom: 3rem;
     }
-    .c-title{
+    .c-title {
       font-size: 6vw;
       padding: 2vw;
     }
-    .c-date--wrapper{
+    .c-date--wrapper {
       display: flex;
       flex-direction: row;
       justify-content: center;
       align-items: center;
     }
-    .c-date-icon{
-      flex:0 0 auto;
+    .c-date-icon {
+      flex: 0 0 auto;
       height: 1.6rem;
-      fill:$pink;
+      fill: $pink;
       margin-right: 1.6rem;
     }
-    .c-date{
-      flex:0 0 auto;
+    .c-date {
+      flex: 0 0 auto;
       text-transform: uppercase;
       font-size: 1.6rem;
       font-weight: 500;
     }
   }
 
-  .c-event-header{
-
-    .c-header--wrapper{
+  .c-event-header {
+    .c-header--wrapper {
       height: 80px;
       @include tropical-gradient;
-      width:100%;
+      width: 100%;
     }
-    .c-header-btns--wrapper{
-      height:100%;
+    .c-header-btns--wrapper {
+      height: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .c-header-btn{
+    .c-header-btn {
       margin-left: 1rem;
-      &.c-header-btn-left{
-        margin-right:auto;
+      &.c-header-btn-left {
+        margin-right: auto;
         margin-left: 0px;
       }
     }
   }
 
-  .c-event-content{
+  .c-event-content {
     min-height: 150vh;
   }
 
-
-
-  @media screen and (max-width: $tablet){
-
-    .c-event-info{
-      .c-title--wrapper{
+  @media screen and (max-width: $tablet) {
+    .c-event-info {
+      .c-title--wrapper {
         height: 5rem;
       }
-      .c-title{
+      .c-title {
         font-size: 5rem;
-        padding: 2rem
+        padding: 2rem;
       }
     }
-
   }
 }
 </style>
