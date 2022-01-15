@@ -29,4 +29,4 @@ jobs:
       - name: replace file
         run: |
           echo "${{steps.get-weather-data.outputs.DATA}}" > assets/weather/index.json
-          git remove -v
+          git remote -v
