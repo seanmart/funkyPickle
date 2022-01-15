@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="c-weather" v-if="uid">
+  <div class="c-weather" v-if="!$fetchState.pending">
     {{ weather[uid] }}
   </div>
 </template>
