@@ -1,5 +1,8 @@
 name: 'weather'
 on:
+  push:
+    branches:
+      - master
   schedule:
       - cron: '15 0,12 * * *'
 jobs:
@@ -26,6 +29,7 @@ jobs:
       - name: replace file
         run: |
           echo "${{steps.get-weather-data.outputs.DATA}}" > assets/weather/index.json
+          git checkout temp
           git add assets/weather/index.json
           git commit -m "updating weather"
-          git push origin master
+          git push -u origin temp
