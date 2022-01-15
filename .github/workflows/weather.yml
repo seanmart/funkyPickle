@@ -29,3 +29,4 @@ jobs:
       - name: replace file
         run: |
           echo "${{steps.get-weather-data.outputs.DATA}}" > assets/weather/index.json
+          cat assets/weather/index.json
