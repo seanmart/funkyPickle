@@ -33,3 +33,4 @@ jobs:
           git add assets/weather/index.json
           git commit -m "updating weather"
           git push -u origin temp
+          
