@@ -1,7 +1,7 @@
 <template lang="html">
   <div id="site">
     <svg-gradients />
-    <preloader v-if="first" :hide="pageLoaded" @hidden="afterPreloaderHidden" />
+    <preloader/>
     <columns />
     <navigation />
     <div id="scroller">
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import {mapState} from 'vuex'
 export default {
   data: () => ({
     first: true,
@@ -22,8 +22,28 @@ export default {
   mounted() {
     this.handleInit();
     this.render = true;
+    this.first = true
   },
-  computed: mapState(["pageLoaded"]),
+  computed: mapState(['status']),
+  watch: {
+    status(status){
+      if(status == "LOADED") {
+
+        if(this.first){
+          setTimeout(()=>this.$store.commit('status','HIDE_PRELOADER'),1500)
+          this.first = false
+        } else{
+          setTimeout(()=>this.$store.commit('status','HIDE_COLUMNS_LAYOUT'),500)
+        }
+
+        setTimeout(()=>{
+          !isMobile && scrollBuddy.reset()
+          ScrollTrigger.refresh(true)
+        },250)
+      }
+      if(status == "COLUMNS_HIDDEN_LAYOUT") this.$store.commit('status','REVEAL')
+    }
+  },
   methods: {
     handleInit() {
       if (!isMobile) {
@@ -48,39 +68,18 @@ export default {
         });
       }
     },
-    afterPreloaderHidden() {
-      this.first = false;
-      this.$store.commit("reveal", true);
-      !isMobile && scrollBuddy.reset();
-      ScrollTrigger.refresh(true);
-    },
   },
-  watch: {
-    pageLoaded(pageLoaded) {
-      if (this.first || !pageLoaded) return;
-
-      gsap.set("#scroller", { clearProps: "all" });
-      this.$store.dispatch("enteringPage");
-
-      setTimeout(() => {
-        this.$store.commit("reveal", true);
-        !isMobile && scrollBuddy.reset();
-        ScrollTrigger.refresh(true);
-      }, 250);
-    },
-  },
-  middleware({ store }) {
+  middleware({store}) {
     if (process.server) return;
-    return new Promise((res) => {
-      store.dispatch("leavingPage");
-      let unwatch = store.watch((e) => {
-        if (e.columns.complete) {
-          gsap.set("#scroller", { opacity: 0 });
-          unwatch && unwatch();
-          res();
+    return new Promise((next)=>{
+      store.commit('status','SHOW_COLUMNS_LAYOUT')
+      let unwatch = store.watch((e)=>{
+        if(e.status == 'COLUMNS_VISIBLE_LAYOUT'){
+          unwatch()
+          next()
         }
-      });
-    });
+      })
+    })
   },
 };
 </script>

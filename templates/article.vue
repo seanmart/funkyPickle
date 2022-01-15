@@ -3,11 +3,7 @@
 </template>
 
 <script>
-export default {
-  mounted() {
-    this.$nextTick(() => this.$store.dispatch("loadingComplete"));
-  },
-};
+export default {};
 </script>
 
 <style lang="scss"></style>

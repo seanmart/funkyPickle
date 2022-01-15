@@ -7,32 +7,27 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
-  props:['hide'],
-  data:()=>({
-    isLoaded:false,
-    shouldHide: false
-  }),
   mounted(){
-    gsap.timeline({delay:.5,onComplete: this.validate})
-        .to('#c-preloader .c-preloader-logo--wrapper',1,{opacity:1,scale:1,ease:'power2.out'})
-        .call(()=> this.isLoaded = true)
-
-    gsap.to('#c-preloader .ball',10,{rotate:360,ease: 'none',transformOrigin:'center center', repeat: -1})
-    gsap.to('#c-preloader',5,{backgroundPosition: '100%'})
+    this.handleShow()
+    this.complete = false
   },
+  computed:mapState(['status']),
   watch:{
-    hide(){
-      this.shouldHide = true
-      this.validate()
+    status(status){
+      if (status == 'HIDE_PRELOADER') this.handleHide()
     }
   },
   methods:{
-    validate(){
-      this.isLoaded && this.shouldHide && this.handleHide()
+    handleShow(){
+      gsap.timeline()
+          .to('#c-preloader .c-preloader-logo--wrapper',1,{opacity:1,scale:1,ease:'power2.out'},.5)
+          .to('#c-preloader .ball',10,{rotate:360,ease: 'none',transformOrigin:'center center', repeat: -1},0)
+          .to('#c-preloader',5,{backgroundPosition: '100%'},0)
     },
     handleHide(){
-      gsap.timeline({onComplete: ()=> this.$emit('hidden')})
+      gsap.timeline()
       .to('#c-preloader',.75,{y:'-100vh',ease: 'power4.in'})
       .to('#c-preloader .c-preloader-logo--wrapper',.75,{y:'100vh',ease: 'power4.in'},'<')
       .set('#c-preloader',{display:'none'},'>')
