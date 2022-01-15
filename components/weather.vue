@@ -23,6 +23,11 @@ export default {
   data: () => ({
     weather: {},
   }),
+  watch: {
+    weather() {
+      console.log(this.weather);
+    },
+  },
 };
 </script>
 

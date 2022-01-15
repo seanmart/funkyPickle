@@ -98,6 +98,7 @@ export default {
   },
   watch: {
     eventList() {
+      console.log(this.events);
       this.$nextTick(() => {
         if (this.$refs.events) {
           gsap.set(this.$refs.events, { y: 100, opacity: 0 });
