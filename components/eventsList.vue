@@ -72,7 +72,7 @@ export default {
     }
 
     this.events = events || [];
-    this.$nextTick(() => this.$store.dispatch("fetchingComplete"));
+    setTimeout(() => this.$store.dispatch("fetchingComplete"), 250);
   },
   fetchKey: "event-list",
   props: ["data"],
