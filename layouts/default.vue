@@ -31,11 +31,12 @@ export default {
     this.$bus.$on('LOADED',()=>{
       this.first && setTimeout(()=>this.$bus.$emit('HIDE_PRELOADER',()=> this.$bus.$emit('REVEAL')),1500)
       !this.first && setTimeout(()=>this.$bus.$emit('HIDE_COLUMNS',()=> this.$bus.$emit('REVEAL')),500)
+      !isMobile && scrollBuddy.reset()
       this.first = false
     })
 
     this.$bus.$on('REVEAL',()=>{
-      !isMobile && scrollBuddy.reset()
+      !isMobile && scrollBuddy.update()
       ScrollTrigger.refresh(true)
     })
 

@@ -13,21 +13,22 @@ export default {
   async asyncData({ $prismic, route, error, store, payload }) {
 
     let page = route.path.replace("/", "");
-    let data = null
 
-    if (payload && payload.data) {
-      data = await checkComponents(payload.data.body);
-    } else if (store.state.pages[page]){
-      data = store.state.pages[page]
-    } else {
-      let res = await $prismic.api.getByUID("page", page || "home");
-      if (res) {
-        data = await checkComponents(res.data.body);
-        store.commit("pages", { page, data });
-      }
+    if (store.state.pages[page]){
+      return {data:store.state.pages[page]}
     }
 
-    if(data) return { data };
+    if (payload && payload.data) {
+      let data = await checkComponents(payload.data.body);
+      return {data}
+    }
+
+    let res = await $prismic.api.getByUID("page", page || "home");
+    if (res) {
+      let data = await checkComponents(res.data.body);
+      store.commit("pages", { page, data });
+      return {data}
+    }
 
     error({ statusCode: 404, message: "Page not found" });
   },
