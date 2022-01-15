@@ -1,5 +1,8 @@
 name: 'weather'
-on: push
+on:
+  push: true
+  schedule:
+      - cron: '15 0,12 * * *'
 jobs:
   weather:
     runs-on: ubuntu-latest
@@ -13,10 +16,12 @@ jobs:
           ACCESS_TOKEN: ${{secrets.PRISMIC_ACCESS_TOKEN}}
           END_POINT: ${{secrets.PRISMIC_END_POINT}}
           TYPE: event
-          FIELDS: id:uid,latitude:data.map.latitude,longitude:data.map.longitude
+          FIELDS: id:uid,data.map.latitude,data.map.longitude
       - name: get weather data
         uses: seanmart/get-open-weather-action@master
         with:
           API_KEY: ${{secrets.WEATHER_ACCESS_TOKEN}}
           EXCLUDE: 'minutely,hourly,daily,alerts'
           COORDINATES: ${{steps.get-prismic-data.outputs.DATA}}
+      - name: replace file
+        run: |
