@@ -1,6 +1,8 @@
 <template lang="html">
   <div class="c-weather">
-    {{ weather[uid] }}
+    <div class="c-weather-temp" v-if="eventWeather">
+      Temp is {{temp}}°
+    </div>
   </div>
 </template>
 
@@ -17,11 +19,20 @@ export default {
       this.$store.commit("fetchData", { key: "weather", data });
     }
 
-    this.weather = data;
+    this.data = data;
   },
   data: () => ({
-    weather: {}
-  })
+    data: {}
+  }),
+  computed:{
+    eventWeather(){
+      return this.data[this.uid] || null
+    },
+    temp(){
+      if(!this.eventWeather) return null
+      return Math.round((this.eventWeather.current.temp - 273.15) * 9/5 + 32)
+    }
+  }
 };
 </script>
 

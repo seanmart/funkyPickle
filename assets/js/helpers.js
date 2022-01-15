@@ -62,3 +62,8 @@ export function getStyle(e, s){
     }
     return parseFloat(sv);
 }
+
+
+export function pause(dur = 1000){
+  return new Promise((next)=> setTimeout(next,dur))
+}

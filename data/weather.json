@@ -1,1 +1,91 @@
-{"another-event-for-pickleball":{"lat":39.1565,"lon":-75.523,"timezone":"America/New_York","timezone_offset":-18000,"current":{"dt":1642268383,"sunrise":1642249183,"sunset":1642284174,"temp":268.34,"feels_like":261.34,"pressure":1026,"humidity":35,"dew_point":256.58,"uvi":1.09,"clouds":75,"visibility":10000,"wind_speed":7.2,"wind_deg":340,"weather":[{"id":803,"main":"Clouds","description":"broken clouds","icon":"04d"}]}},"the-allstar-pickleball-finals":{"lat":40.7504,"lon":-73.9935,"timezone":"America/New_York","timezone_offset":-18000,"current":{"dt":1642268384,"sunrise":1642249073,"sunset":1642283550,"temp":265.36,"feels_like":261.26,"pressure":1026,"humidity":39,"dew_point":255,"uvi":1.2,"clouds":0,"visibility":10000,"wind_speed":2.24,"wind_deg":321,"wind_gust":6.71,"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01d"}]}},"santas-pickleball-battle-royal":{"lat":83.3659,"lon":-35.9061,"timezone":"America/Nuuk","timezone_offset":-10800,"current":{"dt":1642268384,"temp":240.84,"feels_like":233.84,"pressure":1019,"humidity":98,"dew_point":240.65,"uvi":0,"clouds":100,"visibility":2234,"wind_speed":2.1,"wind_deg":284,"wind_gust":3.57,"weather":[{"id":804,"main":"Clouds","description":"overcast clouds","icon":"04n"}]}},"pay-your-taxes-pickleball-showdown":{"lat":38.8891,"lon":-77.0349,"timezone":"America/New_York","timezone_offset":-18000,"current":{"dt":1642268384,"sunrise":1642249504,"sunset":1642284579,"temp":269.29,"feels_like":267.3,"pressure":1025,"humidity":40,"dew_point":258.9,"uvi":1.14,"clouds":75,"visibility":10000,"wind_speed":1.34,"wind_deg":24,"wind_gust":3.13,"weather":[{"id":803,"main":"Clouds","description":"broken clouds","icon":"04d"}]}}}
+{
+  "another-event-for-pickleball": {
+    "lat": 39.1565,
+    "lon": -75.523,
+    "timezone": "America/New_York",
+    "timezone_offset": -18000,
+    "current": {
+      "dt": 1642268383,
+      "sunrise": 1642249183,
+      "sunset": 1642284174,
+      "temp": 268.34,
+      "feels_like": 261.34,
+      "pressure": 1026,
+      "humidity": 35,
+      "dew_point": 256.58,
+      "uvi": 1.09,
+      "clouds": 75,
+      "visibility": 10000,
+      "wind_speed": 7.2,
+      "wind_deg": 340,
+      "weather": [{ "id": 803, "main": "Clouds", "description": "broken clouds", "icon": "04d" }]
+    }
+  },
+  "the-allstar-pickleball-finals": {
+    "lat": 40.7504,
+    "lon": -73.9935,
+    "timezone": "America/New_York",
+    "timezone_offset": -18000,
+    "current": {
+      "dt": 1642268384,
+      "sunrise": 1642249073,
+      "sunset": 1642283550,
+      "temp": 265.36,
+      "feels_like": 261.26,
+      "pressure": 1026,
+      "humidity": 39,
+      "dew_point": 255,
+      "uvi": 1.2,
+      "clouds": 0,
+      "visibility": 10000,
+      "wind_speed": 2.24,
+      "wind_deg": 321,
+      "wind_gust": 6.71,
+      "weather": [{ "id": 800, "main": "Clear", "description": "clear sky", "icon": "01d" }]
+    }
+  },
+  "santas-pickleball-battle-royal": {
+    "lat": 83.3659,
+    "lon": -35.9061,
+    "timezone": "America/Nuuk",
+    "timezone_offset": -10800,
+    "current": {
+      "dt": 1642268384,
+      "temp": 240.84,
+      "feels_like": 233.84,
+      "pressure": 1019,
+      "humidity": 98,
+      "dew_point": 240.65,
+      "uvi": 0,
+      "clouds": 100,
+      "visibility": 2234,
+      "wind_speed": 2.1,
+      "wind_deg": 284,
+      "wind_gust": 3.57,
+      "weather": [{ "id": 804, "main": "Clouds", "description": "overcast clouds", "icon": "04n" }]
+    }
+  },
+  "pay-your-taxes-pickleball-showdown": {
+    "lat": 38.8891,
+    "lon": -77.0349,
+    "timezone": "America/New_York",
+    "timezone_offset": -18000,
+    "current": {
+      "dt": 1642268384,
+      "sunrise": 1642249504,
+      "sunset": 1642284579,
+      "temp": 269.29,
+      "feels_like": 267.3,
+      "pressure": 1025,
+      "humidity": 40,
+      "dew_point": 258.9,
+      "uvi": 1.14,
+      "clouds": 75,
+      "visibility": 10000,
+      "wind_speed": 1.34,
+      "wind_deg": 24,
+      "wind_gust": 3.13,
+      "weather": [{ "id": 803, "main": "Clouds", "description": "broken clouds", "icon": "04d" }]
+    }
+  }
+}

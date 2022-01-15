@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { checkComponents } from "@/assets/js/helpers";
+import { checkComponents,pause } from "@/assets/js/helpers";
 export default {
   name: "Page",
   async asyncData({ $prismic, route, error, store, payload }) {

@@ -23,21 +23,30 @@ export default {
     this.first = true
 
     this.$bus.$on('LOADED',()=>{
-      this.first && setTimeout(()=>this.$bus.$emit('HIDE_PRELOADER',()=> this.$bus.$emit('REVEAL')),1500)
-      !this.first && setTimeout(()=>this.$bus.$emit('HIDE_COLUMNS',()=> this.$bus.$emit('REVEAL')),500)
+
+      this.first && setTimeout(()=>{
+        this.resetScroll()
+        this.$bus.$emit('HIDE_PRELOADER',()=> this.$bus.$emit('REVEAL'))
+        this.first = false
+      },1500)
+
+      !this.first && setTimeout(()=>{
+        this.resetScroll()
+        this.$bus.$emit('HIDE_COLUMNS',()=> this.$bus.$emit('REVEAL'))
+      },500)
+
       !isMobile && scrollBuddy.reset()
-      this.first = false
+
     })
 
-    this.$bus.$on('REVEAL',()=>{
-      !isMobile && scrollBuddy.update()
-      ScrollTrigger.refresh(true)
-    })
 
   },
   methods: {
+    resetScroll(){
+      !isMobile && scrollBuddy.update()
+      ScrollTrigger.refresh(true)
+    },
     handleInit() {
-
       gsap.registerPlugin(ScrollTrigger);
 
       if (!isMobile) {

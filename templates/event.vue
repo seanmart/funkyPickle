@@ -85,6 +85,8 @@ export default {
     .c-image {
       height: 257px;
       @include dark-gradient(0);
+      position: relative;
+      z-index: 1;
     }
     .c-logo--wrapper {
       height: 2rem;
@@ -92,7 +94,7 @@ export default {
       justify-content: center;
       align-items: center;
       position: relative;
-      z-index: 1;
+      z-index: 2;
       background: $black;
       margin-bottom: 5rem;
     }
