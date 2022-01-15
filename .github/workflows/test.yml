@@ -1,5 +1,5 @@
 name: 'weather'
-on: push,
+on: push
 jobs:
   weather:
     runs-on: ubuntu-latest
