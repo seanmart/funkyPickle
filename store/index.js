@@ -4,22 +4,14 @@ export default {
     events: {},
     pages: {},
     fetchData: {},
-    loading: 0,
-    status: ""
   }),
   mutations: {
-    loading:(state,x)=> state.loading = x,
     nav: (state, data) => (state.nav = data),
     pages: (state, { page, data }) => (state.pages[page] = data),
     events: (state, { id, data }) => (state.events[id] = data),
-    fetchData: (state, { key, data }) => (state.fetchData[key] = data),
-    status: (state, status) => (state.status = status),
+    fetchData: (state, { key, data }) => (state.fetchData[key] = data)
   },
   actions: {
-    loading({commit,state},isLoading){
-      commit('loading',state.loading + (isLoading ? 1 : -1) )
-      if(state.loading == 0) commit('status','LOADED')
-    },
     async settingsInit({ commit }) {
       let results = await this.$prismic.api.getSingle("settings");
       let links = [];

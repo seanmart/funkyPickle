@@ -40,9 +40,7 @@
 import { getDay, getMonth } from "@/assets/js/helpers";
 export default {
   name: "Event",
-  async asyncData({ $prismic, $axios, params, error, store, payload }) {
-
-    store.dispatch('loading',true)
+  async asyncData({ $prismic, $bus, params, error, store, payload }) {
 
     let uid = params.event;
     let data = null
@@ -64,8 +62,11 @@ export default {
     error({ statusCode: 404, message: "Page not found" });
 
   },
+  created(){
+    this.$bus.$emit('LOADING',true)
+  },
   mounted(){
-    this.$store.dispatch('loading',false)
+    this.$bus.$emit('LOADING',false)
   },
   data: () => ({
     data: null,

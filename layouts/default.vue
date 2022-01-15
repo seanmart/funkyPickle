@@ -13,39 +13,39 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
 export default {
   data: () => ({
-    first: true,
     render: false,
   }),
   mounted() {
     this.handleInit();
     this.render = true;
     this.first = true
-  },
-  computed: mapState(['status']),
-  watch: {
-    status(status){
-      if(status == "LOADED") {
+    this.count = 0
 
-        if(this.first){
-          setTimeout(()=>this.$store.commit('status','HIDE_PRELOADER'),1500)
-          this.first = false
-        } else{
-          setTimeout(()=>this.$store.commit('status','HIDE_COLUMNS_LAYOUT'),500)
-        }
+    this.$bus.$on('LOADING',(isLoading)=>{
+      this.count = this.count + (isLoading ? 1 : -1)
+      this.count == 0 && this.$bus.$emit('LOADED')
+    })
 
-        setTimeout(()=>{
-          !isMobile && scrollBuddy.reset()
-          ScrollTrigger.refresh(true)
-        },250)
-      }
-      if(status == "COLUMNS_HIDDEN_LAYOUT") this.$store.commit('status','REVEAL')
-    }
+    this.$bus.$on('LOADED',()=>{
+      this.first && setTimeout(()=>this.$bus.$emit('HIDE_PRELOADER'),1500)
+      !this.first && setTimeout(()=>this.$bus.$emit('HIDE_COLUMNS','layout'),500)
+      this.$bus.$once('COLUMNS_HIDDEN',()=>this.$bus.$emit('REVEAL'))
+      this.handleScrollReset()
+      this.first = false
+    })
+
   },
   methods: {
+    handleScrollReset(){
+      !isMobile && scrollBuddy.reset()
+      ScrollTrigger.refresh(true)
+    },
     handleInit() {
+
+      gsap.registerPlugin(ScrollTrigger);
+
       if (!isMobile) {
         scrollBuddy.init({
           el: "#scroller",
@@ -69,16 +69,12 @@ export default {
       }
     },
   },
-  middleware({store}) {
+  middleware({$bus}) {
     if (process.server) return;
+
     return new Promise((next)=>{
-      store.commit('status','SHOW_COLUMNS_LAYOUT')
-      let unwatch = store.watch((e)=>{
-        if(e.status == 'COLUMNS_VISIBLE_LAYOUT'){
-          unwatch()
-          next()
-        }
-      })
+      $bus.$emit('SHOW_COLUMNS')
+      $bus.$once('COLUMNS_VISIBLE',next)
     })
   },
 };
