@@ -21,9 +21,11 @@ jobs:
           FIELDS: id:uid,data.map.latitude,data.map.longitude
       - name: get weather data
         uses: seanmart/get-open-weather-action@master
+        id: get-weather-data
         with:
           API_KEY: ${{secrets.WEATHER_ACCESS_TOKEN}}
           EXCLUDE: 'minutely,hourly,daily,alerts'
           COORDINATES: ${{steps.get-prismic-data.outputs.DATA}}
       - name: replace file
         run: |
+              ls
