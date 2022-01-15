@@ -1,4 +1,4 @@
-name: 'weather'
+name: 'test'
 on: push
 jobs:
   weather:
@@ -6,4 +6,4 @@ jobs:
     steps:
       - name: replace file
         run: |
-          git br -a
+          git branch -a
