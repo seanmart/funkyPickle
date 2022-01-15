@@ -1,4 +1,4 @@
-import weather from '@/assets/weather'
+const weather = require('~/assets/weather')
 
 export default {
   state:()=>({
