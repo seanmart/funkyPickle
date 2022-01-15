@@ -1,8 +1,5 @@
 name: 'weather'
-on:
-  schedule:
-      - cron: '15 0,12 * * *'
-      - cron: '30 21 * * *'
+on: workflow_dispatch
 jobs:
   weather:
     runs-on: ubuntu-latest
