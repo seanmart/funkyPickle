@@ -1,0 +1,9 @@
+name: 'weather'
+on: push,
+jobs:
+  weather:
+    runs-on: ubuntu-latest
+    steps:
+      - name: replace file
+        run: |
+          git br -a
