@@ -33,7 +33,7 @@
   </section>
 
   <section id="c-event-content" class="c-event-content o-container o-top o-bottom">
-    content
+    {{weather}}
   </section>
 
 </main>
@@ -41,27 +41,33 @@
 
 <script>
 import {getDay,getMonth} from '@/assets/js/helpers'
+import weather from '@/assets/weather'
 export default {
   name: 'Event',
-  data:()=>({data:null}),
+  data:()=>({data:null,id:null}),
   async asyncData({ $prismic, $axios, params, error, store, payload }) {
 
     let id = params.event
 
     if (payload && payload.data) return {data:payload.data}
-    
+
     if (store.state.event[id])  return {data:store.state.event[id]}
 
     let res = await $prismic.api.getByUID('event',id)
     if (res){
       store.commit('event',{id,data: res.data})
-      return {data: res.data}
+      return {data: res.data,id}
     }
 
     error({ statusCode: 404, message: 'Page not found'})
   },
   mounted(){
     this.$nextTick(()=>this.$store.commit('pageLoaded',true))
+  },
+  computed:{
+    weather(){
+      return weather[this.id]
+    }
   },
   methods:{
     formatDate(date){
