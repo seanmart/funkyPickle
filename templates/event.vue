@@ -1,8 +1,8 @@
 <template lang="html">
-  <main id="c-event" :key="$route.path">
+  <main id="c-event">
     <section class="c-event-landing">
       <div class="c-image">
-        <fancy-image :scale="1.3" :start="0" :image="data.image.url" />
+        <fancy-image :scale="1.3" :start="0" :key="data.image.url" :image="data.image.url" />
       </div>
       <div class="c-logo--wrapper">
         <div class="c-logo" v-image:cover="data.logo.url" />
@@ -62,11 +62,8 @@ export default {
     error({ statusCode: 404, message: "Page not found" });
 
   },
-  created(){
-    this.$bus.$emit('LOADING',true)
-  },
   mounted(){
-    this.$bus.$emit('LOADING',false)
+    this.$bus.$emit('LOADED')
   },
   data: () => ({
     data: null,

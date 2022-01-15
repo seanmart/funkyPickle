@@ -32,11 +32,8 @@ export default {
 
     error({ statusCode: 404, message: "Page not found" });
   },
-  created(){
-    this.$bus.$emit('LOADING',true)
-  },
   mounted(){
-    this.$bus.$emit('LOADING',false)
+    this.$bus.$emit('LOADED')
   },
   data: () => ({
     data: [],

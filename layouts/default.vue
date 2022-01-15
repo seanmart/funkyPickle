@@ -21,12 +21,6 @@ export default {
     this.handleInit();
     this.render = true;
     this.first = true
-    this.count = 0
-
-    this.$bus.$on('LOADING',(isLoading)=>{
-      this.count = this.count + (isLoading ? 1 : -1)
-      this.count == 0 && this.$bus.$emit('LOADED')
-    })
 
     this.$bus.$on('LOADED',()=>{
       this.first && setTimeout(()=>this.$bus.$emit('HIDE_PRELOADER',()=> this.$bus.$emit('REVEAL')),1500)

@@ -79,14 +79,6 @@ export default {
     getDay,
     getMonth,
   }),
-  created(){
-    this.$bus.$emit('LOADING',true)
-  },
-  watch:{
-    events(){
-      this.$bus.$emit('LOADING',false)
-    }
-  },
   computed: {
     eventList() {
       return this.data.primary.limit ? this.events.slice(0, this.data.primary.limit) : this.events;

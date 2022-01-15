@@ -10,8 +10,6 @@ export default {
   props: ["uid"],
   async fetch() {
 
-    this.$nuxt.$emit('LOADING',true)
-
     let data = this.$store.state.fetchData.weather;
 
     if (!data) {
@@ -22,13 +20,8 @@ export default {
     this.weather = data;
   },
   data: () => ({
-    weather: {},
-  }),
-  watch:{
-    weather(){
-      this.$nuxt.$emit('LOADING',false)
-    }
-  }
+    weather: {}
+  })
 };
 </script>
 
