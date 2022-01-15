@@ -29,19 +29,18 @@ export default {
     })
 
     this.$bus.$on('LOADED',()=>{
-      this.$bus.$once('COLUMNS_HIDDEN',()=>this.$bus.$emit('REVEAL'))
-      this.first && setTimeout(()=>this.$bus.$emit('HIDE_PRELOADER'),1500)
-      !this.first && setTimeout(()=>this.$bus.$emit('HIDE_COLUMNS','layout'),500)
-      this.handleScrollReset()
+      this.first && setTimeout(()=>this.$bus.$emit('HIDE_PRELOADER',()=> this.$bus.$emit('REVEAL')),1500)
+      !this.first && setTimeout(()=>this.$bus.$emit('HIDE_COLUMNS',()=> this.$bus.$emit('REVEAL')),500)
       this.first = false
+    })
+
+    this.$bus.$on('REVEAL',()=>{
+      !isMobile && scrollBuddy.reset()
+      ScrollTrigger.refresh(true)
     })
 
   },
   methods: {
-    handleScrollReset(){
-      !isMobile && scrollBuddy.reset()
-      ScrollTrigger.refresh(true)
-    },
     handleInit() {
 
       gsap.registerPlugin(ScrollTrigger);
@@ -71,11 +70,7 @@ export default {
   },
   middleware({$bus}) {
     if (process.server) return;
-
-    return new Promise((next)=>{
-      $bus.$once('COLUMNS_VISIBLE',next)
-      $bus.$emit('SHOW_COLUMNS')
-    })
+    return new Promise((next)=> $bus.$emit('SHOW_COLUMNS',next))
   },
 };
 </script>

@@ -10,8 +10,6 @@
 export default {
   mounted(){
     this.handleShow()
-    this.complete = false
-
     this.$bus.$once('HIDE_PRELOADER',this.handleHide)
   },
   methods:{
@@ -21,8 +19,8 @@ export default {
           .to('#c-preloader .ball',10,{rotate:360,ease: 'none',transformOrigin:'center center', repeat: -1},0)
           .to('#c-preloader',5,{backgroundPosition: '100%'},0)
     },
-    handleHide(){
-      gsap.timeline()
+    handleHide(cb){
+      gsap.timeline({onComplete:cb})
       .to('#c-preloader',.75,{y:'-100vh',ease: 'power4.in'})
       .to('#c-preloader .c-preloader-logo--wrapper',.75,{y:'100vh',ease: 'power4.in'},'<')
       .set('#c-preloader',{display:'none'},'>')

@@ -9,22 +9,25 @@
 <script>
 export default {
   mounted(){
-    this.$bus.$on('SHOW_COLUMNS',(sender)=>this.showColumns(sender))
-    this.$bus.$on('HIDE_COLUMNS',(sender)=>this.hideColumns(sender))
+    this.$bus.$on('SHOW_COLUMNS',this.showColumns)
+    this.$bus.$on('HIDE_COLUMNS',this.hideColumns)
+  },
+  destroyed(){
+    this.$bus.$off('SHOW_COLUMNS',this.showColumns)
+    this.$bus.$off('HIDE_COLUMNS',this.hideColumns)
   },
   methods: {
-    showColumns(sender) {
-      gsap
-        .timeline({ onComplete: () => this.$bus.$emit('COLUMNS_VISIBLE',sender)})
-        .set("#c-columns", { zIndex: 99 })
-        .to("#c-columns .c-column", 0.5, { x: 0, ease: "power2.out", stagger: 0.07 });
+    showColumns(cb) {
+      gsap.timeline({ onComplete:cb})
+          .set("#c-columns", { zIndex: 99 })
+          .to("#c-columns .c-column", 0.5, { x: 0, ease: "power2.out", stagger: 0.07 });
     },
-    hideColumns(sender) {
-      gsap
-        .timeline({ onComplete: () => this.$bus.$emit('COLUMNS_HIDDEN',sender) })
-        .to("#c-columns .c-column", 0.5, { x: "101%", ease: "power2.out", stagger: 0.07 }, 0)
-        .set("#c-columns", { clearProps: "all" })
-        .set("#c-columns .c-column", { clearProps: "all" });
+    hideColumns(cb) {
+      gsap.timeline()
+          .to("#c-columns .c-column", 0.5, { x: "101%", ease: "power2.out", stagger: 0.07 }, 0)
+          .add(cb,.2)
+          .set("#c-columns", { clearProps: "all" })
+          .set("#c-columns .c-column", { clearProps: "all" });
     },
   },
 };
