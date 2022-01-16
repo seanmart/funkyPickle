@@ -18,7 +18,7 @@ export async function checkComponents(d){
   return d
 }
 
-export function getDate(o = 0){
+export function getDateOffset(o = 0){
   let d = new Date()
   d.setDate(d.getDate() + o)
 

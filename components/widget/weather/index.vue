@@ -36,23 +36,12 @@
 
 <script>
 import weatherIcon from './weatherIcon'
-const getWeather = () => import("~/data/weather.json").then((m) => m.default || m);
+import {mapState} from 'vuex'
 
 export default {
   props: ["uid"],
   name: 'WeatherWidget',
   components:{weatherIcon},
-  async fetch() {
-
-    let data = this.$store.state.fetchData.weather;
-
-    if (!data) {
-      data = await getWeather();
-      this.$store.commit("fetchData", { key: "weather", data });
-    }
-
-    this.data = data;
-  },
   data: () => ({
     data: {},
     info:[
@@ -63,9 +52,10 @@ export default {
     ]
   }),
   computed:{
+    ...mapState(['eventsWeather']),
     current(){
-      let eventData = this.data[this.uid] || {}
-      return eventData.current || null
+      let data = this.eventsWeather[this.uid] || {}
+      return data.current || null
     }
   },
   methods:{

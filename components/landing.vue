@@ -11,18 +11,16 @@
 export default {
   props: ["data"],
   mounted() {
-    this.$bus.$once('LOADED',this.handleLoaded)
     this.$bus.$once('REVEAL',this.handleReveal)
+    this.handleMounted()
   },
   methods:{
-    handleLoaded(){
-      console.log('loaded')
+    handleMounted(){
       gsap.timeline()
       .set('.c-landing .c-reveal',{scaleY:0,transformOrigin:'top',display:'block'})
       .set('.c-landing .c-image',{scale:1.2,opacity:0})
     },
     handleReveal(){
-      console.log('reveal')
       gsap.timeline()
       .to('.c-landing .c-reveal',.75,{scaleY:1,ease:'power4.in'})
       .set('.c-landing .c-image',{opacity:1})

@@ -19,7 +19,6 @@ export default {
   }),
   mounted() {
     this.handleInit();
-    this.render = true;
     this.first = true
 
     this.$bus.$on('LOADED',()=>{
@@ -39,6 +38,7 @@ export default {
 
     })
 
+    this.render = true;
 
   },
   methods: {

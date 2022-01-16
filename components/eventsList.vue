@@ -4,7 +4,7 @@
       <h2 class="t-headline-rg" v-html="data.primary.title" ref="title" />
     </div>
 
-    <div class="c-list" v-if="eventList.length > 0">
+    <div class="c-list">
       <template v-for="(event, i) in eventList">
         <div class="c-event" ref="events">
           <nuxt-link :to="`/events/${event.uid}`" class="c-event--wrapper">
@@ -33,7 +33,6 @@
         </div>
       </template>
     </div>
-    <div v-else class="c-no-list">No events found</div>
 
     <div class="u-gap-top-rg c-event-btn" v-if="data.primary.link.uid" ref="btn">
       <btn :to="`/${data.primary.link.uid}`" rainbow arrow>view all events</btn>
@@ -42,48 +41,32 @@
 </template>
 
 <script>
-import { getDate, getDay, getMonth } from "@/assets/js/helpers";
+import {getDay, getMonth } from "@/assets/js/helpers";
+import {mapState} from 'vuex'
 export default {
   props: ["data"],
-  fetchKey: "event-list",
-  async fetch() {
-
-    let data = this.$store.state.fetchData.events;
-
-    if (!data) {
-      let date = getDate(-1);
-      let results = await this.$prismic.api.query([this.$prismic.predicates.at("document.type", "event"), this.$prismic.predicates.date.after("my.event.end_date", date)], {
-        graphQuery: `{
-        event
-        {
-        title
-        state
-        city
-        logo
-        uid
-        start_date
-        }
-        }`,
-        orderings: "[my.event.start_date]",
-      });
-      if (results) {
-        data = results.results;
-        this.$store.commit("fetchData", { key: "events", data });
-      }
-    }
-
-    this.events = data || [];
-  },
   data: () => ({
-    events: [],
     getDay,
     getMonth,
   }),
+  mounted(){
+    this.$bus.$once('REVEAL',this.handleReveal)
+    this.handleMounted()
+  },
   computed: {
+    ...mapState(['eventsList']),
     eventList() {
-      return this.data.primary.limit ? this.events.slice(0, this.data.primary.limit) : this.events;
+      return this.data.primary.limit ? this.eventsList.slice(0, this.data.primary.limit) : this.eventsList;
     },
   },
+  methods:{
+    handleMounted(){
+
+    },
+    handleReveal(){
+
+    }
+  }
 };
 </script>
 <style lang="scss">
