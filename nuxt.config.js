@@ -15,7 +15,7 @@ export default {
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "stylesheet", href: "https://unpkg.com/swiper/swiper-bundle.min.css" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: true },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Open+Sans:wght@365;400&family=Saira+Extra+Condensed:wght@700&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Saira+Extra+Condensed:wght@700&display=swap" },
     ],
     script: [{ src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js" }, { src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/ScrollTrigger.min.js" }, { src: "https://unpkg.com/swiper/swiper-bundle.min.js" }],
   },
