@@ -24,11 +24,11 @@ jobs:
           API_KEY: ${{secrets.WEATHER_ACCESS_TOKEN}}
           EXCLUDE: "minutely,hourly,daily,alerts"
           COORDINATES: ${{steps.get-prismic-data.outputs.DATA}}
-      - name: replace file
-        run: |
-          echo ${{toJson(steps.get-weather-data.outputs.DATA)}} > data/weather.json
-          git add data/weather.json
-          git config --global user.name 'Sean Metcalf'
-          git config --global user.email 'sean@seanmart.com'
-          git commit -m "updated weather"
-          git push origin master
+      # - name: replace file
+      #   run: |
+      #     echo ${{toJson(steps.get-weather-data.outputs.DATA)}} > data/weather.json
+      #     git add data/weather.json
+      #     git config --global user.name 'Sean Metcalf'
+      #     git config --global user.email 'sean@seanmart.com'
+      #     git commit -m "updated weather"
+      #     git push origin master
