@@ -16,11 +16,13 @@ export default {
   },
   methods:{
     handleLoaded(){
+      console.log('loaded')
       gsap.timeline()
       .set('.c-landing .c-reveal',{scaleY:0,transformOrigin:'top',display:'block'})
       .set('.c-landing .c-image',{scale:1.2,opacity:0})
     },
     handleReveal(){
+      console.log('reveal')
       gsap.timeline()
       .to('.c-landing .c-reveal',.75,{scaleY:1,ease:'power4.in'})
       .set('.c-landing .c-image',{opacity:1})
