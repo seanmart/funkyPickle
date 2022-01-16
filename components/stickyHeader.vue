@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="slicky-header" ref="header">
+  <div class="c-slicky-header" ref="header">
     <slot/>
   </div>
 </template>
@@ -35,3 +35,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .c-slicky-header{
+    position: relative;
+    z-index: 50;
+  }
+</style>

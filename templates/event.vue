@@ -1,9 +1,8 @@
 <template lang="html">
   <main id="c-event">
+
     <section class="c-event-landing">
-      <div class="c-image">
-        <fancy-image :scale="1.3" :start="0" :key="data.image.url" :image="data.image.url" />
-      </div>
+      <fancy-image class="c-image" :scale="1.3" :start="0" :key="data.image.url" :image="data.image.url" />
       <div class="c-logo--wrapper">
         <div class="c-logo" v-image:cover="data.logo.url" />
       </div>
@@ -15,10 +14,15 @@
       </text-scroll>
       <div class="c-date--wrapper">
         <icon calendar class="c-date-icon" />
-        <span class="c-date"> {{ formatDate(data.start_date) }} {{ data.start_date && data.end_date ? " - " : "" }} {{ formatDate(data.end_date) }}</span>
+        <div class="c-date" v-html="">
+          <span v-if="data.start_date" v-html="formatDate(data.start_date)"/>
+          <span v-if="data.start_date && data.end_date" v-html="'&nbsp&nbsp–&nbsp&nbsp'"/>
+          <span v-if="data.end_date" v-html="formatDate(data.end_date)"/>
+        </div>
       </div>
     </section>
-    <section class="c-event-header">
+
+    <section class="c-event-header o-bottom">
       <sticky-header endTrigger="#c-event-content">
         <div class="c-header--wrapper">
           <div class="c-header-btns--wrapper o-container">
@@ -31,15 +35,33 @@
     </section>
 
     <section id="c-event-content" class="c-event-content o-container o-top o-bottom">
-      <weather :uid="data.uid" />
+      <div class="c-event-content--wrapper">
+        <div class="c-column-main">
+
+          <weather :uid="data.uid" />
+
+          <location :address="data.address" :city="data.city" :state="data.state" :uid="data.uid"/>
+
+        </div>
+        <div class="c-column-side">
+
+          <sponsors/>
+
+        </div>
+      </div>
     </section>
+
   </main>
 </template>
 
 <script>
-import { getDay, getMonth } from "@/assets/js/helpers";
+import { getDay, getMonth, getYear } from "@/assets/js/helpers";
+import weather from '@/components/widget/weather'
+import sponsors from '@/components/widget/sponsors'
+import location from '@/components/widget/location'
 export default {
   name: "Event",
+  components:{weather,sponsors,location},
   async asyncData({ $prismic, $bus, params, error, store, payload }) {
 
     let uid = params.event;
@@ -71,9 +93,10 @@ export default {
   methods: {
     formatDate(date) {
       if (!date) return;
+      let year = getYear(date)
       let month = getMonth(date, "long");
       let day = getDay(date);
-      return `${month} ${day}`;
+      return `${month} ${day}, ${year}`;
     },
   },
 };
@@ -82,23 +105,27 @@ export default {
 <style lang="scss">
 #c-event {
   .c-event-landing {
-    .c-image {
-      height: 257px;
-      @include dark-gradient(0);
-    }
+    position: relative;
+    height: 257px;
+    margin-bottom: 7rem;
+    @include dark-gradient(0);
+
     .c-logo--wrapper {
+      position: absolute;
+      z-index: 1;
+      bottom:0px;
+      left:0px;
+      right:0px;
+      transform: translateZ(0);
       height: 2rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      position: relative;
-      z-index: 1;
       background: $black;
-      margin-bottom: 5rem;
     }
     .c-logo {
-      width: 12rem;
-      height: 12rem;
+      width: 15rem;
+      height: 15rem;
       border-radius: 50%;
       background-position: center center;
       box-shadow: 0px 2px 5px rgba($blue, 0.2);
@@ -131,8 +158,8 @@ export default {
     .c-date {
       flex: 0 0 auto;
       text-transform: uppercase;
-      font-size: 1.6rem;
-      font-weight: 500;
+      font-size: 2rem;
+      font-weight: 600;
     }
   }
 
@@ -158,13 +185,37 @@ export default {
   }
 
   .c-event-content {
-    min-height: 150vh;
+
+    .c-event-content--wrapper{
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      margin: 0px -1rem;
+    }
+
+    .c-column-main{
+      flex: 0 0 66.666%;
+    }
+    .c-column-side{
+      flex: 1 1 auto;
+    }
+  }
+
+  @media screen and (max-width:1000px){
+    .c-event-content{
+      .c-event-content--wrapper{
+        flex-direction: column;
+      }
+    }
   }
 
   @media screen and (max-width: $tablet) {
     .c-event-info {
+      padding: 5rem 0px;
+
       .c-title--wrapper {
         height: 5rem;
+        margin-bottom: 1rem;
       }
       .c-title {
         font-size: 5rem;

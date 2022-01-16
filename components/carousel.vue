@@ -62,6 +62,7 @@ export default {
     height:100%;
     display: flex;
     flex-direction: row;
+    transform-style: preserve-3d;
   }
   .c-carousel-slide{
     flex: 0 0 auto;
@@ -69,6 +70,7 @@ export default {
     width:100%;
     position: relative;
     z-index: 0;
+    transform: translateZ(0);
   }
   .c-carousel-dots{
     margin-top: 3rem;
