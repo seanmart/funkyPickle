@@ -1,7 +1,7 @@
 name: "weather"
 on:
   schedule:
-    - cron: "15 10,22 * * *"
+    - cron: "15 0,12 * * *"
   workflow_dispatch:
 jobs:
   weather:
