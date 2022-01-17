@@ -108,6 +108,8 @@ export default {
     background: $black;
     height: 300px;
     overflow: hidden;
+    position: relative;
+    z-index: 1;
   }
 }
 </style>
