@@ -4,7 +4,9 @@
 
 <script>
 export default {
-
+  mounted(){
+    this.$bus.$emit('LOADED')
+  },
 };
 </script>
 
