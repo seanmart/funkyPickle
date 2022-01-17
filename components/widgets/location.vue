@@ -71,6 +71,8 @@ export default {
         ext: "png",
       });
       map.addLayer(Stamen_Toner);
+
+      setTimeout(map.invalidateSize, 1500);
     },
   },
 };
