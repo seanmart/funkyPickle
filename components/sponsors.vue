@@ -1,64 +1,56 @@
 <template lang="html">
   <section class="c-sponsors o-container o-top o-bottom">
+    <div class="c-header--wrapper u-gap-bottom-rg" v-if="data.primary.title">
+      <h2 class="t-headline-rg" v-html="data.primary.title" ref="title" />
+    </div>
 
-      <div class="c-header--wrapper u-gap-bottom-rg" v-if="data.primary.title" >
-        <h2 class="t-headline-rg" v-html="data.primary.title" ref="title"/>
-      </div>
-
-      <div class="c-sponsors--wrapper">
-        <template v-for="(logo,i) in data.items">
-          <div :key="i" class="c-sponsor">
-            <div class="c-sponsor-logo--wrapper">
-              <img class="c-sponsor-logo" :src="logo.logo.url" :alt="logo.logo.alt">
-            </div>
+    <div class="c-sponsors--wrapper">
+      <template v-for="(logo, i) in data.items">
+        <div :key="i" class="c-sponsor">
+          <div class="c-sponsor-logo--wrapper">
+            <img class="c-sponsor-logo" :src="logo.logo.url" :alt="logo.logo.alt" />
           </div>
-        </template>
-      </div>
-
+        </div>
+      </template>
+    </div>
   </section>
-
 </template>
 
 <script>
 export default {
-  props:['data']
-}
+  props: ["data"],
+};
 </script>
 
 <style lang="scss">
-.c-sponsors{
-
-  .c-sponsors--wrapper{
+.c-sponsors {
+  .c-sponsors--wrapper {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin: 0px -$space / 4;
+    align-items: center;
+    margin: 0px -3rem;
   }
-  .c-sponsor{
+  .c-sponsor {
     flex: 0 0 33.333%;
-    padding: $space / 4;
+    padding: 3rem;
   }
-  .c-sponsor-logo--wrapper{
+  .c-sponsor-logo--wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    .c-sponsor-logo{
+    .c-sponsor-logo {
       max-width: 100%;
     }
   }
-  @media screen and (max-width:$tablet){
-    .c-sponsors--wrapper{
-      margin: 0px -10px;
+  @media screen and (max-width: $tablet) {
+    .c-sponsors--wrapper {
+      margin: 0px -2rem;
     }
-    .c-sponsor{
-      padding: 10px;
-    }
-  }
-
-  @media screen and (max-width:$mobile){
-    .c-sponsor{
-      flex: 0 0 100%;
+    .c-sponsor {
+      padding: 2rem;
+      flex: 0 0 50%;
     }
   }
 }

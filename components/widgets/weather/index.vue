@@ -107,13 +107,20 @@ export default {
     .c-info-table {
       text-align: left;
       font-weight: 800;
-      font-size: 1.4rem;
     }
     .c-info-label {
       text-align: right;
       padding-right: 1.5rem;
       font-weight: 400;
-      opacity: 0.75;
+      opacity: 0.6;
+    }
+  }
+
+  @media screen and (max-width: $tablet) {
+    .c-temp--wrapper {
+      .c-temp-value {
+        font-size: 7rem;
+      }
     }
   }
 }
