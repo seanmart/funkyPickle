@@ -1,6 +1,5 @@
 <template lang="html">
   <main id="c-event">
-
     <section class="c-event-landing">
       <fancy-image class="c-image" :scale="1.3" :start="0" :key="data.image.url" :image="data.image.url" />
       <div class="c-logo--wrapper">
@@ -15,9 +14,9 @@
       <div class="c-date--wrapper">
         <icon calendar class="c-date-icon" />
         <div class="c-date" v-html="">
-          <span v-if="data.start_date" v-html="formatDate(data.start_date)"/>
-          <span v-if="data.start_date && data.end_date" v-html="'&nbsp&nbsp–&nbsp&nbsp'"/>
-          <span v-if="data.end_date" v-html="formatDate(data.end_date)"/>
+          <span v-if="data.start_date" v-html="formatDate(data.start_date)" />
+          <span v-if="data.start_date && data.end_date" v-html="'&nbsp&nbsp–&nbsp&nbsp'" />
+          <span v-if="data.end_date" v-html="formatDate(data.end_date)" />
         </div>
       </div>
     </section>
@@ -37,55 +36,47 @@
     <section id="c-event-content" class="c-event-content o-container o-top o-bottom">
       <div class="c-event-content--wrapper">
         <div class="c-column-main">
-
           <weather :uid="data.uid" />
-
-          <location :place="data.place" :address="data.address" :city="data.city" :state="data.state" :uid="data.uid"/>
-
+          <location :data="data" />
         </div>
         <div class="c-column-side">
-
-          <sponsors/>
-
+          <sponsors />
         </div>
       </div>
     </section>
-
   </main>
 </template>
 
 <script>
 import { getDay, getMonth, getYear } from "@/assets/js/helpers";
-import weather from '@/components/widgets/weather'
-import sponsors from '@/components/widgets/sponsors'
-import location from '@/components/widgets/location'
+import weather from "@/components/widgets/weather";
+import sponsors from "@/components/widgets/sponsors";
+import location from "@/components/widgets/location";
 export default {
   name: "Event",
-  components:{weather,sponsors,location},
+  components: { weather, sponsors, location },
   async asyncData({ $prismic, $bus, params, error, store, payload }) {
-
     let uid = params.event;
 
-    if (store.state.events[uid]){
-      return {data:store.state.events[uid]}
+    if (store.state.events[uid]) {
+      return { data: store.state.events[uid] };
     }
 
-    if(payload && payload.data){
-      return {data:{...payload.data, uid }}
+    if (payload && payload.data) {
+      return { data: { ...payload.data, uid } };
     }
 
     let res = await $prismic.api.getByUID("event", uid);
     if (res) {
       let data = { ...res.data, uid };
       store.commit("events", { uid, data });
-      return {data}
+      return { data };
     }
 
     error({ statusCode: 404, message: "Page not found" });
-
   },
-  mounted(){
-    this.$bus.$emit('LOADED')
+  mounted() {
+    this.$bus.$emit("LOADED");
   },
   data: () => ({
     data: null,
@@ -93,7 +84,7 @@ export default {
   methods: {
     formatDate(date) {
       if (!date) return;
-      let year = getYear(date)
+      let year = getYear(date);
       let month = getMonth(date, "long");
       let day = getDay(date);
       return `${month} ${day}, ${year}`;
@@ -113,9 +104,9 @@ export default {
     .c-logo--wrapper {
       position: absolute;
       z-index: 1;
-      bottom:0px;
-      left:0px;
-      right:0px;
+      bottom: 0px;
+      left: 0px;
+      right: 0px;
       transform: translateZ(0);
       height: 2rem;
       display: flex;
@@ -185,25 +176,24 @@ export default {
   }
 
   .c-event-content {
-
-    .c-event-content--wrapper{
+    .c-event-content--wrapper {
       display: flex;
       flex-direction: row;
       align-items: stretch;
       margin: 0px -1rem;
     }
 
-    .c-column-main{
+    .c-column-main {
       flex: 0 0 66.666%;
     }
-    .c-column-side{
+    .c-column-side {
       flex: 1 1 auto;
     }
   }
 
-  @media screen and (max-width:1000px){
-    .c-event-content{
-      .c-event-content--wrapper{
+  @media screen and (max-width: 1000px) {
+    .c-event-content {
+      .c-event-content--wrapper {
         flex-direction: column;
       }
     }
