@@ -22,7 +22,6 @@ jobs:
         id: get-weather-data
         with:
           API_KEY: ${{secrets.WEATHER_ACCESS_TOKEN}}
-          EXCLUDE: "minutely,hourly,daily,alerts"
           DATA: ${{steps.get-prismic-data.outputs.DATA}}
       - name: replace file
         run: |
