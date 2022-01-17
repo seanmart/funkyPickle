@@ -1,9 +1,9 @@
 const Prismic = require("@prismicio/client");
 
 export default {
-  target: "static",
   components: true,
-  ssr: true,
+  ssr: false,
+  loading: false,
   head: {
     title: "Funky Pickle",
     htmlAttrs: {
@@ -27,7 +27,6 @@ export default {
       let client = Prismic.client(process.env.PRISMIC_END_POINT, { accessToken: process.env.PRISMIC_ACCESS_TOKEN });
       let events = await client.query(Prismic.Predicates.at("document.type", "event"));
       events.results.forEach((data) => routes.push({ route: `/events/${data.uid}`, payload: data }));
-      console.log("routes created");
       return routes;
     },
   },
@@ -45,9 +44,6 @@ export default {
     { src: "@/plugins/scrollBuddy.js", ssr: false },
     { src: "@/plugins/directives.js", ssr: false },
   ],
-  loading: false,
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: ["@nuxtjs/prismic"],
