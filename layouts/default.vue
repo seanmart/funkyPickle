@@ -13,20 +13,20 @@
 </template>
 
 <script>
+let isFirst = true
 export default {
   data: () => ({
     render: false,
   }),
   mounted() {
     this.handleInit();
-    this.first = true
 
     this.$bus.$on('LOADED',()=>{
 
-      this.first && setTimeout(()=>{
+      isFirst && setTimeout(()=>{
         this.resetScroll()
         this.$bus.$emit('HIDE_PRELOADER',()=> this.$bus.$emit('REVEAL'))
-        this.first = false
+        isFirst = false
       },1500)
 
       !this.first && setTimeout(()=>{
@@ -73,7 +73,7 @@ export default {
     },
   },
   middleware({$bus}) {
-    if (process.server) return;
+    if (process.server || isFirst) return;
     return new Promise((next)=> $bus.$emit('SHOW_COLUMNS',next))
   },
 };
