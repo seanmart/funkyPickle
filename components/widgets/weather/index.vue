@@ -22,7 +22,7 @@
                   <td class="c-info-label" v-html="`${item.label}:`"/>
                   <td v-if="item.temp" v-html="getTemp(current[item.key])"/>
                   <td v-else-if="item.time" v-html="getTime(current[item.key])"/>
-                  <td v-else v-html="current[item.key]"/>
+                  <td v-else-if="item.percent" v-html="current[item.key] + '%'"/>
                 </template>
               </tr>
             </template>
@@ -44,19 +44,20 @@ export default {
   props: ["uid"],
   components:{weatherIcon,widget},
   data: () => ({
-    data: {},
     info:[
       {label:'Feels Like',key:'feels_like',temp:true},
-      {label:'Humidity',key:'humidity'},
+      {label:'Humidity',key:'humidity',percent:true},
       {label:'Sunrise',key:'sunrise',time:true},
       {label:'Sunset',key:'sunset',time:true}
     ]
   }),
   computed:{
     ...mapState(['eventsWeather']),
+    data(){
+      return this.eventsWeather[this.uid] || {}
+    },
     current(){
-      let data = this.eventsWeather[this.uid] || {}
-      return data.current || null
+      return this.data.current || null
     }
   },
   methods:{
@@ -64,15 +65,12 @@ export default {
       return `${Math.round((k - 273.15) * 9/5 + 32)}°F`
     },
     getTime(t){
-      let date = new Date(t * 1000)
-      let hrs = date.getHours()
-      let min = date.getMinutes()
-      let ampm = hrs >= 12 ? 'pm' : 'am';
-      hrs = hrs % 12
-      min = min < 10 ? '0'+min : min;
-
-      return `${hrs}:${min} ${ampm}`
-
+      let o = this.data.timezone_offset || 0
+      return new Date( t * 1000 + o * 1000).toLocaleTimeString('en-US',{
+        timeZone: 'UTC',
+        hour: '2-digit',
+        minute: '2-digit'
+      })
     }
   }
 }
