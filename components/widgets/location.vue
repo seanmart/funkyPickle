@@ -6,8 +6,8 @@
           <icon wayfinder />
         </div>
         <div class="c-location">
-          <h2 class="c-title t-header" v-html="address"/>
-          <span class="c-address" v-html="`${city}, ${state}`"/>
+          <h2 class="c-title t-header" v-html="place"/>
+          <span class="c-address" v-html="formatCityState(address, city, state)"/>
         </div>
       </div>
     </template>
@@ -24,7 +24,17 @@ import widget from './widget'
 export default {
   name: 'LocationWidget',
   components:{widget},
-  props:['address','city','state','uid'],
+  props:['place','address','city','state','uid'],
+  methods:{
+    formatCityState(address,city,state){
+      let str = ""
+      new Array(address,city,state).forEach(s =>{
+        if(s && str != '') str +=', '
+        str += s || ''
+      })
+      return str || 'No Location Announced'
+    }
+  }
 }
 </script>
 

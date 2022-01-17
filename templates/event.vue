@@ -40,7 +40,7 @@
 
           <weather :uid="data.uid" />
 
-          <location :address="data.address" :city="data.city" :state="data.state" :uid="data.uid"/>
+          <location :place="data.place" :address="data.address" :city="data.city" :state="data.state" :uid="data.uid"/>
 
         </div>
         <div class="c-column-side">

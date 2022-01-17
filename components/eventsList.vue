@@ -20,7 +20,10 @@
               <text-scroll class="c-title--wrapper">
                 <h3 class="c-title t-header" v-html="event.data.title" />
               </text-scroll>
-              <span class="c-location"><icon wayfinder />{{ `${event.data.city}, ${event.data.state}` }}</span>
+              <div class="c-location">
+                <icon wayfinder />
+                <span v-html="formatCityState(event.data.city,event.data.state)"/>
+              </div>
             </div>
             <div class="c-arrow--wrapper">
               <div class="c-bg">
@@ -65,6 +68,9 @@ export default {
     },
     handleReveal(){
 
+    },
+    formatCityState(city,state){
+      return city && state ? `${city}, ${state}` : city || state || 'No Location Announced'
     }
   }
 };
