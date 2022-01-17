@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/news", (function(a,b,c){a[0]={slice_type:b,slice_label:null,items:[{}],primary:{publish:c,title:[{type:"heading1",text:"News",spans:[]}],text:[],image:{}},component:b,hasComponent:c};return {data:[{data:a}],fetch:{},mutations:[["pages",{page:"news",data:a}]]}}(Array(1),"intro",true)));

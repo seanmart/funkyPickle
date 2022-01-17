@@ -36,12 +36,13 @@
 
 <script>
 import weatherIcon from './weatherIcon'
+import widget from '../widget'
 import {mapState} from 'vuex'
 
 export default {
-  props: ["uid"],
   name: 'WeatherWidget',
-  components:{weatherIcon},
+  props: ["uid"],
+  components:{weatherIcon,widget},
   data: () => ({
     data: {},
     info:[

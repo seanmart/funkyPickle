@@ -56,9 +56,9 @@
 
 <script>
 import { getDay, getMonth, getYear } from "@/assets/js/helpers";
-import weather from '@/components/widget/weather'
-import sponsors from '@/components/widget/sponsors'
-import location from '@/components/widget/location'
+import weather from '@/components/widgets/weather'
+import sponsors from '@/components/widgets/sponsors'
+import location from '@/components/widgets/location'
 export default {
   name: "Event",
   components:{weather,sponsors,location},

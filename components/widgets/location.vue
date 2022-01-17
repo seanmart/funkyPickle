@@ -20,9 +20,11 @@
 </template>
 
 <script>
+import widget from './widget'
 export default {
+  name: 'LocationWidget',
+  components:{widget},
   props:['address','city','state','uid'],
-  name: 'LocationWidget'
 }
 </script>
 
@@ -33,7 +35,7 @@ export default {
     display: flex;
     flex-direction: row;
     padding-top: .5rem;
-    
+
     .c-icon{
       flex: 0 0 auto;
       padding-right: 1rem;

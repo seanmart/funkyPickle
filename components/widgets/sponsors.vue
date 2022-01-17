@@ -1,21 +1,21 @@
 <template lang="html">
-  <div class="c-sponsors-widget">
-    <div class="o-widget o-widget-content c-sponsors--wrapper">
+  <widget class="c-sponsor-widget">
+    <template #content>
       sponsors
-    </div>
-  </div>
+    </template>
+  </widget>
 </template>
 
 <script>
+import widget from './widget'
 export default {
+  name: 'SponsorsWidget',
+  components:{widget}
 }
 </script>
 
 <style lang="scss">
-.c-sponsors-widget{
-  .c-sponsors--wrapper{
-    background: white;
-    min-height: 600px;
-  }
+.c-sponsor-widget{
+
 }
 </style>
