@@ -7,7 +7,7 @@
         </div>
 
         <div class="c-temp--wrapper">
-          <h3 class="c-temp-value t-header" v-html="getTemp(data.temp)" />
+          <h3 class="c-temp-value t-header" v-html="getTemp(data.main.temp)" />
           <span class="c-temp-description" v-html="data.weather[0].main" />
         </div>
 
@@ -15,16 +15,22 @@
 
         <div class="c-info--wrapper">
           <table class="c-info-table">
-            <template v-for="(item, i) in info">
-              <tr class="c-info-row">
-                <template v-if="data[item.key]">
-                  <td class="c-info-label" v-html="`${item.label}:`" />
-                  <td v-if="item.temp" v-html="getTemp(data[item.key])" />
-                  <td v-else-if="item.time" v-html="getTime(data[item.key])" />
-                  <td v-else-if="item.percent" v-html="data[item.key] + '%'" />
-                </template>
-              </tr>
-            </template>
+            <tr class="c-info-row" v-if="data.main.feels_like">
+              <td class="c-info-label" v-html="'Feels Like'" />
+              <td v-html="getTemp(data.main.feels_like)" />
+            </tr>
+            <tr class="c-info-row" v-if="data.main.humidity">
+              <td class="c-info-label" v-html="'Humidity'" />
+              <td v-html="data.main.humidity + '%'" />
+            </tr>
+            <tr class="c-info-row" v-if="data.sys.sunrise">
+              <td class="c-info-label" v-html="'Sunrise'" />
+              <td v-html="getTime(data.sys.sunrise)" />
+            </tr>
+            <tr class="c-info-row" v-if="data.sys.sunset">
+              <td class="c-info-label" v-html="'Sunset'" />
+              <td v-html="getTime(data.sys.sunset)" />
+            </tr>
           </table>
         </div>
       </template>
@@ -41,18 +47,10 @@ export default {
   name: "WeatherWidget",
   props: ["uid"],
   components: { weatherIcon, widget },
-  data: () => ({
-    info: [
-      { label: "Feels Like", key: "feels_like", temp: true },
-      { label: "Humidity", key: "humidity", percent: true },
-      { label: "Sunrise", key: "sunrise", time: true },
-      { label: "Sunset", key: "sunset", time: true },
-    ],
-  }),
   computed: {
     ...mapState(["eventsWeather"]),
     data() {
-      return this.eventsWeather[this.uid] || {};
+      return this.eventsWeather[this.uid] || null;
     },
   },
   methods: {
@@ -60,7 +58,7 @@ export default {
       return `${Math.round(((k - 273.15) * 9) / 5 + 32)}°F`;
     },
     getTime(t) {
-      let o = this.data.timezone_offset || 0;
+      let o = this.data.timezone || 0;
       return new Date(t * 1000 + o * 1000).toLocaleTimeString("en-US", {
         timeZone: "UTC",
         hour: "2-digit",

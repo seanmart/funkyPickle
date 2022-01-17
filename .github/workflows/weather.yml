@@ -16,14 +16,14 @@ jobs:
           ACCESS_TOKEN: ${{secrets.PRISMIC_ACCESS_TOKEN}}
           END_POINT: ${{secrets.PRISMIC_END_POINT}}
           QUERY: '[[at(document.type, "event")][date.after(my.event.end_date,{{date,-1}})]]'
-          FIELDS: id:uid,data.city,data.state
+          FIELDS: id:uid,data.city,data.state,data.longitude,data.latitude
       - name: get weather data
         uses: seanmart/get-open-weather-action@master
         id: get-weather-data
         with:
           API_KEY: ${{secrets.WEATHER_ACCESS_TOKEN}}
           EXCLUDE: "minutely,hourly,daily,alerts"
-          CITY_STATE: ${{steps.get-prismic-data.outputs.DATA}}
+          DATA: ${{steps.get-prismic-data.outputs.DATA}}
       - name: replace file
         run: |
           echo ${{toJson(steps.get-weather-data.outputs.DATA)}} > data/weather.json
