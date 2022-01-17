@@ -25,9 +25,9 @@ export default {
   props: ["data"],
   head() {
     return {
-      link: [{ rel: "stylesheet", href: "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" }],
+      link: [{ rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" }],
       script: [
-        { type: "text/javascript", src: "https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" },
+        { type: "text/javascript", src: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js" },
         { type: "text/javascript", src: "https://stamen-maps.a.ssl.fastly.net/js/tile.stamen.js" },
       ],
     };
@@ -107,6 +107,7 @@ export default {
   #map {
     background: $black;
     height: 300px;
+    overflow: hidden;
   }
 }
 </style>
