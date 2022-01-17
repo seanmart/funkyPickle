@@ -1,5 +1,5 @@
 <template lang="html">
-  <widget class="c-weather-widget">
+  <widget class="c-weather-widget" :hide="!current">
     <template #content>
       <template v-if="current">
 

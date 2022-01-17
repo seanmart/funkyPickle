@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="c-widget">
+  <div class="c-widget" v-if="!hide">
     <div class="c-widget--wrapper">
       <div class="c-widget-header" v-if="$slots.header">
         <slot name="header"/>
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-
+  props:{hide:Boolean,default:false}
 }
 </script>
 
