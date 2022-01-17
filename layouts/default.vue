@@ -1,7 +1,7 @@
 <template lang="html">
   <div id="site">
     <svg-gradients />
-    <preloader/>
+    <preloader />
     <columns />
     <navigation />
     <div id="scroller">
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-let isFirst = true
+let isFirst = true;
 export default {
   data: () => ({
     render: false,
@@ -21,30 +21,29 @@ export default {
   mounted() {
     this.handleInit();
 
-    this.$bus.$on('LOADED',()=>{
+    this.$bus.$on("LOADED", () => {
+      isFirst &&
+        setTimeout(() => {
+          this.resetScroll();
+          this.$bus.$emit("HIDE_PRELOADER", () => this.$bus.$emit("REVEAL"));
+          isFirst = false;
+        }, 1500);
 
-      isFirst && setTimeout(()=>{
-        this.resetScroll()
-        this.$bus.$emit('HIDE_PRELOADER',()=> this.$bus.$emit('REVEAL'))
-        isFirst = false
-      },1500)
+      !isFirst &&
+        setTimeout(() => {
+          this.resetScroll();
+          this.$bus.$emit("HIDE_COLUMNS", () => this.$bus.$emit("REVEAL"));
+        }, 500);
 
-      !this.first && setTimeout(()=>{
-        this.resetScroll()
-        this.$bus.$emit('HIDE_COLUMNS',()=> this.$bus.$emit('REVEAL'))
-      },500)
-
-      !isMobile && scrollBuddy.reset()
-
-    })
+      !isMobile && scrollBuddy.reset();
+    });
 
     this.render = true;
-
   },
   methods: {
-    resetScroll(){
-      !isMobile && scrollBuddy.update()
-      ScrollTrigger.refresh(true)
+    resetScroll() {
+      !isMobile && scrollBuddy.update();
+      ScrollTrigger.refresh(true);
     },
     handleInit() {
       gsap.registerPlugin(ScrollTrigger);
@@ -72,9 +71,10 @@ export default {
       }
     },
   },
-  middleware({$bus}) {
+  middleware({ $bus, route, from }) {
     if (process.server || isFirst) return;
-    return new Promise((next)=> $bus.$emit('SHOW_COLUMNS',next))
+    if (from.path == route.path) return;
+    return new Promise((next) => $bus.$emit("SHOW_COLUMNS", next));
   },
 };
 </script>

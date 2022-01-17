@@ -22,7 +22,7 @@
               </text-scroll>
               <div class="c-location">
                 <icon wayfinder />
-                <span v-html="formatCityState(event.data.city,event.data.state)"/>
+                <span v-html="formatCityState(event.data.city, event.data.state)" />
               </div>
             </div>
             <div class="c-arrow--wrapper">
@@ -44,35 +44,31 @@
 </template>
 
 <script>
-import {getDay, getMonth } from "@/assets/js/helpers";
-import {mapState} from 'vuex'
+import { getDay, getMonth } from "@/assets/js/helpers";
+import { mapState } from "vuex";
 export default {
   props: ["data"],
   data: () => ({
     getDay,
     getMonth,
   }),
-  mounted(){
-    this.$bus.$once('REVEAL',this.handleReveal)
-    this.handleMounted()
+  mounted() {
+    this.$bus.$once("REVEAL", this.handleReveal);
+    this.handleMounted();
   },
   computed: {
-    ...mapState(['eventsList']),
+    ...mapState(["eventsList"]),
     eventList() {
       return this.data.primary.limit ? this.eventsList.slice(0, this.data.primary.limit) : this.eventsList;
     },
   },
-  methods:{
-    handleMounted(){
-
+  methods: {
+    handleMounted() {},
+    handleReveal() {},
+    formatCityState(city, state) {
+      return city && state ? `${city}, ${state}` : city || state || "No Location Announced";
     },
-    handleReveal(){
-
-    },
-    formatCityState(city,state){
-      return city && state ? `${city}, ${state}` : city || state || 'No Location Announced'
-    }
-  }
+  },
 };
 </script>
 <style lang="scss">
@@ -208,7 +204,7 @@ export default {
       fill: white;
     }
     svg {
-      flex: 0 0 40%;
+      flex: 0 0 20px;
       transition-duration: $event-list-duration;
       transition-property: opacity;
     }
@@ -226,7 +222,7 @@ export default {
       display: none;
     }
     .c-arrow--wrapper {
-      width: $event-list-space * 1.5;
+      width: $event-list-space * 1.75;
     }
     .c-info--wrapper .c-location {
       display: none;

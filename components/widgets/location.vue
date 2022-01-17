@@ -58,7 +58,8 @@ export default {
       let map = new L.Map("map", {
         attribution,
         center: new L.LatLng(lat, lon),
-        zoom: 14,
+        zoom: 13,
+        zoomControl: false,
       });
 
       let marker = L.marker([lat, lon]).addTo(map);
@@ -66,8 +67,8 @@ export default {
       let Stamen_Toner = L.tileLayer("https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}", {
         attribution,
         subdomains: "abcd",
-        minZoom: 0,
-        maxZoom: 20,
+        minZoom: 12,
+        maxZoom: 15,
         ext: "png",
       });
       map.addLayer(Stamen_Toner);
@@ -98,9 +99,10 @@ export default {
     }
     .c-title {
       font-size: 3rem;
+      margin-bottom: 0.2rem;
     }
     .c-address {
-      opacity: 0.5;
+      opacity: 0.6;
     }
   }
 
@@ -110,6 +112,10 @@ export default {
     overflow: hidden;
     position: relative;
     z-index: 1;
+
+    .leaflet-control-attribution {
+      font-size: 0.9rem;
+    }
   }
 }
 </style>

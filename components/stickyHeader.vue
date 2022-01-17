@@ -22,7 +22,7 @@ export default {
         pinSpacing: false,
         anticipatePin: 1,
         start: () => `top top+=${this.top + getStyle(scroller, "padding-top")}`,
-        end: () => `bottom top+=${el.offsetHeight}`,
+        end: () => `bottom top+=${el.offsetHeight + getStyle(scroller, "padding-top")}`,
       };
 
       this.endTrigger && (props.endTrigger = this.endTrigger);

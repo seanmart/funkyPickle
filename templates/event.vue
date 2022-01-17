@@ -8,14 +8,14 @@
     </section>
 
     <section class="c-event-info o-container">
-      <text-scroll class="c-title--wrapper" :duration="45">
+      <text-scroll class="c-title--wrapper" :duration="35">
         <h1 v-if="data.title" class="t-header c-title" v-html="data.title" />
       </text-scroll>
       <div class="c-date--wrapper">
         <icon calendar class="c-date-icon" />
         <div class="c-date" v-html="">
           <span v-if="data.start_date" v-html="formatDate(data.start_date)" />
-          <span v-if="data.start_date && data.end_date" v-html="'&nbsp&nbsp–&nbsp&nbsp'" />
+          <span v-if="data.start_date && data.end_date" v-html="'&nbsp–&nbsp'" />
           <span v-if="data.end_date" v-html="formatDate(data.end_date)" />
         </div>
       </div>
@@ -204,14 +204,17 @@ export default {
       padding: 5rem 0px;
 
       .c-title--wrapper {
-        height: 5rem;
-        margin-bottom: 1rem;
+        height: 6rem;
+        margin-bottom: 1.5rem;
       }
       .c-title {
-        font-size: 5rem;
+        font-size: 7rem;
         padding: 2rem;
       }
     }
+  }
+
+  @media screen and (max-width: $mobile) {
   }
 }
 </style>
