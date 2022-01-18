@@ -2,7 +2,9 @@
   <section class="c-landing o-bottom">
     <div class="o-wrapper">
       <div class="c-reveal" />
-      <fancy-image class="c-image" :image="data.primary.image.url" :scale="1.3" :start="0" :trigger="'.c-landing'" />
+      <div class="c-image">
+        <fancy-image :image="data.primary.image.url" :scale="1.3" :start="0" :trigger="'.c-landing'" />
+      </div>
     </div>
   </section>
 </template>
@@ -16,12 +18,12 @@ export default {
   },
   methods: {
     handleMounted() {
-      gsap.timeline().set(".c-landing .c-reveal", { scaleY: 0, transformOrigin: "top", display: "block" }).set(".c-landing .c-image", { scale: 1.2, opacity: 0 });
+      gsap.timeline()
+      .set(".c-landing .c-reveal", { scaleY: 0, transformOrigin: "top", display: "block" })
+      .set(".c-landing .c-image", { scale: 1.2, opacity: 0 });
     },
     handleReveal() {
-      console.log("reveal");
-      gsap
-        .timeline()
+      gsap.timeline()
         .to(".c-landing .c-reveal", 0.75, { scaleY: 1, ease: "power4.in" })
         .set(".c-landing .c-image", { opacity: 1 })
         .to(".c-landing .c-reveal", 0.75, { scaleY: 0, transformOrigin: "bottom", ease: "power4.out" }, 0.8)
