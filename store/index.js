@@ -1,12 +1,12 @@
-import {getDateOffset} from '@/assets/js/helpers'
-import eventsWeather from '@/data/weather.json'
+import { getDateOffset } from "@/assets/js/helpers";
+import eventsWeather from "@/data/weather.json";
 
 export default {
   state: () => ({
     nav: [],
     events: {},
-    eventsList:[],
-    eventsWeather:{},
+    eventsList: [],
+    eventsWeather: {},
     pages: {},
     data: {},
   }),
@@ -14,12 +14,11 @@ export default {
     nav: (state, data) => (state.nav = data),
     pages: (state, { page, data }) => (state.pages[page] = data),
     events: (state, { id, data }) => (state.events[id] = data),
-    eventsList:(state,data)=> state.eventsList = data,
-    eventsWeather:(state,data)=> state.eventsWeather = data,
+    eventsList: (state, data) => (state.eventsList = data),
+    eventsWeather: (state, data) => (state.eventsWeather = data),
   },
   actions: {
     async getSettings({ commit }) {
-
       let links = [];
       let res = await this.$prismic.api.getSingle("settings");
 
@@ -35,13 +34,9 @@ export default {
         commit("nav", links);
       }
     },
-    async getEventsListData({commit}){
-
+    async getEventsListData({ commit }) {
       let date = getDateOffset(-1);
-      let res = await this.$prismic.api.query([
-        this.$prismic.predicates.at("document.type", "event"),
-        this.$prismic.predicates.date.after("my.event.end_date", date)
-      ], {
+      let res = await this.$prismic.api.query([this.$prismic.predicates.at("document.type", "event"), this.$prismic.predicates.date.after("my.event.end_date", date)], {
         graphQuery: `{
         event
         {
@@ -56,12 +51,12 @@ export default {
         orderings: "[my.event.start_date]",
       });
 
-      res && commit('eventsList',res.results)
+      res && commit("eventsList", res.results);
     },
-    async nuxtServerInit({ dispatch,commit }){
-      await dispatch("getSettings")
-      await dispatch("getEventsListData")
-      commit('eventsWeather',eventsWeather)
-    }
+    nuxtServerInit({ dispatch, commit }) {
+      dispatch("getSettings");
+      dispatch("getEventsListData");
+      commit("eventsWeather", eventsWeather);
+    },
   },
 };
