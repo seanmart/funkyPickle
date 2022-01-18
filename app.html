@@ -2,6 +2,33 @@
 <html {{ HTML_ATTRS }}>
   <head>
     {{ HEAD }}
+
+    <style type="text/css">
+      #c-preloader{
+        position: fixed;
+        top:0px;
+        left:0px;
+        bottom: 0px;
+        right: 0px;
+        z-index: 200;
+        background: #5600f7;
+        background: linear-gradient(90deg, #ff0093 0%, #5600f7 50%, #00aeef 100%);
+        background-size: 400% 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+      #c-preloader .c-preloader-logo--wrapper{
+        opacity: 0;
+        transform: scale(.7);
+      }
+      #c-preloader .c-preloader-logo{
+        fill: white;
+        width: 200px;
+      }
+
+    </style>
   </head>
   <body {{ BODY_ATTRS }}>
     <div id="c-preloader">
@@ -15,12 +42,24 @@
         </svg>
       </div>
       <script type="text/javascript">
-        window.onload = function(){
+        function handleStartPreloader(){
           gsap.timeline()
           .to('#c-preloader .c-preloader-logo--wrapper',1,{opacity:1,scale:1,ease:'power2.out'},.5)
           .to('#c-preloader .ball',10,{rotate:360,ease: 'none',transformOrigin:'center center', repeat: -1},0)
           .to('#c-preloader',5,{backgroundPosition: '100%'},0)
         }
+
+        function checkGSAP(){
+          let interval = setInterval(function(){
+            if (window.gsap){
+              handleStartPreloader()
+              clearInterval(interval)
+            }
+          },100)
+        }
+
+        checkGSAP()
+
       </script>
     </div>
     {{ APP }}

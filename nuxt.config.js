@@ -4,6 +4,7 @@ export default {
   components: true,
   ssr: false,
   loading: false,
+  target: 'static',
   head: {
     title: "Funky Pickle",
     htmlAttrs: {
