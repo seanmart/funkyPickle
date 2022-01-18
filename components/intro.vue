@@ -17,10 +17,6 @@ import { getStyle } from "@/assets/js/helpers";
 export default {
   props: ["data"],
   mounted() {
-    if (this.data.primary.title.length > 0) {
-      window.addEventListener("resize", this.calculateHeader);
-      this.calculateHeaderInit();
-    }
     this.$bus.$once("REVEAL", this.handleReveal);
     setTimeout(this.handleMounted, 500);
   },
@@ -31,6 +27,11 @@ export default {
   },
   methods: {
     handleMounted() {
+      if (this.data.primary.title.length > 0) {
+        window.addEventListener("resize", this.calculateHeader);
+        this.calculateHeaderInit();
+      }
+
       this.$refs.titleLine && gsap.set(this.$refs.titleLine, { y: "120%" });
       this.$refs.text && gsap.set(this.$refs.text, { y: "100%", opacity: 0 });
     },
@@ -51,11 +52,12 @@ export default {
       this.fontMultiplier = (fontHeight / fontSize) * 0.88;
       this.fontSizeRatio = fontHeight / fontWidth;
       this.letterSpacingRatio = letterSpacing / fontSize;
+
       this.calculateHeader();
     },
     calculateHeader() {
       let width = this.$refs.title.offsetWidth;
-      let newFontSize = width * this.fontSizeRatio * this.fontMultiplier;
+      let newFontSize = Math.min(width * this.fontSizeRatio * this.fontMultiplier,160)
       let newLetterSpacing = newFontSize * this.letterSpacingRatio;
 
       this.$refs.title.style.fontSize = `${newFontSize}px`;
@@ -72,13 +74,14 @@ export default {
   .c-title {
     font-size: 50px;
     letter-spacing: -2.2px;
+    line-height: .8;
   }
 
   .c-line--wrapper {
     overflow: hidden;
-    margin-bottom: -5%;
     .c-line {
       display: inline-block;
+      line-height: .8;
     }
   }
 
