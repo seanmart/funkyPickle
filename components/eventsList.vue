@@ -214,7 +214,9 @@ export default {
     .c-event-btn {
       text-align: center;
     }
-
+    .c-title {
+      padding: 0px 1.25rem;
+    }
     .c-date--wrapper .c-rainbow {
       display: none;
     }
@@ -222,16 +224,23 @@ export default {
       display: none;
     }
     .c-arrow--wrapper {
-      width: $event-list-space * 1.75;
+      width: $event-list-space * 1.5;
     }
     .c-info--wrapper .c-location {
-      display: none;
+      font-size: 2rem;
+      opacity: 1;
+      svg{
+        fill: $pink;
+      }
     }
     .c-bg {
       transition: none;
       transform: none;
       .c-rainbow {
         opacity: 1;
+      }
+      svg{
+        flex: 0 0 17px;
       }
     }
   }
