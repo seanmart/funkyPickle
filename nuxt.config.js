@@ -2,7 +2,7 @@ const Prismic = require("@prismicio/client");
 
 export default {
   components: true,
-  ssr: false,
+  ssr: true,
   loading: false,
   target: 'static',
   head: {

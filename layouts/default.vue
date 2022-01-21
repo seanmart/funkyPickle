@@ -1,5 +1,6 @@
 <template lang="html">
   <div id="site">
+    <preloader v-if="showPreloader"/>
     <svg-gradients />
     <columns />
     <navigation />
@@ -16,6 +17,7 @@ let isFirst = true;
 export default {
   data: () => ({
     render: false,
+    showPreloader: true
   }),
   mounted() {
     this.handleInit();
@@ -24,7 +26,10 @@ export default {
       isFirst &&
         setTimeout(() => {
           this.resetScroll();
-          this.handleHide();
+          this.$bus.$emit("HIDE_PRELOADER", () => {
+            this.$bus.$emit("REVEAL")
+            this.showPreloader = false
+          });
           isFirst = false;
         }, 1500);
 
@@ -40,13 +45,6 @@ export default {
     this.render = true;
   },
   methods: {
-    handleHide(){
-      let preLoader = document.getElementById('c-preloader')  
-      gsap.timeline({onComplete:() => this.$bus.$emit("REVEAL")})
-      .to('#c-preloader',.75,{y:'-100vh',ease: 'power4.in'})
-      .to('#c-preloader .c-preloader-logo--wrapper',.75,{y:'100vh',ease: 'power4.in'},'<')
-      .add(()=> preLoader.remove(),'>')
-    },
     resetScroll() {
       !isMobile && scrollBuddy.update();
       ScrollTrigger.refresh(true);
