@@ -46,7 +46,6 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: "@/plugins/clientInit.js", ssr: false },
     { src: "@/plugins/eventBus.js", ssr: true },
     { src: "@/plugins/scrollBuddy.js", ssr: false },
     { src: "@/plugins/directives.js", ssr: false },

@@ -53,9 +53,9 @@ export default {
 
       res && commit("eventsList", res.results);
     },
-    nuxtServerInit({ dispatch, commit }) {
-      dispatch("getSettings");
-      dispatch("getEventsListData");
+    async nuxtServerInit({ dispatch, commit }) {
+      await dispatch("getSettings");
+      await dispatch("getEventsListData");
       commit("eventsWeather", eventsWeather);
     },
   },
