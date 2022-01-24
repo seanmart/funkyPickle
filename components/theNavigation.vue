@@ -81,7 +81,7 @@ $header-mobile-nav-width: 70vw;
   .c-header-top{
     z-index: 100;
     position: fixed;
-    top: 0px;
+    top: -2px;
     left: 0px;
     right: 0px;
     height: $s-nav + 2px;
@@ -178,8 +178,16 @@ $header-mobile-nav-width: 70vw;
       box-shadow: 2px 0px 5px rgba($blue,.2);
       background: white;
       color: $black;
+      justify-content: flex-start;
       .c-logo{
         display: block;
+      }
+      .c-nav{
+        margin-top: 3rem;
+      }
+      .c-link{
+        font-size: 1.5rem;
+        padding: .5rem;
       }
     }
 
@@ -187,13 +195,6 @@ $header-mobile-nav-width: 70vw;
       display: none;
     }
 
-    .c-nav{
-      margin-top: 3rem;
-    }
-    .c-link{
-      font-size: 1.5rem;
-      padding: .5rem;
-    }
 
   }
 }
@@ -211,7 +212,7 @@ main{
     }
     #c-header{
       .c-header-side{
-        transform: translateX(-2px);
+        transform: translateX(0px);
       }
       .c-header-top{
         transform: translateY(-120%);

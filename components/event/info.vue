@@ -32,8 +32,8 @@ export default {
 
 <style lang="scss">
 .c-event-info{
-  padding-top: 19.5vw;
-  padding-bottom: 8vw;
+  padding-top: 23.5vw;
+  padding-bottom: 25vw;
   background: white;
 
   .c-title--wrapper{

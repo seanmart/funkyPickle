@@ -48,7 +48,7 @@ export default {
   display: inline-block;
   background: white;
   border-radius: 3rem;
-  padding: 1rem 3rem;
+  padding: 1.25rem 3.25rem;
   font-size: 1.25rem;
   letter-spacing: .02rem;
   line-height: 1;
@@ -64,7 +64,7 @@ export default {
   }
 
   &.is-circle{
-    padding: 1rem;
+    padding: 1.25rem;
     .c-btn-text{
       height: 1.25rem;
       width: 1.25rem;
