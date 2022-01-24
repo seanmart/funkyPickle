@@ -70,8 +70,8 @@ function initScrollBuddy(){
       this.window.style.cssText = `position:fixed;top:0;right:0;bottom:0;width:20px;overflow:scroll;`;
       document.documentElement.style.cssText = `position:fixed;top:0;left:0;right:0;height:100vh;overflow:hidden;`;
 
-      window.addEventListener('wheel',this.handleWheel)
       window.addEventListener('resize',this.updateDocument)
+      window.addEventListener('wheel',this.handleWheel)
       this.window.addEventListener('scroll',this.handleScroll)
 
       this.updateDocument()
@@ -90,6 +90,7 @@ function initScrollBuddy(){
 
     handleWheel(e){
       e.stopPropagation();
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return
       this.window.scrollTop += e.deltaY * 0.75;
     }
 

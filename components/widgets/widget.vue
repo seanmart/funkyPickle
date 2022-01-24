@@ -22,7 +22,6 @@ export default {
 
 <style lang="scss">
   .c-widget{
-    padding:1rem;
     .c-widget--wrapper{
       border-radius: 8px;
       background: white;
@@ -30,12 +29,21 @@ export default {
       overflow: hidden;
     }
     .c-widget-header{
-      padding: 1.5rem 2.5rem;
+      padding: 3vw;
     }
     .c-widget-content{
-      padding:2rem 2.5rem;
+      padding:3vw;
       &.is-wide{
         padding: 0px;
+      }
+    }
+
+    @media screen and (min-width: $medium){
+      .c-widget-header{
+        padding: 1.25rem;
+      }
+      .c-widget-content{
+        padding:1.25rem;
       }
     }
   }

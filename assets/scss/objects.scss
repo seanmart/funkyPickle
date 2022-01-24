@@ -1,44 +1,50 @@
-
 .o-container{
-  margin: 0px auto;
-  max-width: $max-width;
+  padding-left: $s-margin;
+  padding-right: $s-margin;
 }
-
-.o-top{
-  padding-top: $space;
-}
-.o-bottom{
-  padding-bottom: $space;
-}
-.o-wrapper{
-  height:100%;
-  position: relative;
-  overflow: hidden;
-}
-
-.o-bottom:last-child{
-  padding-bottom: $space * 2;
-}
-
-.o-top:first-child{
-  padding-top: $space * 2;
-}
-
-@media screen and (max-width: $navigation-width + $max-width + ($margins * 2)){
-  .o-container{
-    margin: 0px $margins;
+.o-space{
+  margin-top: $s-space;
+  &:first-child{
+    margin-top: calc(#{$s-space} + #{$s-nav});
+  }
+  &:last-child{
+    margin-bottom: $s-space;
   }
 }
-
-@media screen and (max-width: $tablet){
-  .o-container{
-    margin: 0px auto;
-    max-width: $m-max-width
-  }
+.o-space-inner{
+  padding-top: $s-space;
+  padding-bottom: $s-space;
+}
+.o-margins{
+  padding-left: $s-margin;
+  padding-right: $s-margin;
 }
 
-@media screen and (max-width: $m-max-width + ($m-margins * 2)){
-  .o-container{
-    margin: 0px $m-margins;
+@media screen and (min-width: $medium){
+  .o-container,
+  .o-container-wide-small{
+    margin-left: $m-nav;
+    padding-left: $m-margin;
+    padding-right: $m-margin;
+  }
+  .o-container-wide{
+    padding-left: $m-nav;
+  }
+  .o-space{
+    margin-top: $m-space;
+    &:first-child{
+      margin-top: $m-space;
+    }
+    &:last-child{
+      margin-bottom: $m-space;
+    }
+  }
+  .o-space-inner{
+    padding-top: $m-space;
+    padding-bottom: $m-space;
+  }
+  .o-margins{
+    padding-left: $m-margin;
+    padding-right: $m-margin;
   }
 }

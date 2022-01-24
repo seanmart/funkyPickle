@@ -1,17 +1,15 @@
 <template lang="html">
-  <section class="c-signup">
-    <div class="c-signup--wrapper">
-      <div class="c-content o-container">
-        <div class="c-title--wrapper">
-          <h2 class="c-title t-header" v-html="`Join the Philanthropic Pickle People`" />
-        </div>
-
-        <form class="c-form">
-          <input class="c-field" type="text" name="" value="" placeholder="Name" />
-          <input class="c-field" type="text" name="" value="" placeholder="Email" />
-          <btn class="c-submit u-gap-top-rg" lime>sign up!</btn>
-        </form>
+  <section class="c-signup o-space-inner">
+    <div class="c-content o-container">
+      <div class="c-title--wrapper">
+        <h2 class="c-title t-header" v-html="`Join the Philanthropic Pickle People`" />
       </div>
+
+      <form class="c-form">
+        <input class="c-field" type="text" name="" value="" placeholder="Name" />
+        <input class="c-field" type="text" name="" value="" placeholder="Email" />
+        <btn class="c-submit u-gap-top-rg" lime>sign up!</btn>
+      </form>
     </div>
   </section>
 </template>
@@ -24,10 +22,7 @@ export default {
 
 <style lang="scss">
 .c-signup {
-  .c-signup--wrapper {
-    @include dark-tropical-gradient;
-    padding: $space 0px;
-  }
+  @include dark-tropical-gradient;
 
   .c-content {
     display: flex;
@@ -50,11 +45,11 @@ export default {
 
     .c-field {
       background: none;
-      padding: 1.25rem;
+      padding: 1vw;
       border: 2px solid $lime;
       margin: 0.5rem 0px;
       color: $lime;
-      font-size: 1.5rem;
+      font-size: 1.5vw;
       display: block;
       width: 100%;
       text-align: left;
@@ -78,43 +73,5 @@ export default {
     }
   }
 
-  @media screen and (min-width: $navigation-width + $max-width + ($margins * 2)) {
-    .c-title {
-      font-size: 80px;
-    }
-  }
-
-  @media screen and (max-width: $tablet + 100px) {
-    .c-content {
-      flex-direction: column;
-      align-items: stretch;
-    }
-    .c-title--wrapper {
-      margin-right: 0px;
-      margin-bottom: $space / 2;
-      text-align: center;
-    }
-    .c-title {
-      font-size: 10vw;
-    }
-
-    .c-form {
-      flex: 0 0 auto;
-      text-align: center;
-
-      .c-field {
-        max-width: 350px;
-        margin-left: auto;
-        margin-right: auto;
-        font-size: 2rem;
-      }
-    }
-  }
-
-  @media screen and (max-width: $tablet) {
-    .c-title {
-      font-size: 14vw;
-    }
-  }
 }
 </style>

@@ -1,25 +1,21 @@
-.u-gap-bottom-sm{
-  margin-bottom: 2rem;
-}
-.u-gap-bottom-rg{
-  margin-bottom: 5rem;
-}
-.u-gap-bottom-lg{
-  margin-bottom: 7rem;
-}
-.u-gap-top-sm{
-  margin-top: 2rem;
-}
-.u-gap-top-rg{
-  margin-top: 5rem;
-}
-.u-gap-top-lg{
-  margin-top: 7rem;
+.u-hide-scrollbars::-webkit-scrollbar {
+  display: none;
 }
 
-.u-text-gap-rg > *{
-  margin-bottom: 2.5rem;
-  &:last-child{
-    margin-bottom: 0px;
+.u-hide-scrollbars {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scrollbar-height: none;
+}
+
+.u-space-top{
+  margin-top: 10vw;
+}
+
+@media screen and (min-width: $medium){
+
+  .u-space-top{
+    margin-top: 3rem;
   }
+
 }

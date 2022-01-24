@@ -1,0 +1,216 @@
+<template lang="html">
+  <header id="c-header" ref="header" :class="{'has-scrolled': hasScrolled}">
+
+    <div class="c-header-top">
+      <nuxt-link class="c-logo" to="/">
+        <logo horizontal rainbow animate class="c-logo" />
+      </nuxt-link>
+    </div>
+
+    <button class="c-menu-button" type="button" name="button" @click="menuIsOpen = !menuIsOpen">
+      <div v-for="i in 3" class="c-bar"/>
+    </button>
+
+    <div class="c-header-side">
+
+      <nuxt-link class="c-logo" to="/">
+        <logo vertical rainbow animate class="c-logo" />
+      </nuxt-link>
+
+      <nav class="c-nav t-header">
+        <template v-for="(link, i) in nav">
+          <nuxt-link v-if="link.to" class="c-link" :to="link.to" v-html="link.label" />
+          <a v-if="link.href" class="c-link" :href="link.href" v-html="link.label" />
+        </template>
+      </nav>
+
+    </div>
+  </header>
+</template>
+
+<script>
+import { mapState } from "vuex";
+export default {
+  computed: mapState(["nav"]),
+  data:()=>({
+    hasScrolled: false,
+    menuIsOpen: false
+  }),
+  watch:{
+    menuIsOpen(open){
+      open
+      ? document.body.classList.add('menu-is-open')
+      : document.body.classList.remove('menu-is-open')
+    }
+  },
+  mounted() {
+    setTimeout(this.init,250)
+
+    this.$bus.$on('NAV_LEAVING',(cb)=>{
+      if (this.hasScrolled || this.menuIsOpen){
+        this.hasScrolled = false
+        this.menuIsOpen = false
+        setTimeout(cb,250)
+      } else {
+        cb()
+      }
+    })
+  },
+  methods:{
+    init(){
+      ScrollTrigger.create({
+        trigger: this.$refs.header,
+        start: 1,
+        end: 20,
+        onEnter:()=> this.hasScrolled = true,
+        onEnterBack: ()=> this.hasScrolled = false,
+        onLeaveBack: ()=> this.hasScrolled = false
+      })
+    }
+  }
+};
+</script>
+
+<style lang="scss">
+$header-ease: cubic-bezier(0.645, 0.045, 0.355, 1.000);
+$header-dur: .5s;
+$header-mobile-nav-width: 200px;
+
+#c-header {
+
+  .c-header-top{
+    z-index: 100;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: $s-nav + 2px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    box-shadow: 0px 2px 5px rgba($blue,.2);
+    transition-duration: $header-dur;
+    transition-timing-function: $header-ease;
+    transition-property: transform;
+
+    .c-logo{
+      flex: 0 0 auto;
+      height: $s-nav - 20px;
+    }
+  }
+
+  .c-header-side{
+    z-index: 100;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    width: $header-mobile-nav-width;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateX(-100%);
+    box-shadow: 2px 0px 5px rgba($blue,.2);
+    padding: 30px;
+    transition-duration: $header-dur;
+    transition-timing-function: $header-ease;
+    transition-property: transform;
+    background: white;
+    .c-logo{
+      width: 100%;
+    }
+  }
+
+  &.has-scrolled{
+    .c-header-top{
+      transform: translateY(-120%);
+    }
+  }
+
+  .c-menu-button{
+    z-index: 100;
+    position: fixed;
+    bottom: $s-margin;
+    right: $s-margin;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: $black;
+    border: none;
+    outline: none;
+
+    .c-bar{
+      height: 2px;
+      width: 60%;
+      margin: 3px;
+      background: white;
+    }
+  }
+
+  .c-nav{
+    margin-top: 60px;
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  .c-link{
+    display: block;
+    font-size: 30px;
+    padding: 7px;
+  }
+
+
+  @media screen and (min-width: $medium){
+
+    .c-header-top{
+      display: none;
+    }
+
+    .c-header-side{
+      transform: none;
+      width: $m-nav;
+      padding: 1.5rem;
+    }
+
+    .c-menu-button{
+      display: none;
+    }
+
+    .c-nav{
+      margin-top: 3rem;
+    }
+    .c-link{
+      font-size: 1.5rem;
+      padding: .5rem;
+    }
+
+  }
+}
+
+main{
+  transition-duration: $header-dur;
+  transition-timing-function: $header-ease;
+  transition-property: transform;
+}
+
+@media screen and (max-width:$medium - 1px){
+  .menu-is-open{
+    main{
+      transform: translateX($header-mobile-nav-width);
+    }
+    #c-header{
+      .c-header-side{
+        transform: translateX(-2px);
+      }
+      .c-header-top{
+        transform: translateY(-120%);
+      }
+    }
+  }
+}
+</style>

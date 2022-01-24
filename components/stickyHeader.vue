@@ -13,7 +13,6 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      let scroller = document.getElementById("scroller");
       let el = this.$slots.default[0].elm;
 
       let props = {
@@ -21,8 +20,8 @@ export default {
         trigger: this.$refs.header,
         pinSpacing: false,
         anticipatePin: 1,
-        start: () => `top top+=${this.top + getStyle(scroller, "padding-top")}`,
-        end: () => `bottom top+=${el.offsetHeight + getStyle(scroller, "padding-top")}`,
+        start: () => `top top+=${this.top}`,
+        end: () => `bottom top+=${el.offsetHeight}`,
       };
 
       this.endTrigger && (props.endTrigger = this.endTrigger);

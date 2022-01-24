@@ -2,9 +2,7 @@
   <widget class="c-location-widget">
     <template #header>
       <div class="c-header">
-        <div class="c-icon">
-          <icon wayfinder />
-        </div>
+        <icon class="c-icon" wayfinder />
         <div class="c-location">
           <h2 class="c-title t-header" v-html="data.place" />
           <span class="c-address" v-html="cityAndState" />
@@ -84,37 +82,59 @@ export default {
   .c-header {
     display: flex;
     flex-direction: row;
-    padding-top: 0.5rem;
-
-    .c-icon {
-      flex: 0 0 auto;
-      padding-right: 1rem;
-    }
-    svg {
-      height: 4.3rem;
-      fill: $pink;
-    }
-    .c-location {
-      flex: 1 1 auto;
-    }
-    .c-title {
-      font-size: 3rem;
-      margin-bottom: 0.2rem;
-    }
-    .c-address {
-      opacity: 0.6;
-    }
+    align-items: center;
+  }
+  .c-icon {
+    display: block;
+    font-size: 0;
+    flex: 0 0 auto;
+    padding-right: 2vw;
+    height: 8vw;
+    fill: $pink;
+  }
+  .c-location {
+    flex: 1 1 auto;
+  }
+  .c-title {
+    font-size: 6vw;
+    margin-bottom: 2vw;
+    line-height: .7;
+  }
+  .c-address {
+    opacity: 0.6;
+    display: block;
+    line-height: .7
   }
 
   #map {
-    background: $black;
-    height: 300px;
+    background: rgba($black,.3);
+    height: 80vw;
     overflow: hidden;
     position: relative;
     z-index: 1;
+  }
+  .leaflet-control-attribution {
+    font-size: 2vw;
+  }
 
+  @media screen and (min-width: $medium){
+
+    .c-icon {
+      padding-right: 1rem;
+      height: 2.5rem;
+    }
+    .c-title {
+      font-size: 2rem;
+      margin-bottom: .5rem;
+    }
+    .c-address {
+      line-height: .7
+    }
+    #map {
+      height: 20rem;
+    }
     .leaflet-control-attribution {
-      font-size: 0.9rem;
+      font-size: .5rem;
     }
   }
 }

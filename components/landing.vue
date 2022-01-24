@@ -1,6 +1,6 @@
 <template lang="html">
-  <section class="c-landing o-bottom">
-    <div class="o-wrapper">
+  <section class="c-landing o-container-wide">
+    <div class="c-landing--wrapper">
       <div class="c-reveal" />
       <div class="c-image">
         <fancy-image :image="data.primary.image.url" :scale="1.3" :start="0" :trigger="'.c-landing'" />
@@ -37,6 +37,12 @@ export default {
 
 <style lang="scss">
 .c-landing {
+
+  .c-landing--wrapper{
+    position: relative;
+    overflow: hidden;
+  }
+
   .c-reveal {
     @include cover;
     @include lime-gradient;
@@ -44,8 +50,14 @@ export default {
     display: none;
   }
   .c-image {
-    height: 700px;
-    max-height: 90vh;
+    height: 135vw;
+    max-height: 100vh;
+  }
+
+  @media screen and (min-width: $medium){
+    .c-image {
+      height: 700px;
+    }
   }
 }
 </style>

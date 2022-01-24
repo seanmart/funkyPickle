@@ -1,14 +1,14 @@
 <template lang="html">
-  <section class="c-intro o-container o-top o-bottom" ref="container">
+  <section class="c-intro o-container o-space" ref="container">
     <div class="c-title" v-if="data.primary.title.length > 0" ref="title">
       <template v-for="(line, i) in data.primary.title">
         <div class="c-line--wrapper">
-          <h1 ref="titleLine" v-html="line.text" class="c-line t-header" :class="{ ['c-rainbow']: line.spans.length > 0 }" />
+          <h1 ref="line" v-html="line.text" class="c-line t-header" :class="{ ['c-rainbow']: line.spans.length > 0 }" />
         </div>
       </template>
     </div>
 
-    <div ref="text" v-if="data.primary.text.length > 0" class="c-text t-body-xl u-gap-top-rg u-text-gap-rg" v-html="$prismic.asHtml(data.primary.text)" />
+    <div ref="text" v-if="data.primary.text.length > 0" class="c-text u-space-top" v-html="$prismic.asHtml(data.primary.text)" />
   </section>
 </template>
 
@@ -17,8 +17,8 @@ import { getStyle } from "@/assets/js/helpers";
 export default {
   props: ["data"],
   mounted() {
-    this.$bus.$once("REVEAL", this.handleReveal);
-    setTimeout(this.handleMounted, 500);
+    // this.$bus.$once("REVEAL", this.handleReveal);
+    // setTimeout(this.handleMounted, 500);
   },
   destroyed() {
     if (this.data.primary.title.length > 0) {
@@ -27,42 +27,14 @@ export default {
   },
   methods: {
     handleMounted() {
-      if (this.data.primary.title.length > 0) {
-        window.addEventListener("resize", this.calculateHeader);
-        this.calculateHeaderInit();
-      }
-
-      this.$refs.titleLine && gsap.set(this.$refs.titleLine, { y: "120%" });
+      this.$refs.line && gsap.set(this.$refs.line, { y: "120%" });
       this.$refs.text && gsap.set(this.$refs.text, { y: "100%", opacity: 0 });
     },
     handleReveal() {
       let tl = gsap.timeline({ scrollTrigger: { trigger: this.$refs.container, start: "top 50%", once: true } });
-      this.$refs.titleLine && tl.to(this.$refs.titleLine, 1.5, { y: 0, ease: "power4.out", stagger: 0.25 });
+      this.$refs.line && tl.to(this.$refs.line, 1.5, { y: 0, ease: "power4.out", stagger: 0.25 });
       this.$refs.text && tl.to(this.$refs.text, 1.5, { y: 0, ease: "power4.out", opacity: 1 }, ">-1");
-    },
-    calculateHeaderInit() {
-      let fontWidth = 0;
-      for (let i = 0; i < this.$refs.titleLine.length; i++) {
-        let w = this.$refs.titleLine[i].offsetWidth;
-        if (w > fontWidth) fontWidth = w;
-      }
-      let fontHeight = this.$refs.titleLine[0].offsetHeight;
-      let fontSize = getStyle(this.$refs.titleLine[0], "font-size");
-      let letterSpacing = getStyle(this.$refs.titleLine[0], "letter-spacing");
-      this.fontMultiplier = (fontHeight / fontSize) * 0.88;
-      this.fontSizeRatio = fontHeight / fontWidth;
-      this.letterSpacingRatio = letterSpacing / fontSize;
-
-      this.calculateHeader();
-    },
-    calculateHeader() {
-      let width = this.$refs.title.offsetWidth;
-      let newFontSize = Math.min(width * this.fontSizeRatio * this.fontMultiplier,160)
-      let newLetterSpacing = newFontSize * this.letterSpacingRatio;
-
-      this.$refs.title.style.fontSize = `${newFontSize}px`;
-      this.$refs.title.style.letterSpacing = `${newLetterSpacing}px`;
-    },
+    }
   },
 };
 </script>
@@ -72,7 +44,7 @@ export default {
   position: relative;
 
   .c-title {
-    font-size: 50px;
+    font-size: 12vw;
     letter-spacing: -2.2px;
     line-height: .8;
   }
@@ -92,7 +64,19 @@ export default {
   }
 
   .c-text {
+    font-size: 4vw;
     max-width: 35ch;
+  }
+
+  @media screen and (min-width: $medium){
+
+    .c-title{
+      font-size: calc(7vw + 10px)
+    }
+
+    .c-text{
+      font-size: 1.25rem;
+    }
   }
 }
 </style>

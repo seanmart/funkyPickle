@@ -33,10 +33,10 @@ export default {
 <style lang="scss">
 #c-columns {
   position: fixed;
-  top: 0px;
+  top: $s-nav;
   right: 0px;
   bottom: 0px;
-  left: $navigation-width;
+  left: 0px;
   z-index: 99;
   display: none;
 
@@ -78,6 +78,10 @@ export default {
     }
     &.c-4 .c-column::after {
       left: -300%;
+    }
+    &.c-3,
+    &.c-4 {
+      display: none;
     }
   }
 
@@ -147,14 +151,14 @@ export default {
     }
   }
 
-  @media screen and (max-width: $tablet) {
-    left: 0px;
-    top: $navigation-height;
+  @media screen and (min-width: $medium) {
+    top:0px;
+    left: $m-nav;
 
     .c-column--wrapper {
       &.c-3,
       &.c-4 {
-        display: none;
+        display: block;
       }
     }
   }

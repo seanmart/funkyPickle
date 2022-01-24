@@ -1,44 +1,51 @@
 <template lang="html">
-  <section class="c-events-list o-container o-top o-bottom">
-    <div class="c-header--wrapper u-gap-bottom-rg" v-if="data.primary.title">
-      <h2 class="t-headline-rg" v-html="data.primary.title" ref="title" />
-    </div>
+  <section class="c-events-list o-container o-space">
+
+    <template v-if="data.primary.title">
+      <h2 class="t-headline" v-html="data.primary.title" ref="title" />
+    </template>
 
     <div class="c-list">
       <template v-for="(event, i) in eventList">
-        <div class="c-event" ref="events">
-          <nuxt-link :to="`/events/${event.uid}`" class="c-event--wrapper">
+
+          <nuxt-link :to="`/events/${event.uid}`" class="c-event">
+
             <div class="c-date--wrapper">
-              <h3 class="c-date c-month t-header" v-html="getMonth(event.data.start_date, 'short')" />
-              <h3 class="c-date c-day t-header" v-html="getDay(event.data.start_date)" />
+              <h3 class="c-month t-header" v-html="getMonth(event.data.start_date, 'short')" />
+              <h3 class="c-day t-header" v-html="getDay(event.data.start_date)" />
               <div class="c-rainbow" />
             </div>
+
             <div class="c-logo--wrapper">
-              <div class="c-logo" v-image:cover="event.data.logo.url" />
+              <div class="c-logo">
+                <div class="c-image" v-image:cover="event.data.logo.url" />
+              </div>
             </div>
+
             <div class="c-info--wrapper">
-              <text-scroll class="c-title--wrapper">
-                <h3 class="c-title t-header" v-html="event.data.title" />
+              <text-scroll class="c-event-title--wrapper">
+                <h3 class="c-event-title t-header" v-html="event.data.title" />
               </text-scroll>
               <div class="c-location">
                 <icon wayfinder />
                 <span v-html="formatCityState(event.data.city, event.data.state)" />
               </div>
             </div>
+
             <div class="c-arrow--wrapper">
-              <div class="c-bg">
+              <div class="c-arrow-bg">
                 <div class="c-rainbow">
                   <icon arrow />
                 </div>
               </div>
             </div>
           </nuxt-link>
-        </div>
+
       </template>
     </div>
 
-    <div class="u-gap-top-rg c-event-btn" v-if="data.primary.link.uid" ref="btn">
-      <btn :to="`/${data.primary.link.uid}`" rainbow arrow>view all events</btn>
+    <div class="u-space-top c-event-btn" v-if="data.primary.link.uid" ref="btn">
+      <btn :to="`/${data.primary.link.uid}`" rainbow>view all events</btn>
     </div>
   </section>
 </template>
@@ -72,204 +79,227 @@ export default {
 };
 </script>
 <style lang="scss">
+
+$s-events-list-padding: 5vw;
+$m-events-list-padding: 1rem;
+$events-transition-timing: .35s;
+
 .c-events-list {
-  $event-list-space: 2.5rem;
-  $event-list-duration: 0.25s;
 
-  .c-header--wrapper {
-    overflow: hidden;
-  }
-
-  .c-event {
-    margin-bottom: $event-list-space / 2;
-    box-shadow: 0px 2px 5px rgba($blue, 0.2);
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    transition-property: box-shadow;
-    transition-duration: $event-list-duration;
-    cursor: pointer;
-    &:last-child {
-      margin-bottom: 0px;
-    }
-  }
-
-  .c-event--wrapper {
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-  }
-
-  .c-rainbow {
-    opacity: 0;
-    transition-duration: $event-list-duration;
-    transition-property: opacity;
-    animation: animate-gradient-vertical 5s infinite;
-    animation-play-state: paused;
+  .c-rainbow{
     @include cover;
     @include rainbow-gradient(0);
-    background-size: 100% 200%;
+    opacity: 0;
+    transition: opacity $events-transition-timing;
   }
 
-  .c-date--wrapper {
+  .c-event{
+    display: flex;
+    flex-direction: row;
+    background: white;
+    overflow: hidden;
+    box-shadow: 0px 2px 5px rgba($blue,.2);
+    margin-bottom: 2vw;
+    outline: none;
+  }
+
+  .c-date--wrapper{
     flex: 0 0 auto;
-    padding: $event-list-space 0px;
-    position: relative;
+    width: 15vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-width: 10rem;
+    position: relative;
+    padding: $s-events-list-padding 0px;
     @include dark-gradient;
-  }
-  .c-date {
-    flex: 0 0 auto;
     color: white;
+  }
+
+  .c-month{
+    font-size: 6vw;
+    line-height: 1.1;
     position: relative;
     z-index: 1;
-    &.c-month {
-      font-size: 4.5rem;
-    }
-    &.c-day {
-      font-size: 5.5rem;
-    }
+  }
+  .c-day{
+    font-size: 8vw;
+    position: relative;
+    z-index: 1;
   }
 
-  .c-logo--wrapper {
-    flex: 0 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: $event-list-space;
-    padding-right: 0px;
-    min-width: 10rem;
+  .c-logo--wrapper{
+    display: none;
   }
-  .c-logo {
+
+  .c-logo{
     flex: 0 0 auto;
-    height: 8rem;
-    width: 8rem;
+    width: 100%;
+    position: relative;
+  }
+
+  .c-image{
+    width: 100%;
+    padding-bottom: 100%;
     border-radius: 50%;
     overflow: hidden;
-    box-shadow: 0px 2px 5px rgba($blue, 0.2);
-    transition-duration: $event-list-duration;
-    transition-property: box-shadow;
+    box-shadow: 0px 2px 5px rgba($blue,.2);
+    background-position: center center;
   }
 
-  .c-info--wrapper {
+  .c-info--wrapper{
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    padding: $event-list-space;
+    justify-content: center;
+    padding: $s-events-list-padding 2.5vw;
   }
-  .c-title--wrapper {
-    flex: 1 1 auto;
-  }
-  .c-title {
-    font-size: 4rem;
-    padding: 0px 2rem;
-    transition-duration: $event-list-duration;
-    transition-property: color;
-  }
-  .c-location {
+
+  .c-event-title--wrapper{
     flex: 0 0 auto;
-    display: block;
-    opacity: 0.5;
-    transition-duration: $event-list-duration;
-    transition-property: opacity;
-    svg {
-      height: 1.2rem;
-      margin-right: 1rem;
-      transition-duration: $event-list-duration;
-      transition-property: fill;
-    }
+    height: 6vw;
+    margin-bottom: 1.5vw;
   }
 
-  .c-arrow--wrapper {
+  .c-event-title{
+    font-size: 7vw;
+    padding: 0px 2vw;
+    transition: color $events-transition-timing;
+  }
+
+  .c-location{
     flex: 0 0 auto;
-    width: $event-list-space * 2;
-    position: relative;
-    overflow: hidden;
-  }
-  .c-bg {
-    @include cover;
-    @include dark-gradient;
-    transform: translateX(50%);
-    transition-duration: $event-list-duration;
-    transition-property: transform;
-    .c-rainbow {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      fill: white;
-    }
-    svg {
-      flex: 0 0 20px;
-      transition-duration: $event-list-duration;
-      transition-property: opacity;
-    }
-  }
-
-  @media screen and (max-width: $mobile) {
-    .c-event-btn {
-      text-align: center;
-    }
-    .c-title {
-      padding: 0px 1.25rem;
-    }
-    .c-date--wrapper .c-rainbow {
-      display: none;
-    }
-    .c-logo--wrapper {
-      display: none;
-    }
-    .c-arrow--wrapper {
-      width: $event-list-space * 1.5;
-    }
-    .c-info--wrapper .c-location {
-      font-size: 2rem;
-      opacity: 1;
-      svg{
-        fill: $pink;
-      }
-    }
-    .c-bg {
-      transition: none;
-      transform: none;
-      .c-rainbow {
-        opacity: 1;
-      }
-      svg{
-        flex: 0 0 17px;
-      }
-    }
-  }
-}
-
-.c-events-list .c-event--wrapper:hover,
-.c-events-list .c-event--wrapper:active,
-.is-desktop .c-events-list .c-event--wrapper:focus {
-  outline: none;
-  box-shadow: 0px 5px 8px rgba($blue, 0.3);
-
-  .c-rainbow {
-    opacity: 1;
-    animation-play-state: running;
-  }
-  .c-logo {
-    box-shadow: 0px 5px 8px rgba($blue, 0.3);
-  }
-  .c-bg {
-    transform: translateX(0px);
-  }
-  .c-location {
-    opacity: 1;
-    svg {
+    line-height: 1;
+    svg{
+      height: 2vw;
       fill: $pink;
     }
   }
-  .c-title {
+
+  .c-arrow--wrapper{
+    flex: 0 0 auto;
+    width: 4vw;
+    position: relative;
+
+    .c-rainbow{
+      opacity: 1;
+    }
+  }
+
+  .c-arrow-bg{
+    @include dark-gradient;
+    @include cover;
+
+    .c-rainbow{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    svg{
+      fill: white;
+      width: 60%;
+    }
+  }
+
+  .c-event-btn{
+    text-align: center;
+  }
+
+  @media screen and (min-width: $medium){
+
+    .c-event{
+      margin-bottom: .75rem;
+    }
+
+    .c-date--wrapper{
+      width: 7rem;
+      padding: $m-events-list-padding;
+    }
+
+    .c-month{
+      font-size: 2rem;
+    }
+    .c-day{
+      font-size: 3rem;
+    }
+
+    .c-logo--wrapper{
+      display: flex;
+      flex: 0 0 auto;
+      width: 7rem;
+      padding: $m-events-list-padding 0px;
+      padding-left: 2vw;
+    }
+
+    .c-info--wrapper{
+      padding: $m-events-list-padding 2vw;
+    }
+
+    .c-event-title--wrapper{
+      height: 3rem;
+      margin-bottom: .5vw;
+    }
+
+    .c-event-title{
+      font-size: 2.5rem;
+      padding: 0px 1rem;
+    }
+
+    .c-location{
+      flex: 0 0 auto;
+      opacity: .5;
+      transition: opacity $events-transition-timing;
+      svg{
+        height: .6rem;
+        fill: $black;
+        transition: fill $events-transition-timing;
+      }
+    }
+
+    .c-arrow--wrapper{
+      width: 2rem;
+
+      .c-rainbow{
+        opacity: 0;
+      }
+
+    }
+
+    .c-arrow-bg{
+      transform: translateX(.5rem);
+      transition: transform $events-transition-timing;
+    }
+
+    .c-event-btn{
+      text-align: left;
+    }
+
+  }
+
+}
+
+.c-events-list .c-event:active,
+.is-desktop .c-events-list .c-event:focus,
+.is-desktop .c-events-list .c-event:hover{
+
+  .c-rainbow{
+    opacity: 1;
+  }
+
+  .c-event-title{
     color: $purple;
   }
+
+  .c-location{
+    opacity: 1;
+    svg{
+      fill: $pink;
+    }
+  }
+
+  .c-arrow-bg{
+    transform: translateX(0);
+  }
 }
+
 </style>

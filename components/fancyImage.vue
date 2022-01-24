@@ -54,7 +54,7 @@ export default {
       right: 0px;
       bottom: 0px;
       background-size: cover;
-      background-position: center center;
+      background-position: top center;
       background-repeat: no-repeat;
       will-change: transform;
     }
