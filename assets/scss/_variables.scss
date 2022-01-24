@@ -33,12 +33,13 @@ $huge: 1600px;
 $s-nav: 75px;
 $m-nav: 12rem;
 $h-nav: 13rem;
-$s-margin: 2rem;
+$s-margin: 2.75vw;
 $m-margin: 10vw;
 $h-margin: 15vw;
 $s-space: 20vw;
 $m-space: 6rem;
 $h-space: 7vw;
+$ease: cubic-bezier(0.645, 0.045, 0.355, 1.000);
 
 :export {
   lightGrey: $light-grey;

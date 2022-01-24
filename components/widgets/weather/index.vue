@@ -99,7 +99,7 @@ export default {
   }
   .c-info--wrapper {
     flex: 0 0 auto;
-    font-size: 2vw;
+    font-size: 3vw;
   }
   .c-info-table {
     text-align: left;

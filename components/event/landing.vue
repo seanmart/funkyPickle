@@ -16,7 +16,8 @@ export default {
 <style lang="scss">
 .c-event-landing {
   @include dark-gradient(0);
-  height: 100vw;
+  height: 110vw;
+  max-height: 420px;
   position: relative;
 
   .c-logo--wrapper {

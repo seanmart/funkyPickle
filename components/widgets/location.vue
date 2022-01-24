@@ -114,7 +114,7 @@ export default {
     z-index: 1;
   }
   .leaflet-control-attribution {
-    font-size: 2vw;
+    font-size: 1.75vw;
   }
 
   @media screen and (min-width: $medium){

@@ -70,13 +70,13 @@ export default {
   .c-description{
     margin-top: 2vw;
     max-width: 60ch;
-    font-size: 3.5vw;
+    font-size: 3.75vw;
     font-weight: 800;
     line-height: 1.2;
     transition: color .5s;
   }
   .c-date{
-    font-size: 1.75vw;
+    font-size: 2.25vw;
     margin-top: 3vw;
     opacity: .5;
     transition: opacity .5s;

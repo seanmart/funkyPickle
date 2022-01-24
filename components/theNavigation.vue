@@ -1,5 +1,5 @@
 <template lang="html">
-  <header id="c-header" ref="header" :class="{'has-scrolled': hasScrolled}">
+  <header id="c-header" ref="header">
 
     <div class="c-header-top">
       <nuxt-link class="c-logo" to="/">
@@ -41,6 +41,11 @@ export default {
       open
       ? document.body.classList.add('menu-is-open')
       : document.body.classList.remove('menu-is-open')
+    },
+    hasScrolled(scrolled){
+      scrolled
+      ? document.body.classList.add('has-scrolled')
+      : document.body.classList.remove('has-scrolled')
     }
   },
   mounted() {
@@ -72,9 +77,8 @@ export default {
 </script>
 
 <style lang="scss">
-$header-ease: cubic-bezier(0.645, 0.045, 0.355, 1.000);
 $header-dur: .5s;
-$header-mobile-nav-width: 70vw;
+$header-mobile-nav-width: 250px;
 
 #c-header {
 
@@ -92,7 +96,7 @@ $header-mobile-nav-width: 70vw;
     background: white;
     box-shadow: 0px 2px 5px rgba($blue,.2);
     transition-duration: $header-dur;
-    transition-timing-function: $header-ease;
+    transition-timing-function: $ease;
     transition-property: transform;
 
     .c-logo{
@@ -115,7 +119,7 @@ $header-mobile-nav-width: 70vw;
     transform: translateX(-100%);
     padding: 30px;
     transition-duration: $header-dur;
-    transition-timing-function: $header-ease;
+    transition-timing-function: $ease;
     transition-property: transform;
     background: $black;
     color: white;
@@ -129,14 +133,8 @@ $header-mobile-nav-width: 70vw;
     }
     .c-link{
       display: block;
-      font-size: 12vw;
+      font-size: 40px;
       padding: 3vw;
-    }
-  }
-
-  &.has-scrolled{
-    .c-header-top{
-      transform: translateY(-120%);
     }
   }
 
@@ -201,7 +199,7 @@ $header-mobile-nav-width: 70vw;
 
 main{
   transition-duration: $header-dur;
-  transition-timing-function: $header-ease;
+  transition-timing-function: $ease;
   transition-property: transform;
 }
 
@@ -214,6 +212,13 @@ main{
       .c-header-side{
         transform: translateX(0px);
       }
+      .c-header-top{
+        transform: translateY(-120%);
+      }
+    }
+  }
+  .has-scrolled{
+    #c-header{
       .c-header-top{
         transform: translateY(-120%);
       }

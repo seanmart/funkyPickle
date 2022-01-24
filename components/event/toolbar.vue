@@ -20,8 +20,8 @@ export default {
 .c-event-toolbar{
 
   .c-toolbar--wrapper{
-    padding-top: 3vw;
-    padding-bottom: 3vw;
+    padding-top: 3.5vw;
+    padding-bottom: 3.5vw;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -31,6 +31,13 @@ export default {
   .c-toolbar-btn{
     flex: 0 0 auto;
     margin-right: 3vw;
+    opacity: 0;
+    transform: scale(.7);
+    transform-origin: center center;
+    transition-timing-function: $ease;
+    transition-property: opacity,transform;
+    transition-duration: .5s;
+
     &:last-child{
       margin-right: 0px;
     }
@@ -47,7 +54,20 @@ export default {
     }
     .c-toolbar-btn{
       margin-right: .75rem;
+      opacity: 1;
+      transform: scale(1);
     }
   }
 }
+
+.has-scrolled{
+  .c-event-toolbar{
+    .c-toolbar-btn{
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+
 </style>
