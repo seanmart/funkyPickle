@@ -1,6 +1,8 @@
 <template lang="html">
   <header id="c-header" ref="header">
 
+    <a class="c-stmc" href="#scroller">skip to main content</a>
+    
     <div class="c-header-top">
       <nuxt-link class="c-logo" to="/">
         <logo horizontal rainbow animate class="c-logo" />
@@ -82,6 +84,14 @@ $header-mobile-nav-width: 250px;
 
 #c-header {
 
+  .c-stmc{
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+  }
   .c-header-top{
     z-index: 100;
     position: fixed;

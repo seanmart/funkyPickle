@@ -101,6 +101,8 @@ $events-transition-timing: .35s;
     box-shadow: 0px 2px 5px rgba($blue,.2);
     margin-bottom: 2vw;
     outline: none;
+    cursor: pointer;
+    pointer-events: auto;
   }
 
   .c-date--wrapper{
