@@ -56,7 +56,7 @@ export default {
     margin-right: 2vw;
   }
   .c-date{
-    font-size: 3vw;
+    font-size: 3.5vw;
   }
 
   @media screen and (min-width: $medium){

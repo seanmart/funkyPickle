@@ -170,15 +170,16 @@ $events-transition-timing: .35s;
   .c-location{
     flex: 0 0 auto;
     line-height: 1;
+    font-size: 3.5vw;
     svg{
-      height: 2vw;
+      height: 2.5vw;
       fill: $pink;
     }
   }
 
   .c-arrow--wrapper{
     flex: 0 0 auto;
-    width: 4vw;
+    width: 5vw;
     position: relative;
 
     .c-rainbow{

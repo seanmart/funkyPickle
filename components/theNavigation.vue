@@ -74,7 +74,7 @@ export default {
 <style lang="scss">
 $header-ease: cubic-bezier(0.645, 0.045, 0.355, 1.000);
 $header-dur: .5s;
-$header-mobile-nav-width: 200px;
+$header-mobile-nav-width: 70vw;
 
 #c-header {
 
@@ -111,15 +111,26 @@ $header-mobile-nav-width: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     transform: translateX(-100%);
-    box-shadow: 2px 0px 5px rgba($blue,.2);
     padding: 30px;
     transition-duration: $header-dur;
     transition-timing-function: $header-ease;
     transition-property: transform;
-    background: white;
+    background: $black;
+    color: white;
     .c-logo{
       width: 100%;
+      display: none;
+    }
+    .c-nav{
+      flex: 0 0 auto;
+      width: 100%;
+    }
+    .c-link{
+      display: block;
+      font-size: 12vw;
+      padding: 3vw;
     }
   }
 
@@ -153,17 +164,6 @@ $header-mobile-nav-width: 200px;
     }
   }
 
-  .c-nav{
-    margin-top: 60px;
-    flex: 0 0 auto;
-    width: 100%;
-  }
-  .c-link{
-    display: block;
-    font-size: 30px;
-    padding: 7px;
-  }
-
 
   @media screen and (min-width: $medium){
 
@@ -175,6 +175,12 @@ $header-mobile-nav-width: 200px;
       transform: none;
       width: $m-nav;
       padding: 1.5rem;
+      box-shadow: 2px 0px 5px rgba($blue,.2);
+      background: white;
+      color: $black;
+      .c-logo{
+        display: block;
+      }
     }
 
     .c-menu-button{
