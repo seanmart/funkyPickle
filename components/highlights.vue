@@ -1,17 +1,22 @@
 <template lang="html">
-  <section class="c-highlights o-top o-bottom" ref="container">
-    <div class="o-container c-highlights--wrapper">
-      <carousel :slides="data.items" loop :speed="500" :autoplay="5" :gap="10">
-        <template #default="slide">
-          <div class="c-slide" v-image:cover="slide.image.url">
-            <div class="c-card">
-              <h2 v-if="slide.title" class="c-title t-header-lg" v-html="slide.title" />
-              <div v-if="slide.description.length > 0" class="u-gap-top-sm c-description" v-html="$prismic.asHtml(slide.description)" />
+  <section class="c-highlights o-container-wide o-space o-space-inner">
+
+    <h2 class="t-headline o-margins">Latest News</h2>
+
+    <div class="c-highlights--scroller u-hide-scrollbars">
+
+        <template v-for="item in [...data.items,...data.items]">
+          <div class="c-card">
+            <div class="c-image--wrapper">
+              <div class="c-image" v-image:cover="item.image.url"/>
             </div>
+            <div class="c-description" v-html="'This is a long descriptive headline about the article'"/>
+            <span class="c-date" v-html="'January 12th, 2022'"/>
           </div>
         </template>
-      </carousel>
+
     </div>
+
   </section>
 </template>
 
@@ -23,48 +28,98 @@ export default {
 
 <style lang="scss">
 .c-highlights {
-  overflow: hidden;
-  .c-carousel {
-    overflow: visible;
+  background: white;
+
+  .c-highlights--scroller{
+    overflow-x: scroll;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    padding: 10px 0px;
+    &::after,
+    &::before{
+      content: '';
+      flex: 0 0 $s-margin;
+    }
   }
-  .c-slide {
-    height: 500px;
+
+  .c-card{
+    flex: 0 0 auto;
+    width: 70vw;
+    margin-right: 5vw;
+    display: flex;
+    flex-direction: column;
+    &:last-child{
+      margin-right: 0px;
+    }
+  }
+
+  .c-image--wrapper{
+    flex: 0 0 auto;
     width: 100%;
     position: relative;
+    padding-bottom: 56.25%;
     overflow: hidden;
-    transition: box-shadow 0.5s;
-    border-radius: 8px;
-    box-shadow: 0px 3px 5px -2px rgba($blue, 0.2);
-    background-position: top center;
-    -webkit-backface-visibility: hidden;
+    transform: translateZ(0)
   }
-  .c-card {
-    @include lime-gradient;
-    position: absolute;
-    top: 10%;
-    bottom: 10%;
-    left: 0px;
-    z-index: 1;
-    padding: 5rem;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    max-width: 40rem;
-    transition: opacity 0.8s;
-    opacity: 0;
+  .c-image{
+    @include cover;
+    transition: transform .5s;
+    transform: scale(1.1);
   }
-  .swiper-slide-next {
-    .c-card {
-      transition: none;
-    }
+  .c-description{
+    margin-top: 2vw;
+    max-width: 60ch;
+    font-size: 3.5vw;
+    font-weight: 800;
+    line-height: 1.2;
+    transition: color .5s;
   }
-  .swiper-slide-active {
-    .c-card {
-      opacity: 1;
-      transition-delay: .5s;
+  .c-date{
+    font-size: 1.75vw;
+    margin-top: 3vw;
+    opacity: .5;
+    transition: opacity .5s;
+  }
+
+  @media screen and (min-width: $medium){
+
+    .c-highlights--scroller{
+      &::after,
+      &::before{
+        content: '';
+        flex: 0 0 $m-margin;
+      }
     }
-    .c-slide {
-      box-shadow: 0px 30px 10px -15px rgba($blue, 0.3);
+
+    .c-card{
+      width: 20vw;
+      margin-right: 1.5rem;
     }
+    .c-description{
+      margin-top: 1rem;
+      font-size: .9rem;
+    }
+    .c-date{
+      font-size: .6rem;
+      margin-top: 1rem;
+    }
+
+  }
+
+}
+
+.c-highlights .c-card:active,
+.c-highlights .c-card:focus,
+.is-desktop .c-highlights .c-card:hover{
+  .c-description{
+    color: $purple;
+  }
+  .c-image{
+    transform: scale(1.05);
+  }
+  .c-date{
+    opacity: 1;
   }
 }
 </style>

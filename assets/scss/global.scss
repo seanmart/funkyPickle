@@ -10,14 +10,10 @@ main{
 }
 
 #scroller{
-  padding-left: $navigation-width;
   width: 100vw;
   overflow: hidden;
 }
 
-@media screen and (max-width: $tablet){
-  #scroller{
-    padding-left: 0px;
-    padding-top: $navigation-height
-  }
+.is-resizing *{
+  transition: none !important;
 }

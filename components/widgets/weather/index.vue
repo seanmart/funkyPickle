@@ -3,7 +3,7 @@
     <template #content>
       <template v-if="data">
         <div class="c-icon--wrapper">
-          <weather-icon :icon="data.weather[0].icon" />
+          <weather-icon class="c-icon" :icon="data.weather[0].icon" />
         </div>
 
         <div class="c-temp--wrapper">
@@ -77,50 +77,50 @@ export default {
     justify-content: space-between;
     align-items: center;
   }
-
   .c-icon--wrapper {
     flex: 0 0 auto;
-    svg {
-      display: block;
-      width: 7rem;
-    }
+    width: 20%;
   }
-
+  .c-icon{
+    display: block;
+    width: 100%;
+  }
   .c-temp--wrapper {
     flex: 0 0 auto;
     text-align: center;
-
-    .c-temp-value {
-      font-size: 5rem;
-    }
   }
-
+  .c-temp-value {
+    font-size: 10vw;
+  }
   .c-bar {
     flex: 0 0 1px;
     align-self: stretch;
     background: $pink;
   }
-
   .c-info--wrapper {
     flex: 0 0 auto;
-
-    .c-info-table {
-      text-align: left;
-      font-weight: 800;
-    }
-    .c-info-label {
-      text-align: right;
-      padding-right: 1.5rem;
-      font-weight: 400;
-      opacity: 0.6;
-    }
+    font-size: 2vw;
+  }
+  .c-info-table {
+    text-align: left;
+    font-weight: 800;
+  }
+  .c-info-label {
+    text-align: right;
+    padding-right: 2vw;
+    font-weight: 400;
+    opacity: 0.6;
   }
 
-  @media screen and (max-width: $tablet) {
-    .c-temp--wrapper {
-      .c-temp-value {
-        font-size: 7rem;
-      }
+  @media screen and (min-width: $medium) {
+    .c-temp-value {
+      font-size: 3rem;
+    }
+    .c-info--wrapper {
+      font-size: .75rem;
+    }
+    .c-info-label {
+      padding-right: .75rem;
     }
   }
 }

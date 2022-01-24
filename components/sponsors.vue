@@ -1,8 +1,9 @@
 <template lang="html">
-  <section class="c-sponsors o-container o-top o-bottom">
-    <div class="c-header--wrapper u-gap-bottom-rg" v-if="data.primary.title">
-      <h2 class="t-headline-rg" v-html="data.primary.title" ref="title" />
-    </div>
+  <section class="c-sponsors o-container o-space">
+
+    <template v-if="data.primary.title">
+      <h2 class="t-headline" v-html="data.primary.title" ref="title" />
+    </template>
 
     <div class="c-sponsors--wrapper">
       <template v-for="(logo, i) in data.items">
@@ -24,6 +25,7 @@ export default {
 
 <style lang="scss">
 .c-sponsors {
+
   .c-sponsors--wrapper {
     display: flex;
     flex-direction: row;

@@ -25,7 +25,20 @@ $space: 70px;
 // mobile-objects
 $m-margins: 20px;
 $m-max-width: 600px;
-$m-space: 50px;
+
+// new
+$small: 600px;
+$medium: 800px;
+$huge: 1600px;
+$s-nav: 75px;
+$m-nav: 12rem;
+$h-nav: 13rem;
+$s-margin: 2rem;
+$m-margin: 10vw;
+$h-margin: 15vw;
+$s-space: 20vw;
+$m-space: 6rem;
+$h-space: 7vw;
 
 :export {
   lightGrey: $light-grey;

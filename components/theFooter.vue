@@ -1,6 +1,6 @@
 <template lang="html">
   <footer class="c-footer">
-    <div class="c-footer--wrapper o-container o-top o-bottom">
+    <div class="c-footer--wrapper o-container o-space-inner">
       footer
     </div>
   </footer>

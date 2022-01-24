@@ -18,22 +18,25 @@ export default {
 
   .c-ball--wrapper {
     position: absolute;
-    top: $space;
+    top: $s-space;
     left: 60%;
     z-index: -1;
   }
 
   .c-ball {
     @include lime-gradient(45);
-    width: 70vw;
-    height: 70vw;
+    width: 140vw;
+    height: 140vw;
     border-radius: 50%;
   }
 
-  @media screen and (max-width: $tablet) {
+  @media screen and (min-width: $medium) {
     .c-ball {
-      width: 140vw;
-      height: 140vw;
+      width: 70vw;
+      height: 70vw;
+    }
+    .c-ball--wrapper{
+      top: $m-space;
     }
   }
 }

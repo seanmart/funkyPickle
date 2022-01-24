@@ -3,11 +3,11 @@
     <preloader v-if="showPreloader"/>
     <svg-gradients />
     <columns />
-    <navigation />
+    <the-navigation />
     <div id="scroller">
       <nuxt v-if="render" />
       <signup />
-      <end-matter />
+      <the-footer />
     </div>
   </div>
 </template>
@@ -26,10 +26,10 @@ export default {
       isFirst &&
         setTimeout(() => {
           this.resetScroll();
-          this.$bus.$emit("HIDE_PRELOADER", () => {
+          this.$bus.$emit('HIDE_PRELOADER',()=>{
             this.$bus.$emit("REVEAL")
             this.showPreloader = false
-          });
+          })
           isFirst = false;
         }, 1500);
 
@@ -72,13 +72,24 @@ export default {
         ScrollTrigger.defaults({
           scroller: "#scroller",
         });
+
+        let timeout = null
+        window.addEventListener('resize',()=>{
+          timeout && clearTimeout(timeout)
+          document.body.classList.add('is-resizing')
+          timeout = setTimeout(()=> document.body.classList.remove('is-resizing'),200)
+        })
       }
     },
   },
   middleware({ $bus, route, from }) {
     if (process.server || isFirst) return;
     if (from.path == route.path) return;
-    return new Promise((next) => $bus.$emit("SHOW_COLUMNS", next));
+    return new Promise((next) => {
+      $bus.$emit('NAV_LEAVING',()=>{
+        $bus.$emit("SHOW_COLUMNS", next)
+      })
+    });
   },
 };
 </script>
