@@ -89,7 +89,7 @@ export default {
     font-size: 0;
     flex: 0 0 auto;
     padding-right: 2vw;
-    height: 8vw;
+    height: 8.25vw;
     fill: $pink;
   }
   .c-location {
@@ -103,7 +103,8 @@ export default {
   .c-address {
     opacity: 0.6;
     display: block;
-    line-height: .7
+    line-height: .7;
+    font-size: 3vw;
   }
 
   #map {
@@ -121,14 +122,15 @@ export default {
 
     .c-icon {
       padding-right: 1rem;
-      height: 2.5rem;
+      height: 2rem;
     }
     .c-title {
-      font-size: 2rem;
+      font-size: 1.5rem;
       margin-bottom: .5rem;
     }
     .c-address {
-      line-height: .7
+      line-height: .7;
+      font-size: .75rem;
     }
     #map {
       height: 20rem;

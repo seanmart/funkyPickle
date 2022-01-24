@@ -68,7 +68,7 @@ export default {
       padding: 2vw;
     }
 
-    @media screen and (min-width: $medium){
+    @media screen and (min-width: 1000px){
 
       .c-event-content--wrapper{
         margin: -.5rem;

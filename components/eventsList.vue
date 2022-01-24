@@ -224,14 +224,6 @@ $events-transition-timing: .35s;
       font-size: 3rem;
     }
 
-    .c-logo--wrapper{
-      display: flex;
-      flex: 0 0 auto;
-      width: 7rem;
-      padding: $m-events-list-padding 0px;
-      padding-left: 2vw;
-    }
-
     .c-info--wrapper{
       padding: $m-events-list-padding 2vw;
     }
@@ -249,6 +241,7 @@ $events-transition-timing: .35s;
     .c-location{
       flex: 0 0 auto;
       opacity: .5;
+      font-size: .85rem;
       transition: opacity $events-transition-timing;
       svg{
         height: .6rem;
@@ -275,6 +268,16 @@ $events-transition-timing: .35s;
       text-align: left;
     }
 
+  }
+
+  @media screen and (min-width: 1000px){
+    .c-logo--wrapper{
+      display: flex;
+      flex: 0 0 auto;
+      width: 7rem;
+      padding: $m-events-list-padding 0px;
+      padding-left: 2vw;
+    }
   }
 
 }

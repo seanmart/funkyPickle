@@ -29,7 +29,7 @@ export default {
       overflow: hidden;
     }
     .c-widget-header{
-      padding: 3vw;
+      padding: 4vw 3vw;
     }
     .c-widget-content{
       padding:3vw;
@@ -40,7 +40,7 @@ export default {
 
     @media screen and (min-width: $medium){
       .c-widget-header{
-        padding: 1.25rem;
+        padding: 1.5rem 1.25rem;
       }
       .c-widget-content{
         padding:1.25rem;
