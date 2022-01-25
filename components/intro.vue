@@ -64,7 +64,7 @@ export default {
   }
 
   .c-text {
-    font-size: 4vw;
+    font-size: 4.5vw;
     max-width: 35ch;
   }
 
@@ -75,7 +75,7 @@ export default {
     }
 
     .c-text{
-      font-size: 1.25rem;
+      font-size: 1.4rem;
     }
   }
 }

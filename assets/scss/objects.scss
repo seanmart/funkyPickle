@@ -48,3 +48,20 @@
     padding-right: $m-margin;
   }
 }
+
+@media screen and (min-width: $huge){
+  .o-container,
+  .o-container-wide-small{
+    padding-left: $h-margin;
+    padding-right: $h-margin;
+  }
+
+  .o-space-inner{
+    padding-top: $m-space;
+    padding-bottom: $m-space;
+  }
+  .o-margins{
+    padding-left: $h-margin;
+    padding-right: $h-margin;
+  }
+}

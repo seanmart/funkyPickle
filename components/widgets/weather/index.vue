@@ -99,7 +99,8 @@ export default {
   }
   .c-info--wrapper {
     flex: 0 0 auto;
-    font-size: 3vw;
+    font-size: 3.25vw;
+    line-height: 1.4;
   }
   .c-info-table {
     text-align: left;
@@ -107,7 +108,7 @@ export default {
   }
   .c-info-label {
     text-align: right;
-    padding-right: 2vw;
+    padding-right: 3vw;
     font-weight: 400;
     opacity: 0.6;
   }
@@ -117,10 +118,24 @@ export default {
       font-size: 3rem;
     }
     .c-info--wrapper {
-      font-size: .75rem;
+      font-size: .9rem;
+      line-height: 1.6;
     }
     .c-info-label {
       padding-right: .75rem;
+    }
+  }
+
+  @media screen and (min-width: $huge) {
+
+    .c-temp-value {
+      font-size: 3.25rem;
+    }
+    .c-info--wrapper {
+      font-size: .8rem;
+    }
+    .c-info-label {
+      padding-right: .65rem;
     }
   }
 }

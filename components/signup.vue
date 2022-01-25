@@ -32,7 +32,7 @@ export default {
 
   .c-title--wrapper {
     flex: 0 0 50%;
-    margin-right: $space;
+    margin-right: 0px;
   }
 
   .c-title {

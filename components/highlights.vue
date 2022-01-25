@@ -70,7 +70,6 @@ export default {
   .c-description{
     margin-top: 2vw;
     max-width: 60ch;
-    font-size: 3.75vw;
     font-weight: 800;
     line-height: 1.2;
     transition: color .5s;
@@ -93,20 +92,18 @@ export default {
     }
 
     .c-card{
-      width: 20vw;
+      width: 20rem;
       margin-right: 1.5rem;
     }
     .c-description{
       margin-top: 1rem;
-      font-size: .9rem;
     }
     .c-date{
-      font-size: .6rem;
+      font-size: .75rem;
       margin-top: 1rem;
     }
 
   }
-
 }
 
 .c-highlights .c-card:active,

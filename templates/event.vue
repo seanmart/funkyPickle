@@ -68,10 +68,18 @@ export default {
       padding: 2vw;
     }
 
-    @media screen and (min-width: 1000px){
-
+    @media screen and (min-width: $medium){
       .c-event-content--wrapper{
         margin: -.5rem;
+      }
+      .c-event-widget{
+        padding: .5rem;
+      }
+    }
+
+    @media screen and (min-width: $huge){
+
+      .c-event-content--wrapper{
         flex-direction: row;
       }
       .c-column-main{
@@ -79,9 +87,6 @@ export default {
       }
       .c-column-side{
         flex: 0 0 30%;
-      }
-      .c-event-widget{
-        padding: .5rem;
       }
     }
   }

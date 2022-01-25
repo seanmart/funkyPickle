@@ -2,7 +2,7 @@
   <header id="c-header" ref="header">
 
     <a class="c-stmc" href="#scroller">skip to main content</a>
-    
+
     <div class="c-header-top">
       <nuxt-link class="c-logo" to="/">
         <logo horizontal rainbow animate class="c-logo" />
@@ -151,7 +151,7 @@ $header-mobile-nav-width: 250px;
   .c-menu-button{
     z-index: 100;
     position: fixed;
-    bottom: $s-margin;
+    bottom: $s-margin * 2;
     right: $s-margin;
     width: 70px;
     height: 70px;
