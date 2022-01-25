@@ -31,11 +31,11 @@ export default {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    margin: 0px -3rem;
+    margin: 0px -2rem;
   }
   .c-sponsor {
-    flex: 0 0 33.333%;
-    padding: 3rem;
+    padding: 2rem;
+    flex: 0 0 50%;
   }
   .c-sponsor-logo--wrapper {
     display: flex;
@@ -46,13 +46,13 @@ export default {
       max-width: 100%;
     }
   }
-  @media screen and (max-width: $tablet) {
+  @media screen and (min-width: $medium) {
     .c-sponsors--wrapper {
-      margin: 0px -2rem;
+      margin: 0px -3rem;
     }
     .c-sponsor {
-      padding: 2rem;
-      flex: 0 0 50%;
+      flex: 0 0 33.333%;
+      padding: 3rem;
     }
   }
 }

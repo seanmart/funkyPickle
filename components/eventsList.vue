@@ -1,52 +1,48 @@
 <template lang="html">
-  <section class="c-events-list o-container o-space">
+  <section class="c-event-list o-container o-space">
 
     <template v-if="data.primary.title">
       <h2 class="t-headline" v-html="data.primary.title" ref="title" />
     </template>
 
-    <div class="c-list">
-      <template v-for="(event, i) in eventList">
+    <template v-for="event in eventList">
 
-          <nuxt-link :to="`/events/${event.uid}`" class="c-event">
+      <nuxt-link :to="`/events/${event.uid}`" class="c-event">
 
-            <div class="c-date--wrapper">
-              <h3 class="c-month t-header" v-html="getMonth(event.data.start_date, 'short')" />
-              <h3 class="c-day t-header" v-html="getDay(event.data.start_date)" />
-              <div class="c-rainbow" />
-            </div>
+        <div class="c-date--wrapper">
+          <h3 class="c-date t-header">
+            <span class="c-date-item month" v-html="getMonth(event.data.start_date)"/>
+            <span class="c-date-item day" v-html="getDay(event.data.start_date)"/>
+          </h3>
+          <div v-if="event.data.image.url" v-image:cover="event.data.image.url" class="c-image"/>
+        </div>
 
-            <div class="c-logo--wrapper">
-              <div class="c-logo">
-                <div class="c-image" v-image:cover="event.data.logo.url" />
-              </div>
-            </div>
+        <div class="c-logo--wrapper">
+          <div class="c-logo" v-image:cover="event.data.logo.url"/>
+        </div>
 
-            <div class="c-info--wrapper">
-              <text-scroll class="c-event-title--wrapper">
-                <h3 class="c-event-title t-header" v-html="event.data.title" />
-              </text-scroll>
-              <div class="c-location">
-                <icon wayfinder />
-                <span v-html="formatCityState(event.data.city, event.data.state)" />
-              </div>
-            </div>
+        <div class="c-info--wrapper">
+          <text-scroll class="c-event-title--wrapper t-header">
+            <h3 class="c-event-title" v-html="event.data.title"/>
+          </text-scroll>
+          <div class="c-location--wrapper">
+            <icon class="c-icon" wayfinder/>
+            <span class="c-location" v-html="formatCityState(event.data.city,event.data.state)"/>
+          </div>
+        </div>
 
-            <div class="c-arrow--wrapper">
-              <div class="c-arrow-bg">
-                <div class="c-rainbow">
-                  <icon arrow />
-                </div>
-              </div>
-            </div>
-          </nuxt-link>
+        <div class="c-arrow--wrapper">
+          <icon class="c-arrow" arrow/>
+          <div class="c-rainbow"/>
+        </div>
 
-      </template>
-    </div>
+      </nuxt-link>
+    </template>
 
     <div class="u-space-top c-event-btn" v-if="data.primary.link.uid" ref="btn">
       <btn :to="`/${data.primary.link.uid}`" rainbow>view all events</btn>
     </div>
+
   </section>
 </template>
 
@@ -78,130 +74,101 @@ export default {
   },
 };
 </script>
+
 <style lang="scss">
-
-$s-events-list-padding: 5vw;
-$m-events-list-padding: 1rem;
-$events-transition-timing: .35s;
-
-.c-events-list {
-
-  .c-rainbow{
-    @include cover;
-    @include rainbow-gradient(0);
-    opacity: 0;
-    transition: opacity $events-transition-timing;
-  }
+.c-event-list{
 
   .c-event{
     display: flex;
-    flex-direction: row;
-    background: white;
-    overflow: hidden;
+    flex-direction: column;
     box-shadow: 0px 2px 5px rgba($blue,.2);
-    margin-bottom: 2vw;
+    background: white;
+    margin-bottom: 5vw;
     outline: none;
-    cursor: pointer;
-    pointer-events: auto;
   }
 
   .c-date--wrapper{
     flex: 0 0 auto;
-    width: 15vw;
+    position: relative;
+    padding: 10vw 0px 20vw;
+    @include dark-gradient;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    position: relative;
-    padding: $s-events-list-padding 0px;
-    @include dark-gradient;
     color: white;
+    overflow: hidden;
   }
 
-  .c-month{
-    font-size: 6vw;
-    line-height: 1.1;
+  .c-date{
     position: relative;
     z-index: 1;
+    font-size: 10vw;
   }
-  .c-day{
-    font-size: 8vw;
-    position: relative;
-    z-index: 1;
+
+  .c-image{
+    @include cover;
+    z-index: 0;
+    opacity: .5;
+    transition-property: transform, opacity;
+    transition-duration: .5s;
+    transform: scale(1.1);
   }
 
   .c-logo--wrapper{
-    display: none;
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 0px;
+    position: relative;
+    z-index: 1;
   }
 
   .c-logo{
     flex: 0 0 auto;
-    width: 100%;
-    position: relative;
-  }
-
-  .c-image{
-    width: 100%;
-    padding-bottom: 100%;
+    width: 20vw;
+    height: 20vw;
     border-radius: 50%;
-    overflow: hidden;
     box-shadow: 0px 2px 5px rgba($blue,.2);
-    background-position: center center;
+    transition-property: transform;
+    transition-duration: .5s;
+    transform: scale(1.01);
   }
 
   .c-info--wrapper{
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: $s-events-list-padding 2.5vw;
+    flex: 0 0 auto;
+    padding: 20vw 10vw 10vw;
   }
 
   .c-event-title--wrapper{
-    flex: 0 0 auto;
-    height: 6vw;
-    margin-bottom: 1.5vw;
+    height: 10vw;
+    width: 100%;
   }
 
   .c-event-title{
-    font-size: 7vw;
-    padding: 0px 2vw;
-    transition: color $events-transition-timing;
+    font-size: 10vw;
+    padding: 0px 3vw;
+    transition-property: color;
+    transition-duration: .25s;
   }
 
-  .c-location{
+  .c-location--wrapper{
     flex: 0 0 auto;
-    line-height: 1;
-    font-size: 3.5vw;
-    svg{
-      height: 2.5vw;
-      fill: $pink;
-    }
+    margin-top: 2vw;
+    text-align: center;
+  }
+
+  .c-icon{
+    fill: $pink;
+    height: 3vw;
+    margin-right: 1vw;
+    font-size: 0;
+    line-height: 0;
   }
 
   .c-arrow--wrapper{
-    flex: 0 0 auto;
-    width: 5vw;
-    position: relative;
-
-    .c-rainbow{
-      opacity: 1;
-    }
-  }
-
-  .c-arrow-bg{
-    @include dark-gradient;
-    @include cover;
-
-    .c-rainbow{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    svg{
-      fill: white;
-      width: 60%;
-    }
+    display: none;
   }
 
   .c-event-btn{
@@ -211,28 +178,28 @@ $events-transition-timing: .35s;
   @media screen and (min-width: $medium){
 
     .c-event{
-      margin-bottom: .75rem;
+      margin-bottom: 1.5rem;
     }
 
     .c-date--wrapper{
-      width: 7rem;
-      padding: $m-events-list-padding;
+      padding: 2rem 0px 5rem;
     }
 
-    .c-month{
-      font-size: 2rem;
+    .c-date{
+      font-size: 2.5rem;
     }
-    .c-day{
-      font-size: 3rem;
+
+    .c-logo{
+      width: 6rem;
+      height: 6rem;
     }
 
     .c-info--wrapper{
-      padding: $m-events-list-padding 2vw;
+      padding: 5rem 2rem 2rem;
     }
 
     .c-event-title--wrapper{
-      height: 3rem;
-      margin-bottom: .5vw;
+      height: 2.5rem;
     }
 
     .c-event-title{
@@ -240,72 +207,126 @@ $events-transition-timing: .35s;
       padding: 0px 1rem;
     }
 
-    .c-location{
-      flex: 0 0 auto;
-      opacity: .5;
-      font-size: .85rem;
-      transition: opacity $events-transition-timing;
-      svg{
-        height: .6rem;
-        fill: $black;
-        transition: fill $events-transition-timing;
-      }
+    .c-location--wrapper{
+      margin-top: 1rem;
     }
 
-    .c-arrow--wrapper{
-      width: 2rem;
-
-      .c-rainbow{
-        opacity: 0;
-      }
-
-    }
-
-    .c-arrow-bg{
-      transform: translateX(.5rem);
-      transition: transform $events-transition-timing;
+    .c-icon{
+      height: 1rem;
     }
 
     .c-event-btn{
       text-align: left;
     }
-
   }
 
-  @media screen and (min-width: 1000px){
-    .c-logo--wrapper{
-      display: flex;
-      flex: 0 0 auto;
-      width: 7rem;
-      padding: $m-events-list-padding 0px;
-      padding-left: 2vw;
+  @media screen and (min-width: $huge){
+
+    .c-event{
+      flex-direction: row;
+      align-items: stretch;
+      height: 9rem;
+      margin-bottom: 1rem;
     }
-  }
 
+    .c-date--wrapper{
+      padding: 0px;
+      padding-right: 2.5rem;
+      width: 11rem;
+      text-align: center;
+    }
+
+    .c-date{
+      font-size: 1.75rem;
+    }
+
+    .c-date-item{
+      display: block;
+      &.day{
+        font-size: 4.5rem;
+      }
+    }
+
+    .c-logo--wrapper{
+      position: relative;
+      height: 100%;
+      width:2px;
+      flex-direction: column;
+    }
+
+    .c-logo{
+      width: 5rem;
+      height: 5rem;
+    }
+
+    .c-info--wrapper{
+      flex: 1 1 auto;
+      padding: 0px;
+      padding-left: 4.5rem;
+      padding-right: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .c-event-title--wrapper{
+      height: 2rem;
+    }
+
+    .c-event-title{
+      font-size: 2rem;
+      padding: 0px .75rem;
+    }
+
+    .c-location--wrapper{
+      text-align: left;
+      margin-top: .5rem;
+    }
+
+    .c-arrow--wrapper{
+      flex: 0 0 auto;
+      padding: .5rem;
+      @include dark-gradient;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .c-arrow{
+      fill: white;
+      width: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .c-rainbow{
+      @include cover;
+      @include rainbow-gradient(0);
+      z-index: 0;
+      opacity: 0;
+      transition-property: opacity;
+      transition-duration: .25s;
+    }
+
+  }
 }
 
-.c-events-list .c-event:active,
-.is-desktop .c-events-list .c-event:focus,
-.is-desktop .c-events-list .c-event:hover{
-
+.is-desktop .c-event-list .c-event:hover,
+.is-desktop .c-event-list .c-event:focus,
+.c-event-list .c-event:active{
   .c-rainbow{
     opacity: 1;
   }
-
   .c-event-title{
     color: $purple;
   }
-
-  .c-location{
-    opacity: 1;
-    svg{
-      fill: $pink;
-    }
+  .c-image{
+    transform: scale(1.01);
+    opacity: .35
   }
-
-  .c-arrow-bg{
-    transform: translateX(0);
+  .c-logo{
+    transform: scale(1.1)
   }
 }
-
 </style>

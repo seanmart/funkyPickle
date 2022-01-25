@@ -46,6 +46,7 @@ export default {
         logo
         uid
         start_date
+        image
         }
         }`,
         orderings: "[my.event.start_date]",

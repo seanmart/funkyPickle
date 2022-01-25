@@ -50,8 +50,7 @@ export default {
     display: none;
   }
   .c-image {
-    height: 135vw;
-    max-height: 100vh;
+    height: 600px;
   }
 
   @media screen and (min-width: $medium){
