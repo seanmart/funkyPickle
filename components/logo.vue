@@ -1,5 +1,5 @@
 <template lang="html">
-  <svg v-if="vertical" class="fp-logo vertical" :class="{rainbow,animate}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 299.99 489.56">
+  <svg v-if="vertical" class="fp-logo vertical" :class="{rainbow,animate,knockout}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 299.99 489.56">
 
     <path style="fill:none;" d="M300,244.64a149,149,0,0,1-11.6,57.89v187H11.59v-187a150.75,150.75,0,0,1,0-115.92V0H288.32V186.68a149.42,149.42,0,0,1,11.67,58Z"/>
 
@@ -25,7 +25,7 @@
 </svg>
 
 
-<svg v-else-if="horizontal" class="fp-logo horizontal" :class="{rainbow,animate}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1178.69 363.39">
+<svg v-else-if="horizontal" class="fp-logo horizontal" :class="{rainbow,animate,knockout}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1178.69 363.39">
   <circle class="ball-bg" cx="580.43" cy="181.73" r="102.37"/>
   <path class="ball" d="M580.42,78.9a102.8,102.8,0,1,0,102.8,102.78A102.81,102.81,0,0,0,580.42,78.9ZM519.53,215.65c-7.46,11.42-20.57-5.42-19.19-16.07-2.76,9.68,7.38,26.58,16.48,22.85C504,234,488.69,199.78,501.91,194.07h0C510.59,189.83,521.27,205.86,519.53,215.65Zm7-81.59c-9.05-2.24-6.72-12.74,1.48-19.19a23.48,23.48,0,0,1,7.73-4c-10,.37-22.86,15.29-16.39,22.65-7-3.59-4.72-12.88,2.74-19.61h0C547.94,95.25,550.21,128.31,526.48,134.06ZM553,261.44h0c.71-8.55,19.92-9.29,27.31-3.74,6.09,11.18-15.56,12.73-23.46,7.4,6.88,6.29,26.66,6,27.86-2.51C588.66,277.42,551.25,273.79,553,261.44Zm27.42-59.13a20.62,20.62,0,1,1,20.62-20.62A20.63,20.63,0,0,1,580.43,202.31Zm29.74-91.4c-22.21-10.83,3.3-17.87,14.41-5.63-4.62-7-22.14-12.17-25.47-5.22a5.79,5.79,0,0,1,.22-2.3c1.66-4.07,9.28-4.69,16.89-1.55C634.3,103.89,628.41,118.36,610.17,110.91ZM652.4,239.57C640,256,625.91,245.32,638.33,229c16.54-19.83,18.61,8.21,2.59,16.27,8.58-2.64,18.17-19.17,11.69-24.37C659.56,222.73,658,231.93,652.4,239.57Zm16.92-67.31c-6.5,1.89-13.71-13.71-12.21-21.4,6.41-8.37,14.66,9.28,13.56,17,2.16-7.56-4.77-23.59-11.47-22.12C668.62,137.93,678.77,170.16,669.32,172.26Z"/>
 
@@ -53,22 +53,17 @@ export default {
     rainbow:{type:Boolean,default:false},
     horizontal:{type:Boolean,default:false},
     vertical:{type:Boolean,default:false},
-    animate:{type:Boolean,default:false}
+    animate:{type:Boolean,default:false},
+    knockout:{type: Boolean, default: false}
   }
 }
 </script>
 
 <style lang="scss">
 .fp-logo{
-  path{
-    fill:inherit;
-  }
   &.animate .ball{
     animation: rotate 30s linear infinite;
     transform-origin: center center;
-  }
-  .ball-bg{
-    fill:none;
   }
   &.rainbow{
     .ball{fill: url(#rainbow-move)}
@@ -77,6 +72,12 @@ export default {
   }
   &.horizontal .ball{
     transform-origin: 49.24% 50.008%;
+  }
+  &.knockout{
+    fill: white;
+  }
+  .ball-bg{
+    fill:none;
   }
 }
 </style>

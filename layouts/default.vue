@@ -6,7 +6,6 @@
     <the-navigation />
     <div id="scroller">
       <nuxt v-if="render" />
-      <signup />
       <the-footer />
     </div>
   </div>
@@ -86,9 +85,7 @@ export default {
     if (process.server || isFirst) return;
     if (from.path == route.path) return;
     return new Promise((next) => {
-      $bus.$emit('NAV_LEAVING',()=>{
-        $bus.$emit("SHOW_COLUMNS", next)
-      })
+      $bus.$emit("SHOW_COLUMNS", next)
     });
   },
 };

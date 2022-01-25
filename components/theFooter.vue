@@ -13,7 +13,7 @@ export default {
 
 <style lang="scss">
 .c-footer{
-  @include dark-gradient;
+  @include tropical-gradient;
   color: white;
 }
 </style>

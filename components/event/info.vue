@@ -35,6 +35,7 @@ export default {
   padding-top: 22vw;
   padding-bottom: 14vw;
   background: white;
+  color: $black;
 
   .c-title--wrapper{
     height: 10vw;

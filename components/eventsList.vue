@@ -40,7 +40,7 @@
     </template>
 
     <div class="u-space-top c-event-btn" v-if="data.primary.link.uid" ref="btn">
-      <btn :to="`/${data.primary.link.uid}`" rainbow>view all events</btn>
+      <btn :to="`/${data.primary.link.uid}`" big rainbow>view all events</btn>
     </div>
 
   </section>
@@ -85,6 +85,7 @@ export default {
     background: white;
     margin-bottom: 5vw;
     outline: none;
+    color: $black;
   }
 
   .c-date--wrapper{
@@ -138,7 +139,7 @@ export default {
 
   .c-info--wrapper{
     flex: 0 0 auto;
-    padding: 20vw 10vw 10vw;
+    padding: 20vw 5vw 10vw;
   }
 
   .c-event-title--wrapper{
@@ -195,7 +196,7 @@ export default {
     }
 
     .c-info--wrapper{
-      padding: 5rem 2rem 2rem;
+      padding: 5rem 1rem 2rem;
     }
 
     .c-event-title--wrapper{
@@ -263,7 +264,7 @@ export default {
       flex: 1 1 auto;
       padding: 0px;
       padding-left: 4.5rem;
-      padding-right: 2rem;
+      padding-right: 1rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
