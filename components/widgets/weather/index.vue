@@ -39,14 +39,13 @@
 </template>
 
 <script>
-import weatherIcon from "./weatherIcon";
 import widget from "../widget";
 import { mapState } from "vuex";
 
 export default {
   name: "WeatherWidget",
   props: ["uid"],
-  components: { weatherIcon, widget },
+  components: { widget },
   computed: {
     ...mapState(["eventsWeather"]),
     data() {
@@ -99,7 +98,6 @@ export default {
   }
   .c-info--wrapper {
     flex: 0 0 auto;
-    font-size: 3.25vw;
     line-height: 1.4;
   }
   .c-info-table {
@@ -118,7 +116,6 @@ export default {
       font-size: 3rem;
     }
     .c-info--wrapper {
-      font-size: .9rem;
       line-height: 1.6;
     }
     .c-info-label {
@@ -130,9 +127,6 @@ export default {
 
     .c-temp-value {
       font-size: 3.25rem;
-    }
-    .c-info--wrapper {
-      font-size: .8rem;
     }
     .c-info-label {
       padding-right: .65rem;

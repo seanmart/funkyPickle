@@ -28,6 +28,12 @@
           <div class="c-location--wrapper">
             <icon class="c-icon" wayfinder/>
             <span class="c-location" v-html="formatCityState(event.data.city,event.data.state)"/>
+            <template v-if="eventsWeather[event.uid]">
+              <div class="c-weather">
+                <weather-icon :icon="eventsWeather[event.uid].weather[0].icon"/>
+                <span v-html="eventsWeather[event.uid].weather[0].main"/>
+              </div>
+            </template>
           </div>
         </div>
 
@@ -60,7 +66,7 @@ export default {
     this.handleMounted();
   },
   computed: {
-    ...mapState(["eventsList"]),
+    ...mapState(["eventsList","eventsWeather"]),
     eventList() {
       return this.data.primary.limit ? this.eventsList.slice(0, this.data.primary.limit) : this.eventsList;
     },
@@ -157,15 +163,43 @@ export default {
   .c-location--wrapper{
     flex: 0 0 auto;
     margin-top: 2vw;
-    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 
   .c-icon{
     fill: $pink;
     height: 3vw;
-    margin-right: 1vw;
+    flex: 0 0 auto;
+    margin-right: 2vw;
     font-size: 0;
     line-height: 0;
+  }
+
+  .c-location{
+    flex: 0 0 auto;
+  }
+
+  .c-weather{
+    flex: 0 0 auto;
+    padding: 0px 12px;
+    height: 22px;
+    margin-left: 30px;
+    border-radius: 7px;;
+    background: lighten($black,70%);
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    fill: white;
+    font-size: 12px;
+    line-height: .25;
+    svg{
+      height: 12px;
+      margin-right: 5px;
+    }
   }
 
   .c-arrow--wrapper{
@@ -214,6 +248,7 @@ export default {
 
     .c-icon{
       height: 1rem;
+      margin-right: .75rem;
     }
 
     .c-event-btn{
@@ -280,7 +315,7 @@ export default {
     }
 
     .c-location--wrapper{
-      text-align: left;
+      justify-content: flex-start;
       margin-top: .5rem;
     }
 

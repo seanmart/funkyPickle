@@ -45,15 +45,15 @@ export default {
     padding-left: 6vw;
   }
   .c-date--wrapper{
-    margin-top: 2vw;
+    margin-top: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   .c-date-icon{
-    height: 3vw;
+    height: 18px;
     fill: $pink;
-    margin-right: 2vw;
+    margin-right: 12px;
   }
 
   @media screen and (min-width: $medium){
@@ -67,10 +67,13 @@ export default {
       font-size: 4rem;
       padding-left: 2.5rem;
     }
+    .c-date--wrapper{
+      margin-top: 30px;
+    }
     .c-date-icon{
-      height: 1.25rem;
+      height: 20px;
       fill: $pink;
-      margin-right: 1rem;
+      margin-right: 15px;
     }
   }
 
