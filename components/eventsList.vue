@@ -31,7 +31,7 @@
             <template v-if="eventsWeather[event.uid]">
               <div class="c-weather">
                 <weather-icon :icon="eventsWeather[event.uid].weather[0].icon"/>
-                <span v-html="eventsWeather[event.uid].weather[0].main"/>
+                <span v-html="`${eventsWeather[event.uid].weather[0].main}, ${getTemp(eventsWeather[event.uid].main.temp)}`"/>
               </div>
             </template>
           </div>
@@ -53,13 +53,14 @@
 </template>
 
 <script>
-import { getDay, getMonth } from "@/assets/js/helpers";
+import { getDay, getMonth, getTemp } from "@/assets/js/helpers";
 import { mapState } from "vuex";
 export default {
   props: ["data"],
   data: () => ({
     getDay,
     getMonth,
+    getTemp
   }),
   mounted() {
     this.$bus.$once("REVEAL", this.handleReveal);
@@ -171,9 +172,9 @@ export default {
 
   .c-icon{
     fill: $pink;
-    height: 3vw;
+    height: 14px;
     flex: 0 0 auto;
-    margin-right: 2vw;
+    margin-right: 10px;
     font-size: 0;
     line-height: 0;
   }
@@ -197,7 +198,7 @@ export default {
     font-size: 12px;
     line-height: .25;
     svg{
-      height: 12px;
+      height: 10px;
       margin-right: 5px;
     }
   }
@@ -247,8 +248,8 @@ export default {
     }
 
     .c-icon{
-      height: 1rem;
-      margin-right: .75rem;
+      height: 16px;
+      margin-right: 12px;
     }
 
     .c-event-btn{
