@@ -70,3 +70,15 @@ export function getStyle(e, s) {
 export function pause(dur = 1000) {
   return new Promise((next) => setTimeout(next, dur));
 }
+
+export function getTemp(k) {
+  return `${Math.round(((k - 273.15) * 9) / 5 + 32)}°F`;
+}
+
+export function getTime(t,o) {
+  return new Date(t * 1000 + o * 1000).toLocaleTimeString("en-US", {
+    timeZone: "UTC",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}

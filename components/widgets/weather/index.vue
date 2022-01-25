@@ -41,6 +41,7 @@
 <script>
 import widget from "../widget";
 import { mapState } from "vuex";
+import {getTemp,getTime} from '@/assets/js/helpers'
 
 export default {
   name: "WeatherWidget",
@@ -54,16 +55,12 @@ export default {
   },
   methods: {
     getTemp(k) {
-      return `${Math.round(((k - 273.15) * 9) / 5 + 32)}°F`;
+      return getTemp(k)
     },
     getTime(t) {
+      return getTime(t,this.data.timezone || 0)
       let o = this.data.timezone || 0;
-      return new Date(t * 1000 + o * 1000).toLocaleTimeString("en-US", {
-        timeZone: "UTC",
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-    },
+    }
   },
 };
 </script>
