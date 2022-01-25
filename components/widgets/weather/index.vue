@@ -110,7 +110,7 @@ export default {
     text-align: right;
     padding-right: 3vw;
     font-weight: 400;
-    opacity: 0.6;
+    opacity: 0.4;
   }
 
   @media screen and (min-width: $medium) {

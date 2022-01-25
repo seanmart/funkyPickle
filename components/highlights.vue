@@ -29,6 +29,7 @@ export default {
 <style lang="scss">
 .c-highlights {
   background: white;
+  color: $black;
 
   .c-highlights--scroller{
     overflow-x: scroll;

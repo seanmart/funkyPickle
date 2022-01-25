@@ -7,8 +7,8 @@
     <section id="c-event-content" class="c-event-content o-margins o-space">
       <div class="c-event-content--wrapper">
         <div class="c-column-main">
-          <weather class="c-event-widget" :uid="data.uid" />
           <location class="c-event-widget" :data="data" />
+          <weather class="c-event-widget" :uid="data.uid" />
         </div>
         <div class="c-column-side">
           <sponsors class="c-event-widget" />

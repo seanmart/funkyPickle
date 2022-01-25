@@ -9,7 +9,7 @@
       </nuxt-link>
     </div>
 
-    <button class="c-menu-button" type="button" name="button" @click="menuIsOpen = !menuIsOpen">
+    <button class="c-menu-button" type="button" name="button" @click="toggleMenu">
       <div v-for="i in 3" class="c-bar"/>
     </button>
 
@@ -40,9 +40,14 @@ export default {
   }),
   watch:{
     menuIsOpen(open){
-      open
-      ? document.body.classList.add('menu-is-open')
-      : document.body.classList.remove('menu-is-open')
+      if(open){
+        document.body.classList.add('menu-is-open')
+        this.timeout = setTimeout(()=> window.addEventListener('click',this.toggleMenu),250)
+      } else {
+        document.body.classList.remove('menu-is-open')
+        this.timeout && clearTimeout(this.timeout)
+        window.removeEventListener('click',this.toggleMenu)
+      }
     },
     hasScrolled(scrolled){
       scrolled
@@ -53,13 +58,10 @@ export default {
   mounted() {
     setTimeout(this.init,250)
 
-    this.$bus.$on('NAV_LEAVING',(cb)=>{
+    this.$bus.$on('SHOW_COLUMNS',()=>{
       if (this.hasScrolled || this.menuIsOpen){
         this.hasScrolled = false
         this.menuIsOpen = false
-        setTimeout(cb,250)
-      } else {
-        cb()
       }
     })
   },
@@ -73,6 +75,9 @@ export default {
         onEnterBack: ()=> this.hasScrolled = false,
         onLeaveBack: ()=> this.hasScrolled = false
       })
+    },
+    toggleMenu(){
+      this.menuIsOpen = !this.menuIsOpen
     }
   }
 };
@@ -93,7 +98,7 @@ $header-mobile-nav-width: 250px;
     left: 0px;
   }
   .c-header-top{
-    z-index: 100;
+    z-index: 101;
     position: fixed;
     top: -2px;
     left: 0px;
@@ -161,11 +166,11 @@ $header-mobile-nav-width: 250px;
     justify-content: center;
     align-items: center;
     background: $black;
-    border: none;
-    outline: none;
+    outline:none;
+    border: 2px solid lighten($black,10%);
 
     .c-bar{
-      height: 2px;
+      height: 3px;
       width: 60%;
       margin: 3px;
       background: white;
@@ -210,27 +215,28 @@ $header-mobile-nav-width: 250px;
 main{
   transition-duration: $header-dur;
   transition-timing-function: $ease;
-  transition-property: transform;
+  transition-property: transform, opacity;
 }
 
 @media screen and (max-width:$medium - 1px){
-  .menu-is-open{
-    main{
-      transform: translateX($header-mobile-nav-width);
-    }
-    #c-header{
-      .c-header-side{
-        transform: translateX(0px);
-      }
-      .c-header-top{
-        transform: translateY(-120%);
-      }
-    }
-  }
   .has-scrolled{
     #c-header{
       .c-header-top{
-        transform: translateY(-120%);
+        transform: translateY(-100%);
+      }
+    }
+  }
+  .menu-is-open{
+    main{
+      transform: translateX($header-mobile-nav-width);
+      pointer-events: none;
+    }
+    #c-header{
+      .c-header-side{
+        transform: translateX(0);
+      }
+      .c-header-top{
+        transform: translateY(0);
       }
     }
   }

@@ -1,7 +1,7 @@
 <template lang="html">
   <div id="c-preloader">
     <div class="c-preloader-logo--wrapper">
-      <logo class="c-preloader-logo" vertical/>
+      <logo class="c-preloader-logo" vertical knockout/>
     </div>
   </div>
 </template>
