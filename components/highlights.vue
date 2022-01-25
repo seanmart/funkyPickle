@@ -69,15 +69,16 @@ export default {
     transform: scale(1.1);
   }
   .c-description{
-    margin-top: 2vw;
+    margin-top: 18px;
     max-width: 60ch;
+    font-size: 18px;
     font-weight: 800;
     line-height: 1.2;
     transition: color .5s;
   }
   .c-date{
-    font-size: 2.25vw;
-    margin-top: 3vw;
+    font-size: 12px;
+    margin-top: 12px;
     opacity: .5;
     transition: opacity .5s;
   }
@@ -97,11 +98,31 @@ export default {
       margin-right: 1.5rem;
     }
     .c-description{
-      margin-top: 1rem;
+      margin-top: 20px;
+      font-size: 20px;
     }
     .c-date{
-      font-size: .75rem;
-      margin-top: 1rem;
+      font-size: 13px;
+      margin-top: 13px;
+    }
+
+  }
+
+  @media screen and (min-width: $huge){
+
+    .c-highlights--scroller{
+      &::after,
+      &::before{
+        content: '';
+        flex: 0 0 $h-margin;
+      }
+    }
+
+    .c-description{
+      font-size: 22px;
+    }
+    .c-date{
+      font-size: 14px;
     }
 
   }

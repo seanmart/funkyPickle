@@ -103,8 +103,7 @@ export default {
   .c-address {
     opacity: 0.6;
     display: block;
-    line-height: .7;
-    font-size: 3vw;
+    line-height: .8;
   }
 
   #map {
@@ -127,10 +126,6 @@ export default {
     .c-title {
       font-size: 1.5rem;
       margin-bottom: .5rem;
-    }
-    .c-address {
-      line-height: .7;
-      font-size: .75rem;
     }
     #map {
       height: 20rem;

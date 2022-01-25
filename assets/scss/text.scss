@@ -4,7 +4,7 @@ html{
 
 body{
   font-family: 'Open Sans', sans-serif;
-  font-size: 4vw;
+  font-size: 14px;
   line-height: 1.5;
   font-weight: 400;
 }
@@ -21,26 +21,26 @@ body{
 }
 
 .t-headline{
-  font-size: 6vw;
-  margin-bottom: 7vw;
+  font-size: 25px;
+  margin-bottom: 50px;
 }
 
 @media screen and (min-width: $medium){
 
   body{
-    font-size: 1.25rem;
+    font-size: 15px
   }
 
   .t-headline{
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
+    font-size: 30px;
+    margin-bottom: 60px;
   }
 }
 
 @media screen and (min-width: $huge){
 
   body{
-    font-size: 1rem;
+    font-size: 16px;
   }
 
 }
