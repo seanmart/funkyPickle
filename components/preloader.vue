@@ -1,5 +1,5 @@
 <template lang="html">
-  <div id="c-preloader">
+  <div id="c-preloader" v-if="show">
     <div class="c-preloader-logo--wrapper">
       <logo class="c-preloader-logo" vertical knockout/>
     </div>
@@ -8,6 +8,9 @@
 
 <script>
 export default {
+  data:()=>({
+    show: true
+  }),
   mounted(){
     gsap.timeline()
     .to('#c-preloader .c-preloader-logo--wrapper',1,{opacity:1,scale:1,ease:'power2.out'},.5)
@@ -15,7 +18,7 @@ export default {
     .to('#c-preloader',5,{backgroundPosition: '100%'},0)
 
     this.$bus.$once('HIDE_PRELOADER',(cb)=>{
-      gsap.timeline({onComplete:cb})
+      gsap.timeline({onComplete:()=> (this.show = false, cb())})
       .to('#c-preloader',.75,{y:'-100vh',ease: 'power4.in'})
       .to('#c-preloader .c-preloader-logo--wrapper',.75,{y:'100vh',ease: 'power4.in'},'<')
     })

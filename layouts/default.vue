@@ -1,6 +1,6 @@
 <template lang="html">
   <div id="site">
-    <preloader v-if="showPreloader"/>
+    <preloader/>
     <svg-gradients />
     <columns />
     <the-navigation />
@@ -12,52 +12,39 @@
 </template>
 
 <script>
-let isFirst = true;
+let isFirstLoad = true;
 export default {
   data: () => ({
     render: false,
-    showPreloader: true
   }),
   mounted() {
     this.handleInit();
+    this.handleResize()
 
     this.$bus.$on("LOADED", () => {
-      isFirst &&
-        setTimeout(() => {
-          this.resetScroll();
-          this.$bus.$emit('HIDE_PRELOADER',()=>{
-            this.$bus.$emit("REVEAL")
-            this.showPreloader = false
-          })
-          isFirst = false;
-        }, 1500);
 
-      !isFirst &&
-        setTimeout(() => {
-          this.resetScroll();
-          this.$bus.$emit("HIDE_COLUMNS", () => this.$bus.$emit("REVEAL"));
-        }, 500);
+      let action = isFirstLoad ? 'HIDE_PRELOADER' : 'HIDE_COLUMNS'
+      let duration = isFirstLoad ? 1500 : 500
+      isFirstLoad = false
 
-      !isMobile && scrollBuddy.reset();
+      setTimeout(() => {
+        !isMobile && scrollBuddy.reset();
+        ScrollTrigger.refresh(true);
+        this.$bus.$emit(action,()=> this.$bus.$emit("REVEAL"))
+      }, duration)
+
     });
 
     this.render = true;
+
   },
   methods: {
-    resetScroll() {
-      !isMobile && scrollBuddy.update();
-      ScrollTrigger.refresh(true);
-    },
     handleInit() {
       gsap.registerPlugin(ScrollTrigger);
 
       if (!isMobile) {
-        scrollBuddy.init({
-          el: "#scroller",
-          event: ScrollTrigger.update,
-          inertia: 0.1,
-        });
-
+        scrollBuddy.init({el: "#scroller",event: ScrollTrigger.update,inertia: 0.1,});
+        ScrollTrigger.defaults({scroller: "#scroller"});
         ScrollTrigger.scrollerProxy("#scroller", {
           scrollTop: (value) => scrollBuddy.top,
           getBoundingClientRect: () => ({
@@ -67,26 +54,21 @@ export default {
             height: window.innerHeight,
           }),
         });
-
-        ScrollTrigger.defaults({
-          scroller: "#scroller",
-        });
-
-        let timeout = null
-        window.addEventListener('resize',()=>{
-          timeout && clearTimeout(timeout)
-          document.body.classList.add('is-resizing')
-          timeout = setTimeout(()=> document.body.classList.remove('is-resizing'),200)
-        })
       }
     },
+    handleResize(){
+      let timeout = null
+      window.addEventListener('resize',()=>{
+        timeout && clearTimeout(timeout)
+        document.body.classList.add('is-resizing')
+        timeout = setTimeout(()=> document.body.classList.remove('is-resizing'),200)
+      })
+    }
   },
   middleware({ $bus, route, from }) {
-    if (process.server || isFirst) return;
+    if (process.server || isFirstLoad) return;
     if (from.path == route.path) return;
-    return new Promise((next) => {
-      $bus.$emit("SHOW_COLUMNS", next)
-    });
+    return new Promise((next) => $bus.$emit("SHOW_COLUMNS", next));
   },
 };
 </script>
