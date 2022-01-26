@@ -85,6 +85,8 @@ export default {
 <style lang="scss">
 .c-event-list{
 
+  $events-list-dur: .75s;
+
   .c-event{
     display: flex;
     flex-direction: column;
@@ -98,7 +100,7 @@ export default {
   .c-date--wrapper{
     flex: 0 0 auto;
     position: relative;
-    padding: 10vw 0px 20vw;
+    padding: 20vw 0px 30vw;
     @include dark-gradient;
     display: flex;
     flex-direction: row;
@@ -119,7 +121,7 @@ export default {
     z-index: 0;
     opacity: .5;
     transition-property: transform, opacity;
-    transition-duration: .5s;
+    transition-duration: $events-list-dur;
     transform: scale(1.1);
   }
 
@@ -140,7 +142,7 @@ export default {
     border-radius: 50%;
     box-shadow: 0px 2px 5px rgba($blue,.2);
     transition-property: transform;
-    transition-duration: .5s;
+    transition-duration: $events-list-dur;
     transform: scale(1.01);
   }
 
@@ -158,7 +160,7 @@ export default {
     font-size: 10vw;
     padding: 0px 3vw;
     transition-property: color;
-    transition-duration: .25s;
+    transition-duration: $events-list-dur;
   }
 
   .c-location--wrapper{
@@ -218,7 +220,7 @@ export default {
     }
 
     .c-date--wrapper{
-      padding: 2rem 0px 5rem;
+      padding: 5rem 0px 8rem;
     }
 
     .c-date{
@@ -343,7 +345,7 @@ export default {
       z-index: 0;
       opacity: 0;
       transition-property: opacity;
-      transition-duration: .25s;
+      transition-duration: $events-list-dur;
     }
 
   }
