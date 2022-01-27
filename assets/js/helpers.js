@@ -40,20 +40,33 @@ export function getDateOffset(o = 0) {
 }
 
 export function toDate(d) {
+  if(d.indexOf('T') > 0) d = d.split('T')[0]
   return new Date(`${d}T00:00:00-07:00`);
 }
+
 export function getDay(d) {
   d = toDate(d);
   return d.getDate().toString().padStart(2, "0");
 }
+
 export function getMonth(d, f = "long") {
   d = toDate(d);
   return new Intl.DateTimeFormat("en-US", { month: f }).format(d);
 }
+
 export function getYear(d) {
   d = toDate(d);
   return d.getFullYear();
 }
+
+export function fullDate(date) {
+  if (!date) return;
+  let year = getYear(date);
+  let month = getMonth(date, "long");
+  let day = getDay(date);
+  return `${month} ${day}, ${year}`;
+}
+
 export function getStyle(e, s) {
   let sv = "";
   if (document.defaultView && document.defaultView.getComputedStyle) {

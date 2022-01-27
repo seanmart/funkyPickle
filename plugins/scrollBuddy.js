@@ -82,7 +82,6 @@ function initScrollBuddy(){
       scrollBuddy.updateScroll(0,0)
       this.updateDocument()
       this.window.scrollTop = 0
-      console.log(this)
     }
 
     update(){

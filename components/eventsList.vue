@@ -5,7 +5,7 @@
       <h2 class="t-headline" v-html="data.primary.title" ref="title" />
     </template>
 
-    <template v-for="event in eventList">
+    <template v-for="event in events">
 
       <nuxt-link :to="`/events/${event.uid}`" class="c-event">
 
@@ -28,10 +28,10 @@
           <div class="c-location--wrapper">
             <icon class="c-icon" wayfinder/>
             <span class="c-location" v-html="formatCityState(event.data.city,event.data.state)"/>
-            <template v-if="eventsWeather[event.uid]">
+            <template v-if="weather[event.uid]">
               <div class="c-weather">
-                <weather-icon :icon="eventsWeather[event.uid].weather[0].icon"/>
-                <span v-html="`${eventsWeather[event.uid].weather[0].main}, ${getTemp(eventsWeather[event.uid].main.temp)}`"/>
+                <weather-icon :icon="weather[event.uid].weather[0].icon"/>
+                <span v-html="`${weather[event.uid].weather[0].main}, ${getTemp(weather[event.uid].main.temp)}`"/>
               </div>
             </template>
           </div>
@@ -54,27 +54,31 @@
 
 <script>
 import { getDay, getMonth, getTemp } from "@/assets/js/helpers";
-import { mapState } from "vuex";
+import {mapState} from 'vuex'
+import eventsList from '@/graphQueries/eventsList'
 export default {
   props: ["data"],
+  async fetch(){
+    if (this.$store.state.meta.events.length == 0){
+    let data = await eventsList(this.$prismic)
+    this.$store.commit('meta',{key:'events',data: data.results})
+    }
+  },
   data: () => ({
     getDay,
     getMonth,
     getTemp
   }),
-  mounted() {
-    this.$bus.$once("REVEAL", this.handleReveal);
-    this.handleMounted();
-  },
   computed: {
-    ...mapState(["eventsList","eventsWeather"]),
-    eventList() {
-      return this.data.primary.limit ? this.eventsList.slice(0, this.data.primary.limit) : this.eventsList;
+    ...mapState({
+      eventsData: state => state.meta.events,
+      weather: state => state.meta.weather
+    }),
+    events() {
+      return this.data.primary.limit ? this.eventsData.slice(0, this.data.primary.limit) : this.eventsData;
     },
   },
   methods: {
-    handleMounted() {},
-    handleReveal() {},
     formatCityState(city, state) {
       return city && state ? `${city}, ${state}` : city || state || "No Location Announced";
     },
@@ -95,11 +99,16 @@ export default {
     margin-bottom: 5vw;
     outline: none;
     color: $black;
+    overflow: hidden;
+    border-radius: 8px;
+    position: relative;
+    z-index: 1;
   }
 
   .c-date--wrapper{
     flex: 0 0 auto;
     position: relative;
+    z-index: 1;
     padding: 20vw 0px 30vw;
     @include dark-gradient;
     display: flex;
@@ -111,9 +120,12 @@ export default {
   }
 
   .c-date{
+    font-size: 10vw;
+  }
+
+  .c-date-item{
     position: relative;
     z-index: 1;
-    font-size: 10vw;
   }
 
   .c-image{
@@ -189,7 +201,7 @@ export default {
     flex: 0 0 auto;
     padding: 0px 12px;
     height: 22px;
-    margin-left: 30px;
+    margin-left: 40px;
     border-radius: 7px;;
     background: lighten($black,70%);
     display: inline-flex;
@@ -200,7 +212,7 @@ export default {
     font-size: 12px;
     line-height: .25;
     svg{
-      height: 10px;
+      height: 12px;
       margin-right: 5px;
     }
   }
@@ -211,6 +223,8 @@ export default {
 
   .c-event-btn{
     text-align: center;
+    position: relative;
+    z-index: 1;
   }
 
   @media screen and (min-width: $medium){

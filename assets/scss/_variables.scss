@@ -16,12 +16,11 @@ $huge: 1150px;
 $s-nav: 75px;
 $m-nav: 12rem;
 $h-nav: 13rem;
-$s-margin: 2.75vw;
+$s-margin: 5vw;
 $m-margin: 8vw;
 $h-margin: 10vw;
-$s-space: 20vw;
-$m-space: 6rem;
-$h-space: 7vw;
+$s-space: 22vw;
+$m-space: 8rem;
 $ease: cubic-bezier(0.645, 0.045, 0.355, 1.000);
 
 :export {
@@ -34,4 +33,7 @@ $ease: cubic-bezier(0.645, 0.045, 0.355, 1.000);
   lime: $lime;
   lime2: $lime2;
   black: $black;
+  small: $small;
+  medium: $medium;
+  huge: $huge;
 }

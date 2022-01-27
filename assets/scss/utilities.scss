@@ -9,13 +9,13 @@
 }
 
 .u-space-top{
-  margin-top: 10vw;
+  margin-top: $s-space / 2;
 }
 
 @media screen and (min-width: $medium){
 
   .u-space-top{
-    margin-top: 3rem;
+    margin-top: $m-space / 2;
   }
 
 }
