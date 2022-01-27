@@ -1,5 +1,5 @@
 <template lang="html">
-  <section class="c-sponsors o-container o-space">
+  <section class="c-sponsors o-container o-space-inner">
 
     <template v-if="data.primary.title">
       <h2 class="t-headline" v-html="data.primary.title" ref="title" />

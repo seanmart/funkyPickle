@@ -9,7 +9,7 @@
         </div>
       </div>
     </template>
-    <template #contentWide>
+    <template>
       <div id="map"></div>
     </template>
   </widget>
@@ -54,10 +54,10 @@ export default {
       attribution += `under <a href="http://www.openstreetmap.org/copyright">ODbL.</a>`;
 
       let map = new L.Map("map", {
-        attribution,
         center: new L.LatLng(lat, lon),
         zoom: 13,
-        zoomControl: false,
+        touchZoom: false,
+        scrollWheelZoom: false
       });
 
       let marker = L.marker([lat, lon]).addTo(map);
@@ -66,7 +66,7 @@ export default {
         attribution,
         subdomains: "abcd",
         minZoom: 12,
-        maxZoom: 15,
+        maxZoom: 17,
         ext: "png",
       });
       map.addLayer(Stamen_Toner);

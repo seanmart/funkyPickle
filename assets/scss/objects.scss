@@ -4,11 +4,9 @@
 }
 .o-space{
   margin-top: $s-space;
+  margin-bottom: $m-space;
   &:first-child{
     margin-top: calc(#{$s-space} + #{$s-nav});
-  }
-  &:last-child{
-    margin-bottom: $s-space;
   }
 }
 .o-space-inner{
@@ -32,11 +30,9 @@
   }
   .o-space{
     margin-top: $m-space;
+    margin-bottom: $m-space;
     &:first-child{
       margin-top: $m-space;
-    }
-    &:last-child{
-      margin-bottom: $m-space;
     }
   }
   .o-space-inner{

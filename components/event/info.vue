@@ -6,27 +6,21 @@
     <div class="c-date--wrapper">
       <icon calendar class="c-date-icon" />
       <div class="c-date" v-html="">
-        <span v-if="start" v-html="formatDate(start)" />
+        <span v-if="start" v-html="fullDate(start)" />
         <span v-if="start && end" v-html="'&nbsp–&nbsp'" />
-        <span v-if="end" v-html="formatDate(end)" />
+        <span v-if="end" v-html="fullDate(end)" />
       </div>
     </div>
   </section>
 </template>
 
 <script>
-import { getDay, getMonth, getYear } from "@/assets/js/helpers";
+import { fullDate } from "@/assets/js/helpers";
 export default {
   props:['title','start','end'],
-  methods: {
-    formatDate(date) {
-      if (!date) return;
-      let year = getYear(date);
-      let month = getMonth(date, "long");
-      let day = getDay(date);
-      return `${month} ${day}, ${year}`;
-    },
-  }
+  data:()=>({
+    fullDate
+  })
 }
 </script>
 

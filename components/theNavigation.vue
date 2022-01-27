@@ -150,6 +150,9 @@ $header-mobile-nav-width: 250px;
       display: block;
       font-size: 40px;
       padding: 3vw;
+      &:hover{
+        color: $lime;
+      }
     }
   }
 
@@ -201,6 +204,9 @@ $header-mobile-nav-width: 250px;
       .c-link{
         font-size: 1.5rem;
         padding: .5rem;
+        &:hover{
+          color: $pink;
+        }
       }
     }
 
@@ -227,9 +233,11 @@ main{
     }
   }
   .menu-is-open{
+
     main{
       transform: translateX($header-mobile-nav-width);
       pointer-events: none;
+      opacity: .25;
     }
     #c-header{
       .c-header-side{

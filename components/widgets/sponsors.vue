@@ -1,7 +1,9 @@
 <template lang="html">
   <widget class="c-sponsor-widget">
-    <template #content>
-      sponsors
+    <template>
+      <div class="o-widget-space">
+        sponsors
+      </div>
     </template>
   </widget>
 </template>
