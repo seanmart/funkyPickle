@@ -1,4 +1,4 @@
-import weather from "@/assets/data/weather.json";
+import weather from "@/data/weather.json";
 
 export default{
   state:()=>({
