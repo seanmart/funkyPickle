@@ -2,14 +2,14 @@
   <section class="c-event-list o-container o-space">
 
     <template v-if="data.primary.title">
-      <h2 class="t-xxl t-bold-xl u-marg-bottom-xl" v-html="data.primary.title" />
+      <h2 class="t-xxl t-bold-xl u-mb-xl" v-html="data.primary.title" />
     </template>
 
     <template v-for="event in events">
 
-      <nuxt-link :to="`/events/${event.uid}`" class="c-event-list__event u-marg-bottom-md u-shadow-y u-shadow--hover">
+      <nuxt-link :to="`/events/${event.uid}`" class="c-event-list__event u-fc u-fr--lg u-mb-md u-shadow-y u-shadow--hover">
 
-        <div class="c-event__date--wrapper u-cover-container">
+        <div class="c-event__date--wrapper u-fcc u-cover-container">
           <h3 class="c-date__text--wrapper t-header">
             <span class="c-date__text is-month" v-html="getMonth(event.data.start_date)"/>
             <span class="c-date__text is-day" v-html="getDay(event.data.start_date)"/>
@@ -17,20 +17,20 @@
           <div v-if="event.data.image.url" v-image:cover="event.data.image.url" class="c-date__bg u-cover"/>
         </div>
 
-        <div class="c-event__logo--wrapper">
+        <div class="c-event__logo--wrapper u-frc u-fcc--lg">
           <event-logo :image="event.data.logo.url" :start="event.data.start_date" :end="event.data.end_date"/>
         </div>
 
-        <div class="c-event__info--wrapper">
-          <div class="c-info--wrapper u-pad-xl u-pad-lg--md">
-            <text-scroll class="c-info__title--wrapper t-header">
-              <h3 class="c-info__title u-pad-x-md" v-html="event.data.title"/>
-            </text-scroll>
-            <div class="c-info__location--wrapper u-pad-top-xl u-pad-top-md--md">
-              <icon class="c-info__icon u-marg-right-xs" wayfinder/>
-              <span class="c-info__location" v-html="formatCityState(event.data.city,event.data.state)"/>
-              <mini-weather-widget class="c-info__weather u-marg-left-lg" :uid="event.uid"/>
+        <div class="c-event__info--wrapper u-fcc--lg u-fas--lg u-p-xl">
+          <text-scroll class="c-info__title--wrapper t-header">
+            <h3 class="c-info__title u-px-md" v-html="event.data.title"/>
+          </text-scroll>
+          <div class="c-info__location--wrapper u-fcc u-frc--lg u-fjs--lg u-pt-md">
+            <div class="c-info__location t-sm--lg">
+              <icon class="u-mr-xs t-svg-rg t-svg-sm--lg" wayfinder/>
+              <span v-html="formatCityState(event.data.city,event.data.state)"/>
             </div>
+            <mini-weather-widget class="c-info__weather u-mt-lg u-ml-lg--lg" :uid="event.uid"/>
           </div>
         </div>
       </nuxt-link>
@@ -38,7 +38,7 @@
     </template>
 
     <template v-if="data.primary.link.uid">
-      <div class="c-event-list__btn--wrapper u-marg-top-xxl">
+      <div class="c-event-list__btn--wrapper u-mt-xxl">
         <btn :to="data.primary.link.uid" value="View All Events" big rainbow/>
       </div>
     </template>
@@ -86,13 +86,12 @@ export default {
   $event-list-dur:.75s;
 
   .c-event-list__event{
-    display: flex;
-    flex-direction: column;
     max-width: 100%;
     overflow: hidden;
     border-radius: 8px;
     outline: none;
     position: relative;
+    background: white;
     z-index: 1;
     &:last-child{
       margin-bottom:0px;
@@ -102,9 +101,6 @@ export default {
   .c-event__date--wrapper{
     flex: 0 0 auto;
     @include dark-gradient;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 25rem;
     padding-bottom: 5rem;
     overflow: hidden;
@@ -126,16 +122,13 @@ export default {
   .c-event__logo--wrapper{
     flex: 0 0 auto;
     height: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: relative;
     z-index: 2;
   }
 
   .c-event__info--wrapper{
-    background: white;
     flex: 1 1 auto;
+    margin-top: 5rem;
   }
   .c-info__title--wrapper{
     font-size: 4rem;
@@ -146,37 +139,21 @@ export default {
     transition-duration: $event-list-dur;
   }
 
-  .c-info__location--wrapper{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .c-info__icon{
-    height:1.3rem;
-    fill:$pink;
+  .c-info__location{
+    svg{fill:$pink}
   }
 
   .c-event-list__btn--wrapper{
     text-align: center;
   }
 
-  @media(max-width: $screen-lg - 1px){
-    .c-event__info--wrapper{
-      padding-top: 5rem;
-    }
-  }
-
   @media(min-width: $screen-lg){
 
     .c-event-list__event{
-      flex-direction: row;
       height: 13rem;
     }
 
     .c-event__date--wrapper{
-      flex-direction: column;
       height: auto;
       width: 15rem;
       padding-bottom:0px;
@@ -197,27 +174,21 @@ export default {
     .c-event__logo--wrapper{
       height: 100%;
       width:0px;
-      flex-direction: column;
     }
 
     .c-event__info--wrapper{
-      padding-left: 4rem;
-    }
-
-    .c-info--wrapper{
+      margin-top: 0px;
+      margin-left: 4rem;
       height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .c-info__location--wrapper{
-      justify-content: flex-start;
     }
 
     .c-info__title--wrapper{
       font-size: 3rem;
       letter-spacing: -.03rem;
+    }
+
+    .c-info__weather{
+      margin-top: 0px;
     }
 
     .c-event-list__btn--wrapper{

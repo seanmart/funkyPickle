@@ -1,19 +1,19 @@
 <template lang="html">
   <div class="c-widget-container" :class="classes">
     <div class="c-widget-container--wrapper u-shadow-y">
-      <div class="c-widget__header u-pad-md" v-if="$slots.header">
+      <div class="c-widget__header u-p-md" v-if="$slots.header">
         <slot name="header"/>
       </div>
-      <div class="c-widget__icon u-pad-md" v-if="$slots.icon">
+      <div class="c-widget__icon u-p-md" v-if="$slots.icon">
         <slot name="icon"/>
       </div>
-      <div class="c-widget__content is-row u-pad-md" v-if="$slots.contentRow">
+      <div class="c-widget__content is-row u-p-md" v-if="$slots.contentRow">
         <slot name="contentRow"/>
       </div>
       <div class="c-widget__content" v-if="$slots.contentWide">
         <slot name="contentWide"/>
       </div>
-      <div class="c-widget__content is-col u-pad-md" v-if="$slots.content">
+      <div class="c-widget__content is-col u-p-md" v-if="$slots.content">
         <slot name="content"/>
       </div>
     </div>
@@ -112,7 +112,7 @@ export default {
   }
   &.should-shrink{
     text-align: center;
-    padding:0px;
+    pding:0px;
     .c-widget-container--wrapper{
       display: inline-flex;
       text-align: left;
@@ -120,12 +120,12 @@ export default {
   }
   &.is-wide-left{
     .c-widget__content{
-      padding-left: 0px;
+      pding-left: 0px;
     }
   }
   &.is-wide-right{
     .c-widget__content{
-      padding-right: 0px;
+      pding-right: 0px;
     }
   }
 

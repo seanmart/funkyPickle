@@ -9,12 +9,12 @@
       <div class="c-scroller--wrapper o-container">
 
         <template v-for="article in articles">
-          <nuxt-link :to="`/news/${article.uid}`" class="c-article-list__article u-marg-right-md">
-            <div class="c-article__image--wrapper u-marg-bottom-md">
+          <nuxt-link :to="`/news/${article.uid}`" class="c-article-list__article u-mr-md">
+            <div class="c-article__image--wrapper u-mb-md">
               <div class="c-article__image" v-image:cover="article.data.image.url"/>
             </div>
             <div class="c-article__title t-md t-bold" v-html="$prismic.asHtml(article.data.title)"/>
-            <span class="c-article__date t-sm t-xs--md u-marg-top-md" v-html="formatDate(article.first_publication_date)"/>
+            <span class="c-article__date t-sm t-xs--md u-mt-md" v-html="formatDate(article.first_publication_date)"/>
           </nuxt-link>
         </template>
 

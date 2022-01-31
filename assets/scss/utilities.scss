@@ -1,3 +1,14 @@
+.u-flex{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.u-flex-center{
+
+}
+
 .u-center-row{
   display: flex;
   flex-direction: row;
@@ -88,57 +99,120 @@ $breakpoints:(
   lg: $screen-lg
 );
 
-@mixin map-u-padding($mod:""){
+@mixin map-flex($mod:""){
+
+  .u-frc#{$mod},
+  .u-fr#{$mod}{
+    display: flex;
+    flex-direction: row;
+  }
+  .u-frr#{$mod}{
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  .u-fcc#{$mod},
+  .u-fc#{$mod}{
+    display: flex;
+    flex-direction: column;
+  }
+  .u-fcr#{$mod}{
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .u-frc#{$mod},
+  .u-fcc#{$mod},
+  .u-fjc#{$mod}{
+    justify-content: center;
+  }
+  .u-fjs#{$mod}{
+    justify-content: flex-start;
+  }
+  .u-fje#{$mod}{
+    justify-content: flex-end;
+  }
+  .u-fja#{$mod}{
+    justify-content: space-around;
+  }
+  .u-fjb#{$mod}{
+    justify-content: space-between;
+  }
+  .u-frc#{$mod},
+  .u-fcc#{$mod},
+  .u-fac#{$mod}{
+    align-items: center;
+  }
+  .u-fas#{$mod}{
+    align-items: flex-start;
+  }
+  .u-fae#{$mod}{
+    align-items: flex-end;
+  }
+  .u-fast#{$mod}{
+    align-items: stretch;
+  }
+  .u-fab#{$mod}{
+    align-items: baseline;
+  }
+}
+
+@mixin map-margins($mod:""){
   @each $s-name,$s-size in $spaces{
-
-    .u-pad-#{$s-name}#{$mod},
-    .u-pad-y-#{$s-name}#{$mod},
-    .u-pad-top-#{$s-name}#{$mod}{
-      padding-top: $s-size;
-    }
-    .u-pad-#{$s-name}#{$mod},
-    .u-pad-y-#{$s-name}#{$mod},
-    .u-pad-bottom-#{$s-name}#{$mod}{
-      padding-bottom: $s-size;
-    }
-    .u-pad-#{$s-name}#{$mod},
-    .u-pad-x-#{$s-name}#{$mod},
-    .u-pad-left-#{$s-name}#{$mod}{
-      padding-left: $s-size;
-    }
-    .u-pad-#{$s-name}#{$mod},
-    .u-pad-x-#{$s-name}#{$mod},
-    .u-pad-right-#{$s-name}#{$mod}{
-      padding-right: $s-size;
-    }
-
-    .u-marg-y-#{$s-name}#{$mod},
-    .u-marg-top-#{$s-name}#{$mod}{
+    .u-my-#{$s-name}#{$mod},
+    .u-mt-#{$s-name}#{$mod}{
       margin-top:$s-size;
     }
-    .u-marg-y-#{$s-name}#{$mod},
-    .u-marg-bottom-#{$s-name}#{$mod}{
+    .u-my-#{$s-name}#{$mod},
+    .u-mb-#{$s-name}#{$mod}{
       margin-bottom:$s-size;
     }
-    .u-marg-x-#{$s-name}#{$mod},
-    .u-marg-left-#{$s-name}#{$mod}{
+    .u-mx-#{$s-name}#{$mod},
+    .u-ml-#{$s-name}#{$mod}{
       margin-left:$s-size;
     }
-    .u-marg-x-#{$s-name}#{$mod},
-    .u-marg-right-#{$s-name}#{$mod}{
+    .u-mx-#{$s-name}#{$mod},
+    .u-mr-#{$s-name}#{$mod}{
       margin-right:$s-size;
     }
+  }
+}
 
+@mixin map-padding($mod:""){
+  @each $s-name,$s-size in $spaces{
+
+    .u-p-#{$s-name}#{$mod},
+    .u-py-#{$s-name}#{$mod},
+    .u-pt-#{$s-name}#{$mod}{
+      padding-top: $s-size;
+    }
+    .u-p-#{$s-name}#{$mod},
+    .u-py-#{$s-name}#{$mod},
+    .u-pb-#{$s-name}#{$mod}{
+      padding-bottom: $s-size;
+    }
+    .u-p-#{$s-name}#{$mod},
+    .u-px-#{$s-name}#{$mod},
+    .u-pl-#{$s-name}#{$mod}{
+      padding-left: $s-size;
+    }
+    .u-p-#{$s-name}#{$mod},
+    .u-px-#{$s-name}#{$mod},
+    .u-pr-#{$s-name}#{$mod}{
+      padding-right: $s-size;
+    }
   };
 };
 
 @each $name, $width in $breakpoints {
   @if $name == null {
-    @include map-u-padding()
+    @include map-padding()
+    @include map-margins()
+    @include map-flex()
   }
   @else {
     @media(min-width: $width) {
-      @include map-u-padding('--#{$name}')
+      @include map-padding('--#{$name}')
+      @include map-margins('--#{$name}')
+      @include map-flex('--#{$name}')
     }
   }
 }

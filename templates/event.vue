@@ -6,18 +6,18 @@
       <div class="c-event__logo--wrapper u-center-row">
         <event-logo class="c-event__logo" :image="data.logo.url" :start="data.start_date" :end="data.end_date"/>
       </div>
-      <div class="c-event__info u-pad-y-xxl o-container">
+      <div class="c-event__info u-py-xxl o-container">
         <text-scroll>
-          <h1 class="c-event__title t-header u-pad-x-lg" v-html="data.title" />
+          <h1 class="c-event__title t-header u-px-lg" v-html="data.title" />
         </text-scroll>
       </div>
     </section>
 
     <section id="c-event-content">
-      <sticky-header trigger="#c-event-content" headerClass="c-event__header o-container u-pad-y-sm u-center-row">
+      <sticky-header trigger="#c-event-content" headerClass="c-event__header o-container u-py-sm u-center-row">
         <btn class="c-header-btn__register" to="/" knockout value="Register"/>
         <btn knockout icon="facebook"/>
-        <btn class="u-marg-left-sm" knockout icon="instagram"/>
+        <btn class="u-ml-sm" knockout icon="instagram"/>
       </sticky-header>
       <div class="c-event__columns o-container o-space">
         <div class="c-event__column-main">

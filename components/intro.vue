@@ -8,7 +8,7 @@
     </template>
 
     <template v-if="data.primary.text.length > 0">
-    <div class="c-intro__text t-md t-lg--sm u-pad-top-xl" v-html="$prismic.asHtml(data.primary.text)"/>
+    <div class="c-intro__text t-md t-lg--sm u-pt-xl" v-html="$prismic.asHtml(data.primary.text)"/>
   </template>
 
   </section>
