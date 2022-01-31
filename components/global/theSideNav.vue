@@ -28,7 +28,7 @@ import { mapState } from "vuex";
 import vars from '~/@scss/_variables.scss'
 export default {
   data:()=>({
-    knockout: true
+    knockout: false
   }),
   mounted(){
     this.$bus.$on('OPEN_MENU',this.openMenu)
