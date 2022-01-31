@@ -2,73 +2,79 @@
   <section class="c-event-list o-container o-space">
 
     <template v-if="data.primary.title">
-      <h2 class="t-xxl t-bold-xl u-marg-bottom-xl" v-html="data.primary.title" />
+      <h2 class="t-headline" v-html="data.primary.title" ref="title" />
     </template>
 
     <template v-for="event in events">
 
-      <nuxt-link :to="`/event/${event.uid}`" class="c-event-list__event u-marg-bottom-md u-shadow-y u-shadow--hover">
+      <nuxt-link :to="`/events/${event.uid}`" class="c-event">
 
-        <div class="c-event__date--wrapper u-cover-container">
-          <h3 class="c-date__text--wrapper t-header">
-            <span class="c-date__text is-month" v-html="getMonth(event.data.start_date)"/>
-            <span class="c-date__text is-day" v-html="getDay(event.data.start_date)"/>
+        <div class="c-date--wrapper">
+          <h3 class="c-date t-header">
+            <span class="c-date-item month" v-html="getMonth(event.data.start_date)"/>
+            <span class="c-date-item day" v-html="getDay(event.data.start_date)"/>
           </h3>
-          <div v-if="event.data.image.url" v-image:cover="event.data.image.url" class="c-date__bg u-cover"/>
+          <div v-if="event.data.image.url" v-image:cover="event.data.image.url" class="c-image"/>
         </div>
 
-        <div class="c-event__logo--wrapper">
-          <event-logo :image="event.data.logo.url" :start="event.data.start_date" :end="event.data.end_date"/>
+        <div class="c-logo--wrapper">
+          <div class="c-logo" v-image:cover="event.data.logo.url"/>
         </div>
 
-        <div class="c-event__info--wrapper">
-          <div class="c-info--wrapper u-pad-xl u-pad-lg--md">
-            <text-scroll class="c-info__title--wrapper t-header">
-              <h3 class="c-info__title u-pad-x-md" v-html="event.data.title"/>
-            </text-scroll>
-            <div class="c-info__location--wrapper u-pad-top-xl u-pad-top-md--md">
-              <icon class="c-info__icon u-marg-right-xs" wayfinder/>
-              <span class="c-info__location" v-html="formatCityState(event.data.city,event.data.state)"/>
-              <mini-weather-widget class="c-info__weather u-marg-left-lg" :uid="event.uid"/>
-            </div>
+        <div class="c-info--wrapper">
+          <text-scroll class="c-event-title--wrapper t-header">
+            <h3 class="c-event-title" v-html="event.data.title"/>
+          </text-scroll>
+          <div class="c-location--wrapper">
+            <icon class="c-icon" wayfinder/>
+            <span class="c-location" v-html="formatCityState(event.data.city,event.data.state)"/>
+            <template v-if="weather[event.uid]">
+              <div class="c-weather">
+                <weather-icon :icon="weather[event.uid].weather[0].icon"/>
+                <span v-html="`${weather[event.uid].weather[0].main}, ${getTemp(weather[event.uid].main.temp)}`"/>
+              </div>
+            </template>
           </div>
         </div>
+
+        <div class="c-arrow--wrapper">
+          <icon class="c-arrow" arrow/>
+          <div class="c-rainbow"/>
+        </div>
+
       </nuxt-link>
-
     </template>
 
-    <template v-if="data.primary.link.uid">
-      <div class="c-event-list__btn--wrapper u-marg-top-xxl">
-        <btn :to="data.primary.link.uid" value="View All Events" big rainbow/>
-      </div>
-    </template>
+    <div class="u-space-top c-event-btn" v-if="data.primary.link.uid" ref="btn">
+      <btn :to="`/${data.primary.link.uid}`" big rainbow>view all events</btn>
+    </div>
 
   </section>
 </template>
 
 <script>
-import { getDay, getMonth } from "~/@js/helpers";
+import { getDay, getMonth, getTemp } from "@/assets/js/helpers";
 import {mapState} from 'vuex'
-import query from '~/@js/eventListQuery'
+import eventsList from '@/graphQueries/eventsList'
 export default {
   props: ["data"],
   async fetch(){
-    if (this.$store.state.lists.events.length == 0){
-    let data = await query(this.$prismic)
-    this.$store.commit('LIST',{key:'events',data: data.results})
-    setTimeout(()=>this.$bus.$emit('REFRESH'),250)
+    if (this.$store.state.meta.events.length == 0){
+    let data = await eventsList(this.$prismic)
+    this.$store.commit('meta',{key:'events',data: data.results})
     }
   },
   data: () => ({
     getDay,
-    getMonth
+    getMonth,
+    getTemp
   }),
   computed: {
     ...mapState({
-      eventsData: state => state.lists.events
+      eventsData: state => state.meta.events,
+      weather: state => state.meta.weather
     }),
     events() {
-      if (this.eventsData.length == 0) return []
       return this.data.primary.limit ? this.eventsData.slice(0, this.data.primary.limit) : this.eventsData;
     },
   },
@@ -83,158 +89,292 @@ export default {
 <style lang="scss">
 .c-event-list{
 
-  $event-list-dur:.75s;
+  $events-list-dur: .75s;
 
-  .c-event-list__event{
+  .c-event{
     display: flex;
     flex-direction: column;
-    max-width: 100%;
+    box-shadow: 0px 2px 5px rgba($blue,.2);
+    background: white;
+    margin-bottom: 5vw;
+    outline: none;
+    color: $black;
     overflow: hidden;
     border-radius: 8px;
-    outline: none;
     position: relative;
     z-index: 1;
-    &:last-child{
-      margin-bottom:0px;
-    }
   }
 
-  .c-event__date--wrapper{
+  .c-date--wrapper{
     flex: 0 0 auto;
+    position: relative;
+    z-index: 1;
+    padding: 20vw 0px 30vw;
     @include dark-gradient;
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 25rem;
-    padding-bottom: 5rem;
+    color: white;
     overflow: hidden;
   }
-  .c-date__text--wrapper{
-    position: relative;
-    z-index: 1;
-    color: white;
-    font-size: 5rem;
-  }
-  .c-date__bg{
-    opacity: .5;
-    z-index: 0;
-    transform: scale(1.1);
-    transition-property: transform,opacity;
-    transition-duration: $event-list-dur;
+
+  .c-date{
+    font-size: 10vw;
   }
 
-  .c-event__logo--wrapper{
+  .c-date-item{
+    position: relative;
+    z-index: 1;
+  }
+
+  .c-image{
+    @include cover;
+    z-index: 0;
+    opacity: .5;
+    transition-property: transform, opacity;
+    transition-duration: $events-list-dur;
+    transform: scale(1.1);
+  }
+
+  .c-logo--wrapper{
     flex: 0 0 auto;
-    height: 0px;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 0px;
     position: relative;
-    z-index: 2;
+    z-index: 1;
   }
 
-  .c-event__info--wrapper{
-    background: white;
-    flex: 1 1 auto;
+  .c-logo{
+    flex: 0 0 auto;
+    width: 20vw;
+    height: 20vw;
+    border-radius: 50%;
+    box-shadow: 0px 2px 5px rgba($blue,.2);
+    transition-property: transform;
+    transition-duration: $events-list-dur;
+    transform: scale(1.01);
   }
-  .c-info__title--wrapper{
-    font-size: 4rem;
-    letter-spacing: -.05rem;
+
+  .c-info--wrapper{
+    flex: 0 0 auto;
+    padding: 20vw 5vw 10vw;
   }
-  .c-info__title{
+
+  .c-event-title--wrapper{
+    height: 10vw;
+    width: 100%;
+  }
+
+  .c-event-title{
+    font-size: 10vw;
+    padding: 0px 3vw;
     transition-property: color;
-    transition-duration: $event-list-dur;
+    transition-duration: $events-list-dur;
   }
 
-  .c-info__location--wrapper{
+  .c-location--wrapper{
+    flex: 0 0 auto;
+    margin-top: 2vw;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
   }
 
-  .c-info__icon{
-    height:1.3rem;
-    fill:$pink;
+  .c-icon{
+    fill: $pink;
+    height: 14px;
+    flex: 0 0 auto;
+    margin-right: 10px;
+    font-size: 0;
+    line-height: 0;
   }
 
-  .c-event-list__btn--wrapper{
+  .c-location{
+    flex: 0 0 auto;
+  }
+
+  .c-weather{
+    flex: 0 0 auto;
+    padding: 0px 12px;
+    height: 22px;
+    margin-left: 40px;
+    border-radius: 7px;;
+    background: lighten($black,70%);
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    fill: white;
+    font-size: 12px;
+    line-height: .25;
+    svg{
+      height: 12px;
+      margin-right: 5px;
+    }
+  }
+
+  .c-arrow--wrapper{
+    display: none;
+  }
+
+  .c-event-btn{
     text-align: center;
+    position: relative;
+    z-index: 1;
   }
 
-  @media(max-width: $screen-lg - 1px){
-    .c-event__info--wrapper{
-      padding-top: 5rem;
-    }
-  }
+  @media screen and (min-width: $medium){
 
-  @media(min-width: $screen-lg){
-
-    .c-event-list__event{
-      flex-direction: row;
-      height: 13rem;
+    .c-event{
+      margin-bottom: 1.5rem;
     }
 
-    .c-event__date--wrapper{
-      flex-direction: column;
-      height: auto;
-      width: 15rem;
-      padding-bottom:0px;
-      padding-right: 4rem;
-      text-align: center;
+    .c-date--wrapper{
+      padding: 5rem 0px 8rem;
     }
 
-    .c-date__text{
-      display: block;
-      &.is-month{
-        font-size: 2.25rem;
-      }
-      &.is-day{
-        font-size: 7rem;
-      }
+    .c-date{
+      font-size: 2.5rem;
     }
 
-    .c-event__logo--wrapper{
-      height: 100%;
-      width:0px;
-      flex-direction: column;
-    }
-
-    .c-event__info--wrapper{
-      padding-left: 4rem;
+    .c-logo{
+      width: 6rem;
+      height: 6rem;
     }
 
     .c-info--wrapper{
+      padding: 5rem 1rem 2rem;
+    }
+
+    .c-event-title--wrapper{
+      height: 2.5rem;
+    }
+
+    .c-event-title{
+      font-size: 2.5rem;
+      padding: 0px 1rem;
+    }
+
+    .c-location--wrapper{
+      margin-top: 1rem;
+    }
+
+    .c-icon{
+      height: 16px;
+      margin-right: 12px;
+    }
+
+    .c-event-btn{
+      text-align: left;
+    }
+  }
+
+  @media screen and (min-width: $huge){
+
+    .c-event{
+      flex-direction: row;
+      align-items: stretch;
+      height: 9rem;
+      margin-bottom: 1rem;
+    }
+
+    .c-date--wrapper{
+      padding: 0px;
+      padding-right: 2.5rem;
+      width: 11rem;
+      text-align: center;
+    }
+
+    .c-date{
+      font-size: 1.75rem;
+    }
+
+    .c-date-item{
+      display: block;
+      &.day{
+        font-size: 4.5rem;
+      }
+    }
+
+    .c-logo--wrapper{
+      position: relative;
       height: 100%;
+      width:2px;
+      flex-direction: column;
+    }
+
+    .c-logo{
+      width: 5rem;
+      height: 5rem;
+    }
+
+    .c-info--wrapper{
+      flex: 1 1 auto;
+      padding: 0px;
+      padding-left: 4.5rem;
+      padding-right: 1rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
 
-    .c-info__location--wrapper{
+    .c-event-title--wrapper{
+      height: 2rem;
+    }
+
+    .c-event-title{
+      font-size: 2rem;
+      padding: 0px .75rem;
+    }
+
+    .c-location--wrapper{
       justify-content: flex-start;
+      margin-top: .5rem;
     }
 
-    .c-info__title--wrapper{
-      font-size: 3rem;
-      letter-spacing: -.03rem;
+    .c-arrow--wrapper{
+      flex: 0 0 auto;
+      padding: .5rem;
+      @include dark-gradient;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
     }
 
-    .c-event-list__btn--wrapper{
-      text-align: left;
+    .c-arrow{
+      fill: white;
+      width: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .c-rainbow{
+      @include cover;
+      @include rainbow-gradient(0);
+      z-index: 0;
+      opacity: 0;
+      transition-property: opacity;
+      transition-duration: $events-list-dur;
     }
 
   }
 }
 
-.is-desktop .c-event-list .c-event-list__event:hover,
-.is-desktop .c-event-list .c-event-list__event:focus,
-.c-event-list .c-event-list__event:active{
-
-  .c-info__title{
+.is-desktop .c-event-list .c-event:hover,
+.is-desktop .c-event-list .c-event:focus,
+.c-event-list .c-event:active{
+  .c-rainbow{
+    opacity: 1;
+  }
+  .c-event-title{
     color: $purple;
   }
-  .c-date__bg{
+  .c-image{
     transform: scale(1.01);
     opacity: .35
   }
