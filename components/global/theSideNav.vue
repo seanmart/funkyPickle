@@ -25,7 +25,6 @@
 
 <script>
 import { mapState } from "vuex";
-import vars from '~/@scss/_variables.scss'
 export default {
   data:()=>({
     knockout: false
@@ -48,7 +47,7 @@ export default {
     init(){
       this.setEls()
 
-      let mq = window.matchMedia(`(min-width:${vars.screenMedium})`)
+      let mq = window.matchMedia(`(min-width:800px)`)
       mq.addEventListener('change',this.handleMatchMedia)
       this.handleMatchMedia(mq)
     },

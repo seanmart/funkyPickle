@@ -1,3 +1,5 @@
+const Prismic = require("@prismicio/client");
+
 export default {
   target: 'static',
   loading: false,

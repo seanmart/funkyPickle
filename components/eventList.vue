@@ -7,7 +7,7 @@
 
     <template v-for="event in events">
 
-      <nuxt-link :to="`/event/${event.uid}`" class="c-event-list__event u-marg-bottom-md u-shadow-y u-shadow--hover">
+      <nuxt-link :to="`/events/${event.uid}`" class="c-event-list__event u-marg-bottom-md u-shadow-y u-shadow--hover">
 
         <div class="c-event__date--wrapper u-cover-container">
           <h3 class="c-date__text--wrapper t-header">
