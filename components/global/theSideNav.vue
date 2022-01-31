@@ -25,7 +25,6 @@
 
 <script>
 import { mapState } from "vuex";
-import vars from '@/assets/scss/_variables.scss'
 export default {
   data:()=>({
     knockout: false
