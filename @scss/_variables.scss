@@ -1,0 +1,51 @@
+// colors
+$light-grey: #f7f7f9;
+$dark-grey: #282833;
+$pink: #ff0093;
+$purple: #5600f7;
+$blue: #00aeef;
+$orange: #fe692c;
+$lime: #e4fe57;
+$lime2: #c2fa45;
+$black: #0a0a0e;
+
+// nav
+$nav-top: 70px;
+$nav-side: 250px;
+
+// breakpoints
+$screen-sm: 500px;
+$screen-md: 800px;
+$screen-lg: 1000px;
+
+//animation
+$ease: cubic-bezier(0.645, 0.045, 0.355, 1.000);
+
+// text
+$base-font-size: 10px;
+$screen-md-font-size: calc(#{$base-font-size} + (100vw - #{$screen-md})/160);
+
+// space
+$base-margins: 5vw;
+$screen-sm-margins: calc((100vw - #{$screen-sm - 50}) / 2);
+$screen-md-margins: calc((100vw - #{$screen-md - 250}) / 5);
+$base-space: 70px;
+$screen-sm-space:100px;
+$screen-md-space:10rem;
+
+
+
+:export {
+  lightGrey: $light-grey;
+  darkGrey: $dark-grey;
+  pink: $pink;
+  purple: $purple;
+  blue: $blue;
+  orange: $orange;
+  lime: $lime;
+  lime2: $lime2;
+  black: $black;
+  screenSmall: $screen-sm;
+  screenMedium: $screen-md;
+  screenLarge: $screen-lg;
+}

@@ -1,0 +1,144 @@
+.u-center-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.u-center-col{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.u-hide-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.u-hide-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scrollbar-height: none;
+}
+
+.u-cover-container{
+  position: relative;
+}
+.u-cover{
+  position: absolute;
+  top:0px;
+  left:0px;
+  bottom:0px;
+  right:0px;
+}
+
+.u-hide-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.u-hide-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scrollbar-height: none;
+}
+
+.u-shadow-y{
+  box-shadow: 0px 2px 5px rgba($blue,.2);
+}
+.u-shadow-x{
+  box-shadow: 2px 0px 5px rgba($blue,.2);
+}
+.u-shadow--hover .u-shadow-x,
+.u-shadow--hover .u-shadow-y,
+.u-shadow--hover.u-shadow-x,
+.u-shadow--hover.u-shadow-y{
+  transition-property: box-shadow;
+  transition-duration: .25s;
+}
+
+.u-shadow--hover:hover .u-shadow-x,
+.u-shadow--hover.u-shadow-x:hover,
+.is-desktop .u-shadow--hover:focus .u-shadow-x,
+.is-desktop .u-shadow--hover.u-shadow-x:focus{
+  box-shadow: 5px 0px 10px rgba($blue,.3);
+}
+
+.u-shadow--hover:hover .u-shadow-y,
+.u-shadow--hover.u-shadow-y:hover,
+.is-desktop .u-shadow--hover:focus .u-shadow-y,
+.is-desktop .u-shadow--hover.u-shadow-y:focus{
+  box-shadow: 0px 5px 10px rgba($blue,.3);
+}
+
+$spaces:(
+  xxs: .25rem,
+  xs: .5rem,
+  sm: 1rem,
+  md: 1.5rem,
+  lg: 2rem,
+  xl: 3rem,
+  xxl: 5rem
+);
+
+$breakpoints:(
+  null: 0,
+  sm: $screen-sm,
+  md: $screen-md,
+  lg: $screen-lg
+);
+
+@mixin map-u-padding($mod:""){
+  @each $s-name,$s-size in $spaces{
+
+    .u-pad-#{$s-name}#{$mod},
+    .u-pad-y-#{$s-name}#{$mod},
+    .u-pad-top-#{$s-name}#{$mod}{
+      padding-top: $s-size;
+    }
+    .u-pad-#{$s-name}#{$mod},
+    .u-pad-y-#{$s-name}#{$mod},
+    .u-pad-bottom-#{$s-name}#{$mod}{
+      padding-bottom: $s-size;
+    }
+    .u-pad-#{$s-name}#{$mod},
+    .u-pad-x-#{$s-name}#{$mod},
+    .u-pad-left-#{$s-name}#{$mod}{
+      padding-left: $s-size;
+    }
+    .u-pad-#{$s-name}#{$mod},
+    .u-pad-x-#{$s-name}#{$mod},
+    .u-pad-right-#{$s-name}#{$mod}{
+      padding-right: $s-size;
+    }
+
+    .u-marg-y-#{$s-name}#{$mod},
+    .u-marg-top-#{$s-name}#{$mod}{
+      margin-top:$s-size;
+    }
+    .u-marg-y-#{$s-name}#{$mod},
+    .u-marg-bottom-#{$s-name}#{$mod}{
+      margin-bottom:$s-size;
+    }
+    .u-marg-x-#{$s-name}#{$mod},
+    .u-marg-left-#{$s-name}#{$mod}{
+      margin-left:$s-size;
+    }
+    .u-marg-x-#{$s-name}#{$mod},
+    .u-marg-right-#{$s-name}#{$mod}{
+      margin-right:$s-size;
+    }
+
+  };
+};
+
+@each $name, $width in $breakpoints {
+  @if $name == null {
+    @include map-u-padding()
+  }
+  @else {
+    @media(min-width: $width) {
+      @include map-u-padding('--#{$name}')
+    }
+  }
+}

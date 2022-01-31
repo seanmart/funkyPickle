@@ -1,13 +1,20 @@
 import Vue from "vue";
-import { uid } from "../assets/js/helpers";
+import { uid } from "~/@js/helpers";
 
 Vue.directive("image", {
   bind: function (el, { value, arg }) {
+    if (!value) return 
     el.style.backgroundImage = `url("${value}")`;
     if (arg == "cover") {
       el.style.backgroundSize = "cover";
       el.style.backgroundRepeat = "no-repeat";
     }
+  },
+});
+
+Vue.directive("stagger", {
+  bind: function (el, { value }) {
+    el.style.transitionDelay = `${value}s`;
   },
 });
 

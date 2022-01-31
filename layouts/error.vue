@@ -1,7 +1,7 @@
 <template lang="html">
-  <main id="page-404">
-    <div class="content--wrapper">
-      <h1 class="t-header u-gap-bottom-sm">out of bounds!</h1>
+  <main id="c-404">
+    <div class="c-404--wrapper">
+      <h1 class="c-404__title t-header u-marg-bottom-lg">out of bounds!</h1>
       <p class="">The page your looking for doen't exist</p>
     </div>
   </main>
@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  layout:'default',
   mounted() {
     this.$bus.$emit("LOADED");
   },
@@ -16,20 +17,20 @@ export default {
 </script>
 
 <style lang="scss">
-#page-404 {
+#c-404 {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background: $lime;
 
-  .content--wrapper {
+  .c-404--wrapper {
     text-align: center;
     color: $pink;
   }
 
-  .t-header {
-    font-size: 15vw;
+  .c-404__title {
+    font-size: 8rem;
   }
 }
 </style>

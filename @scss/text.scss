@@ -1,0 +1,72 @@
+html{
+  font-family: 'Open Sans', sans-serif;
+  font-size: $base-font-size;
+  line-height: calc(2px + 2ex + 2px);
+  @media screen and (min-width: $screen-md){
+    font-size: $screen-md-font-size;
+  }
+}
+
+body{
+  font-size: 1.4rem;
+}
+
+.t-header{
+  font-family: 'Saira Extra Condensed', sans-serif;
+  text-transform: uppercase;
+  line-height: .85;
+  font-weight: 700;
+}
+
+.t-rainbow {
+  @include rainbow-gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
+
+.t-bold{
+  font-weight: 600;
+}
+.t-bold-xl{
+  font-weight: 800;
+}
+
+
+$sizes:("xs","sm","rg","md","lg","xl","xxl","xxxl");
+$breakpoints:(
+  null: 0,
+  sm: $screen-sm,
+  md: $screen-md,
+  lg: $screen-lg
+);
+
+// body copy
+
+$t-accum: .25rem;
+$t-size-base: 1.4rem - $t-accum * 2;
+$t-line-accum: -.05;
+$t-line-base: 1.5;
+
+@mixin map-t-sizes($suffix:''){
+  $t-size: $t-size-base;
+  $t-line: $t-line-base;
+  @each $size in $sizes {
+    .t-#{$size}#{$suffix}{
+      font-size: $t-size;
+      line-height: $t-line;
+    }
+    $t-size: $t-size + $t-accum;
+    $t-line: $t-line + $t-line-accum;
+  }
+}
+
+@each $name, $width in $breakpoints {
+  @if $name == null {
+    @include map-t-sizes()
+  }
+  @else {
+    @media(min-width: $width) {
+      @include map-t-sizes('--#{$name}')
+    }
+  }
+}

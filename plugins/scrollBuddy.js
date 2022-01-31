@@ -1,15 +1,10 @@
 function initScrollBuddy(){
 
-  const { userAgent, maxTouchPoints, platform } = navigator
-  const conditional = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
   let smoothScroll = null
   let lerp = (s,e,a)=>{
     let l = (1 - a) * s + a * e;
     return Math.abs(l - e) < 0.0001 ? e : l;
   }
-
-  window.isMobile = conditional.test(userAgent) || (platform === "MacIntel" && maxTouchPoints > 1);
-  document.documentElement.classList.add(isMobile ? 'is-mobile' : 'is-desktop')
 
   window.scrollBuddy = {
     top:0,
@@ -26,11 +21,6 @@ function initScrollBuddy(){
     },
     reset:()=>{
       smoothScroll && smoothScroll.reset()
-    },
-    isMobile:()=>{
-      let { userAgent, maxTouchPoints, platform } = navigator
-      let conditional = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
-      return conditional.test(userAgent) || (platform === "MacIntel" && maxTouchPoints > 1);
     },
     updateScroll:(top,last = scrollBuddy.top)=>{
       scrollBuddy.delta = top - last
@@ -67,11 +57,11 @@ function initScrollBuddy(){
       document.body.appendChild(this.window);
 
       this.el.style.willChange = 'transform'
-      this.window.style.cssText = `position:fixed;top:0;right:0;bottom:0;width:20px;overflow:scroll;`;
+      this.window.style.cssText = `position:fixed;top:0;right:0;bottom:0;width:20px;overflow:scroll;z-index:200;`;
       document.documentElement.style.cssText = `position:fixed;top:0;left:0;right:0;height:100vh;overflow:hidden;`;
 
       window.addEventListener('resize',this.updateDocument)
-      window.addEventListener('wheel',this.handleWheel)
+      this.el.addEventListener('wheel',this.handleWheel)
       this.window.addEventListener('scroll',this.handleScroll)
 
       this.updateDocument()

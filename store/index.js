@@ -1,44 +1,42 @@
-import weather from "@/data/weather.json";
+import weather from "~/@data/weather.json";
 
-export default {
-  state: () => ({
-    nav: [],
-    events: {},
+export default{
+  state:()=>({
     articles:{},
-    pages: {},
-    meta:{
-      weather:{},
+    events:{},
+    pages:{},
+    weather:{},
+    lists:{
+      articles:[],
       events:[],
-      articles:[]
+      nav:[]
     }
   }),
-  mutations: {
-    nav: (state, data) => (state.nav = data),
-    pages: (state, { page, data }) => (state.pages[page] = data),
-    events: (state, { id, data }) => (state.events[id] = data),
-    articles: (state, { id, data }) => (state.articles[id] = data),
-    meta: (state, {key,data}) => (state.meta[key] = data)
+  mutations:{
+    ARTICLE:(state,{key,data}) => state.articles[key] = data,
+    WEATHER:(state,data) => state.weather = data,
+    EVENT:(state,{key,data}) => state.events[key] = data,
+    PAGE:(state,{key,data}) => state.pages[key] = data,
+    LIST:(state,{key,data}) => state.lists[key] = data
   },
-  actions: {
-    async getSettings({ commit }) {
-      let links = [];
-      let res = await this.$prismic.api.getSingle("settings");
+  actions:{
+    async NAV({commit}){
+      let res = await this.$prismic.api.getSingle("navigation");
+      if (!res) return
 
-      if (res) {
-        res.data.links.forEach(
-          (item) =>
-            item.page.uid &&
-            links.push({
-              to: `/${item.page.uid}`,
-              label: item.label,
-            })
-        );
-        commit("nav", links);
-      }
+      let links = res.data.body.map((item) => {
+        return {
+          to:`/${item.primary.link.uid}`,
+          label: item.primary.label
+        }
+      })
+
+      commit("LIST", {key: 'nav',data: links});
+
     },
-    async nuxtServerInit({ dispatch, commit }) {
-      await dispatch("getSettings");
-      commit("meta", {key:'weather', data: weather});
-    },
-  },
-};
+    async nuxtServerInit({dispatch,commit}){
+      await dispatch('NAV')
+      commit('WEATHER',weather)
+    }
+  }
+}
