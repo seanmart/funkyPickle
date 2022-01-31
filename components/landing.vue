@@ -37,7 +37,7 @@ export default {
 
     .c-landing__image{
       height: 100%;
-      background-position: center -20px;
+      background-position: center -20px -20px;
     }
 
     @media(min-width: $screen-sm){

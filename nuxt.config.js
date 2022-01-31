@@ -66,5 +66,18 @@ export default {
         useShortDoctype: true,
       },
     },
-  }
+  },
+  generate: {
+    fallback: "404.html",
+    interval: 500,
+    async routes() {
+      let routes = [];
+      let client = Prismic.client(process.env.PRISMIC_END_POINT, { accessToken: process.env.PRISMIC_ACCESS_TOKEN });
+      let pages = await client.query(Prismic.Predicates.at("document.type", "page"));
+      pages.results.forEach((data) => routes.push({ route: `/${data.uid == 'home' ? '' : data.uid}`, payload: data }));
+      let events = await client.query(Prismic.Predicates.at("document.type", "event"));
+      events.results.forEach((data) => routes.push({ route: `/events/${data.uid}`, payload: data }));
+      return routes;
+    },
+  },
 }
