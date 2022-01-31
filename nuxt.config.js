@@ -32,9 +32,9 @@ export default {
     ],
   },
   buildModules: ["@nuxtjs/style-resources","@nuxtjs/prismic",'nuxt-purgecss'],
-  css: ["~/@scss/main.scss"],
+  css: ["@/assets/scss/main.scss"],
   styleResources: {
-    scss: ["~/@scss/_variables.scss", "~/@scss/_mixins.scss"],
+    scss: ["@/assets/scss/_variables.scss", "@/assets/scss/_mixins.scss"],
   },
   prismic: {
     endpoint: process.env.PRISMIC_END_POINT,
@@ -45,8 +45,12 @@ export default {
     },
   },
   purgeCSS:{
-    //enabled: true
-  },
+    paths: [
+      'templates/**/*.vue',
+      'components/global/*.vue',
+      'components/widgets/*.vue'
+    ]
+},
   plugins: [
     { src: "@/plugins/eventBus.js", ssr: true },
     { src: "@/plugins/scrollBuddy.js", ssr: false },

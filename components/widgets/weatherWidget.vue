@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import {getTemp,getTime} from '~/@js/helpers'
+import {getTemp,getTime} from '@/assets/js/helpers'
 import {mapState} from 'vuex'
 export default {
   props:{

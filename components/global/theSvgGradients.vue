@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import vars from "~/@scss/_variables.scss";
+import vars from "@/assets/scss/_variables.scss";
 export default {
   data: () => ({
     vars: vars,

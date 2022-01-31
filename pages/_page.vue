@@ -1,4 +1,4 @@
 <script>
-import page from '~/@templates/page'
+import page from '@/templates/page'
 export default page
 </script>

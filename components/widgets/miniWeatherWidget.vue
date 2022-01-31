@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import {getTemp} from '~/@js/helpers'
+import {getTemp} from '@/assets/js/helpers'
 import {mapState} from 'vuex'
 export default {
   props:['uid'],

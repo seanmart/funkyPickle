@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import {formatDate} from '~/@js/helpers'
+import {formatDate} from '@/assets/js/helpers'
 export default {
   props:{
     start:String,

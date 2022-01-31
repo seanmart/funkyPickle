@@ -1,4 +1,4 @@
 <script>
-import shop from '~/@templates/shop'
+import shop from '@/templates/shop'
 export default shop
 </script>

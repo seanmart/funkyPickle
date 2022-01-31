@@ -47,9 +47,9 @@
 </template>
 
 <script>
-import { getDay, getMonth } from "~/@js/helpers";
+import { getDay, getMonth } from "@/assets/js/helpers";
 import {mapState} from 'vuex'
-import query from '~/@js/eventListQuery'
+import query from '@/assets/js/eventListQuery'
 export default {
   props: ["data"],
   async fetch(){

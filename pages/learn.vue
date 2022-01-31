@@ -1,4 +1,4 @@
 <script>
-import learn from '~/@templates/learn'
+import learn from '@/templates/learn'
 export default learn
 </script>

@@ -26,8 +26,8 @@
 
 <script>
 import {mapState} from 'vuex'
-import query from '~/@js/articleListQuery'
-import { formatDate } from "~/@js/helpers";
+import query from '@/assets/js/articleListQuery'
+import { formatDate } from "@/assets/js/helpers";
 export default {
   props: ["data"],
   async fetch(){
