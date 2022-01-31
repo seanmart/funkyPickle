@@ -1,0 +1,12 @@
+@import "reset.scss";
+@import "utilities.scss";
+@import "objects.scss";
+@import "text.scss";
+@import "animations.scss";
+
+html {
+  background: linear-gradient(90deg, lighten($blue, 51%) 0%, lighten($pink, 48%) 100%);
+  background-repeat: no-repeat;
+  fill: $black;
+  color: $black;
+}

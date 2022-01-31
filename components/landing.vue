@@ -1,62 +1,47 @@
 <template lang="html">
-  <section class="c-landing o-container-wide">
-    <div class="c-landing--wrapper">
-      <div class="c-reveal" />
-      <div class="c-image">
-        <fancy-image :image="data.primary.image.url" :scale="1.3" :start="0" :trigger="'.c-landing'" />
-      </div>
+  <section class="c-landing o-container u-cover-container" ref="container">
+    <div class="c-landing__media u-cover" ref="media">
+      <figure v-if="img" ref="image" class="c-landing__image" v-image:cover="img"/>
     </div>
   </section>
 </template>
 
 <script>
 export default {
-  props: ["data"],
+  props: ["data","image"],
   mounted() {
-    this.$bus.$once("REVEAL", this.handleReveal);
-    this.handleMounted();
+    if (this.$refs.image){
+      gsap.to(this.$refs.image,1,{scale:1.3,ease:'none', scrollTrigger:{
+        trigger: this.$refs.container,
+        start: 'top top',
+        end: 'bottom top',
+        scrub:true
+      }})
+    }
   },
-  methods: {
-    handleMounted() {
-      gsap.timeline()
-      .set(".c-landing .c-reveal", { scaleY: 0, transformOrigin: "top", display: "block" })
-      .set(".c-landing .c-image", { scale: 1.2, opacity: 0 });
-    },
-    handleReveal() {
-      gsap.timeline()
-        .to(".c-landing .c-reveal", 0.75, { scaleY: 1, ease: "power4.in" })
-        .set(".c-landing .c-image", { opacity: 1 })
-        .to(".c-landing .c-reveal", 0.75, { scaleY: 0, transformOrigin: "bottom", ease: "power4.out" }, 0.8)
-        .to(".c-landing .c-image", 2, { scale: 1, ease: "power4.out" }, "<")
-        .set(".c-landing .c-reveal", { clearProps: "all" })
-        .set(".c-landing .c-image", { clearProps: "all" });
-    },
-  },
-};
-</script>
-
-<style lang="scss">
-.c-landing {
-
-  .c-landing--wrapper{
-    position: relative;
-    overflow: hidden;
-  }
-
-  .c-reveal {
-    @include cover;
-    @include lime-gradient;
-    z-index: 1;
-    display: none;
-  }
-  .c-image {
-    height: 600px;
-  }
-
-  @media screen and (min-width: $medium){
-    .c-image {
-      height: 650px;
+  computed:{
+    img(){
+      if(this.image) return this.image
+      if(this.data) return this.data.primary.image.url
+      return null
     }
   }
 }
+</script>
+
+<style lang="scss">
+  .c-landing{
+    height: 600px;
+    overflow: hidden;
+    background: $black;
+
+    .c-landing__image{
+      height: 100%;
+      background-position: center -20px;
+    }
+
+    @media(min-width: $screen-sm){
+      height:650px;
+    }
+  }
 </style>
