@@ -55,6 +55,9 @@ $t-line-base: 1.5;
       font-size: $t-size;
       line-height: $t-line;
     }
+    .t-svg-#{$size}#{$suffix}{
+      height: $t-size * .8;
+    }
     $t-size: $t-size + $t-accum;
     $t-line: $t-line + $t-line-accum;
   }
