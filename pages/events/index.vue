@@ -1,4 +1,4 @@
 <script>
-import page from '@/templates/page'
-export default page
+import events from '@/templates/events'
+export default events
 </script>

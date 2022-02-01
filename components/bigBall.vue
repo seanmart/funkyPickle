@@ -34,5 +34,6 @@ export default {
       height: 70vw;
     }
   }
+
 }
 </style>

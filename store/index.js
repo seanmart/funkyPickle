@@ -26,7 +26,7 @@ export default{
 
       let links = res.data.body.map((item) => {
         return {
-          to:`/${item.primary.link.uid}`,
+          to:`/${item.primary.link.type == 'page' ? item.primary.link.uid : item.primary.link.type}`,
           label: item.primary.label
         }
       })

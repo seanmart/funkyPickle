@@ -50,7 +50,7 @@ export default {
     let res = await $prismic.api.getByUID("event", uid);
     if (res) {
       let data = { ...res.data, uid };
-      store.commit("EVENT", { uid, data });
+      store.commit("EVENT", { key:uid, data });
       return { data };
     }
 
