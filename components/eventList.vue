@@ -1,8 +1,8 @@
 <template lang="html">
   <section class="c-event-list o-container o-space">
 
-    <template v-if="data.primary.title">
-      <h2 class="t-xxl t-bold-xl u-mb-xl" v-html="data.primary.title" />
+    <template v-if="theTitle">
+      <h2 class="t-xxl t-bold-xl u-mb-xl" v-html="theTitle" />
     </template>
 
     <template v-for="event in events">
@@ -37,9 +37,9 @@
 
     </template>
 
-    <template v-if="data.primary.link.uid">
+    <template v-if="link">
       <div class="c-event-list__btn--wrapper u-mt-xxl">
-        <btn :to="data.primary.link.uid" value="View All Events" big rainbow/>
+        <btn :to="'/events'" value="View All Events" big rainbow/>
       </div>
     </template>
 
@@ -51,7 +51,11 @@ import { getDay, getMonth } from "@/assets/js/helpers";
 import {mapState} from 'vuex'
 import query from '@/assets/js/eventListQuery'
 export default {
-  props: ["data"],
+  props: {
+    data: Object,
+    title: String,
+    link:{type:Boolean,default:true},
+  },
   async fetch(){
     if (this.$store.state.lists.events.length == 0){
     let data = await query(this.$prismic)
@@ -67,9 +71,15 @@ export default {
     ...mapState({
       eventsData: state => state.lists.events
     }),
+    theTitle(){
+      if (this.data) return this.data.primary.title
+      if (this.title) return this.title
+      return null
+    },
     events() {
       if (this.eventsData.length == 0) return []
-      return this.data.primary.limit ? this.eventsData.slice(0, this.data.primary.limit) : this.eventsData;
+      if (this.data && this.data.primary.limit) return this.eventsData.slice(0, this.data.primary.limit);
+      return this.eventsData
     },
   },
   methods: {

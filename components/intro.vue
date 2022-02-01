@@ -1,14 +1,14 @@
 <template lang="html">
   <section class="c-intro o-container o-space">
 
-    <template v-for="(line, i) in data.primary.title">
+    <template v-for="(line, i) in theTitle">
       <div class="c-intro__line--wrapper">
         <h1 ref="line" v-html="line.text" class="c-intro__line t-header" :class="{ ['t-rainbow']: line.spans.length > 0 }" />
       </div>
     </template>
 
-    <template v-if="data.primary.text.length > 0">
-    <div class="c-intro__text t-md t-lg--sm u-pt-xl" v-html="$prismic.asHtml(data.primary.text)"/>
+    <template v-if="theText.length > 0">
+    <div class="c-intro__text t-md t-lg--sm u-pt-xl" v-html="$prismic.asHtml(theText)"/>
   </template>
 
   </section>
@@ -16,7 +16,19 @@
 
 <script>
 export default {
-  props:['data']
+  props:['data','title','text'],
+  computed:{
+    theTitle(){
+      if(this.data) return this.data.primary.title
+      if(this.title) return this.title
+      return []
+    },
+    theText(){
+      if(this.data) return this.data.primary.text
+      if(this.text) return this.text
+      return []
+    }
+  }
 }
 </script>
 
