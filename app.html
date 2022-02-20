@@ -1,9 +1,9 @@
 <html {{ HTML_ATTRS }}>
   <head {{ HEAD_ATTRS }}>
     <script id="js" type="text/javascript">
-      let { userAgent, maxTouchPoints, platform } = navigator
+      let { userAgent, maxTouchPoints, platform, getVRDisplays } = navigator
       let conditional = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
-      window.isMobile = conditional.test(userAgent) || (platform === "MacIntel" && maxTouchPoints > 1);
+      window.isMobile = conditional.test(userAgent) || (platform === "MacIntel" && maxTouchPoints > 1) || getVRDisplays;
       document.documentElement.classList.add('has-js')
       document.documentElement.classList.add(window.isMobile ? 'is-mobile' : 'is-desktop')
     </script>
