@@ -2,7 +2,7 @@
   <head {{ HEAD_ATTRS }}>
     <script id="js" type="text/javascript">
       let { userAgent, maxTouchPoints, platform } = navigator
-      let conditional = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
+      let conditional = /Android|iPhone|iPad|iPod|BlackBerry|Quest|IEMobile|Opera Mini/i
       window.isMobile = conditional.test(userAgent) || (platform === "MacIntel" && maxTouchPoints > 1);
       document.documentElement.classList.add('has-js')
       document.documentElement.classList.add(window.isMobile ? 'is-mobile' : 'is-desktop')
