@@ -1,7 +1,7 @@
 
 @mixin rainbow-gradient($dir: 90){
   background: $pink;
-  background: linear-gradient(#{$dir}deg, $pink 0%, $purple 50%, $blue 100%);
+  background: linear-gradient(#{$dir}deg, $lime 0%, $orange 25%, $pink 50%, $black 100%);
 }
 
 @mixin tropical-gradient($dir: 90){

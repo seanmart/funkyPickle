@@ -14,7 +14,7 @@ export default {
   position: relative;
   .c-big-ball__ball {
     position: absolute;
-    left: 60%;
+    left: 65%;
     top: $base-space;
     @include lime-gradient(45);
     width: 700px;
@@ -30,6 +30,7 @@ export default {
 
   @media(min-width: $screen-md){
     .c-big-ball__ball {
+      top: $screen-md-space;
       width: 70vw;
       height: 70vw;
     }

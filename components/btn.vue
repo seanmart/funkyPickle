@@ -96,11 +96,11 @@ export default {
     }
   }
   &.is-rainbow{
-    @include rainbow-gradient;
+    @include rainbow-gradient(160);
     &:hover{
       color: white;
       fill: white;
-      background: $pink;
+      @include rainbow-gradient(-20)
     }
   }
   &.is-big{
@@ -109,6 +109,13 @@ export default {
     &.should-shrink{
       padding:0px;
       width: 5rem;
+    }
+  }
+
+  @media screen and (max-width:theme('screens.md-max')){
+    .c-btn{
+      height: 5rem;
+      padding: 0px 4rem;
     }
   }
 }

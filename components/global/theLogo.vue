@@ -105,7 +105,7 @@ export default {
       fill: url(#rainbow-move);
     }
     .fp-logo__ball-bg {
-      fill: url(#lime-vertical);
+      fill: none;
     }
     .fp-logo__frame {
       fill: url(#rainbow-vertical);

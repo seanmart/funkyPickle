@@ -93,7 +93,7 @@ export default {
 <style lang="scss">
 .c-event-list{
 
-  $event-list-dur:.75s;
+  $event-list-dur:.5s;
 
   .c-event-list__event{
     max-width: 100%;
@@ -213,7 +213,7 @@ export default {
 .c-event-list .c-event-list__event:active{
 
   .c-info__title{
-    color: $purple;
+    color: $pink;
   }
   .c-date__bg{
     transform: scale(1.01);

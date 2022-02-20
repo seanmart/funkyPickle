@@ -19,7 +19,7 @@ body{
 }
 
 .t-rainbow {
-  @include rainbow-gradient;
+  @include rainbow-gradient(160);
   -webkit-background-clip: text;
   -webkit-text-fill-color: rgba(255, 255, 255, 0);
 }

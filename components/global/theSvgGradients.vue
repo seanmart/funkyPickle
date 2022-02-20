@@ -1,15 +1,16 @@
 <template lang="html">
   <svg viewbox="0 0 500 500" id="svg-gradients">
-    <linearGradient id="rainbow-move" x1="-100%" y1="0" x2="200%" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0" :stop-color="blue"><animate attributeName="offset" values="0;.25;0;0;0" dur="5s" repeatCount="indefinite" /></stop>
-      <stop offset=".5" :stop-color="purple"><animate attributeName="offset" values=".5;.75;.5;.25;.5" dur="5s" repeatCount="indefinite" /></stop>
-      <stop offset="1" :stop-color="pink"><animate attributeName="offset" values="1;1;1;.75;1" dur="5s" repeatCount="indefinite" /></stop>
+    <linearGradient id="rainbow-move" x1="0%" x2="60%" y1="0" y2="0" gradientUnits="userSpaceOnUse">
+      <template v-for="(color,i) in rainbow">
+        <stop :offset="i/(rainbow.length - 1)" :stop-color="color">
+        </stop>
+      </template>
     </linearGradient>
 
     <linearGradient id="rainbow-vertical" x1="0" y1="0" x2="0" y2="100%" gradientUnits="userSpaceOnUse">
-      <stop offset="0" :stop-color="pink"></stop>
-      <stop offset=".5" :stop-color="purple"></stop>
-      <stop offset="1" :stop-color="blue"></stop>
+      <template v-for="(color,i) in rainbow">
+        <stop :offset="i/(rainbow.length - 1)" :stop-color="color"></stop>
+      </template>
     </linearGradient>
 
     <linearGradient id="lime-vertical" x1="0" y1="0" x2="0" y2="100%" gradientUnits="userSpaceOnUse">
@@ -27,8 +28,16 @@ export default {
     blue:'#00aeef',
     lime:'#e4fe57',
     lime2:'#c2fa45',
-    dur: "5s",
+    orange: '#ff903b',
+    darkPurple:'#652e6e',
+    black:'#0a0a0e',
+    dur: "5s"
   }),
+  computed:{
+    rainbow(){
+      return [this.lime,this.orange,this.pink,this.darkPurple,this.black]
+    }
+  }
 };
 </script>
 <style lang="scss">

@@ -87,7 +87,6 @@ export default {
     }
   }
   #c-event-content{
-    min-height: 200vh;
     .c-event__header{
       @include tropical-gradient;
     }
