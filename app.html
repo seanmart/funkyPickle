@@ -1,11 +1,20 @@
 <html {{ HTML_ATTRS }}>
   <head {{ HEAD_ATTRS }}>
-    <script id="js" type="text/javascript">
+    <script id="js-check" type="text/javascript">
+
       let { userAgent, maxTouchPoints, platform } = navigator
-      let conditional = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Quest|Quest 2|OculusBrowser/i
-      window.isMobile = conditional.test(userAgent) || (platform === "MacIntel" && maxTouchPoints > 1);
-      document.documentElement.classList.add('has-js')
+      let mobileCheck = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
+      let vrCheck = /Quest|Quest 2|OculusBrowser/i
+
+      window.isMobile = mobileCheck.test(userAgent) || (platform === "MacIntel" && maxTouchPoints > 1);
+      window.isVR = vrCheck.test(userAgent)
+      window.useSmooth = !window.isMobile && !window.isVR
       document.documentElement.classList.add(window.isMobile ? 'is-mobile' : 'is-desktop')
+      document.documentElement.classList.add('has-js')
+      window.isVR && document.documentElement.classList.add('is-vr')
+
+      document.getElementById('js-check').remove()
+
     </script>
     {{ HEAD }}
   </head>

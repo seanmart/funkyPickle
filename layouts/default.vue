@@ -37,7 +37,7 @@ export default {
   },
   methods:{
     handleReveal(){
-      !isMobile && ScrollBuddy.update()
+      useSmooth && ScrollBuddy.update()
     },
     initCreated(){
       let timeout = null
@@ -49,7 +49,7 @@ export default {
         html.classList.add('is-resizing')
       })
 
-      !isMobile && this.initSmoothScroll()
+      useSmooth && this.initSmoothScroll()
     },
     initSmoothScroll(){
       gsap.registerPlugin(ScrollTrigger);
@@ -66,7 +66,7 @@ export default {
     },
     refresh(){
       ScrollTrigger.getAll().length > 0 && ScrollTrigger.refresh(true)
-      !isMobile && ScrollBuddy.reset()
+      useSmooth && ScrollBuddy.reset()
     }
   }
 }
