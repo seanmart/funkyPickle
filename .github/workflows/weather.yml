@@ -1,0 +1,33 @@
+name: "weather"
+on:
+  schedule:
+    - cron: "30 */6 * * *"
+  workflow_dispatch:
+jobs:
+  weather:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: get prismic data
+        uses: seanmart/query-prismic-data-action@master
+        id: get-prismic-data
+        with:
+          ACCESS_TOKEN: ${{secrets.PRISMIC_ACCESS_TOKEN}}
+          END_POINT: ${{secrets.PRISMIC_END_POINT}}
+          QUERY: '[[at(document.type, "event")][date.after(my.event.end_date,{{date,-1}})]]'
+          FIELDS: id:uid,data.city,data.state,data.map.longitude,data.map.latitude
+      - name: get weather data
+        uses: seanmart/get-open-weather-action@master
+        id: get-weather-data
+        with:
+          API_KEY: ${{secrets.WEATHER_ACCESS_TOKEN}}
+          DATA: ${{steps.get-prismic-data.outputs.DATA}}
+      - name: replace file
+        run: |
+          echo ${{toJson(steps.get-weather-data.outputs.DATA)}} > assets/weather.json
+          git add assets/weather.json
+          git config --global user.name 'Sean Metcalf'
+          git config --global user.email 'sean@seanmart.com'
+          git commit -m "updated weather"
+          git push origin master
