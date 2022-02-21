@@ -1,8 +1,6 @@
 <template lang="html">
   <main id="page">
     <template v-if="data">
-      <big-ball class="pt-space"/>
-      <!-- <intro :title="data.title" /> -->
       <event-list :link="false" :title="theTitle" class="is-last" />
     </template>
   </main>
