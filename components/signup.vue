@@ -3,13 +3,13 @@
     <div class="flex flex-col lg:flex-row lg:items-center">
       <div class="flex-auto">
         <h3 class="font-header font-bold uppercase leading-08 text-center text-60 lg:text-left lg:text-50">
-        <template v-for="line in signup.title">
+        <template v-for="line in data.title">
           <span class="block" v-html="line.text"/>
         </template>
         </h3>
       </div>
       <div class="flex-initial lg:w-250 pt-20 lg:pl-20 lg:pt-0">
-        <template v-for="field in signup.body">
+        <template v-for="field in data.form">
           <formulate-input :label="field.primary.label" :type="field.primary.type" :name="field.primary.ID" :validation="getValidation(field)"/>
         </template>
         <div class="mt-20 text-center lg:text-left">
@@ -32,7 +32,9 @@ export default {
     }})
   },
   computed:{
-    ...mapState(['signup'])
+    ...mapState({
+      data: state => state.settings.signup
+    })
   },
   methods:{
     getValidation(field){

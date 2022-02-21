@@ -40,7 +40,7 @@ export default {
     mobileHeaderDisabled: false
   }),
   computed: mapState({
-    links: state => state.navigation
+    links: state => state.settings.links
   }),
   watch:{
     hideNav(hide){
