@@ -1,7 +1,7 @@
 <template lang="html">
   <container inner class="sponsors bg-black">
     <section-title :value="data.primary.title" knockout/>
-    <div class="flex flex-row flex-wrap -mx-5px">
+    <div class="flex flex-row flex-wrap items-stretch -mx-5px">
       <template v-for="item in data.items">
         <div class="flex-auto w-1/2 lg:w-1/3 p-5px">
           <div class="sponsors__sponsor rounded-lg h-full w-full p-20 flex justify-center items-center">

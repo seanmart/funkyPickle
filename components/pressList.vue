@@ -6,7 +6,7 @@
     </div>
 
     <div class="swiper gutter-left gutter-right relative z-10" ref="swiper">
-      <div class="swiper-wrapper h-auto">
+      <div class="swiper-wrapper h-auto items-stretch">
         <template v-for="item in pressItems">
           <div class="press-list__item swiper-slide h-auto min-h-300">
             <a :href="item.link" target="_blank" class="block overflow-hidden rounded-lg shadow-bottom h-full bg-lime flex flex-col lg:flex-row items-stretch">

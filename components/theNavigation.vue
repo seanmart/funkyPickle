@@ -65,12 +65,12 @@ export default {
       gsap.timeline()
           .set('#nav__side .nav__logo',{x: '-130%'})
           .set('#nav__side .nav__link span',{y:'130%'})
-          .set('#nav__top .nav__logo',{y: '130%'})
+          .set('#nav__top',{y: '-100%'})
     },
     reveal(){
       gsap.timeline()
           .to('#nav__side .nav__logo',1,{x: 0,ease:'expo.out'})
-          .to('#nav__top .nav__logo',1,{y: 0,ease:'expo.out'})
+          .to('#nav__top',1,{y: 0,ease:'expo.out'})
           .to('#nav__side .nav__link span',1,{y:0,stagger: .1,ease:'expo.out'},'<')
     }
   }

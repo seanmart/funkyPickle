@@ -2,7 +2,7 @@
   <div class="relative big-ball w-full z-back">
     <div class="relative">
       <div class="absolute top-space left-0 right-0 overflow-hidden text-right">
-        <div class="inline-block big-ball__ball mr-auto w-full md:w-2/3">
+        <div class="inline-block big-ball__ball mr-auto w-4/5 md:w-2/3">
           <icon ball class="w-full fill-lime" ref="ball" />
         </div>
       </div>
@@ -39,7 +39,7 @@ export default {
 
 <style lang="css">
 .big-ball__ball {
-  transform: translateX(50%);
+  transform: translateX(55%);
 }
 
 </style>

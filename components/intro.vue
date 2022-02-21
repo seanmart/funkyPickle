@@ -4,7 +4,7 @@
         <div class="overflow-hidden">
           <h1
             v-html="line.text"
-            class="intro__title inline-block font-header uppercase text-90 font-bold tracking-tight leading-08"
+            class="intro__title inline-block font-header uppercase text-80 sm:text-90 font-bold tracking-tight leading-08"
             :class="{'text-pink':line.spans.length > 0}"
           />
         </div>
