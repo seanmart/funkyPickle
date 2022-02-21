@@ -1,7 +1,7 @@
 <template lang="html">
   <main id="page">
     <template v-if="data">
-      <event-list :link="false" :title="theTitle" class="is-last" />
+      <event-list :link="false" :title="theTitle" class="is-first is-last" />
     </template>
   </main>
 </template>
