@@ -8,7 +8,7 @@
     <div class="swiper gutter-left gutter-right relative z-10" ref="swiper">
       <div class="swiper-wrapper h-auto items-stretch">
         <template v-for="item in pressItems">
-          <div class="press-list__item swiper-slide h-auto min-h-300">
+          <div class="press-list__item swiper-slide h-auto min-h-300 flex flex-row items-stretch">
             <a :href="item.link" target="_blank" class="block overflow-hidden rounded-lg shadow-bottom h-full bg-lime flex flex-col lg:flex-row items-stretch">
               <div class="flex-shrink-0 flex-grow-0 overflow-hidden pb-2/3 lg:pb-0 lg:w-1/2 relative">
                 <div class="press-list__image absolute inset-0 bg-cover bg-center" :style="{ backgroundImage: `url(${item.image.url})` }" />
