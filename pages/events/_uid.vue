@@ -58,37 +58,41 @@
 
     </div>
 
-    <container id="event__widgets" class="flex flex-col xl:flex-row -mx-05">
-      <div class="flex-initial xl:flex-auto">
+    <container id="event__widgets">
+      <div class="flex flex-col xl:flex-row -mx-05">
+        <div class="flex-initial xl:flex-auto">
 
-        <widget class="text-center" v-if="theWeather">
-          <div class="inline-flex flex-row items-center">
-            <div class=" h-60 w-60 md:w-50 md:h-50 p-10 flex justify-center items-center bg-black fill-white rounded-lg">
-              <icon :icon="theWeather.icon" class="w-full"/>
+          <widget class="text-center" v-if="theWeather">
+            <div class="inline-flex flex-row items-center">
+              <div class=" h-60 w-60 md:w-50 md:h-50 p-10 flex justify-center items-center bg-black fill-white rounded-lg">
+                <icon :icon="theWeather.icon" class="w-full"/>
+              </div>
+              <div class="mx-15 sm:mx-20">
+                <h3 class="font-header font-bold whitespace-nowrap uppercase text-50 md:text-40 leading-none" v-html="theWeather.temp"/>
+                <p  class="font-medium text-12 whitespace-nowrap md:text-10" v-html="theWeather.desc"/>
+              </div>
+              <div class="border-l pl-15 sm:pl-20 border-gray"><table><tbody>
+                <template v-for="(item, i) in theWeather.table">
+                  <tr class="leading-11 text-11px sm:text-13px" :class="{'border-t border-gray': i > 0}">
+                    <td class="py-02 pr-10 whitespace-nowrap font-medium" v-html="`${item.label}:`"/>
+                    <td class="py-02 whitespace-nowrap font-bold" v-html="item.value"/>
+                  </tr>
+                </template>
+              </tbody></table></div>
             </div>
-            <div class="mx-15 sm:mx-20">
-              <h3 class="font-header font-bold whitespace-nowrap uppercase text-50 md:text-40 leading-none" v-html="theWeather.temp"/>
-              <p  class="font-medium text-12 whitespace-nowrap md:text-10" v-html="theWeather.desc"/>
-            </div>
-            <div class="border-l pl-15 sm:pl-20 border-gray"><table><tbody>
-              <template v-for="(item, i) in theWeather.table">
-                <tr class="leading-11 text-11px sm:text-13px" :class="{'border-t border-gray': i > 0}">
-                  <td class="py-02 pr-10 whitespace-nowrap font-medium" v-html="`${item.label}:`"/>
-                  <td class="py-02 whitespace-nowrap font-bold" v-html="item.value"/>
-                </tr>
-              </template>
-            </tbody></table></div>
-          </div>
-        </widget>
+          </widget>
 
-        <widget>
-          map
-        </widget>
-      </div>
-      <div class="flex-initial min-w-200">
-        <widget>
-          sponsors
-        </widget>
+          <widget>
+            map
+          </widget>
+        </div>
+        
+        <div class="flex-initial min-w-200">
+          <widget>
+            sponsors
+          </widget>
+        </div>
+
       </div>
     </container>
   </main>
