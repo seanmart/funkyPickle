@@ -1,13 +1,13 @@
 <template lang="html">
-  <div class="p-05">
-    <div class="widget shadow-bottom rounded-lg overflow-hidden" :class="bg">
-      <div class="p-15" v-if="$slots.header">
+  <div class="p-10px">
+    <div class="widget shadow-bottom rounded-lg overflow-hidden" :class="containerClasses">
+      <div class="p-15px font-bold" v-if="$slots.header" :class="headerClasses">
         <slot name="header"/>
       </div>
-      <div class="p-15" v-if="!$slots.full">
+      <div class="p-15px" :class="contentClasses" v-if="!$slots.full">
         <slot/>
       </div>
-      <div class="" v-if="$slots.full">
+      <div :class="contentClasses" v-if="$slots.full">
         <slot name="full"/>
       </div>
     </div>
@@ -17,7 +17,9 @@
 <script>
 export default {
   props:{
-    bg:{type: String, default: 'bg-white'}
+    contentClasses:{type: String, default: ''},
+    containerClasses:{type: String, default: 'bg-white'},
+    headerClasses: {type: String, default: 'bg-lime'},
   }
 
 }

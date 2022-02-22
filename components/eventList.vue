@@ -26,6 +26,9 @@
           <div class="flex flex-row items-center justify-center mt-05 lg:justify-start">
             <icon class="mr-05 h-10 fill-pink" wayfinder />
             <span class="text-14 lg:text-10 font-medium" v-html="formatCityState(event.data.city, event.data.state)" />
+            <span class="ml-10 inline-block py-05 px-10 rounded-md bg-gray">
+              <weather mini :uid="event.uid"/>
+            </span>
           </div>
         </div>
       </nuxt-link>

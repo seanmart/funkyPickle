@@ -46,51 +46,64 @@
             </div>
         </container>
 
-        <!-- <sticky-header> -->
           <container noTop noBottom>
             <div class="mt-40 text-center">
               <btn pink wide value="Register" />
             </div>
           </container>
-        <!-- </sticky-header> -->
 
       </div>
 
     </div>
 
-    <container id="event__widgets">
-      <div class="flex flex-col xl:flex-row -mx-05">
+    <container id="event__widgets" class="is-last">
+      <div class="flex flex-col-reverse xl:flex-row -mx-05">
         <div class="flex-initial xl:flex-auto">
 
-          <widget class="text-center" v-if="theWeather">
-            <div class="inline-flex flex-row items-center">
-              <div class=" h-60 w-60 md:w-50 md:h-50 p-10 flex justify-center items-center bg-black fill-white rounded-lg">
-                <icon :icon="theWeather.icon" class="w-full"/>
+          <widget>
+            <weather :uid="uid"/>
+          </widget>
+
+          <widget headerClasses="bg-white">
+            <template #header >
+              <h3 v-html="`${data.place}`"/>
+              <p class="text-11px font-medium sm:text-13px" v-html="`${data.address}, ${data.city}, ${data.state}`"/>
+            </template>
+            <template #full>
+              <div class="relative pb-2/3">
+                <app-map class="absolute inset-0" :longitude="data.map.longitude" :latitude="data.map.latitude"/>
               </div>
-              <div class="mx-15 sm:mx-20">
-                <h3 class="font-header font-bold whitespace-nowrap uppercase text-50 md:text-40 leading-none" v-html="theWeather.temp"/>
-                <p  class="font-medium text-12 whitespace-nowrap md:text-10" v-html="theWeather.desc"/>
-              </div>
-              <div class="border-l pl-15 sm:pl-20 border-gray"><table><tbody>
-                <template v-for="(item, i) in theWeather.table">
-                  <tr class="leading-11 text-11px sm:text-13px" :class="{'border-t border-gray': i > 0}">
-                    <td class="py-02 pr-10 whitespace-nowrap font-medium" v-html="`${item.label}:`"/>
-                    <td class="py-02 whitespace-nowrap font-bold" v-html="item.value"/>
-                  </tr>
-                </template>
-              </tbody></table></div>
+            </template>
+          </widget>
+
+          <widget>
+            <template #header>
+              <h3>Event Schedule</h3>
+            </template>
+
+            <template v-for="item in tableData.data">
+              <app-table :headers="tableData.headers" :data="item" class="w-full my-15"/>
+            </template>
+
+          </widget>
+
+        </div>
+
+        <div class="flex-initial xl:w-150 xl:pl-10">
+
+          <widget>
+            <template #header>
+              <h3 class="font-bold">Sponsors</h3>
+            </template>
+            <div class="flex flex-row flex-wrap items-center justify-center">
+              <template v-for="sponsor in data.sponsors">
+                <div class="p-30 xl:px-10 text-center">
+                    <img class="w-150px max-w-full inline-block" :src="sponsor.sponsor_logo.url" :alt="sponsor.sponsor_logo.alt"/>
+                </div>
+              </template>
             </div>
           </widget>
 
-          <widget>
-            map
-          </widget>
-        </div>
-        
-        <div class="flex-initial min-w-200">
-          <widget>
-            sponsors
-          </widget>
         </div>
 
       </div>
@@ -99,8 +112,7 @@
 </template>
 
 <script>
-import { formatDate,getTemp,getTime } from "@/assets/helpers";
-import {mapState} from 'vuex'
+import { formatDate } from "@/assets/helpers";
 export default {
   async asyncData({ store, params, $prismic, payload }) {
     let res = null;
@@ -121,25 +133,35 @@ export default {
     headerActive: false,
   }),
   computed:{
-    ...mapState({
-      weather: state => state.weather
-    }),
-    theWeather(){
-      let weather = this.weather[this.uid] || null
-      if (weather){
-        return {
-          icon: weather.weather[0].icon,
-          temp: getTemp(weather.main.temp),
-          desc: weather.weather[0].main,
-          table:[
-            {label: 'Feels Like', value: getTemp(weather.main.feels_like)},
-            {label: 'Humidity', value: `${weather.main.humidity}%`},
-            {label: 'Sunrise', value: getTime(weather.sys.sunrise,weather.timezone)},
-            {label: 'Sunset', value: getTime(weather.sys.sunset,weather.timezone)}
+    tableData(){
+      return{
+        headers:[
+          'time',
+          'main'
+        ],
+        data:[
+          [
+            {time: '8:00am',main:'Intro Game'},
+            {time: '8:00am',main:'Intro Game'},
+            {time: '8:00am',main:'Intro Game'},
+            {time: '8:00am',main:'Intro Game'},
+            {time: '8:00am',main:'Intro Game'},
+            {time: '8:00am',main:'Intro Game'},
+            {time: '8:00am',main:'Intro Game'},
+            {time: '8:00am',main:'Intro Game'}
+          ],
+          [
+            {time: '8:00am',main:'Intro Game'},
+            {time: '8:00am',main:'Intro Game'},
+            {time: '8:00am',main:'Intro Game'},
+            {time: '8:00am',main:'Intro Game'},
+            {time: '8:00am',main:'Intro Game'},
+            {time: '8:00am',main:'Intro Game'},
+            {time: '8:00am',main:'Intro Game'},
+            {time: '8:00am',main:'Intro Game'}
           ]
-        }
+        ]
       }
-      return null
     }
   },
   methods:{
@@ -147,9 +169,3 @@ export default {
   }
 };
 </script>
-
-<style lang="css">
-#event__widgets {
-  height: 100vh;
-}
-</style>
