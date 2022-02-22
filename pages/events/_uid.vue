@@ -1,7 +1,7 @@
 <template lang="html">
   <main id="page">
 
-    <div class="shadow-bottom bg-white">
+    <div class="shadow-bottom bg-white" v-if="data">
 
       <landing center v-if="data.image.url" :image="data.image.url" class="h-350 md:h-250 pb-0" />
 
@@ -25,8 +25,8 @@
                     <icon calendar class="w-20"/>
                   </div>
                   <div class="text-left ml-15 font-medium">
-                    <span class="block whitespace-nowrap" v-html="`${formatDate(data.start_date, 'dddd, mmmm dd, yyyy')}`" />
-                    <span class="block whitespace-nowrap" v-html="`${formatDate(data.end_date, 'dddd, mmmm dd, yyyy')}`" />
+                    <span v-if="data.start_date" class="block whitespace-nowrap" v-html="`${formatDate(data.start_date, 'dddd, mmmm dd, yyyy')}`" />
+                    <span v-if="data.end_date" class="block whitespace-nowrap" v-html="`${formatDate(data.end_date, 'dddd, mmmm dd, yyyy')}`" />
                   </div>
                 </div>
               </widget>
@@ -37,8 +37,8 @@
                     <icon wayfinder class="w-20"/>
                   </div>
                   <div class="text-left ml-15 font-medium">
-                    <span class="block whitespace-nowrap" v-html="data.place" />
-                    <span class="block whitespace-nowrap" v-html="`${data.city}, ${data.state}`" />
+                    <span v-if="data.place" class="block whitespace-nowrap" v-html="data.place" />
+                    <span v-if="data.city && data.state" class="block whitespace-nowrap" v-html="`${data.city}, ${data.state}`" />
                   </div>
                 </div>
               </widget>
@@ -56,15 +56,15 @@
 
     </div>
 
-    <container id="event__widgets" class="is-last">
+    <container id="event__widgets" class="is-last" v-if="data">
       <div class="flex flex-col-reverse xl:flex-row -mx-05">
         <div class="flex-initial xl:flex-auto">
 
-          <widget>
+          <widget v-if="uid">
             <weather :uid="uid"/>
           </widget>
 
-          <widget headerClasses="bg-white">
+          <widget headerClasses="bg-white" v-if="data.map.latitude && data.map.longitude">
             <template #header >
               <h3 v-html="`${data.place}`"/>
               <p class="text-11px font-medium sm:text-13px" v-html="`${data.address}, ${data.city}, ${data.state}`"/>
@@ -128,9 +128,8 @@ export default {
     if (data) return { data, uid };
   },
   data: () => ({
-    data: [],
+    data: null,
     uid: null,
-    headerActive: false,
   }),
   computed:{
     tableData(){

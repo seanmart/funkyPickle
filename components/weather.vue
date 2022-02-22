@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="text-center">
+  <div class="text-center" v-if="weather">
     <div class="inline-flex flex-row items-center">
       <div
         class="flex justify-center items-center"
