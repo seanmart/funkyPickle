@@ -2,9 +2,9 @@
   <container noX noTop class="landing h-600 md:h-400" :class="{'has-video': theVideo}">
       <div class="relative overflow-hidden h-full">
 
+        <template v-if="theImage">
         <div
           ref="image"
-          v-if="theImage"
           class="landing__image absolute inset-0 bg-cover bg-no-repeat"
           :class="{'bg-center-top': !center, 'bg-center': center}"
           :style="{backgroundImage:`url(${theImage})`}"
@@ -13,6 +13,7 @@
         <video class="landing__video w-full h-full" autoplay loop muted>
           <source :src="theVideo" type="video/mp4">
         </video>
+        </template>
 
       </div>
   </container>

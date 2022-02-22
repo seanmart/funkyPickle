@@ -2,7 +2,9 @@
   <table>
     <tr>
       <template v-for="header in headers">
-        <th v-html="header" class="table-header px-10 py-05 text-left bg-gray"/>
+        <th class="table-header px-10 py-05 text-left bg-gray">
+          <span v-html="header"/>
+        </th>
       </template>
     </tr>
     <tbody>
