@@ -27,14 +27,14 @@
             <icon class="mr-05 h-10 fill-pink" wayfinder />
             <span class="text-14 lg:text-10 font-medium" v-html="formatCityState(event.data.city, event.data.state)" />
             <span class="ml-10 inline-block py-05 px-10 rounded-md bg-gray">
-              <weather mini :uid="event.uid"/>
+              weather
             </span>
           </div>
         </div>
       </nuxt-link>
     </template>
-    <div class="mt-40 text-center md:text-left">
-      <btn v-if="link" pink value="View All Events" to="/events" />
+    <div v-if="link" class="mt-40 text-center md:text-left">
+      <btn pink value="View All Events" to="/events" />
     </div>
   </container>
 </template>
@@ -59,6 +59,7 @@ export default {
   computed: {
     ...mapState({
       eventsData: (state) => state.lists.events,
+      weather: state => state.weather
     }),
     theTitle() {
       if (this.data) return this.data.primary.title;

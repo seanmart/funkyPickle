@@ -2,7 +2,7 @@
   <div id="site" class="light-blue">
     <the-preloader/>
     <the-navigation/>
-    <div id="scroller" class="md:pl-nav-side">
+    <div id="scroller" class="md:pl-nav-side" ref="scroller">
       <nuxt/>
       <signup/>
       <the-footer/>
@@ -18,12 +18,12 @@ export default {
     this.initCreated()
   },
   mounted(){
-    this.$bus.$on('REVEAL',this.handleReveal)
     this.$bus.$emit('LOADED')
   },
   watch:{
     $route(){
-      this.refresh()
+      this.$refs.scroller.scrollTo(0,0)
+      ScrollTrigger.getAll().length > 0 && ScrollTrigger.refresh(true)
       gsap.to('#scroller',.5,{delay:.25, opacity:1,onComplete:()=>{
         this.$bus.$emit('REVEAL')
       }})
@@ -36,12 +36,14 @@ export default {
     })
   },
   methods:{
-    handleReveal(){
-      useSmooth && ScrollBuddy.update()
-    },
     initCreated(){
       let timeout = null
       let html = document.documentElement
+
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.registerPlugin(ScrollToPlugin);
+      
+      !isMobile && ScrollTrigger.defaults({scroller: "#scroller",pinType: 'fixed'});
 
       window.addEventListener('resize',()=>{
         timeout && clearTimeout(timeout)
@@ -49,25 +51,7 @@ export default {
         html.classList.add('is-resizing')
       })
 
-      useSmooth && this.initSmoothScroll()
     },
-    initSmoothScroll(){
-      gsap.registerPlugin(ScrollTrigger);
-      ScrollBuddy.init({
-        el: "#scroller",
-        event: ScrollTrigger.update,
-        inertia: 0.11,
-      });
-      ScrollTrigger.defaults({scroller: "#scroller"});
-      ScrollTrigger.scrollerProxy("#scroller", {
-        scrollTop: (value) => ScrollBuddy.top,
-        getBoundingClientRect: () => ({top: 0,left: 0,width: window.innerWidth,height: window.innerHeight}),
-      });
-    },
-    refresh(){
-      ScrollTrigger.getAll().length > 0 && ScrollTrigger.refresh(true)
-      useSmooth && ScrollBuddy.reset()
-    }
   }
 }
 </script>
@@ -80,12 +64,26 @@ export default {
   body{
     font-size: 1.6rem;
   }
+
+  html.is-desktop,
+  .is-desktop body{
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .is-desktop #scroller{
+    overflow: scroll;
+    height: 100%;
+  }
+
   #site{
     width: 100vw;
   }
+
   #page{
     min-height: 100vh;
   }
+
   .is-resizing *{
     transition: none !important;
   }
@@ -100,6 +98,7 @@ export default {
     opacity: .2;
     border-radius: 1px;
   }
+
 
   @media screen and (min-width: theme('screens.md')){
     html{

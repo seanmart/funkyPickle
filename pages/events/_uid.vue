@@ -1,134 +1,125 @@
 <template lang="html">
-  <main id="page" v-if="data">
+  <main id="page" class="event">
 
-    <div class="shadow-bottom bg-white">
+    <template v-if="data.banner_image.url">
+    <div class="h-300 md:h-100 relative">
+      <div class="absolute top-0 left-0 right-0 -bottom-100">
+        <landing center class="event-landing pb-0" :image="data.image.url "/>
+      </div>
+    </div>
+  </template>
 
-      <landing center :image="landingImage" class="h-350 md:h-250 pb-0" />
+    <template v-else>
+      <landing center class="h-300 md:h-200" :image="data.image.url "/>
+    </template>
 
-      <template v-if="bannerImage">
-        <container noTop noBottom>
-          <div class="relative z-10 flex flex-row justify-center items-center h-0">
-            <div class="w-full pb-2/5 shadow-bottom bg-cover bg-center rounded-lg relative" :style="bannerImage" />
+    <container noTop>
+
+      <img class="rounded-lg shadow-bottom" :src="data.banner_image.url" :alt="data.banner_image.alt">
+
+      <div class="mb-50" :class="{'mt-50':data.banner_image.url }">
+        <h1 v-html="this.data.title" class="font-header uppercase font-bold text-40 text-center leading-09 max-w-30ch mx-auto"/>
+      </div>
+
+      <div class="flex flex-row flex-wrap -m-05 lg:text-12 text-center">
+
+        <div v-if="timeData" class="flex flex-col flex-auto">
+          <widget class="m-05">
+              <p v-if="timeData.start" class="label" v-html="'starts:'"/>
+              <div class="inline-flex flex-row items-center mt-5px">
+                <icon-btn lime small icon="calendar" class="mr-10px"/>
+                <h3 v-if="timeData.start" v-html="timeData.start" class="font-semibold"/>
+              </div>
+              <p v-if="timeData.end" class="label" v-html="'ends:'"/>
+              <div class="inline-flex flex-row items-center mt-5px">
+                <icon-btn lime small icon="calendar" class="mr-10px"/>
+                <h3 v-if="timeData.end" v-html="timeData.end" class="font-semibold"/>
+              </div>
+          </widget>
+        </div>
+
+        <widget v-if="weatherData" class="m-05 flex-auto flex flex-row justify-center items-center">
+          <div class="flex-initial self-stretch text-center bg-lime py-10px px-20px rounded-lg flex flex-row items-center">
+            <icon :icon="weatherData.icon" class="h-20 mr-20px"/>
+            <h3 v-html="weatherData.temp" class="font-header font-bold uppercase text-45 lg:text-40 leading-10"/>
           </div>
-          <div class="w-full"><div class="pt-1/5" /></div>
-        </container>
-      </template>
-
-      <div class="py-50">
-
-        <container noTop noBottom>
-
-          <h1 v-html="eventTitle" class="text-center font-header font-bold uppercase text-45 leading-09" />
-
-          <div class="text-left flex flex-row flex-wrap mt-40 -mx-05">
-
-            <template v-if="startDate || endDate">
-              <widget class="flex-auto text-center">
-                <div class="inline-flex flex-row items-center">
-                  <div class="w-40 h-40 flex justify-center items-center bg-pink fill-white rounded-lg">
-                    <icon calendar class="w-20"/>
-                  </div>
-                  <div class="text-left ml-15 font-medium">
-                    <span v-if="startDate" class="block whitespace-nowrap" v-html="startDate" />
-                    <span v-if="endDate" class="block whitespace-nowrap" v-html="endDate" />
-                  </div>
-                </div>
-              </widget>
-            </template>
-
-            <template v-if="place || cityState">
-              <widget class="flex-auto text-center">
-                <div class="inline-flex flex-row items-center">
-                  <div class="w-40 h-40 flex justify-center items-center bg-pink fill-white rounded-lg">
-                    <icon wayfinder class="w-20"/>
-                  </div>
-                  <div class="text-left ml-15 font-medium">
-                    <span v-if="place" class="block whitespace-nowrap" v-html="place" />
-                    <span v-if="cityState" class="block whitespace-nowrap" v-html="cityState" />
-                  </div>
-                </div>
-              </widget>
-            </template>
-
+          <div class="flex-initial px-20px">
+            <p class="label" v-html="'feels like:'"/>
+            <h3 v-html="weatherData.feels" class="font-semibold"/>
+            <p class="label" v-html="'description:'"/>
+            <h3 v-html="weatherData.desc" class="font-semibold"/>
           </div>
+        </widget>
 
-          <div class="mt-40 text-center">
-            <btn pink wide value="Register" />
+        <widget v-if="locationData" class="flex-auto w-full m-05 flex flex-col xl:flex-row xl:items-center">
+          <div class="flex-auto flex flex-row items-center justify-center">
+            <div class="flex-initial">
+              <p v-html="'location:'" class="label"/>
+              <div class="inline-flex flex-row items-center mt-5px mb-05">
+                <icon-btn lime small icon="wayfinder" class="mr-10px"/>
+                <h3 v-html="locationData.place" class="font-bold leading-10 text-20 lg:text-15"/>
+              </div>
+              <p v-html="locationData.address" class="text-14px"/>
+              <p v-html="locationData.address2" class="text-14px"/>
+            </div>
           </div>
-
-        </container>
+          <div class="flex-grow flex-shrink-0 min-w-1/2 mt-20px xl:ml-20px xl:mt-0 rounded-md overflow-hidden">
+            <app-map :longitude="locationData.longitude" :latitude="locationData.latitude" class="w-full h-300px"/>
+          </div>
+        </widget>
 
       </div>
 
+
+    </container>
+
+    <div class="h-80px relative z-30" ref="headerSpacer">
+      <container noTop noBottom class="flex flex-row justify-center items-center h-80px" ref="header">
+        <btn pink wide value="Register" class="mx-05"/>
+      </container>
     </div>
 
-    <container id="event__widgets" class="is-last">
-      <div class="flex flex-col-reverse xl:flex-row -mx-05">
+    <container last ref="content">
 
-        <div class="flex-initial xl:flex-auto">
-
-          <template v-if="uid">
-            <widget>
-              <weather :uid="uid"/>
-            </widget>
-          </template>
-
-          <template v-if="map">
-            <widget headerClasses="bg-white">
-                <template #header >
-                  <template v-if="place || fullAddress">
-                    <h3 v-if="place" v-html="place"/>
-                    <p class="text-11px font-medium sm:text-13px" v-html="fullAddress"/>
-                  </template>
-                </template>
-              <template #full>
-                <div class="relative pb-2/3">
-                  <app-map class="absolute inset-0" :longitude="map.longitude" :latitude="map.latitude"/>
-                </div>
-              </template>
-            </widget>
-          </template>
-
-          <template v-if="schedule">
-            <widget>
-              <template #header>
-                <h3>Event Schedule</h3>
-              </template>
-    
-              <template v-for="item in schedule.data">
-                <app-table :headers="schedule.headers" :data="item" class="w-full my-15"/>
-              </template>
-
-            </widget>
-          </template>
-
-        </div>
-
-        <div class="flex-initial xl:w-150 xl:pl-10">
-
-          <template v-if="sponsors">
-            <widget>
-              <template #header>
-                <h3 class="font-bold">Sponsors</h3>
-              </template>
-              <div class="flex flex-row flex-wrap items-center justify-center">
-                <template v-for="sponsor in sponsors">
-                  <div class="p-30 xl:px-10 text-center">
-                      <img class="w-150px max-w-full inline-block" :src="sponsor.sponsor_logo.url" :alt="sponsor.sponsor_logo.alt"/>
-                  </div>
-                </template>
+      <div class="flex flex-col lg:flex-row" v-if="content">
+        <div class="flex-auto" ref="innerContent">
+          <template v-for="(section,i) in content">
+            <div :id="section.id" :class="{'pb-50':i < content.length - 1}">
+              <section-title :value="section.label"/>
+              <div class="h-200">
+                {{section.label}} content
               </div>
-            </widget>
+            </div>
           </template>
-
+        </div>
+        <div class="flex-initial ml-30 w-130 hidden lg:block" ref="sidebarSpacer">
+          <aside ref="sidebar">
+            <template v-for="(section,i) in content">
+              <a
+              :id="`${section.id}-button`"
+              v-html="section.label"
+              :href="`#${section.id}`"
+              @click.prevent="scrollTo(`#${section.id}`,`${section.id}-button`)"
+              class="sidebar-button block py-05 pl-10 bg-white rounded-full shadow-bottom font-semibold"
+              :class="{'mt-05':i}"
+              />
+            </template>
+          </aside>
         </div>
       </div>
+
+      <div v-else class="text-center">
+        Event Content coming soon!
+      </div>
+
     </container>
+
   </main>
 </template>
 
 <script>
-import { formatDate } from "@/assets/helpers";
+import { formatDate,getTemp,getTime } from "@/assets/helpers";
+import {mapState} from 'vuex'
 export default {
   async asyncData({ store, params, $prismic, payload }) {
     let res = null;
@@ -146,79 +137,157 @@ export default {
   data: () => ({
     data: null,
     uid: null,
+    cancelSectionAnim: false
   }),
-  computed:{
-    landingImage(){
-      if (!this.data) return null
-      return this.data.image.url || null
+  mounted(){
+    this.$nextTick(this.init)
+  },
+  destroyed(){
+    this.shAnim && this.shAnim.kill()
+    this.sbAnim && this.sbAnim.kill()
+    this.sectionAnims && this.sectionAnims.forEach(a => a.kill())
+  },
+  methods:{
+    init(){
+      this.initScrollTriggers()
     },
-    bannerImage(){
-      if (!this.data || !this.data.banner_image.url) return null
-      return {backgroundImage: `url(${this.data.banner_image.url})`}
-    },
-    eventTitle(){
-      if (!this.data) return null
-      return this.data.title || null
-    },
-    startDate(){
-      if (!this.data || !this.data.start_date) return null
-      return formatDate(this.data.start_date, 'dddd, mmmm dd, yyyy')
-    },
-    endDate(){
-      if (!this.data || !this.data.end_date) return null
-      return formatDate(this.data.end_date, 'dddd, mmmm dd, yyyy')
-    },
-    place(){
-      if (!this.data) return null
-      return this.data.place || null
-    },
-    cityState(){
-      if (!this.data) return null
-      let city = this.data.city || null
-      let state = this.data.state || null
-      return [city,state].filter(i => i !== null).join(', ')
-    },
-    fullAddress(){
-      if (!this.data) return null
-      let address =  this.data.address || null
-      return [address,this.cityState].filter(i => i !== null).join(', ')
-    },
-    map(){
-      if (!this.data) return null
-      return this.data.map.longitude && this.data.map.latitude ? this.data.map : null
-    },
-    sponsors(){
-      if (!this.data) return null
-      return this.data.sponsors || null
-    },
-    schedule(){
-      if (!this.data) return null
-      return{
-        headers:['time','main'],
-        data:[
-          [
-            {time: '8:00am',main:'Intro Game'},
-            {time: '8:00am',main:'Intro Game'},
-            {time: '8:00am',main:'Intro Game'},
-            {time: '8:00am',main:'Intro Game'},
-            {time: '8:00am',main:'Intro Game'},
-            {time: '8:00am',main:'Intro Game'},
-            {time: '8:00am',main:'Intro Game'},
-            {time: '8:00am',main:'Intro Game'}
-          ],
-          [
-            {time: '8:00am',main:'Intro Game'},
-            {time: '8:00am',main:'Intro Game'},
-            {time: '8:00am',main:'Intro Game'},
-            {time: '8:00am',main:'Intro Game'},
-            {time: '8:00am',main:'Intro Game'},
-            {time: '8:00am',main:'Intro Game'},
-            {time: '8:00am',main:'Intro Game'},
-            {time: '8:00am',main:'Intro Game'}
-          ]
-        ]
+    initScrollTriggers(){
+      if (!this.content) return
+      let header = this.$refs.header.$el
+      let sidebar = this.$refs.sidebar
+      let content = this.$refs.content.$el
+      let innerContent = this.$refs.innerContent
+
+      this.shAnim = ScrollTrigger.create({
+        trigger: content,
+        start: ()=> `top top+=${header.offsetHeight}`,
+        end: ()=> `bottom top+=${header.offsetHeight}`,
+        pin:header,
+        pinSpacing: false,
+        pinSpacer: this.$refs.headerSpacer,
+        invalidateOnRefresh:true,
+        onEnter:()=> {
+          header.classList.add('bg-white','shadow-bottom')
+          this.$bus.$emit('MOBILE_HEADER_DISABLED',true)
+        },
+        onLeaveBack:()=>{
+          header.classList.remove('bg-white','shadow-bottom')
+          this.$bus.$emit('MOBILE_HEADER_DISABLED',false)
+        }
+      })
+
+      this.sbAnim = ScrollTrigger.create({
+        trigger: content,
+        start: ()=> `top top+=${header.offsetHeight + 50 - innerContent.offsetTop}`,
+        end: ()=> {
+          let pt = header.offsetHeight + 50
+          let pb = content.offsetHeight - innerContent.offsetTop - innerContent.offsetHeight
+          return `bottom top+=${pt + sidebar.offsetHeight + pb}`
+        },
+        pin:sidebar,
+        pinSpacing: false,
+        pinSpacer: this.$refs.sidebarSpacer,
+        invalidateOnRefresh:true
+      })
+
+      if(this.content){
+        this.sectionAnims = []
+        this.content.forEach((s,i) => {
+          let btn = document.getElementById(`${s.id}-button`)
+          this.sectionAnims.push(
+            ScrollTrigger.create({
+            trigger: `#${s.id}`,
+            start: i == 0 ? 'top bottom' : 'top top+=200',
+            end: i == this.content.length - 1 ? 'bottom top-=200' : 'bottom top+=200',
+            onToggle:()=> !this.cancelSectionAnim && btn.classList.toggle('active')
+          }))
+        })
       }
+    },
+    scrollTo(id,sender){
+      this.content.forEach(c => {
+        let btnId = `${c.id}-button`
+        document.getElementById(btnId).classList[btnId == sender ? 'add' : 'remove']('active')
+      })
+      this.cancelSectionAnim = true
+      gsap.to('#scroller', {
+        duration: .75,
+        ease: 'power2.out',
+        scrollTo:{y:id,offsetY:this.$refs.header.$el.offsetHeight + 40},
+        onComplete:()=> this.cancelSectionAnim = false
+      });
+    }
+  },
+  computed:{
+    ...mapState(['weather']),
+    content(){
+      return [
+        {label:'Sponsors',id:'sponsors'},
+        {label:'Entertainment',id:'entertainment'},
+        {label:'Center Court',id:'centercourt'},
+        {label:'Vendors',id:'vendors'},
+        {label:'Activities',id:'activities'},
+        {label:'Lodging',id:'lodging'}
+      ]
+    },
+    weatherData(){
+      let data = this.weather[this.uid]
+      if (!data) return null
+      return {
+        icon: data.weather[0].icon,
+        temp: getTemp(data.main.temp),
+        feels: getTemp(data.main.feels_like),
+        desc: data.weather[0].main
+      }
+    },
+    locationData(){
+      let data = {}
+      let address = []
+
+      if (this.data.map.latitude) data.latitude = this.data.map.latitude
+      if (this.data.map.longitude) data.longitude = this.data.map.longitude
+      if (this.data.address) data.address = this.data.address
+      if(this.data.city) address.push(this.data.city)
+      if(this.data.state) address.push(this.data.state)
+      if (this.data.place) data.place = this.data.place
+      if(address.length > 0) data.address2 = address.join(', ')
+
+      return Object.keys(data).length > 0 ? data : null
+    },
+    timeData(){
+      let data = {}
+      if(this.data.start_date) data.start = formatDate(this.data.start_date, 'dddd, mmmm dd, yyyy')
+      if(this.data.end_date) data.end = formatDate(this.data.end_date, 'dddd, mmmm dd, yyyy')
+      return Object.keys(data).length > 0 ? data : null
     }
   }
 };
 </script>
+
+<style lang="css">
+  .event .event-landing{
+    height:100%;
+  }
+  .event .label{
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    opacity: .4;
+    letter-spacing: 2px;
+    margin-top: 8px;
+  }
+  .event .label:first-child{
+    margin-top:0px;
+  }
+  .event .sidebar-button{
+    transition: background .25s, color .25s;
+  }
+  .event .sidebar-button:hover{
+    outline: 2px solid theme('colors.black');
+  }
+  .event .sidebar-button.active{
+    background: theme('colors.black');
+    color: theme('colors.white');
+  }
+
+</style>

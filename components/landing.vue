@@ -1,5 +1,5 @@
 <template lang="html">
-  <container noX noTop class="landing h-600 md:h-400" :class="{'has-video': theVideo}">
+  <container noX noTop class="landing" :class="[height,{'has-video': theVideo}]">
       <div class="relative overflow-hidden h-full">
 
         <template v-if="theImage">
@@ -25,7 +25,8 @@ export default {
     data:{type:Object,default:null},
     image:{type:String,default:null},
     video:{type:String,default:null},
-    center:{type:Boolean,default:null}
+    center:{type:Boolean,default:null},
+    height:{type:String,default:'h-600 md:h-300'}
   },
   mounted(){
     if (this.$refs.image){

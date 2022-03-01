@@ -16,12 +16,14 @@ export default {
     inner:Boolean,
     innerTop:Boolean,
     innerBottom:Boolean,
-    noFirst: Boolean,
-    noLast:Boolean
+    first:Boolean,
+    last:Boolean
   },
   computed: {
     classes() {
       return {
+        "is-first":this.first,
+        "is-last":this.last,
         "pt-space": !this.noY && !this.noTop && !this.innerTop && !this.inner,
         "pb-space": !this.noY && !this.noBottom && !this.innerBottom && !this.inner,
         "gutter-left": !this.noX && !this.noLeft,
