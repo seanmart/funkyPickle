@@ -52,22 +52,22 @@ export default {
   }
 
   .is-desktop .button.bg-black:hover{
-    background: white;
+    background: none;
     color: theme('colors.black')
   }
 
   .is-desktop .button.bg-pink:hover{
-    background: white;
+    background: none;
     color: theme('colors.pink')
   }
 
   .is-desktop .button.bg-green:hover{
-    background: white;
+    background: none;
     color: theme('colors.green')
   }
 
   .is-desktop .button.bg-lime:hover{
-    background: white;
+    background: none;
     color: theme('colors.lime')
   }
 

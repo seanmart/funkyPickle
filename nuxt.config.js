@@ -25,6 +25,7 @@ export default {
     script: [
       { src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js" },
       { src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/ScrollTrigger.min.js" },
+      { src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollToPlugin.min.js" },
       {src:"https://unpkg.com/swiper@8/swiper-bundle.min.js"}
     ],
   },
