@@ -40,7 +40,7 @@
 
         <widget v-if="weatherData" class="m-05 flex-auto flex flex-row justify-center items-center">
           <div class="flex-initial self-stretch text-center bg-lime py-10px px-20px rounded-lg flex flex-row items-center">
-            <icon :icon="weatherData.icon" class="h-20 mr-20px"/>
+            <icon :icon="weatherData.icon" class="w-40px md:w-50px mr-20px"/>
             <h3 v-html="weatherData.temp" class="font-header font-bold uppercase text-45 lg:text-40 leading-10"/>
           </div>
           <div class="flex-initial px-20px">

@@ -1,6 +1,6 @@
 <template lang="html">
   <div v-if="icon" class="flex justify-center items-center" :class="classes">
-    <icon :icon="icon" class="max-w-full max-h-full"/>
+    <icon :icon="icon" class="w-full h-full"/>
   </div>
 </template>
 
@@ -27,7 +27,7 @@ export default {
         'bg-pink fill-white': !this.black && !this.white && !this.lime,
         'bg-black fill-white': this.black,
         'bg-white fill-pink': this.white,
-        'bg-lime': this.lime,
+        'bg-lime fill-black': this.lime,
       }
     }
   }
