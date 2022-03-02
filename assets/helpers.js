@@ -99,3 +99,7 @@ export function inViewPort(el){
   let rect = el.getBoundingClientRect()
   return rect.top < window.innerHeight && rect.bottom > 0
 }
+
+export function formatSnakeToProper(t){
+  return t.split('_').map(t => `${t[0].toUpperCase()}${t.slice(1)}`).join(" ")
+}

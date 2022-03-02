@@ -2,7 +2,7 @@
   <component
     :to="to"
     :is="to ? 'nuxt-link' : 'button'"
-    class="button rounded-full inline-flex flex-row justify-center items-center font-semibold text-20px h-60px leading-none border-2"
+    class="button rounded-md inline-flex flex-row justify-center items-center font-semibold text-18px h-50px leading-none border-2"
     :class="classes"
   >
     <icon v-if="icon" :icon="icon" class="w-1/2"/>
@@ -32,8 +32,8 @@ export default {
         'bg-white border-white': this.white,
         'bg-black border-black': this.black || (!this.pink && !this.white && !this.lime && !this.green),
         'px-30px': !this.icon && !this.wide,
-        'px-60px': this.wide,
-        'w-60px': this.icon
+        'px-40px md:px-50px': this.wide,
+        'w-50px': this.icon
       }
     }
   }

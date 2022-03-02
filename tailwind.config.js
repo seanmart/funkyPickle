@@ -124,6 +124,12 @@ let spacings = {
 
 module.exports = {
   mode: "jit",
+  purge: [
+    './components/**/*.vue',
+    './layouts/**/*.vue',
+    './pages/**/*.vue',
+    './templates/**/*.vue',
+  ],
   theme: {
     screens: {
       "sm-max": "499px",
