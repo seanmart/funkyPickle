@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="widget icon-widget bg-white shadow-bottom rounded-lg overflow-hidden" :class="{'p-20px':!full}">
+  <div class="widget icon-widget bg-white shadow-bottom rounded-lg overflow-hidden" :class="classes">
       <slot/>
   </div>
 </template>
@@ -7,7 +7,16 @@
 <script>
 export default {
   props:{
-    full: {type: Boolean, default: null},
+    full: Boolean,
+    row: Boolean
+  },
+  computed:{
+    classes(){
+      return{
+        'flex flex-row justify-center items-center': this.row,
+        'p-20px':!this.full
+      }
+    }
   }
 
 }

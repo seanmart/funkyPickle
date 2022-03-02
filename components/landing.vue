@@ -10,7 +10,7 @@
           :style="{backgroundImage:`url(${theImage})`}"
         />
 
-        <video class="landing__video w-full h-full" autoplay loop muted>
+        <video v-if="theVideo" class="landing__video w-full h-full" autoplay loop muted>
           <source :src="theVideo" type="video/mp4">
         </video>
         </template>
@@ -26,11 +26,12 @@ export default {
     image:{type:String,default:null},
     video:{type:String,default:null},
     center:{type:Boolean,default:null},
-    height:{type:String,default:'h-600 md:h-300'}
+    height:{type:String,default:'h-screen'}
   },
   mounted(){
     if (this.$refs.image){
-      this.anim = gsap.fromTo(this.$refs.image,1,{scale:1.01},{scale:1.5,ease:'none',scrollTrigger:{
+      this.anim = gsap.fromTo(this.$refs.image,1,{scale:1.01},{scale:1.5,ease:'power2.in',scrollTrigger:{
+        trigger:this.$refs.image,
         scrub:true,
         start:0,
         end:'bottom top'
@@ -42,7 +43,7 @@ export default {
   },
   computed:{
     theVideo(){
-      return this.data ? 'placeholderVideo.mp4' : null
+      return false
     },
     theImage(){
       if (this.data && this.data.primary.image.url) return this.data.primary.image.url
