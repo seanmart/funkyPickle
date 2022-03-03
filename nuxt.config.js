@@ -58,6 +58,6 @@ export default {
       return routes;
     },
   },
-  modules: [],
+  modules: ['@nuxtjs/axios'],
   build: {},
 };

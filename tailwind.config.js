@@ -169,6 +169,7 @@ module.exports = {
       pink: theme("colors.pink"),
       black: theme("colors.black"),
       white: theme("colors.white"),
+      gray: theme("colors.gray")
     }),
     spacing: spacings,
     minHeight: spacings,

@@ -1,5 +1,5 @@
 <template lang="html">
-  <div id="site" class="light-blue">
+  <div id="site" class="light-blue text-16 md:text-14 xl:text-12">
     <the-preloader/>
     <the-navigation/>
     <div id="scroller" class="md:pl-nav-side" ref="scroller">
@@ -42,7 +42,7 @@ export default {
 
       gsap.registerPlugin(ScrollTrigger);
       gsap.registerPlugin(ScrollToPlugin);
-      
+
       !isMobile && ScrollTrigger.defaults({scroller: "#scroller",pinType: 'fixed'});
 
       window.addEventListener('resize',()=>{
@@ -60,9 +60,6 @@ export default {
   html{
     background:white;
     font-size: 10px;
-  }
-  body{
-    font-size: 1.6rem;
   }
 
   html.is-desktop,
@@ -98,7 +95,6 @@ export default {
     opacity: .2;
     border-radius: 1px;
   }
-
 
   @media screen and (min-width: theme('screens.md')){
     html{

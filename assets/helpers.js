@@ -95,6 +95,14 @@ export function getTime(t, o = 0) {
   });
 }
 
+export function getTimeFromDate(t) {
+  return new Date(t).toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+
 export function inViewPort(el){
   let rect = el.getBoundingClientRect()
   return rect.top < window.innerHeight && rect.bottom > 0

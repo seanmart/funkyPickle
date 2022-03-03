@@ -8,7 +8,7 @@
 
     <div id="content" ref="content">
 
-      <container noY inner>
+      <container>
         <div class="flex flex-row flex-wrap -m-05 lg:text-12 text-center font-bold">
           <dates :data="data" class="flex-auto m-05"/>
           <weather :uid="uid" class="flex-auto m-05"/>
@@ -24,18 +24,18 @@
             <template v-for="(section,i) in sections">
               <div :id="section.id" class="pb-40">
                 <section-title :value="section.label"/>
-                <component :is="section.component" :data="section" class="h-200px"/>
+                <component :is="section.component" :data="section"/>
               </div>
             </template>
           </div>
 
-          <div class="flex-initial ml-30 w-130 hidden lg:block">
+          <div class="flex-initial ml-30 hidden lg:block">
             <sidebar trigger="#sections" :sections="sections" :offset="150"/>
           </div>
 
         </div>
 
-        <div v-else class="text-center">
+        <div v-else class="text-center font-header uppercase font-bold text-pink text-30">
           Event Content coming soon!
         </div>
 

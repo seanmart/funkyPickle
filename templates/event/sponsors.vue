@@ -1,5 +1,5 @@
 <template lang="html">
-  <widget class="flex flex-row flex-wrap">
+  <widget v-if="data.sponsors.length > 0" class="flex flex-row flex-wrap">
     sponsors
   </widget>
 </template>
