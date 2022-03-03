@@ -1,17 +1,19 @@
 <template lang="html">
-  <aside ref="sidebar">
-    <template v-for="(section,i) in sections">
-      <a
-        ref="section"
-        :class="{'mt-05':i}"
-        v-html="section.label"
-        :href="`#${section.id}`"
-        :id="`${section.id}-button`"
-        @click.prevent="scrollToSection(section.id)"
-        class="event-sidebar-button block py-05 pl-10 bg-white rounded-full shadow-bottom font-semibold"
-      />
-    </template>
-  </aside>
+  <div ref="container">
+    <aside ref="sidebar" class="inline-flex flex-col">
+      <template v-for="(section,i) in sections">
+        <a
+          ref="section"
+          :class="{'mt-05':i}"
+          v-html="section.label"
+          :href="`#${section.id}`"
+          :id="`${section.id}-button`"
+          @click.prevent="scrollToSection(section.id)"
+          class="event-sidebar-button inline-block py-05 px-10 bg-white rounded-full shadow-bottom font-semibold"
+        />
+      </template>
+    </aside>
+  </div>
 </template>
 
 <script>
@@ -24,19 +26,22 @@ export default {
   data:()=>({
     cancel: false
   }),
-  destroyed(){
-    this.anims && this.anims.forEach(a => a.kill())
-  },
   mounted(){
+
+    window.addEventListener('resize',this.handleResize)
+    this.handleResize()
+
     this.anims = []
 
     this.anims.push(ScrollTrigger.create({
-      pinSpacing: false,
       trigger: this.trigger,
-      pin:this.$refs.sidebar,
-      invalidateOnRefresh:true,
       start: `top top+=${this.offset}`,
-      end: ()=> `bottom top+=${this.$refs.sidebar.offsetHeight + this.offset * 2}`
+      end: ()=> `bottom top+=${this.$refs.sidebar.offsetHeight + this.offset * 2}`,
+      onEnter:(e)=> gsap.set(this.$refs.sidebar,{position: 'fixed',top: this.offset }),
+      onLeaveBack:()=> gsap.set(this.$refs.sidebar,{clearProps:'all'}),
+      onEnterBack:()=> gsap.set(this.$refs.sidebar,{clearProps:'y', position: 'fixed',top: this.offset }),
+      onLeave: (e)=> gsap.set(this.$refs.sidebar,{clearProps:'position,top',y: e.end - e.start})
+
     }))
 
     let len = this.sections.length - 1
@@ -51,7 +56,14 @@ export default {
     })
 
   },
+  destroyed(){
+    this.anims && this.anims.forEach(a => a.kill())
+    window.removeEventListener('resize',this.handleResize)
+  },
   methods:{
+    handleResize(){
+      gsap.set(this.$refs.container,{minWidth: this.$refs.sidebar.offsetWidth})
+    },
     scrollToSection(id){
 
       let btn = document.getElementById(`${id}-button`)
@@ -61,9 +73,9 @@ export default {
       btn && btn.classList.add('active')
 
       gsap.to('#scroller', {
-        duration: .75,
+        duration: 1,
         ease: 'power2.out',
-        scrollTo:{y:`#${id}`,offsetY:this.offset},
+        scrollTo:{y:`#${id}`,offsetY:this.offset - 1},
         onComplete:()=> this.cancel = false
       });
 

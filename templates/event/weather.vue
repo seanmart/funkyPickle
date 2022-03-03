@@ -2,11 +2,11 @@
   <widget v-if="weather" row >
 
     <div class="flex-auto self-stretch text-center bg-gray py-10px px-20px rounded-lg flex flex-row justify-center items-center">
-      <icon :icon="icon" class="w-40px md:w-50px mr-20px"/>
-      <h3 v-html="temp" class="text-35 lg:text-30 leading-10"/>
+      <icon :icon="icon" class="w-60 md:w-50 mr-20px"/>
+      <h3 v-html="temp" class="text-40 md:text-35 leading-10"/>
     </div>
 
-    <div class="flex-initial px-20px">
+    <div class="flex-initial pl-20px">
       <label-text first value="feels like:"/>
       <h3 v-html="feels"/>
       <label-text value="description:"/>

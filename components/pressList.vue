@@ -15,7 +15,7 @@
               </div>
               <div class="p-20 flex flex-col flex-auto text-14 lg:text-10 font-medium">
                 <p v-html="formatDate(item.date,'mmmm dd, yyyy')" class="mb-05"/>
-                <h3 class="press-list__title text-35 lg:text-25 font-header font-bold uppercase leading-08 flex-auto" v-html="item.title" />
+                <h3 class="press-list__title text-35 lg:text-25 font-header font-bold uppercase leading-09 flex-auto" v-html="item.title" />
                 <i><p v-html="item.source" class="mt-20"/></i>
               </div>
             </a>
@@ -36,7 +36,6 @@ export default {
     data: { type: Object, default: null },
   },
   mounted() {
-    let lg = parseInt(config.theme.screens.lg)
     this.swiper = new Swiper(this.$refs.swiper, {
       slidesPerView: 1,
       spaceBetween:10,
@@ -45,13 +44,7 @@ export default {
         el: '.dots',
         type: 'bullets',
         clickable:true,
-
-      },
-      // breakpoints:{
-      //   [lg]:{
-      //     slidesPerView: 2
-      //   }
-      // }
+      }
     });
   },
   destroyed() {

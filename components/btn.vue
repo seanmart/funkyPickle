@@ -1,7 +1,8 @@
 <template lang="html">
   <component
     :to="to"
-    :is="to ? 'nuxt-link' : 'button'"
+    :href="href"
+    :is="to ? 'nuxt-link' : href ? 'a' : 'button'"
     class="button rounded-md inline-flex flex-row justify-center items-center font-semibold text-18px h-50px leading-none border-2"
     :class="classes"
   >
@@ -20,7 +21,8 @@ export default {
     to: String,
     value: String,
     icon: String,
-    wide: Boolean
+    wide: Boolean,
+    href: String
   },
   computed:{
     classes(){

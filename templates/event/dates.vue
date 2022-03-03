@@ -1,5 +1,5 @@
 <template lang="html">
-  <widget v-if="startDate || endDate" class="fill-pink">
+  <widget v-if="startDate || endDate">
       <label-text v-if="startDate" value="starts:" first/>
       <icon-text v-if="startDate" icon="calendar" :value="startDate"/>
       <label-text v-if="endDate" value="ends:"/>

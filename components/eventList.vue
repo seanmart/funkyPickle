@@ -23,9 +23,9 @@
           <text-scroll>
             <h3 class="event-list__title px-10 font-header uppercase font-bold text-35 lg:text-25 leading-none" v-html="event.data.title" />
           </text-scroll>
-          <div class="flex flex-row items-center justify-center mt-05 lg:justify-start">
+          <div class="flex flex-row items-center justify-center mt-20 md:mt-10 lg:justify-start">
             <icon class="mr-05 h-10 fill-pink" wayfinder />
-            <span class="text-14 lg:text-10 font-medium" v-html="formatCityState(event.data.city, event.data.state)" />
+            <span class="font-semibold" v-html="formatCityState(event.data.city, event.data.state)" />
             <weather class="ml-10" :uid="event.uid"/>
           </div>
         </div>
