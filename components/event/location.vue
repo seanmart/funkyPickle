@@ -1,5 +1,5 @@
 <template lang="html">
-  <container-widget class="flex flex-col xl:flex-row xl:items-center">
+  <container-widget class="text-black flex flex-col xl:flex-row xl:items-center">
     <div class="flex-initial xl:px-20px">
       <text-icon icon="wayfinder" :value="place" class="mb-05"/>
       <div class="font-normal">

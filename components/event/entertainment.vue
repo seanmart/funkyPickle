@@ -3,15 +3,18 @@
     <div class="swiper absolute inset-0 flex flex-col" ref="swiper">
       <div class="swiper-wrapper flex-auto">
         <template v-for="item in this.data.items">
-          <container-widget full lime class="swiper-slide flex flex-col-reverse xl:flex-row">
+
+          <container-widget full
+            class="swiper-slide bg-lime flex flex-col-reverse xl:flex-row"
+            :style="{background:colors.secondary}"
+            >
             <div class="p-20 flex-auto xl:w-1/2">
-              <client-only>
-              <h3 v-html="$prismic.asHtml(item.title)" class="text-35 lg:text-25 font-header font-bold uppercase leading-09"/>
-              <p v-html="$prismic.asHtml(item.description)" class="mt-20 xl:text-12"/>
-              </client-only>
+              <h3 v-html="$prismic.asText(item.title)" class="text-35 lg:text-25 font-header font-bold uppercase leading-09"/>
+              <p v-html="$prismic.asText(item.description)" class="mt-20 xl:text-12"/>
             </div>
             <div class="flex-auto bg-black xl:w-1/2 bg-cover" :style="{backgroundImage:`url(${item.image.url})`}"/>
           </container-widget>
+
         </template>
       </div>
       <div class="flex-initial dots mt-20 text-center"/>
@@ -22,7 +25,10 @@
 <script>
 import config from '@/tailwind.config.js'
 export default {
-  props:['data'],
+  props:{
+    data: Object,
+    colors: Object
+  },
   mounted(){
     let xl = parseInt(config.theme.screens.lg)
     this.swiper = new Swiper(this.$refs.swiper, {

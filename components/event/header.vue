@@ -3,7 +3,7 @@
     <div class="relative z-20" ref="spacer">
       <container noTop noBottom class="flex flex-row justify-center items-center py-10px" ref="header">
         <template v-for="link in links">
-          <btn pink wide :value="link.label" :to="link.url" class="mx-05"/>
+          <btn wide :value="link.label" :href="link.url" class="mx-05" :color="colors.primary"/>
         </template>
       </container>
     </div>
@@ -14,6 +14,7 @@
 export default {
   props:{
     data:Object,
+    colors: Object,
     trigger:String
   },
   mounted(){

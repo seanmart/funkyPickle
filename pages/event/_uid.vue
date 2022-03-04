@@ -3,13 +3,13 @@
 
     <div class="bg-white shadow-bottom" v-if="data">
       <event-landing :data="data"/>
-      <event-header :data="data" trigger="#content" class="pb-40"/>
+      <event-header :data="data" :colors="colors" trigger="#content" class="pb-40"/>
     </div>
 
     <div id="content" ref="content">
 
       <container>
-        <div class="flex flex-row flex-wrap -m-05 lg:text-12 text-center font-bold fill-pink">
+        <div class="flex flex-row flex-wrap -m-05 lg:text-12 text-center font-bold" :style="{fill:colors.primary, color: colors.primary}">
           <event-dates :data="data" class="flex-auto m-05"/>
           <event-weather :uid="uid" class="flex-auto lg:flex-initial m-05"/>
           <event-location :data="data" class="flex-auto w-full m-05"/>
@@ -23,14 +23,14 @@
           <div class="flex-auto">
             <template v-for="(section,i) in sections">
               <div :id="section.id" class="pb-40">
-                <section-title :value="section.label"/>
-                <component :is="section.component" :data="section"/>
+                <section-title :value="section.label" :color1="colors.primary" :color2="colors.secondary"/>
+                <component :is="section.component" :data="section" :colors="colors"/>
               </div>
             </template>
           </div>
 
-          <div class="flex-initial ml-30 hidden lg:block">
-            <event-sidebar trigger="#sections" :sections="sections" :offset="150"/>
+          <div class="flex-initial ml-30 hidden xl:block">
+            <event-sidebar trigger="#sections" :sections="sections" :colors="colors" :offset="150"/>
           </div>
 
         </div>
@@ -48,6 +48,7 @@
 
 <script>
 import {camelize,formatSnakeToProper} from "@/assets/helpers";
+import config from '@/tailwind.config.js'
 
 export default {
   async asyncData({ store, params, $prismic, payload }) {
@@ -66,12 +67,18 @@ export default {
     uid: null
   }),
   computed:{
+    colors(){
+      return{
+        primary: this.data.primary,
+        secondary: this.data.secondary
+      }
+    },
     sections(){
       return this.data.body.map(s=>({
         ...s,
         component: `event-${camelize(s.slice_type)}`,
         id: s.slice_type.replaceAll('_','-'),
-        label:formatSnakeToProper(s.slice_type)
+        label:formatSnakeToProper(s.slice_type),
       }))
     },
   }
