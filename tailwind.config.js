@@ -34,6 +34,8 @@ let spacings = {
   "300px":"300px",
   "350px":"350px",
   "400px":"400px",
+  "500px":"500px",
+  "600px":"600px",
   "01": ".1rem",
   "02": ".2rem",
   "03": ".3rem",
@@ -179,6 +181,7 @@ module.exports = {
     extend: {
       zIndex: {
         back: "-1",
+        'back-2':'-2'
       },
       padding: {
         "16/9": "56.25%",
@@ -262,6 +265,8 @@ module.exports = {
         90: "9rem",
         95: "9.5rem",
         100: "10rem",
+        120: "12rem",
+        150: "15rem",
       },
     },
   },

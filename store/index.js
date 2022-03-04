@@ -29,10 +29,15 @@ export default{
 
       let signup = {title: res.data.signup_title,form: res.data.form, action: res.data.macro_link}
       let footer = {text: res.data.footer_text}
-      let links = res.data.links.map((item) => ({
-          to:`/${item.primary.link.type == 'page' ? item.primary.link.uid : item.primary.link.type}`,
+
+      let links = res.data.links.map((item) => {
+        let {link_type,type,url,uid} = item.primary.link
+        return {
+          href: link_type == "Web" ? url : null,
+          to: link_type == "Document" ? `/${type == 'page' ? uid : type}` : null,
           label: item.primary.label
-        }))
+        }
+      })
 
       commit('SETTINGS',{links,signup,footer})
     },
