@@ -15,8 +15,8 @@
           <h3 v-for="line in message" v-html="line" class="landing-message"/>
         </div>
 
-        <div class="absolute inset-0 z-back">
-          <icon ball class="ml-auto h-full fill-lime" ref="ball" />
+        <div class="absolute top-0 right-0 bottom-0 z-back overflow-hidden">
+          <icon ball class="h-full fill-lime" ref="ball" />
         </div>
       </div>
     </container>
