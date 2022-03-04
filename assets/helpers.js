@@ -49,6 +49,26 @@ export function getYear(d) {
   return d.getFullYear();
 }
 
+export function getPosition(el){
+  var xPos = 0;
+  var yPos = 0;
+  var hPos = el.offsetHeight;
+  var wPos = el.offsetWidth;
+  while (el) {
+    xPos += el.offsetLeft;
+    yPos += el.offsetTop;
+    el = el.offsetParent;
+  }
+  return {
+    top: yPos,
+    bottom: yPos + hPos,
+    left: xPos,
+    right: xPos + wPos,
+    height: hPos,
+    width: wPos,
+  };
+}
+
 
 export function formatDate(date,format = "mmm dd, yyyy") {
   if (!date) return;
