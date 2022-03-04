@@ -1,13 +1,13 @@
 <template lang="html">
   <container-widget full>
-    <app-table :headers="tableData.headers" :data="tableData.rows"/>
+    <app-table :headers="tableData.headers" :data="tableData.rows" :color="colors.secondary"/>
   </container-widget>
 </template>
 
 <script>
 import {getTimeFromDate} from '@/assets/helpers'
 export default {
-  props:['data'],
+  props:['data','colors'],
   computed:{
     tableData(){
       return{

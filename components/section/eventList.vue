@@ -25,7 +25,7 @@
           </text-scroll>
           <div class="flex flex-row items-center justify-center mt-20 md:mt-10 lg:justify-start">
             <icon class="mr-05 h-10 fill-pink" wayfinder/>
-            <span class="font-semibold text-10" v-html="formatCityState(event.data.city, event.data.state)" />
+            <span class="font-semibold text-12 sm:text-10" v-html="formatCityState(event.data.city, event.data.state)" />
             <app-weather class="ml-10" :uid="event.uid"/>
           </div>
         </div>

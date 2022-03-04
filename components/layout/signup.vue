@@ -18,7 +18,7 @@
           </template>
 
           <formulate-input type="submit" class="mt-20">
-            <btn wide :value="isLoading ? 'Sending' : isSent ? 'Sent!' : 'Submit'" />
+            <btn black wide :value="isLoading ? 'Sending' : isSent ? 'Sent!' : 'Submit'" />
           </formulate-input>
 
         </formulate-form>

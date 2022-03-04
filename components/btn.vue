@@ -1,14 +1,19 @@
 <template lang="html">
-  <component
-    :to="to"
-    :href="href"
-    :is="to ? 'nuxt-link' : href ? 'a' : 'button'"
-    class="button rounded-md inline-flex flex-row justify-center items-center font-semibold text-18px h-50px leading-none border-2"
-    :class="classes"
-  >
+  <a v-if="href" :href="href" :target="noTarget ? null : '_blank'" :class="[mainClasses,customClasses]" ref="a">
     <icon v-if="icon" :icon="icon" class="w-1/2"/>
-    <slot>{{value}}</slot>
-  </component>
+    <span class="inline-block relative z-10"><slot>{{value}}</slot></span>
+  </a>
+
+  <nuxt-link v-else-if="to" :to="to" :class="[mainClasses,customClasses]" ref="link">
+  <icon v-if="icon" :icon="icon" class="w-1/2"/>
+  <span class="inline-block relative z-10"><slot>{{value}}</slot></span>
+  </nuxt-link>
+
+  <button v-else :class="[mainClasses,customClasses]" ref="btn">
+  <icon v-if="icon" :icon="icon" class="w-1/2"/>
+  <span class="inline-block relative z-10"><slot>{{value}}</slot></span>
+  </button>
+
 </template>
 
 <script>
@@ -22,17 +27,28 @@ export default {
     value: String,
     icon: String,
     wide: Boolean,
-    href: String
+    href: String,
+    color: String,
+    noTarget: Boolean
+  },
+  mounted(){
+    if (this.color){
+      let el = this.$refs.a || this.$refs.btn || this.$refs.link.$el
+      el.style.background = this.color
+    }
   },
   computed:{
-    classes(){
+    mainClasses(){
+      return 'button rounded-md inline-flex flex-row justify-center items-center font-semibold text-18px h-50px leading-none'
+    },
+    customClasses(){
       return{
         'text-white fill-white': !this.white && !this.lime,
-        'bg-pink border-pink': this.pink,
-        'bg-green border-green': this.green,
-        'bg-lime border-lime': this.lime,
-        'bg-white border-white': this.white,
-        'bg-black border-black': this.black || (!this.pink && !this.white && !this.lime && !this.green),
+        'bg-pink': this.pink,
+        'bg-green': this.green,
+        'bg-lime': this.lime,
+        'bg-white': this.white,
+        'bg-black': this.black,
         'px-30px': !this.icon && !this.wide,
         'px-40px md:px-50px': this.wide,
         'w-50px': this.icon
@@ -44,8 +60,10 @@ export default {
 
 <style lang="css">
   .button{
+    position: relative;
     cursor: pointer;
-    transition: transform .25s, background .1s, color .1s;
+    overflow: hidden;
+    transition: transform .25s;
     transform: scale(1.001);
   }
 
@@ -53,24 +71,16 @@ export default {
     transform: scale(.95)
   }
 
-  .is-desktop .button.bg-black:hover{
-    background: none;
-    color: theme('colors.black')
-  }
-
-  .is-desktop .button.bg-pink:hover{
-    background: none;
-    color: theme('colors.pink')
-  }
-
-  .is-desktop .button.bg-green:hover{
-    background: none;
-    color: theme('colors.green')
-  }
-
-  .is-desktop .button.bg-lime:hover{
-    background: none;
-    color: theme('colors.lime')
+  .is-desktop .button:hover::after{
+    content:'';
+    position: absolute;
+    background: rgba(theme('colors.blackrgb'),.2);
+    top:0px;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    transition: .1s;
+    z-index: 0;
   }
 
 </style>

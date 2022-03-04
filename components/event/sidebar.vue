@@ -2,14 +2,16 @@
   <div ref="container">
     <aside ref="sidebar" class="inline-flex flex-col">
       <template v-for="(section,i) in sections">
-        <a
+        <btn
+          white
+          noTarget
           ref="section"
           :class="{'mt-05':i}"
-          v-html="section.label"
+          :value="section.label"
           :href="`#${section.id}`"
           :id="`${section.id}-button`"
-          @click.prevent="scrollToSection(section.id)"
-          class="event-sidebar-button inline-block py-05 px-10 bg-white rounded-full shadow-bottom font-semibold"
+          @click.native.prevent="scrollToSection(section.id)"
+          class="event-sidebar-button shadow-bottom"
         />
       </template>
     </aside>
@@ -21,7 +23,8 @@ export default {
   props:{
     sections: Array,
     trigger:String,
-    offset:Number
+    offset:Number,
+    colors: Object
   },
   data:()=>({
     cancel: false
@@ -51,7 +54,7 @@ export default {
         trigger: `#${section.id}`,
         start: `top ${!i ? 'bottom' : 'top+=200'}`,
         end: `bottom ${i == len ? 'top-=200' : 'top+=200'}`,
-        onToggle:()=> !this.cancel && this.$refs.section[i].classList.toggle('active')
+        onToggle:(e)=> !this.cancel && this.style(this.$refs.section[i].$el,e.isActive)
       }))
     })
 
@@ -61,6 +64,11 @@ export default {
     window.removeEventListener('resize',this.handleResize)
   },
   methods:{
+    style(el,on){
+      on
+      ? gsap.set(el,{background: this.colors.primary, color:'white'})
+      : gsap.set(el,{clearProps:'all'})
+    },
     handleResize(){
       gsap.set(this.$refs.container,{minWidth: this.$refs.sidebar.offsetWidth})
     },
@@ -69,8 +77,8 @@ export default {
       let btn = document.getElementById(`${id}-button`)
 
       this.cancel = true
-      this.$refs.section.forEach(s => s.classList.remove('active'))
-      btn && btn.classList.add('active')
+      this.$refs.section.forEach(s => this.style(s.$el,false))
+      btn && this.style(btn,true)
 
       gsap.to('#scroller', {
         duration: 1,
@@ -85,15 +93,5 @@ export default {
 </script>
 
 <style lang="css">
-.event-sidebar-button{
-  transition: background .1s, color .1s;
-}
-.event-sidebar-button:hover{
-  background: theme('colors.pink');
-  color: theme('colors.white');
-}
-.event-sidebar-button.active{
-  background: theme('colors.black');
-  color: theme('colors.white');
-}
+
 </style>

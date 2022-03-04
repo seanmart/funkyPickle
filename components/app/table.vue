@@ -3,7 +3,7 @@
     <tbody>
       <tr v-if="headers">
         <template v-for="header in headers">
-          <th class="table-header px-10 py-05 text-left bg-gray">
+          <th class="table-header px-10 py-05 text-left bg-gray" :style="{background:color}">
             <span v-html="header"/>
           </th>
         </template>
@@ -24,7 +24,8 @@ export default {
   props:{
     headers:Array,
     data:Array,
-    tight: Boolean
+    tight: Boolean,
+    color: String,
   }
 }
 </script>

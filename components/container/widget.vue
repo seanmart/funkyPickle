@@ -30,7 +30,5 @@ export default {
 </script>
 
 <style lang="css">
-  .widget{
-    border: 1px solid rgba(theme('colors.bluergb'),.1);
-  }
+
 </style>
