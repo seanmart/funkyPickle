@@ -18,6 +18,10 @@ html.is-desktop,
   width: 100vw;
 }
 
+#page{
+  min-height: 400px;
+}
+
 .is-resizing *{
   transition: none !important;
 }

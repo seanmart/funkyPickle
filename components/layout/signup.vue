@@ -1,5 +1,5 @@
 <template lang="html">
-  <container class="signup bg-lime relative overflow-hidden shadow-top" ref="container">
+  <container class="signup bg-lime relative overflow-hidden" ref="container">
     <div class="flex flex-col lg:flex-row lg:items-center">
       <div class="flex-auto">
         <h3 class="font-header font-bold uppercase leading-09 text-center text-60 lg:text-left lg:text-50">

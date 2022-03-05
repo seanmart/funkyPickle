@@ -60,10 +60,11 @@ export default {
   mounted(){
     this.$nextTick(this.init)
     this.$bus.$on('MOBILE_HEADER_DISABLED',(d)=> this.mobileHeaderDisabled = d)
+    this.$bus.$on('TOP_NAV',(s)=> this.navHidden = !s)
     this.$bus.$once('REVEAL',this.reveal)
   },
   data:()=>({
-    hideNav: false,
+    navHidden: false,
     mobileHeaderDisabled: false,
     menuOpen: false
   }),
@@ -71,7 +72,7 @@ export default {
     links: state => state.settings.links
   }),
   watch:{
-    hideNav(hide){
+    navHidden(hide){
       hide
       ? gsap.to(this.$refs.nav,.75,{y: '-110%', ease: 'expo.inOut'})
       : gsap.to(this.$refs.nav,.75,{y: 0, ease: 'expo.inOut'})
@@ -79,19 +80,14 @@ export default {
     menuOpen(open){
 
       if(open){
-        this.lastHideNav = this.hideNav
-        this.hideNav = false
+        this.navHidden = false
         gsap.to(this.$refs.mobileNav,.75,{x:'0',ease:'expo.inOut'})
         setTimeout(()=> window.addEventListener('click',this.toggleMenu),100)
       } else {
         gsap.to(this.$refs.mobileNav,.75,{x:'-100%',ease:'expo.inOut'})
-        this.hideNav = this.mobileHeaderDisabled ? true : this.lastHideNav
         window.removeEventListener('click',this.toggleMenu)
       }
 
-    },
-    $route(){
-      this.menuOpen = false
     }
   },
   methods:{
@@ -102,7 +98,7 @@ export default {
           this.anim = ScrollTrigger.create({
             start: 50,
             end: 99999,
-            onUpdate:(self)=> this.hideNav = self.direction == 1 || this.mobileHeaderDisabled
+            onUpdate:(self)=> this.navHidden = self.direction == 1 || this.mobileHeaderDisabled
           })
         }
       })

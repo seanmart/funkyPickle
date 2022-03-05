@@ -1,8 +1,12 @@
 <template lang="html">
   <div ref="landing">
 
-    <container first class="relative h-2/3  shadow-bottom overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-top" :style="{backgroundImage: `url(${data.landing_image.url})`}"/>
+    <container first class="relative h-2/3  shadow-bottom overflow-hidden" ref="mediaWrapper">
+        <div class="absolute inset-0 -top-1/3" ref="media">
+          <div class="relative h-full">
+            <div class="absolute inset-0 bg-cover bg-top" :style="{backgroundImage: `url(${data.landing_image.url})`}"/>
+          </div>
+        </div>
     </container>
 
     <container innerTop noTop class="overflow-hidden">
@@ -27,16 +31,30 @@ export default {
   props:['data'],
   mounted(){
 
-    this.anim = gsap.to(this.$refs.ball.$el, 1, {
-      rotation: 90,
-      ease: "none",
-      scrollTrigger: {
-        trigger: this.$refs.ball.$el,
-        start: "top bottom",
-        scrub: true,
-      },
-    });
+    this.anims = [
+      gsap.to(this.$refs.ball.$el, 1, {
+        rotation: 90,
+        ease: "none",
+        scrollTrigger: {
+          trigger: this.$refs.ball.$el,
+          start: "top bottom",
+          scrub: true,
+        },
+      }),
+      gsap.to(this.$refs.media, 1, {
+        y:'33.333%',
+        ease: "none",
+        scrollTrigger: {
+          trigger: this.$refs.mediaWrapper.$el,
+          start: "top bottom",
+          scrub: true,
+        },
+      }),
+    ]
 
+  },
+  destroyed(){
+    this.anims && this.anims.forEach(a => a.kill())
   },
   methods:{
     htmlSerializer(type, element, content, children){

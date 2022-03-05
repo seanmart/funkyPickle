@@ -8,10 +8,13 @@
       <layout-footer/>
     </div>
     <layout-svg-gradients/>
+    <layout-background/>
   </div>
 </template>
 
 <script>
+import config from '@/tailwind.config.js'
+import {random} from '@/assets/helpers'
 export default {
   created(){
     if(process.server) return
@@ -24,15 +27,31 @@ export default {
     $route(){
       this.$refs.scroller.scrollTo(0,0)
       ScrollTrigger.getAll().length > 0 && ScrollTrigger.refresh(true)
-      gsap.to('#scroller',.5,{delay:.25, opacity:1,onComplete:()=>{
-        this.$bus.$emit('REVEAL')
-      }})
+      gsap.timeline({onComplete:()=>this.$bus.$emit('REVEAL')})
+          .to('#background',.75,{scale:1,ease:'expo.inOut'})
+          .to('#background .bg',.75,{opacity:0,ease:'expo.inOut'},'<')
+          .to('#background .strip',.75,{opacity:.05,ease:'expo.inOut',fill:config.theme.colors.blue},'<')
+          .to('#scroller',.75,{scale:1,opacity:1,ease:'expo.inOut'},'<')
+          .set(['#background','#background .bg','#background .strip','#scroller'],{clearProps:'all'})
+
     }
   },
-  middleware({route, from}){
-    if (process.server || from.path == route.path) return;
+  middleware({from,route,$bus}){
+    if (process.server || !from || from.path == route.path) return;
+    let colors = [
+      config.theme.colors.pink,
+      config.theme.colors.green,
+      config.theme.colors.black
+    ]
     return new Promise(res =>{
-      gsap.to('#scroller',.5,{opacity:0,onComplete:res})
+      $bus.$emit('TOP_NAV',true)
+      let bg = config.theme.colors.lime
+      gsap.timeline({onComplete:res})
+          .set('#background .bg',{background:bg},0)
+          .to('#scroller',.75,{scale:.9,opacity:0,ease:'expo.inOut'},'<')
+          .to('#background',.75,{scale:1.1,ease:'expo.inOut'},'<')
+          .to('#background .bg',.75,{opacity:1,ease:'expo.inOut'},'<')
+          .to('#background .strip',.75,{opacity:1,ease:'expo.inOut',fill:()=> colors[random(0,colors.length - 1)]},'<')
     })
   },
   methods:{
