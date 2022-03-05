@@ -1,6 +1,6 @@
 <template lang="html">
-  <div ref="container">
-    <aside ref="sidebar" class="inline-flex flex-col">
+  <div ref="container" class="h-full">
+    <aside ref="sidebar" class="inline-flex flex-col z-20">
       <template v-for="(section,i) in sections">
         <btn
           prevent

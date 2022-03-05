@@ -158,9 +158,9 @@ module.exports = {
       bluergb: "0,174,239",
     },
     boxShadow: (theme) => ({
-      bottom: `0px 2px 5px rgba(${theme("colors.bluergb")},.3)`,
-      side: `2px 0px 5px rgba(${theme("colors.bluergb")},.3)`,
-      top: `0px -2px 5px rgba(${theme("colors.bluergb")},.3)`
+      bottom: `0px 2px 5px rgba(${theme("colors.bluergb")},.25)`,
+      side: `2px 0px 5px rgba(${theme("colors.bluergb")},.25)`,
+      top: `0px -2px 5px rgba(${theme("colors.bluergb")},.25)`
     }),
     fontFamily: {
       sans: ["Open Sans", "sans-serif"],
@@ -172,13 +172,14 @@ module.exports = {
       pink: theme("colors.pink"),
       black: theme("colors.black"),
       white: theme("colors.white"),
-      gray: theme("colors.gray")
+      gray: theme("colors.gray"),
+      blue: theme("colors.blue")
     }),
     spacing: spacings,
-    minHeight: spacings,
-    minWidth: spacings,
-    maxWidth: spacings,
-    maxHeight: spacings,
+    minHeight: {...spacings,screen:'100vh'},
+    minWidth: {...spacings,screen:'100vw'},
+    maxWidth: {...spacings,screen:'100vw'},
+    maxHeight: {...spacings,screen:'100vh'},
     extend: {
       zIndex: {
         back: "-1",
