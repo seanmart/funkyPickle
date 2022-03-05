@@ -1,7 +1,7 @@
 <template lang="html">
   <container class="event-list" ref="container">
 
-    <section-title v-if="theTitle" :value="theTitle"/>
+    <section-title v-if="this.data.primary.title" :value="this.data.primary.title"/>
 
     <template v-for="event in events">
       <nuxt-link :to="`/event/${event.uid}`" class="event-list__event bg-white overflow-hidden mb-10px rounded-lg flex flex-col items-stretch lg:flex-row lg:h-120 shadow-bottom">
@@ -10,12 +10,20 @@
             <span class="lg:block" v-html="getMonth(event.data.start_date)" />
             <span class="lg:block lg:text-60" v-html="getDay(event.data.start_date)" />
           </h3>
-          <div v-if="event.data.image.url" class="event-list__image absolute inset-0 z-0 bg-cover bg-center opacity-40" :style="{ backgroundImage: `url(${event.data.image.url})` }" />
+          <div
+            v-if="event.data.image.url"
+            class="event-list__image absolute inset-0 z-0 bg-cover bg-center opacity-40"
+            :style="{ backgroundImage: `url(${event.data.image.url})` }"
+          />
         </div>
 
         <div class="reative z-10 flex-grow-0 flex-shrink-0 h-0 flex flex-row justify-center items-center lg:flex-col lg:h-full lg:w-0">
           <div class="relative h-80 w-80 rounded-full bg-lime shadow-bottom overflow-hidden">
-            <div v-if="event.data.ball_image.url || event.data.logo.url" class="absolute inset-0 bg-cover bg-center" :style="{ backgroundImage: `url(${event.data.ball_image.url || event.data.logo.url})` }" />
+            <div
+              v-if="event.data.ball_image.url || event.data.logo.url"
+              class="absolute inset-0 bg-cover bg-center"
+              :style="{ backgroundImage: `url(${event.data.ball_image.url || event.data.logo.url})` }"
+            />
           </div>
         </div>
 
@@ -23,16 +31,16 @@
           <text-scroll>
             <h3 class="event-list__title px-10 font-header uppercase font-bold text-35 lg:text-25 leading-none" v-html="event.data.title" />
           </text-scroll>
-          <div class="flex flex-row items-center justify-center mt-20 md:mt-10 lg:justify-start">
+          <div class="flex flex-row items-center justify-center mt-20 md:mt-10 lg:justify-start" v-if="event.data.city || event.data.state">
             <icon class="mr-05 h-10 fill-pink" wayfinder/>
-            <span class="font-semibold text-12 sm:text-10" v-html="formatCityState(event.data.city, event.data.state)" />
+            <span class="font-semibold text-12" v-html="formatCityState(event.data.city, event.data.state)" />
             <app-weather class="ml-10" :uid="event.uid"/>
           </div>
         </div>
       </nuxt-link>
     </template>
-    <div v-if="limit" class="mt-40 text-center md:text-left">
-      <btn pink value="View All Events" to="/events" />
+    <div v-if="this.data.primary.limit" class="mt-40 text-center md:text-left">
+      <btn bg="pink" hoverBg="black" activeBg="black" value="View All Events" to="/events" />
     </div>
   </container>
 </template>
@@ -55,17 +63,9 @@ export default {
       eventsData: (state) => state.lists.events,
       weather: state => state.weather
     }),
-    theTitle() {
-      if (!this.data) return null
-      return this.data.primary.title;
-    },
-    limit(){
-      if (!this.data) return null
-      return this.data.primary.limit || null
-    },
     events() {
       if (this.eventsData.length == 0) return [];
-      if (this.limit) return this.eventsData.slice(0, this.limit);
+      if (this.data.primary.limit) return this.eventsData.slice(0, this.limit);
       return this.eventsData;
     },
   },
@@ -73,7 +73,7 @@ export default {
     getDay,
     getMonth,
     formatCityState(city, state) {
-      return city && state ? `${city}, ${state}` : city || state || "No Location Announced";
+      return city && state ? `${city}, ${state}` : city || state
     },
   },
 };

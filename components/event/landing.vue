@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="relative">
 
-    <div :class="{'relative h-300 md:h-150':banner}">
+    <div :class="{'relative h-300 md:h-150':banner}" v-if="image">
       <div :class="{'absolute top-0 left-0 right-0 -bottom-100':banner}">
         <div class="h-full bg-cover bg-center" :style="{backgroundImage:`url(${image})`}"/>
       </div>

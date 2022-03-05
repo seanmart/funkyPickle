@@ -1,6 +1,5 @@
 <template lang="html">
   <container-widget v-if="weather" row >
-
     <div class="flex-initial text-center text-black p-10px rounded-lg flex flex-col justify-center items-center">
       <icon :icon="icon" class="w-50 md:w-40 mb-10px"/>
       <h3 v-html="temp" class="text-35 md:text-25 leading-10"/>

@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="bg-gray py-5px px-10px rounded-md inline-flex flex-row items-center font-bold text-08 whitespace-nowrap" v-if="data">
+  <div class="bg-gray py-5px px-10px rounded-md inline-flex flex-row items-center font-semibold text-11 md:text-09 whitespace-nowrap" v-if="data">
     <icon :icon="icon" class="h-14px"/>
     <h5 v-html="`${temp}, ${description}`" class=" pl-10px"/>
   </div>

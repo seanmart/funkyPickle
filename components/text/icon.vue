@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="label inline-flex flex-row items-center">
-    <icon :icon="icon" class="h-20px mr-10px"/>
+    <icon :icon="icon" class="h-15 mr-10px"/>
     <p v-html="value"/>
   </div>
 </template>

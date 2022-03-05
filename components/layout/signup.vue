@@ -1,5 +1,5 @@
 <template lang="html">
-  <container inner noY class="signup bg-lime relative z-10 overflow-hidden" ref="container">
+  <container class="signup bg-lime relative overflow-hidden shadow-top" ref="container">
     <div class="flex flex-col lg:flex-row lg:items-center">
       <div class="flex-auto">
         <h3 class="font-header font-bold uppercase leading-09 text-center text-60 lg:text-left lg:text-50">
@@ -17,9 +17,11 @@
             <formulate-input :class="{'mt-05':i > 0}" :label="field.primary.label" :type="field.primary.type" :name="field.primary.key" :validation="getValidation(field)"/>
           </template>
 
-          <formulate-input type="submit" class="mt-20">
-            <btn black wide :value="isLoading ? 'Sending' : isSent ? 'Sent!' : 'Submit'" />
-          </formulate-input>
+          <div class="text-center md:text-left mt-50 md:mt-30">
+            <formulate-input type="submit" class="inline-block">
+              <btn bg="black" hoverBg="pink" wide :value="isLoading ? 'Sending' : isSent ? 'Sent!' : 'Submit'" />
+            </formulate-input>
+          </div>
 
         </formulate-form>
         </client-only>

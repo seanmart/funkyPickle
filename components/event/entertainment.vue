@@ -6,11 +6,11 @@
 
           <container-widget full
             class="swiper-slide bg-lime flex flex-col-reverse xl:flex-row"
-            :style="{background:colors.secondary}"
+            :style="{background:colors.primary}"
             >
-            <div class="p-20 flex-auto xl:w-1/2">
-              <h3 v-html="$prismic.asText(item.title)" class="text-35 lg:text-25 font-header font-bold uppercase leading-09"/>
-              <p v-html="$prismic.asText(item.description)" class="mt-20 xl:text-12"/>
+            <div class="p-20 flex-initial xl:w-1/2 text-white">
+              <prismic-rich-text :field="item.title" class="text-35 md:text-30 font-header font-bold uppercase leading-09" />
+              <prismic-rich-text :field="item.description" class="mt-20 xl:text-12" />
             </div>
             <div class="flex-auto bg-black xl:w-1/2 bg-cover" :style="{backgroundImage:`url(${item.image.url})`}"/>
           </container-widget>

@@ -3,7 +3,14 @@
     <div class="relative z-20" ref="spacer">
       <container noTop noBottom class="flex flex-row justify-center items-center py-10px" ref="header">
         <template v-for="link in links">
-          <btn wide :value="link.label" :href="link.url" class="mx-05" :color="colors.primary"/>
+          <btn wide
+            :value="link.label"
+            :href="link.url"
+            class="mx-05"
+            :bg="colors.primary"
+            :hoverBg="colors.secondary"
+            :activeBg="`${colors.secondary}-10`"
+          />
         </template>
       </container>
     </div>
