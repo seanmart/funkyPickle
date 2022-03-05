@@ -18,16 +18,12 @@ html.is-desktop,
   width: 100vw;
 }
 
-#page{
-  min-height: 100vh;
-}
-
 .is-resizing *{
   transition: none !important;
 }
 
 .light-blue{
-  background: rgba(theme('colors.bluergb'),.04);
+  background: rgba(theme('colors.bluergb'),.06);
 }
 
 .flex-divider{

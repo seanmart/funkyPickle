@@ -1,22 +1,19 @@
 <template lang="html">
   <div ref="landing">
 
-    <container first class="relative h-2/3 md:h-1/2 overflow-hidden">
+    <container first class="relative h-2/3  shadow-bottom overflow-hidden">
         <div class="absolute inset-0 bg-cover bg-top" :style="{backgroundImage: `url(${data.landing_image.url})`}"/>
     </container>
 
-    <container innerTop noTop>
+    <container innerTop noTop class="overflow-hidden">
       <div class="relative py-40">
-        <div class="landing-title text-pink text-80 sm:text-90 tracking-tight">
-          <h1 v-for="item in data.title" v-html="item.text" class="leading-08 font-header uppercase font-bold"/>
+
+        <div class="landing-title leading-09 font-header uppercase font-bold text-black text-center sm:text-left sm:pr-30 md:pr-50">
+          <prismic-rich-text :field="data.message" :htmlSerializer="htmlSerializer" />
         </div>
 
-        <div class="mt-20 font-medium">
-          <h3 v-for="line in message" v-html="line" class="landing-message"/>
-        </div>
-
-        <div class="absolute top-0 right-0 bottom-0 z-back overflow-hidden">
-          <icon ball class="h-full fill-lime" ref="ball" />
+        <div class="absolute inset-0 flex justify-center sm:justify-end z-back">
+          <icon ball class="h-full fill-lime flex-shrink-0" ref="ball" />
         </div>
       </div>
     </container>
@@ -41,14 +38,41 @@ export default {
     });
 
   },
-  computed:{
-    message(){
-      let message = []
-      this.data.message.forEach(item =>{
-        item.text.split('\n').forEach(line => message.push(line))
-      })
-      return message
+  methods:{
+    htmlSerializer(type, element, content, children){
+
+      if(content && content.indexOf('-') > 0){
+        let words = content.split(" ").map(c => c.indexOf('-') > 0 ? `<span class="whitespace-nowrap">${c}</span>`: c)
+        content = words.join(" ")
+      }
+
+      switch(type){
+        case 'em':
+        return `<span class="text-green">${content}</span>`
+        case 'strong':
+        return `<span class="text-pink">${content}</span>`
+        default:
+        return content
+      }
     }
   }
 }
 </script>
+
+<style media="screen">
+  .landing-title{
+    font-size: 15vw
+  }
+
+  @media screen and (min-width: theme('screens.sm')){
+    .landing-title{
+      font-size: 4.5rem;
+    }
+  }
+
+  @media screen and (min-width: theme('screens.md')){
+    .landing-title{
+      font-size: calc((100vw - theme('spacing.nav-side')) / 14 );
+    }
+  }
+</style>

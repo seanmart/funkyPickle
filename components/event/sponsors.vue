@@ -1,11 +1,20 @@
 <template lang="html">
-  <widget v-if="data.sponsors.length > 0" class="flex flex-row flex-wrap">
+  <container-widget v-if="logos" class="flex flex-row flex-wrap">
     sponsors
-  </widget>
+  </container-widget>
 </template>
 
 <script>
 export default {
-  props:['data']
+  props:['data'],
+  computed:{
+    logos(){
+      let logos = []
+      this.data.sponsors.forEach(s =>{
+        if(s.image.url) logos.push(s.image.url)
+      })
+      return logos.length > 0 ? logos : null
+    }
+  }
 }
 </script>

@@ -1,10 +1,10 @@
 <template lang="html">
-  <container-widget class="text-black flex flex-col xl:flex-row xl:items-center">
+  <container-widget class="text-black flex flex-col xl:flex-row xl:items-center" v-if="place || address || cityState || (lat && long)">
     <div class="flex-initial xl:px-20px">
-      <text-icon icon="wayfinder" :value="place" class="mb-05"/>
+      <text-icon v-if="place" icon="wayfinder" :value="place" class="mb-05"/>
       <div class="font-normal">
-        <p v-html="address"/>
-        <p v-html="cityState"/>
+        <p v-if="address" v-html="address"/>
+        <p v-if="cityState" v-html="cityState"/>
       </div>
     </div>
     <div v-if="long && lat" class="flex-grow flex-shrink-0 min-w-1/2 mt-20px xl:ml-20px xl:mt-0 rounded-md overflow-hidden">

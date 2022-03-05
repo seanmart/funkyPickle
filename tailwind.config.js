@@ -144,7 +144,7 @@ module.exports = {
     colors: {
       gray: "#efedf2",
       lime: "#e4fe57",
-      green: "#72C948",
+      green: "#18bb37",
       pink: "#ff0093",
       black: "#0a0a0e",
       white: "#ffffff",
@@ -158,8 +158,9 @@ module.exports = {
       bluergb: "0,174,239",
     },
     boxShadow: (theme) => ({
-      bottom: `0px 2px 5px rgba(${theme("colors.bluergb")},.2)`,
-      side: `2px 0px 5px rgba(${theme("colors.bluergb")},.2)`,
+      bottom: `0px 2px 5px rgba(${theme("colors.bluergb")},.3)`,
+      side: `2px 0px 5px rgba(${theme("colors.bluergb")},.3)`,
+      top: `0px -2px 5px rgba(${theme("colors.bluergb")},.3)`
     }),
     fontFamily: {
       sans: ["Open Sans", "sans-serif"],

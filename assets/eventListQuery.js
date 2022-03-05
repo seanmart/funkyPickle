@@ -1,10 +1,10 @@
 import { getDateOffset } from "./helpers";
 
 export default async function (p) {
-  let date = getDateOffset(-1);
+  let date = getDateOffset(1);
   let res = await p.api.query([
     p.predicates.at("document.type", "event"),
-    p.predicates.date.after("my.event.end_date", date)
+    p.predicates.date.after("my.event.start_date", date)
   ], {
     graphQuery: `{
     event

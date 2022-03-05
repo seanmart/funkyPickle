@@ -1,5 +1,9 @@
 <template lang="html">
-  <container-widget v-if="startDate || endDate" class="min-w-1/2">
+  <container-widget
+    v-if="startDate || endDate"
+    class="min-w-1/2 flex flex-col justify-center items-center"
+    :class="{'text-16': startDate && endDate, 'text-20': startDate && !endDate}"
+  >
       <text-label v-if="startDate" value="starts:" first/>
       <text-icon v-if="startDate" icon="calendar" :value="startDate" class="text-black"/>
       <text-label v-if="endDate" value="ends:"/>

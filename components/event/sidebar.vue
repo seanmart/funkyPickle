@@ -3,14 +3,20 @@
     <aside ref="sidebar" class="inline-flex flex-col">
       <template v-for="(section,i) in sections">
         <btn
-          white
-          noTarget
+          prevent
           ref="section"
+          bg="white"
+          :hoverBg="colors.secondary"
+          :activeBg="colors.primary"
+          :color="colors.primary"
+          hoverColor="white"
+          activeColor="white"
+          :active="i==active"
           :class="{'mt-05':i}"
           :value="section.label"
           :href="`#${section.id}`"
           :id="`${section.id}-button`"
-          @click.native.prevent="scrollToSection(section.id)"
+          @clicked="scrollToSection(section.id,i)"
           class="event-sidebar-button shadow-bottom"
         />
       </template>
@@ -27,7 +33,8 @@ export default {
     colors: Object
   },
   data:()=>({
-    cancel: false
+    cancel: false,
+    active: 0
   }),
   mounted(){
 
@@ -54,7 +61,7 @@ export default {
         trigger: `#${section.id}`,
         start: `top ${!i ? 'bottom' : 'top+=200'}`,
         end: `bottom ${i == len ? 'top-=200' : 'top+=200'}`,
-        onToggle:(e)=> !this.cancel && this.style(this.$refs.section[i].$el,e.isActive)
+        onToggle:(e)=> !this.cancel && e.isActive && (this.active = i)
       }))
     })
 
@@ -64,21 +71,13 @@ export default {
     window.removeEventListener('resize',this.handleResize)
   },
   methods:{
-    style(el,on){
-      on
-      ? gsap.set(el,{background: this.colors.primary, color:'white'})
-      : gsap.set(el,{clearProps:'all'})
-    },
     handleResize(){
       gsap.set(this.$refs.container,{minWidth: this.$refs.sidebar.offsetWidth})
     },
-    scrollToSection(id){
-
-      let btn = document.getElementById(`${id}-button`)
+    scrollToSection(id,index){
 
       this.cancel = true
-      this.$refs.section.forEach(s => this.style(s.$el,false))
-      btn && this.style(btn,true)
+      this.active = index
 
       gsap.to('#scroller', {
         duration: 1,
