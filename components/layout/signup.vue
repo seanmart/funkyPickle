@@ -39,11 +39,11 @@ export default {
     isSent: false
   }),
   mounted(){
-    gsap.to(this.$refs.bg,1,{y: 100, ease: 'none',scrollTrigger:{
-      trigger: this.$refs.container.$el,
-      start: 'top bottom',
-      scrub: true
-    }})
+    // gsap.to(this.$refs.bg,1,{y: 100, ease: 'none',scrollTrigger:{
+    //   trigger: this.$refs.container.$el,
+    //   start: 'top bottom',
+    //   scrub: true
+    // }})
 
   },
   computed:{
