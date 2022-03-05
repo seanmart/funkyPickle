@@ -9,17 +9,21 @@ html.is-desktop,
   overflow: hidden;
 }
 
-.is-desktop #scroller{
-  overflow: scroll;
-  height: 100%;
-}
-
 #site{
   width: 100vw;
 }
 
 #page{
   min-height: 400px;
+}
+
+.is-desktop #scroller{
+  overflow: scroll;
+  height: 100%;
+}
+
+#scroller{
+  transform-origin: center top
 }
 
 .is-resizing *{
