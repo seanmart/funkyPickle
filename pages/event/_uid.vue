@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import {camelize,formatSnakeToProper} from "@/assets/helpers";
+import {camelize,formatSnakeToProper,random} from "@/assets/helpers";
 import config from '@/tailwind.config.js'
 
 export default {
@@ -66,6 +66,10 @@ export default {
     data: null,
     uid: null
   }),
+  mounted(){
+    let colors = [this.colors.primary,this.colors.secondary]
+    gsap.to('#background .strip',.5,{fill:()=> colors[random(0,1)]})
+  },
   computed:{
     colors(){
       return{

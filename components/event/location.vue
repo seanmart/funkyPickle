@@ -1,7 +1,7 @@
 <template lang="html">
   <container-widget class="text-black flex flex-col xl:flex-row xl:items-center" v-if="place || address || cityState || (lat && long)">
     <div class="flex-initial xl:px-20px">
-      <text-icon v-if="place" icon="wayfinder" :value="place" class="mb-05"/>
+      <text-icon v-if="place" icon="wayfinder" :value="place" class="mb-05 text-16"/>
       <div class="font-normal">
         <p v-if="address" v-html="address"/>
         <p v-if="cityState" v-html="cityState"/>

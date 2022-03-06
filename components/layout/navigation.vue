@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <div id="nav__mobile" ref="mobileNav" class="md:hidden fixed top-0 left-0 z-40 h-full p-nav-top bg-black text-white flex flex-col justify-center">
+    <div id="nav__mobile" ref="mobileNav" class="md:hidden fixed inset-0 z-40 h-full p-nav-top bg-black text-white flex flex-col justify-center">
       <div class="links -ml-pxsm font-header uppercase font-bold text-50 leading-none">
 
         <nuxt-link :to="'/'" class="nav__link block p-5px py-7px overflow-hidden cursor-pointer">
@@ -46,8 +46,8 @@
     </div>
 
     <div id="nav__button" class="md:hidden fixed bottom-30 right-20 z-40">
-      <button type="button" name="button" class="h-70px w-70px rounded-full bg-black p-15px flex flex-col justify-center items-center" @click="toggleMenu">
-        <div v-for="i in 3" class="h-2px w-full bg-white my-3px"/>
+      <button type="button" name="button" class="h-70px w-70px rounded-full bg-black p-15px flex flex-col justify-center items-center" @click="toggleMenu" ref="btn">
+        <div v-for="i in 3" class="h-2px w-full bg-white my-3px" ref="bar"/>
       </button>
     </div>
 
@@ -56,6 +56,7 @@
 
 <script>
 import {mapState} from 'vuex'
+import config from '@/tailwind.config.js'
 export default {
   mounted(){
     this.$nextTick(this.init)
@@ -80,12 +81,26 @@ export default {
     menuOpen(open){
 
       if(open){
+        this.navWasHidden = this.navHidden
         this.navHidden = false
-        gsap.to(this.$refs.mobileNav,.75,{x:'0',ease:'expo.inOut'})
-        setTimeout(()=> window.addEventListener('click',this.toggleMenu),100)
+        gsap.timeline()
+            .to(this.$refs.mobileNav,.75,{x:'0',ease:'expo.inOut'})
+            .to(this.$refs.bar[0],.75,{rotate:45,y:8,ease:'expo.inOut'},'<')
+            .to(this.$refs.bar[1],.75,{scale:0,ease:'expo.inOut'},'<')
+            .to(this.$refs.bar[2],.75,{rotate:-45,y:-8,ease:'expo.inOut'},'<')
+            .to(this.$refs.btn,.75,{scale:1.2,background: config.theme.colors.pink, ease:'expo.inOut'},'<')
+
+        setTimeout(()=> window.addEventListener('click',this.handleMenuClick),100)
       } else {
-        gsap.to(this.$refs.mobileNav,.75,{x:'-100%',ease:'expo.inOut'})
-        window.removeEventListener('click',this.toggleMenu)
+        gsap.timeline()
+            .to(this.$refs.mobileNav,.75,{x:'-100%',ease:'expo.inOut'})
+            .to(this.$refs.bar[0],.75,{rotate:0,y:0,ease:'expo.inOut'},'<')
+            .to(this.$refs.bar[1],.75,{scale:1,ease:'expo.inOut'},'<')
+            .to(this.$refs.bar[2],.75,{rotate:0,y:0,ease:'expo.inOut'},'<')
+            .to(this.$refs.btn,.75,{scale:1,background:config.theme.colors.black,ease:'expo.inOut'},'<')
+            .set([this.$refs.bar,this.$refs.btn],{clearProps:'all'})
+
+        window.removeEventListener('click',this.handleMenuClick)
       }
 
     }
@@ -114,8 +129,20 @@ export default {
           .to('#nav__top',1,{y: 0,ease:'expo.out'})
           .to('#nav__side .nav__link span',1,{y:0,stagger: .1,ease:'expo.out'},'<')
     },
+    handleMenuClick(e){
+      let x = this.navWasHidden
+      for(let i = 0; i < e.path.length; i++){
+        if (e.path[i].classList && e.path[i].classList.contains('nav__link')){
+          x = false
+          break
+        }
+      }
+      this.navHidden = x
+      this.menuOpen = false
+    },
     toggleMenu(){
       this.menuOpen = !this.menuOpen
+      if(!this.menuOpen) this.navHidden = this.navWasHidden
     }
   }
 }
