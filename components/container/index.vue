@@ -39,6 +39,9 @@ export default {
 </script>
 
 <style lang="css">
+  section.is-first{
+    padding-top: theme('spacing.nav-top');
+  }
   section.is-first.pt-space{
     padding-top: theme('spacing.space-2x');
   }
@@ -50,5 +53,14 @@ export default {
   }
   .has-outer-top:first-child{
     margin-top: 0px;
+  }
+
+  @media screen and (max-width:theme('screens.md')){
+    section.is-first{
+      padding-top: theme('spacing.nav-top');
+    }
+    section.is-first.pt-space{
+      padding-top: calc(theme('spacing.space-2x') + theme('spacing.nav-top'));
+    }
   }
 </style>

@@ -1,7 +1,7 @@
 <template lang="html">
   <div ref="landing">
 
-    <container first class="relative h-2/3  shadow-bottom overflow-hidden" ref="mediaWrapper">
+    <container first class="relative h-2/3 overflow-hidden" ref="mediaWrapper">
         <div class="absolute inset-0 -top-1/3" ref="media">
           <div class="relative h-full">
             <div class="absolute inset-0 bg-cover bg-top" :style="{backgroundImage: `url(${data.landing_image.url})`}"/>
@@ -9,7 +9,7 @@
         </div>
     </container>
 
-    <container innerTop noTop class="overflow-hidden">
+    <container inner noTop class="bg-white shadow-bottom overflow-hidden">
       <div class="relative py-40">
 
         <div class="landing-title leading-09 font-header uppercase font-bold text-black text-center sm:text-left sm:pr-30 md:pr-50">

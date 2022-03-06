@@ -1,5 +1,5 @@
 <template lang="html">
-  <div id="site" class="light-blue text-16 md:text-14 xl:text-12">
+  <div id="site" class="text-16 md:text-14 xl:text-12">
     <layout-preloader/>
     <layout-navigation/>
     <div id="scroller" class="md:pl-nav-side" ref="scroller">
@@ -15,6 +15,7 @@
 <script>
 import config from '@/tailwind.config.js'
 import {random} from '@/assets/helpers'
+let linksOrder = {}
 export default {
   created(){
     if(process.server) return
@@ -23,40 +24,6 @@ export default {
   mounted(){
     this.$bus.$emit('LOADED')
     this.$bus.$on('REVEAL',()=> ScrollTrigger.refresh())
-  },
-  watch:{
-    $route(){
-      this.$refs.scroller.scrollTo(0,0)
-      ScrollTrigger.getAll().length > 0 && ScrollTrigger.refresh(true)
-      gsap.timeline({delay:.25,onComplete:()=>this.$bus.$emit('REVEAL')})
-          .set('#scroller',{scale:.95})
-          .to('#background',1,{scale:1,ease:'expo.inOut'})
-          .to('#background .bg',1,{opacity:0,ease:'expo.inOut'},'<')
-          .to('#background .strip',1,{opacity:.05,ease:'expo.inOut',fill:config.theme.colors.blue},'<')
-          .to('#scroller',1,{scale:1,opacity:1,ease:'expo.inOut'},'<')
-          .set(['#background','#background .bg','#background .strip','#scroller'],{clearProps:'all'})
-
-    }
-  },
-  middleware({from,route,$bus}){
-    if (process.server || !from || from.path == route.path) return;
-    let colors = [
-      config.theme.colors.lime,
-      config.theme.colors.pink,
-      config.theme.colors.green,
-      config.theme.colors.black
-    ]
-    return new Promise(res =>{
-      $bus.$emit('TOP_NAV',true)
-      let bg = colors.splice(random(0,colors.length -1),1)
-      gsap.timeline({onComplete:res})
-          .set('#background .bg',{background:bg},0)
-          .to('#scroller',1,{scale:.95,opacity:0,ease:'expo.inOut'},'<')
-          .to('#background',1,{scale:1.05,ease:'expo.inOut'},'<')
-          .to('#background .bg',1,{opacity:1,ease:'expo.inOut'},'<')
-          .to('#background .strip',1,{opacity:1,ease:'expo.inOut',fill:()=> colors[random(0,colors.length - 1)]},'<')
-          .set('#scroller',{scale:1})
-    })
   },
   methods:{
     initCreated(){
@@ -74,7 +41,46 @@ export default {
         timeout = setTimeout(()=> {html.classList.remove('is-resizing')},100)
         html.classList.add('is-resizing')
       })
+
+      linksOrder['/'] = 1
+      this.$store.state.settings.links.forEach((l,i) => linksOrder[l.to] = i + 2 )
+
+      this.colors = [
+        config.theme.colors.pink,
+        config.theme.colors.green,
+        config.theme.colors.black
+      ]
     },
-  }
+  },
+  watch:{
+    $route(from,to){
+
+      let fromPath = linksOrder[from.path] || 100
+      let toPath = linksOrder[to.path] || 100
+      let y = toPath > fromPath  ? '-10vh' : '10vh'
+
+      this.$refs.scroller.scrollTo(0,0)
+      ScrollTrigger.getAll().length > 0 && ScrollTrigger.refresh(true)
+
+      gsap.to('#background .strip',.5,{fill:()=>this.colors[random(0,2)]})
+
+      gsap.timeline({delay:.1,onComplete:()=>this.$bus.$emit('REVEAL')})
+          .set('#scroller',{y})
+          .to('#scroller',.5,{y:0,opacity:1,ease:'power2.out'})
+          .set(['#scroller'],{clearProps:'all'})
+    }
+  },
+  middleware({from,route,$bus}){
+    if (process.server || !from || from.path == route.path) return;
+
+    let fromPath = linksOrder[from.path] || 100
+    let toPath = linksOrder[route.path] || 100
+    let y = toPath > fromPath ? '-10vh' : '10vh'
+
+    return new Promise(res =>{
+      $bus.$emit('TOP_NAV',true)
+      gsap.to('#scroller',.5,{y, opacity:0,ease:'power2.in',onComplete:res})
+    })
+  },
 }
 </script>
