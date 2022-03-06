@@ -23,7 +23,6 @@ export default {
   },
   mounted(){
     this.$bus.$emit('LOADED')
-    this.$bus.$on('REVEAL',()=> ScrollTrigger.refresh())
   },
   methods:{
     initCreated(){
