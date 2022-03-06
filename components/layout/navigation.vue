@@ -19,7 +19,7 @@
             <a v-if="link.href" target="_blank" :href="link.href" class="nav__link block p-5px py-7px overflow-hidden cursor-pointer">
               <span class="block" v-html="link.label" />
             </a>
-            <nuxt-link v-if="link.to" :to="link.to" class="nav__link block p-5px py-7px overflow-hidden cursor-pointer">
+            <nuxt-link v-if="link.to" :to="link.to" class="block p-5px py-7px overflow-hidden cursor-pointer">
               <span class="block" v-html="link.label" />
             </nuxt-link>
           </template>
@@ -39,7 +39,7 @@
             <span class="block" v-html="link.label" />
           </a>
           <nuxt-link v-if="link.to" :to="link.to" class="nav__link block p-5px py-7px overflow-hidden cursor-pointer">
-            <span class="block" v-html="link.label" />
+            <span class="block nav__link" v-html="link.label" />
           </nuxt-link>
         </template>
       </div>
@@ -131,11 +131,15 @@ export default {
     },
     handleMenuClick(e){
       let x = this.navWasHidden
-      for(let i = 0; i < e.path.length; i++){
-        if (e.path[i].classList && e.path[i].classList.contains('nav__link')){
-          x = false
-          break
+      if (e.path){
+        for(let i = 0; i < e.path.length; i++){
+          if (e.path[i].classList && e.path[i].classList.contains('nav__link')){
+            x = false
+            break
+          }
         }
+      } else if(e.srcElement) {
+        if (e.srcElement.classList.contains('nav__link')) x = false
       }
       this.navHidden = x
       this.menuOpen = false
@@ -149,11 +153,11 @@ export default {
 </script>
 
 <style lang="css">
-.nav__link span{
+.nav__link{
   transition-property: color;
   transition-duration: .25s;
 }
-.nav__link:hover span{
+.nav__link:hover{
   color: theme('colors.pink');
 }
 
