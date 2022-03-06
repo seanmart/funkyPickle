@@ -33,7 +33,7 @@ export default {
 
     this.anims = [
       gsap.to(this.$refs.ball.$el, 1, {
-        rotation: 90,
+        rotation: 150,
         ease: "none",
         scrollTrigger: {
           trigger: this.$refs.ball.$el,
