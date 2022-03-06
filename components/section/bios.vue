@@ -12,7 +12,7 @@
           <prismic-rich-text :field="person.name" class="font-header font-bold uppercase leading-09 text-pink text-50 md:text-30 min-w-100" />
         </div>
         <div class="flex-auto">
-          <prismic-rich-text :field="person.text" class="md:text-10"/>
+          <app-text :data="person.text" />
         </div>
       </div>
 
@@ -25,7 +25,7 @@
 export default {
   props:['data'],
   data:()=>({
-    colors: ['pink','green','black','pink','green','black']
+    colors: ['pink','green','black']
   })
 }
 </script>
