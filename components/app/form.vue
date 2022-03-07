@@ -89,8 +89,11 @@ form textarea{
   border-radius: 5px;
   background: white;
   border: 1px solid rgba(theme('colors.bluergb'),.25);
-  box-shadow: 0px 2px 5px rgba(theme('colors.bluergb'),.25);
   color: theme('colors.black')
+}
+form .formulate-input-element{
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(theme('colors.bluergb'),.25);
 }
 
 form select{
@@ -118,11 +121,12 @@ form .formulate-input-element--select::before {
 form .formulate-input-label{
   display: inline-block;
   margin-bottom: 5px;
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 1px;
   text-transform: uppercase;
   font-weight: 600;
   opacity: .75;
+  white-space: nowrap;
 }
 
 .formulate-input{
@@ -163,6 +167,12 @@ form .formulate-input[data-is-showing-errors="true"] .formulate-input-label{
 }
 .has-columns .phone{
   flex: 1 0 200px;
+}
+
+@media screen and (min-width: theme('screens.xl')){
+  form .formulate-input-label{
+    font-size: .8rem;
+  }
 }
 
 </style>
