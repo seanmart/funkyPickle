@@ -1,9 +1,9 @@
 <template lang="html">
   <div class="text-scroll overflow-hidden relative w-full" ref="container">
-    <div class="text-ref w-full" ref="text">
+    <div class="text-ref w-full opacity-0" ref="text">
       <slot/>
     </div>
-    <div class="hidden text-clones absolute inset-0 flex-row items-center" ref="wrapper"/>
+    <div class="text-clones absolute inset-0 flex flex-row items-center" ref="wrapper"/>
   </div>
 </template>
 
@@ -51,11 +51,11 @@ export default {
 
 <style lang="css">
 
-  .has-js .text-ref{
-    opacity: 0;
+  .no-js .text-ref{
+    opacity: 1;
   }
-  .has-js .text-clones{
-    display: flex;
+  .no-js .text-clones{
+    display: none;
   }
   .text-scroll .text-scroll__item{
     white-space: nowrap;

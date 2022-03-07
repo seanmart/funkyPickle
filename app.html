@@ -1,17 +1,14 @@
-<html {{ HTML_ATTRS }}>
+<html {{ HTML_ATTRS }} class="no-js">
   <head {{ HEAD_ATTRS }}>
     <script id="js-check" type="text/javascript">
 
       let { userAgent, maxTouchPoints, platform } = navigator
       let mobileCheck = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
-      let vrCheck = /Quest|Quest 2|OculusBrowser/i
-
       window.isMobile = mobileCheck.test(userAgent) || (platform === "MacIntel" && maxTouchPoints > 1);
-      window.isVR = vrCheck.test(userAgent)
-      window.useSmooth = !window.isMobile && !window.isVR
       document.documentElement.classList.add(window.isMobile ? 'is-mobile' : 'is-desktop')
-      document.documentElement.classList.add('has-js')
-      window.isVR && document.documentElement.classList.add('is-vr')
+      document.documentElement.classList.remove('no-js')
+
+      document.documentElement.style.opacity = 0
 
       document.getElementById('js-check').remove()
 

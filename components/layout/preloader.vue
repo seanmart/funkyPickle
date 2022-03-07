@@ -1,5 +1,5 @@
 <template lang="html">
-  <div id="preloader" class="bg-white fixed inset-0 z-50 flex-col justify-center items-center overflow-hidden shadow-bottom" v-if="render">
+  <div id="preloader" class="bg-white fixed inset-0 z-50 flex flex-col justify-center items-center overflow-hidden shadow-bottom" v-if="render">
     <logo class="preloader__logo relative block w-200" vertical/>
   </div>
 </template>
@@ -48,11 +48,8 @@ export default {
 </script>
 
 <style lang="css">
-  #preloader{
+  .no-js #preloader{
     display: none;
-  }
-  .has-js #preloader{
-    display: flex;
   }
   #preloader .preloader__logo{
     opacity: 0
