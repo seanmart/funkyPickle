@@ -4,7 +4,7 @@
     <container first class="relative h-2/3 overflow-hidden" ref="mediaWrapper">
         <div class="absolute inset-0" ref="media">
           <div class="relative h-full">
-            <div class="absolute inset-0 bg-cover bg-top" :style="{backgroundImage: `url(${data.landing_image.url})`}"/>
+            <div class="absolute inset-0 bg-cover bg-top bg__image" :style="{backgroundImage: `url(${data.landing_image.url})`}"/>
           </div>
         </div>
     </container>

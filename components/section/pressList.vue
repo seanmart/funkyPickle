@@ -11,7 +11,7 @@
           <div class="press-list__item swiper-slide h-auto min-h-300 flex flex-row items-stretch">
             <a :href="item.link.url" target="_blank" class="block overflow-hidden rounded-lg shadow-bottom h-full bg-lime flex flex-col lg:flex-row items-stretch w-full">
               <div class="flex-shrink-0 flex-grow-0 overflow-hidden pb-2/3 lg:pb-0 lg:w-1/2 relative">
-                <div class="press-list__image absolute inset-0 bg-cover bg-center" :style="{ backgroundImage: `url(${item.image.url})` }" />
+                <div class="press-list__image absolute inset-0 bg-cover bg-center bg__image" :style="{ backgroundImage: `url(${item.image.url})` }" />
               </div>
               <div class="p-20 flex flex-col flex-auto text-14 lg:text-10 font-medium">
                 <p v-html="formatDate(item.date,'mmmm dd, yyyy')" class="mb-05"/>
