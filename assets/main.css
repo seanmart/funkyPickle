@@ -3,23 +3,12 @@ html{
   font-size: 10px;
 }
 
-html.is-desktop,
-.is-desktop body{
-  height: 100%;
-  overflow: hidden;
-}
-
 #site{
   width: 100vw;
 }
 
 #page{
   min-height: 400px;
-}
-
-.is-desktop #scroller{
-  overflow: scroll;
-  height: 100%;
 }
 
 #scroller{

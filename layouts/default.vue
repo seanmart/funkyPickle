@@ -18,8 +18,7 @@ import config from '@/tailwind.config.js'
 import {random} from '@/assets/helpers'
 
 let linksIndex = {}
-let prevPageIndex = 0
-let nextPageIndex = 0
+let transitionProps = {dir:'y',value:50}
 let colors = [
   config.theme.colors.pink,
   config.theme.colors.green,
@@ -29,7 +28,7 @@ let colors = [
 let transitionOn = ()=>{
   return new Promise((res)=>{
     gsap.to('#scroller',.5,{
-      y:nextPageIndex > prevPageIndex ? '-10vh' : '10vh',
+      [transitionProps.dir]:transitionProps.value,
       opacity:0,
       ease:'power2.in',
       onComplete:res
@@ -40,8 +39,8 @@ let transitionOn = ()=>{
 let transitionOff = ()=>{
   return new Promise((res)=>{
     gsap.timeline({delay:.1,onComplete:res})
-    .set('#scroller',{y:nextPageIndex > prevPageIndex  ? '10vh' : '-10vh'})
-    .to('#scroller',.5,{y:0,opacity:1,ease:'power2.out'})
+    .set('#scroller',{[transitionProps.dir]:transitionProps.value * -1})
+    .to('#scroller',.5,{[transitionProps.dir]:0,opacity:1,ease:'power2.out'})
     .set(['#scroller'],{clearProps:'all'})
   })
 }
@@ -57,7 +56,6 @@ export default {
   },
   watch:{
     $route(){
-      scroller.scrollTo(0,0)
       gsap.to('#background .strip',.5,{fill:()=>colors[random(0,2)]})
     }
   },
@@ -69,7 +67,6 @@ export default {
     initGsap(){
       gsap.registerPlugin(ScrollTrigger);
       gsap.registerPlugin(ScrollToPlugin);
-      !isMobile && ScrollTrigger.defaults({scroller: "#scroller",pinType: 'fixed'});
     },
     initScroller(){
       window.scroller = document.getElementById('scroller')
@@ -98,8 +95,13 @@ export default {
   async middleware({from,route,$bus}){
     if (process.server || !from || from.path == route.path) return;
 
-    prevPageIndex = linksIndex[from.path] || 100
-    nextPageIndex = linksIndex[route.path] || 100
+    let fx = linksIndex[from.path]
+    let tx = linksIndex[route.path]
+
+    transitionProps = {
+      dir: !tx || !fx ? 'x' :'y',
+      value: !tx || tx > fx ? -50 : 50
+    }
 
     $bus.$emit('TOP_NAV',true)
     await transitionOn()

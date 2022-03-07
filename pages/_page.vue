@@ -8,7 +8,6 @@
 
 <script>
 import {camelize} from '@/assets/helpers'
-import imagesLoaded from 'imagesLoaded'
 export default {
   async asyncData({ store, route, $prismic }) {
     let res = null;
@@ -26,7 +25,7 @@ export default {
     page: null
   }),
   mounted(){
-    imagesLoaded('#page',{background: true},()=> this.$bus.$emit('LOADED'))
+    this.$loaded('#page',{background: true},()=> this.$bus.$emit('LOADED'))
   },
   computed:{
     slices(){

@@ -32,6 +32,7 @@ export default {
   css: ['@/assets/main.css'],
   plugins: [
     { src: "@/plugins/eventBus.js", ssr: true },
+    { src: "@/plugins/imagesLoaded.js", ssr: false },
     { src: "@/plugins/screenBuddy.js", ssr: false },
     { src: "@/plugins/directives.js", ssr: false },
   ],
