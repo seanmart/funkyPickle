@@ -12,23 +12,7 @@
         </div>
 
         <div class="flex-initial lg:w-250 pt-20 lg:pl-20 lg:pt-0">
-
-          <client-only>
-          <formulate-form @submit="submit" #default="{ isLoading }">
-
-            <template v-for="(field,i) in data.form">
-              <formulate-input :class="{'mt-05':i > 0}" :label="field.primary.label" :type="field.primary.type" :name="field.primary.key" :validation="getValidation(field)"/>
-            </template>
-
-            <div class="text-center md:text-left mt-50 md:mt-30">
-              <formulate-input type="submit" class="inline-block">
-                <btn bg="black" hoverBg="pink" wide :value="isLoading ? 'Sending' : isSent ? 'Sent!' : 'Submit'" />
-              </formulate-input>
-            </div>
-
-          </formulate-form>
-          </client-only>
-
+          <app-form :data="data.form" :onSubmit="data.submit"/>
         </div>
       </div>
 
@@ -46,19 +30,6 @@ export default {
     ...mapState({
       data: state => state.settings.signup,
     })
-  },
-  methods:{
-    getValidation(field){
-      return field.primary.required ? `required|${field.slice_type.replace('form_','')}` : ""
-    },
-    async submit(data){
-
-      let formData = new FormData()
-      Object.keys(data).forEach(key => formData.append(key,data[key]))
-
-      await fetch(this.data.action, {method: 'POST',body:formData})
-      this.isSent = true
-    }
   }
 }
 </script>
@@ -66,24 +37,6 @@ export default {
 <style lang="css">
 .signup__bg{
   background-image: url("/fp_giraffe.svg");
-}
-
-.signup input{
-  background: rgba(theme('colors.limergb'),.5);
-  border: 2px solid theme('colors.black');
-}
-
-.signup .formulate-input-errors{
-  display: none;
-}
-
-.signup .formulate-input[data-is-showing-errors="true"] input{
-  border: 2px solid theme('colors.pink');
-  background: rgba(theme('colors.pinkrgb'),.1);
-}
-
-.signup .formulate-input[data-is-showing-errors="true"] .formulate-input-label{
-  color: theme('colors.pink')
 }
 
 </style>

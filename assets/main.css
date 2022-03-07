@@ -86,19 +86,6 @@ html.is-desktop,
   padding-right: 5vw;
 }
 
-input{
-  padding: 15px;
-  width: 100%;
-  background: none;
-  border-radius: 5px;
-}
-
-.formulate-input-errors{
-  font-size: 10px;
-  line-height: 1;
-  padding-top: 10px;
-}
-
 @media screen and (min-width: theme("screens.sm")) {
   .gutter-left {
     padding-left: calc((100vw - (theme("screens.sm") - 50px)) / 2);

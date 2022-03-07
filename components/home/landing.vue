@@ -2,7 +2,7 @@
   <div ref="landing">
 
     <container first class="relative h-2/3 overflow-hidden" ref="mediaWrapper">
-        <div class="absolute inset-0 -top-1/3" ref="media">
+        <div class="absolute inset-0" ref="media">
           <div class="relative h-full">
             <div class="absolute inset-0 bg-cover bg-top" :style="{backgroundImage: `url(${data.landing_image.url})`}"/>
           </div>
@@ -42,11 +42,12 @@ export default {
         },
       }),
       gsap.to(this.$refs.media, 1, {
-        y:'33.333%',
+        scale:1.2,
         ease: "none",
         scrollTrigger: {
           trigger: this.$refs.mediaWrapper.$el,
-          start: "top bottom",
+          start: "top top",
+          end: 'bottom top',
           scrub: true,
         },
       }),

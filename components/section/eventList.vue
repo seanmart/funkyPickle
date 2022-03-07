@@ -1,7 +1,7 @@
 <template lang="html">
   <container class="event-list" ref="container">
 
-    <section-title v-if="this.data.primary.title" :value="this.data.primary.title"/>
+    <app-title v-if="this.data.primary.title" :value="this.data.primary.title" class="mb-space"/>
 
     <template v-for="event in events">
       <nuxt-link :to="`/event/${event.uid}`" class="event-list__event bg-white overflow-hidden mb-10px rounded-lg flex flex-col items-stretch lg:flex-row lg:h-120 shadow-bottom">
