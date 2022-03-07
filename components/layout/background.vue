@@ -21,10 +21,23 @@
 </template>
 
 <script>
+  import config from '@/tailwind.config.js'
+  import {random} from '@/assets/helpers'
   export default{
     mounted(){
       if (isMobile){
         this.$refs.svg.style.height = `${window.innerHeight + 100}px`
+      }
+    },
+    watch:{
+      $route(){
+        gsap.to('#background .strip',.5,{fill:()=>this.colors[random(0,2)]})
+      }
+    },
+    computed:{
+      colors(){
+        let {pink,green,black} = config.theme.colors
+        return[pink,green,black]
       }
     }
   }

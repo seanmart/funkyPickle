@@ -1,5 +1,5 @@
 <template lang="html">
-  <container-widget class="text-black flex flex-col xl:flex-row xl:items-center" v-if="place || address || cityState || (lat && long)">
+  <container-widget class="text-black flex flex-col xl:flex-row xl:items-center justify-center" v-if="place || address || cityState || (lat && long)">
     <div class="flex-initial xl:px-20px">
       <text-icon v-if="place" icon="wayfinder" :value="place" class="mb-05 text-16"/>
       <div class="font-normal">
@@ -7,7 +7,7 @@
         <p v-if="cityState" v-html="cityState"/>
       </div>
     </div>
-    <div v-if="long && lat" class="flex-grow flex-shrink-0 min-w-1/2 mt-20px xl:ml-20px xl:mt-0 rounded-md overflow-hidden">
+    <div v-if="long && lat" class="location-map flex-grow flex-shrink-0 min-w-1/2 mt-20px xl:ml-20px xl:mt-0 rounded-md overflow-hidden">
       <app-map :longitude="long" :latitude="lat" class="w-full h-400px md:h-300px"/>
     </div>
   </container-widget>
@@ -38,3 +38,9 @@ export default {
   }
 }
 </script>
+
+<style media="screen">
+  .no-js .location-map{
+    display: none;
+  }
+</style>

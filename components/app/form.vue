@@ -1,5 +1,5 @@
 <template lang="html">
-  <client-only>
+
     <div class="form">
       <formulate-form #default="{ isLoading }" @submit="submit" class="-mx-10px">
 
@@ -15,7 +15,6 @@
             </template>
           </div>
 
-          <formulate-input type="submit" class="inline-block">
             <btn
               wide
               :value="isLoading ? 'Sending' : isSent ? 'Sent!' : 'Submit'"
@@ -25,11 +24,13 @@
               :color="btnColors.color"
               :hoverColor="btnColors.hoverColor"
               :activeColor="btnColors.activeColor"
+              class="inline-block formulate-input formulate-input-element--submit"
+              type="submit"
             />
-          </formulate-input>
+
       </formulate-form>
     </div>
-</client-only>
+
 </template>
 
 <script>
@@ -154,7 +155,7 @@ form .formulate-input[data-is-showing-errors="true"] .formulate-input-label{
 .has-columns .name,
 .has-columns .email,
 .has-columns .location{
-  flex: 1 0 250px;
+  flex: 1 0 300px;
 }
 .has-columns .dropdown{
   flex: 1 1 auto;

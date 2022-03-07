@@ -14,8 +14,6 @@
 
 <script>
 
-import config from '@/tailwind.config.js'
-import {random} from '@/assets/helpers'
 let linksIndex = {}
 let transitionProps = {dir:'y',val:-50}
 
@@ -26,12 +24,9 @@ export default {
     this.initBus()
     this.initResize()
     this.initLinksIndex()
-    this.initColors()
   },
-  watch:{
-    $route(){
-      gsap.to('#background .strip',.5,{fill:()=>this.colors[random(0,2)]})
-    }
+  mounted(){
+    document.documentElement.style.opacity = 1
   },
   methods:{
     initBus(){
@@ -54,13 +49,6 @@ export default {
     initLinksIndex(){
       linksIndex = {'/':1}
       this.$store.state.settings.links.forEach((l,i) => linksIndex[l.to] = i + 2 )
-    },
-    initColors(){
-      this.colors = [
-        config.theme.colors.pink,
-        config.theme.colors.green,
-        config.theme.colors.black
-      ]
     },
     handleLoaded(){
       gsap.timeline({onComplete:()=>this.$bus.$emit('REVEAL')})

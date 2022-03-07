@@ -7,7 +7,7 @@
     </span>
   </nuxt-link>
 
-  <a v-else-if="href" :href="href" :class="classes" :style="styles" target="_blank" @click="handleClick" ref="b">
+  <a v-else-if="href" :href="href" :class="classes" :style="styles" :target="prevent ? '' : '_blank'" @click="handleClick" ref="b">
     <span>
       <icon v-if="iconBefore" :icon="iconName"/>
       <slot>{{value}}</slot>
