@@ -1,5 +1,5 @@
 <template lang="html">
-  <container>
+  <container class="bios-section">
     <template v-for="(person,i) in data.items">
     <div class="bg-white rounded-lg shadow-bottom overflow-hidden flex flex-col md:flex-row" :class="{'mb-10': i < data.items.length - 1}">
 
@@ -29,3 +29,9 @@ export default {
   })
 }
 </script>
+
+<style media="screen">
+.text-section + .bios-section{
+  padding-top: 0px;
+}
+</style>

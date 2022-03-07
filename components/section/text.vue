@@ -1,5 +1,5 @@
 <template lang="html">
-  <container>
+  <container class="text-section" :class="{'no-section-title': !data.primary.title}">
     <app-title class="mb-space" v-if="data.primary.title" :value="data.primary.title"/>
     <div class="rounded-lg shadow-bottom" :class="`bg-${data.primary.background}`">
       <img v-if="data.primary.image.url" class="w-full" :src="data.primary.image.url"/>
@@ -18,3 +18,9 @@ export default {
   }
 }
 </script>
+
+<style media="screen">
+.text-section + .no-section-title.text-section{
+  padding-top: 0px;
+}
+</style>

@@ -1,6 +1,6 @@
 <template lang="html">
-  <container>
-    <div class="p-30 bg-white rounded-lg shadow-bottom sm:p-50" :class="classes">
+  <container class="form-section">
+    <div class="p-30 rounded-lg shadow-bottom sm:p-50" :class="classes">
       <div class="mb-40">
         <h3 v-if="data.primary.title" v-html="data.primary.title" class="text-25 font-bold" :class="{'text-pink':bg == 'white'}"/>
         <app-text v-if="data.primary.description" :data="data.primary.description"/>
@@ -41,3 +41,10 @@ export default {
   }
 }
 </script>
+
+<style media="screen">
+  .text-section + .form-section,
+  .form-section + .form-section{
+    padding-top: 0px;
+  }
+</style>
