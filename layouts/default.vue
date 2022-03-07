@@ -15,6 +15,7 @@
 <script>
 import config from '@/tailwind.config.js'
 import {random} from '@/assets/helpers'
+import imagesLoaded from 'imagesLoaded'
 let linksOrder = {}
 export default {
   created(){
@@ -65,10 +66,12 @@ export default {
 
       gsap.to('#background .strip',.5,{fill:()=>this.colors[random(0,2)]})
 
-      gsap.timeline({delay:.1,onComplete:()=>this.$bus.$emit('REVEAL')})
-          .set('#scroller',{y})
-          .to('#scroller',.5,{y:0,opacity:1,ease:'power2.out'})
-          .set(['#scroller'],{clearProps:'all'})
+      imagesLoaded('#scroller',{background: true},()=>{
+        gsap.timeline({delay:.1,onComplete:()=>this.$bus.$emit('REVEAL')})
+            .set('#scroller',{y})
+            .to('#scroller',.5,{y:0,opacity:1,ease:'power2.out'})
+            .set(['#scroller'],{clearProps:'all'})
+      })
     }
   },
   middleware({from,route,$bus}){

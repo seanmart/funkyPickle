@@ -1,6 +1,12 @@
 <template lang="html">
   <container-widget v-if="logos" class="flex flex-row flex-wrap">
-    sponsors
+    <div class="-mx-05">
+      <template v-for="logo in logos">
+        <div class="flex-grow-0 flex-shrink-0 p-05">
+          <img :src="logo" class="h-30"/>
+        </div>
+      </template>
+    </div>
   </container-widget>
 </template>
 

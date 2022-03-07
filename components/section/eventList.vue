@@ -12,7 +12,7 @@
           </h3>
           <div
             v-if="event.data.image.url"
-            class="event-list__image absolute inset-0 z-0 bg-cover bg-center opacity-40"
+            class="event-list__image absolute inset-0 z-0 bg-cover bg-center opacity-40 bg__image"
             :style="{ backgroundImage: `url(${event.data.image.url})` }"
           />
         </div>
