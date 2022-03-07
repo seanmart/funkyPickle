@@ -79,7 +79,7 @@ export default {
       this.cancel = true
       this.active = index
 
-      gsap.to('#scroller', {
+      gsap.to(window, {
         duration: 1,
         ease: 'power2.out',
         scrollTo:{y:`#${id}`,offsetY:this.offset - 1},
