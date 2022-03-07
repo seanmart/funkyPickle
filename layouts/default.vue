@@ -77,13 +77,14 @@ export default {
   middleware({from,route}){
     if (process.server) return
     return new Promise((res)=>{
-      let indexFrom = linksIndex[from.path]
-      let indexTo = linksIndex[route.path]
 
-      transitionProps = !indexFrom ? {dir:'x',val:50}
-                      : !indexTo ? {dir:'x',val:-50}
-                      : indexFrom > indexTo ? {dir:'y',val:50}
-                      : {dir:'y',val:-50}
+      let fx = linksIndex[from.path]
+      let tx = linksIndex[route.path]
+
+      transitionProps = {
+        dir: !tx || !fx ? 'x' :'y',
+        val: !tx || tx > fx ? -50 : 50
+      }
 
       gsap.to('#page',.5,{[transitionProps.dir]:transitionProps.val,opacity:0,ease:'power2.in',onComplete:()=>{
         window.scrollTo(0,0)
