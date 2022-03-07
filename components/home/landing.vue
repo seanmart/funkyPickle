@@ -31,28 +31,31 @@ export default {
   props:['data'],
   mounted(){
 
-    this.anims = [
-      gsap.to(this.$refs.ball.$el, 1, {
-        rotation: 150,
-        ease: "none",
-        scrollTrigger: {
-          trigger: this.$refs.ball.$el,
-          start: "top bottom",
-          scrub: true,
-        },
-      }),
-      gsap.to(this.$refs.media, 1, {
-        scale:1.2,
-        ease: "none",
-        scrollTrigger: {
-          trigger: this.$refs.mediaWrapper.$el,
-          start: "top top",
-          end: 'bottom top',
-          scrub: true,
-        },
-      }),
-    ]
+    this.$bus.$once('REVEAL',()=>{
 
+      this.anims = [
+        gsap.to(this.$refs.ball.$el, 1, {
+          rotation: 150,
+          ease: "none",
+          scrollTrigger: {
+            trigger: this.$refs.ball.$el,
+            start: "top bottom",
+            scrub: true,
+          },
+        }),
+        gsap.to(this.$refs.media, 1, {
+          scale:1.2,
+          ease: "none",
+          scrollTrigger: {
+            trigger: this.$refs.mediaWrapper.$el,
+            start: "top top",
+            end: 'bottom top',
+            scrub: true,
+          },
+        }),
+      ]
+
+    })
   },
   destroyed(){
     this.anims && this.anims.forEach(a => a.kill())
