@@ -16,12 +16,15 @@
         </nuxt-link>
         <div class="links mt-40px pb-40px -ml-pxsm font-header uppercase font-bold text-30px leading-none">
           <template v-for="link in links">
+
             <a v-if="link.href" target="_blank" :href="link.href" class="nav__link block p-5px py-7px overflow-hidden cursor-pointer">
               <span class="block" v-html="link.label" />
             </a>
-            <nuxt-link v-if="link.to" :to="link.to" class="block p-5px py-7px overflow-hidden cursor-pointer">
+
+            <nuxt-link v-if="link.to" :to="link.to" class="nav__link block p-5px py-7px overflow-hidden cursor-pointer">
               <span class="block" v-html="link.label" />
             </nuxt-link>
+
           </template>
         </div>
       </div>
@@ -35,12 +38,15 @@
         </nuxt-link>
 
         <template v-for="link in links">
+
           <a v-if="link.href" target="_blank" :href="link.href" class="nav__link block p-5px py-7px overflow-hidden cursor-pointer">
             <span class="block" v-html="link.label" />
           </a>
+
           <nuxt-link v-if="link.to" :to="link.to" class="nav__link block p-5px py-7px overflow-hidden cursor-pointer">
             <span class="block nav__link" v-html="link.label" />
           </nuxt-link>
+
         </template>
       </div>
     </div>
@@ -110,11 +116,7 @@ export default {
       ScreenBuddy.onMd((bigger)=>{
         this.anim && this.anim.kill()
         if (!bigger){
-          this.anim = ScrollTrigger.create({
-            start: 50,
-            end: 99999,
-            onUpdate:(self)=> this.navHidden = self.direction == 1 || this.mobileHeaderDisabled
-          })
+          this.anim = ScrollTrigger.create({start: 50,end: 99999, onUpdate:(self)=> this.navHidden = self.direction == 1 || this.mobileHeaderDisabled})
         }
       })
 
@@ -125,9 +127,9 @@ export default {
     },
     reveal(){
       gsap.timeline()
-          .to('#nav__side .nav__logo',1,{x: 0,ease:'expo.out'})
-          .to('#nav__top',1,{y: 0,ease:'expo.out'})
-          .to('#nav__side .nav__link span',1,{y:0,stagger: .1,ease:'expo.out'},'<')
+          .to('#nav__side .nav__logo',.5,{x: 0,ease:'expo.out'})
+          .to('#nav__top',.5,{y: 0,ease:'expo.out'},'<')
+          .to('#nav__side .nav__link span',.5,{y:0,stagger: .1,ease:'expo.out'},'<')
     },
     handleMenuClick(e){
       let x = this.navWasHidden

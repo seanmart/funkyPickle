@@ -9,7 +9,8 @@ export default {
   data:()=>({
     render: true,
     siteLoaded: false,
-    preloaderLoaded: false
+    preloaderLoaded: false,
+    preloaderHidden: false
   }),
   watch:{
     siteLoaded(){
@@ -35,15 +36,12 @@ export default {
           .from('#preloader .preloader__logo .fp-logo__letters path',1.25,{opacity:0,scale:.5,transformOrigin:'center',stagger:.05,ease:'elastic.inOut'},'<+=.5')
     },
     hidePreloader(){
-      let reveal = ()=>{
-        this.loop && this.loop.kill()
-        this.$bus.$emit('REVEAL')
-      }
       gsap.timeline({delay:.5,onComplete:()=> this.render = false})
           .to('#preloader .preloader__logo',1,{opacity:0,scale:.9,transformOrigin:'center',ease:'expo.inOut'},'<')
           .to('#preloader',1,{y:'-100vh',ease:'expo.out'},'<+=.5')
           .to('#preloader .preloader__logo',1,{y:'100vh',ease:'expo.out'},'<')
-          .add(reveal,'<')
+          .add(()=> this.$emit('complete'),'<+=.25')
+          .add(()=> this.loop && this.loop.kill())
     }
   }
 }

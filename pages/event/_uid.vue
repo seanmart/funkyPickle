@@ -48,6 +48,7 @@
 
 <script>
 import {camelize,formatSnakeToProper,random} from "@/assets/helpers";
+import imagesLoaded from 'imagesLoaded'
 import config from '@/tailwind.config.js'
 
 export default {
@@ -69,6 +70,9 @@ export default {
   mounted(){
     let colors = [this.colors.primary,this.colors.secondary]
     gsap.to('#background .strip',.5,{fill:()=> colors[random(0,1)]})
+
+    imagesLoaded('#page',{background: true},()=> this.$bus.$emit('LOADED'))
+
   },
   computed:{
     colors(){
