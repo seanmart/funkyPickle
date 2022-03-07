@@ -9,7 +9,7 @@
     <div id="content" ref="content">
 
       <container>
-        <div class="flex flex-row flex-wrap -m-05 lg:text-12 text-center font-bold" :style="{fill:colors.secondary}">
+        <div class="flex flex-row flex-wrap -m-05 lg:text-12 text-center font-bold" :style="{fill:colors.primary}">
           <event-dates :data="data" class="flex-auto m-05"/>
           <event-weather :uid="uid" class="flex-auto m-05"/>
           <event-location :data="data" class="flex-auto w-full m-05"/>
@@ -22,8 +22,8 @@
 
           <div class="flex-auto">
             <template v-for="(section,i) in sections">
-              <div :id="section.id" class="pb-40">
-                <section-title :value="section.label" :color1="colors.primary" :color2="colors.secondary"/>
+              <div :id="section.id" :class="{'mb-space': i < sections.length - 1}">
+                <app-title class="mb-space" :value="section.label" :color1="colors.primary" :color2="colors.secondary"/>
                 <component :is="section.component" :data="section" :colors="colors"/>
               </div>
             </template>

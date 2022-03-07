@@ -1,5 +1,5 @@
 <template lang="html">
-  <div id="background" class="fixed inset-0 z-back overflow-hidden flex justify-end items-start opacity-10">
+  <div id="background" class="fixed inset-0 z-back overflow-hidden flex justify-end items-start opacity-5">
     <svg class="flex-shrink-0 sm:min-w-full sm:min-h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1621.01 1371.54" ref="svg">
       <path class="strip fill-pink" d="M417.58,1045.9c.33,114.6-24.87,221.13-63.27,324.3H284.84C340,1167.44,293.06,954.65,286,748.35c-27.89-145.13,44.79-351-46.73-464.41-10-11.85-20.82-22.78-33.19-30.45-76-47-140.8-113-206.07-178.32V0C166.67-2.6,98.37-11.26,208.85,93.82c61.75,56.77,132.72-20.55,162.07,90.81,22.65,75.58,26.24,151.7,5.81,229.19C333,624.27,436.36,831.08,417.58,1045.9Z" />
       <path class="strip fill-green" d="M600.75,276.24c-19.26,364.4-9.34,735.31-82,1094H460.84c77.14-338.88-5.6-691.51,25.69-1035.66,2.06-39.64-.36-78.92-5.12-118C471.22,141.09,385.54,80.07,418,0H586.49C599.12,91.49,603.2,183.63,600.75,276.24Z" />

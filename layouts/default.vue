@@ -23,6 +23,9 @@ export default {
   },
   mounted(){
     this.$bus.$emit('LOADED')
+    this.$bus.$on('REVEAL',()=>{
+      ScrollTrigger.getAll().length > 0 && ScrollTrigger.refresh(true)
+    })
   },
   methods:{
     initCreated(){
@@ -59,7 +62,6 @@ export default {
       let y = toPath > fromPath  ? '-10vh' : '10vh'
 
       this.$refs.scroller.scrollTo(0,0)
-      ScrollTrigger.getAll().length > 0 && ScrollTrigger.refresh(true)
 
       gsap.to('#background .strip',.5,{fill:()=>this.colors[random(0,2)]})
 

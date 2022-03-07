@@ -1,8 +1,8 @@
 <template lang="html">
   <container v-if="data" noRight noLeft class="press-list relative overflow-hidden" ref="container">
 
-    <div class="gutter-left gutter-right">
-      <section-title :value="data.primary.title"/>
+    <div class="gutter-left gutter-right" v-if="data.primary.title">
+      <app-title :value="data.primary.title" class="mb-space"/>
     </div>
 
     <div class="swiper gutter-left gutter-right relative z-10" ref="swiper">

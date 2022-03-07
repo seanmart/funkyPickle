@@ -30,8 +30,8 @@ export default {
         "gutter-right": !this.noX && !this.noRight,
         "pt-space-2x": this.innerTop || this.inner,
         "pb-space-2x": this.innerBottom || this.inner,
-        "has-outer-top mt-space": !this.noTop && !this.noY && (this.innerTop || this.inner),
-        "has-outer-bottom mb-space": !this.noBottom && !this.noY && (this.innerBottom || this.inner)
+        "mt-space": !this.noTop && !this.noY && (this.innerTop || this.inner),
+        "mb-space": !this.noBottom && !this.noY && (this.innerBottom || this.inner)
       };
     },
   },
@@ -48,10 +48,10 @@ export default {
   section.is-last.pb-space{
     padding-bottom: theme('spacing.space-2x');
   }
-  .has-outer-bottom:last-child{
+  section.is-last.mb-space{
     margin-bottom: 0px;
   }
-  .has-outer-top:first-child{
+  section.is-first.mt-space{
     margin-top: 0px;
   }
 

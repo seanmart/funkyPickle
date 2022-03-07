@@ -27,8 +27,16 @@ export default{
       let res = await this.$prismic.api.getSingle("settings");
       if (!res) return
 
-      let signup = {title: res.data.signup_title,form: res.data.form, action: res.data.macro_link}
-      let footer = {text: res.data.footer_text}
+      let signup = {
+        title: res.data.signup_title,
+        form: res.data.form[0].items,
+        submit: res.data.form[0].primary.submit
+      }
+
+      let footer = {
+        text: res.data.footer_text,
+        social: res.data.social
+      }
 
       let links = res.data.links.map((item) => {
         let {link_type,type,url,uid} = item.primary.link
