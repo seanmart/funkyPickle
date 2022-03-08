@@ -2,7 +2,7 @@
   <container class="text-section" :class="{'no-section-title': !data.primary.title}">
     <app-title class="mb-space" v-if="data.primary.title" :value="data.primary.title"/>
     <div class="rounded-lg shadow-bottom" :class="`bg-${data.primary.background}`">
-      <img v-if="data.primary.image.url" class="w-full" :src="data.primary.image.url"/>
+      <img v-if="data.primary.image.url" class="w-full image" :src="data.primary.image.url"/>
       <app-text class="p-30 sm:p-50" :knockout="knockout" :data="data.primary.text"/>
     </div>
   </container>

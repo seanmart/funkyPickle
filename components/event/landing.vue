@@ -3,12 +3,12 @@
 
     <div :class="{'relative h-300 md:h-150':banner}" v-if="image">
       <div :class="{'absolute top-0 left-0 right-0 -bottom-100':banner}">
-        <div class="h-full bg-cover bg-center bg__image" :style="{backgroundImage:`url(${image})`}"/>
+        <div class="h-full bg-cover bg-center image" :style="{backgroundImage:`url(${image})`}"/>
       </div>
     </div>
 
     <container noTop noBottom :first="!image && !banner">
-      <img v-if="banner" class="rounded-lg shadow-bottom" :src="banner.url" :alt="banner.alt">
+      <img v-if="banner" class="rounded-lg shadow-bottom image" :src="banner.url" :alt="banner.alt">
       <div class="pt-40 pb-40">
         <h1 v-html="title" class="font-header uppercase font-bold text-center leading-09 mx-auto text-40 max-w-30ch"/>
       </div>

@@ -25,7 +25,9 @@ export default {
     page: null
   }),
   mounted(){
-    this.$loaded('#page',{background: true},()=> this.$bus.$emit('LOADED'))
+    this.$nextTick(()=>{
+      this.$loaded('.image',{background: true},()=> this.$bus.$emit('LOADED'))
+    })
   },
   computed:{
     slices(){

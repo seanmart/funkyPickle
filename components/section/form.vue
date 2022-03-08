@@ -1,11 +1,13 @@
 <template lang="html">
   <container class="form-section">
-    <div class="p-30 rounded-lg shadow-bottom sm:p-50" :class="classes">
-      <div class="mb-40">
-        <h3 v-if="data.primary.title" v-html="data.primary.title" class="text-25 font-bold" :class="{'text-pink':bg == 'white'}"/>
-        <app-text v-if="data.primary.description" :data="data.primary.description"/>
+    <div class="rounded-lg shadow-bottom overflow-hidden">
+      <div  v-if="data.primary.title" :class="headerClasses" class="px-30 sm:px-50 py-10">
+        <h3 v-html="data.primary.title" class="text-25 font-bold font-header uppercase leading-09"/>
       </div>
-      <app-form columns :data="data.items" class="mx-auto" :btn="btn" :onSubmit="data.submit"/>
+      <div class="p-30 sm:px-50 sm:pb-50" :class="contentClasses">
+        <prismic-rich-text v-if="data.primary.description.length > 0" :field="data.primary.description" class="mb-30 font-semibold"/>
+        <app-form columns :data="data.items" class="mx-auto" :btn="btn" :onSubmit="data.submit"/>
+      </div>
     </div>
   </container>
 </template>
@@ -29,7 +31,13 @@ export default {
         activeColor: black ? 'black' : 'white'
       }
     },
-    classes(){
+    headerClasses(){
+      return{
+        'bg-black text-white': this.bg != 'black',
+        'bg-lime text-black': this.bg == 'black'
+      }
+    },
+    contentClasses(){
       return{
         'bg-white':this.bg == 'white',
         'bg-pink text-white' : this.bg == 'pink',
