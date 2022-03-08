@@ -42,6 +42,7 @@ export default {
     endpoint: process.env.PRISMIC_END_POINT,
     modern: true,
     preview: '/preview',
+    linkResolver: '@/app/prismic/link-resolver',
     apiOptions: {
       accessToken: process.env.PRISMIC_ACCESS_TOKEN,
     },
