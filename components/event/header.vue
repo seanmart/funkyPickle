@@ -15,6 +15,11 @@
       </container>
     </div>
   </div>
+  <div v-else class="relative" :style="{background: colors.primary, color:'white'}">
+    <div class="absolute inset-0 flex justify-center items-center">
+      <h3 class="font-bold text-15">Registration Coming Soon</h3>
+    </div>
+  </div>
 </template>
 
 <script>

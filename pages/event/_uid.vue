@@ -70,7 +70,9 @@ export default {
     let colors = [this.colors.primary,this.colors.secondary]
     gsap.to('#background .strip',.5,{fill:()=> colors[random(0,1)]})
 
-    this.$loaded('#page',{background: true},()=> this.$bus.$emit('LOADED'))
+    this.$nextTick(()=>{
+      this.$loaded('.image',{background: true},()=> this.$bus.$emit('LOADED'))
+    })
 
   },
   computed:{

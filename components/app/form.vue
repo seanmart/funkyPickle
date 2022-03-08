@@ -1,20 +1,19 @@
 <template lang="html">
 
     <div class="form">
-      <formulate-form #default="{ isLoading }" @submit="submit" class="-mx-10px">
+      <formulate-form #default="{ isLoading }" @submit="submit" class="-m-10px">
 
           <div :class="{'flex flex-row flex-wrap has-columns': columns}">
             <template v-for="(field,i) in data">
-              <formulate-input v-if="field.type == 'text'" :label="field.label" :name="field.id" :validation="getValidation(field)" type="text" class="text"/>
-              <formulate-input v-else-if="field.type == 'name'" :label="field.label" :name="field.id" :validation="getValidation(field)" type="text" class="name"/>
-              <formulate-input v-else-if="field.type == 'location'" :label="field.label" :name="field.id" :validation="getValidation(field)" type="text" class="location"/>
-              <formulate-input v-else-if="field.type == 'email'" :label="field.label" :name="field.id" :validation="getValidation(field)" type="email" class="email"/>
-              <formulate-input v-else-if="field.type == 'dropdown'" :label="field.label" :name="field.id"  type="select" :options="getValues(field)" class="dropdown"/>
-              <formulate-input v-else-if="field.type == 'phone'" :label="field.label" :name="field.id"  type="tel" class="phone"/>
-              <formulate-input v-else-if="field.type == 'textarea'" :label="field.label" :name="field.id"  type="textarea" class="textarea"/>
+              <formulate-input v-if="field.type == 'text'" :label="field.label" :name="field.id" :validation="getValidation(field)" type="text" class="text-field"/>
+              <formulate-input v-else-if="field.type == 'email'" :label="field.label" :name="field.id" :validation="getValidation(field)" type="email" class="email-field"/>
+              <formulate-input v-else-if="field.type == 'dropdown'" :label="field.label" :name="field.id"  type="select" :options="getValues(field)" class="dropdown-field"/>
+              <formulate-input v-else-if="field.type == 'phone'" :label="field.label" :name="field.id"  type="tel" class="phone-field"/>
+              <formulate-input v-else-if="field.type == 'textarea'" :label="field.label" :name="field.id"  type="textarea" class="textarea-field"/>
             </template>
           </div>
 
+          <div class="text-center lg:text-left">
             <btn
               wide
               :value="isLoading ? 'Sending' : isSent ? 'Sent!' : 'Submit'"
@@ -27,6 +26,7 @@
               class="inline-block formulate-input formulate-input-element--submit"
               type="submit"
             />
+          </div>
 
       </formulate-form>
     </div>
@@ -152,21 +152,17 @@ form .formulate-input[data-is-showing-errors="true"] .formulate-input-label{
   color: theme('colors.pink')
 }
 
-.has-columns .name,
-.has-columns .email,
-.has-columns .location{
-  flex: 1 0 300px;
-}
-.has-columns .dropdown{
+.has-columns .dropdown-field{
   flex: 1 1 auto;
 }
-.has-columns .textarea{
+.has-columns .textarea-field{
   flex: 1 1 100%;
 }
-.has-columns .text{
-  flex: 1 1 100%;
+.has-columns .email-field,
+.has-columns .text-field{
+  flex: 1 1 300px;
 }
-.has-columns .phone{
+.has-columns .phone-field{
   flex: 1 0 200px;
 }
 

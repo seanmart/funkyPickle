@@ -12,7 +12,7 @@
               <prismic-rich-text :field="item.title" class="text-35 md:text-30 font-header font-bold uppercase leading-09" />
               <prismic-rich-text :field="item.description" class="mt-20 xl:text-12" />
             </div>
-            <div class="flex-auto bg-black xl:w-1/2 bg-cover" :style="{backgroundImage:`url(${item.image.url})`}"/>
+            <div class="flex-auto bg-black xl:w-1/2 bg-cover image" :style="{backgroundImage:`url(${item.image.url})`}"/>
           </container-widget>
 
         </template>

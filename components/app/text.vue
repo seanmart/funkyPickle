@@ -17,19 +17,19 @@ export default {
         case 'heading3':
         return `<h3 class="text-20 mb-20 font-semibold">${children.join('')}</h3>`
         case 'heading4':
-        return `<h4 class="text-18 mt-20 mb-05 font-semibold">${children.join('')}</h4>`
+        return `<h4 class="text-18 mb-20 font-semibold">${children.join('')}</h4>`
         case 'heading5':
-        return `<h5 class="text-17 mb-18 font-semibold">${children.join('')}</h5>`
+        return `<h5 class="text-16 mb-20 font-semibold">${children.join('')}</h5>`
         case 'heading6':
-        return `<h6 class="text-16 mb-15 font-semibold">${children.join('')}</h6>`
+        return `<h6 class="text-16 mt-20 mb-05 font-semibold">${children.join('')}</h6>`
         case 'paragraph':
         return `<p class="mb-15">${children.join('')}</p>`
         case 'span':
         return content
         case 'list-item':
-        return `<div class="bg-gray py-05 px-10 rounded-md mb-02 font-semibold inline-block">${children.join('')}</div>`
+        return `<li class="list-disc ml-10 pl-05 marker:text-pink font-medium">${children.join('')}</li>`
         case "group-list-item":
-        return `<div class="my-20">${children.join('<br>')}</div>`
+        return `<ul class="my-20">${children.join('')}</ul>`
         case "strong":
         return `<span class="${this.knockout ? 'text-lime' : 'text-pink'} font-bold">${content}</span>`
       }

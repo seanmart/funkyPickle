@@ -1,6 +1,6 @@
 <template lang="html">
   <container noBottom v-if="data.primary.text">
-    <prismic-rich-text :field="data.primary.text" :htmlSerializer="htmlSerializer" class="font-header font-bold uppercase leading-09 text-80"/>
+    <prismic-rich-text :field="data.primary.text" :htmlSerializer="htmlSerializer" class="font-header font-bold uppercase leading-09 text-60"/>
   </container>
 </template>
 

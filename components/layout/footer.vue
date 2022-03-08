@@ -9,7 +9,7 @@
           </a>
         </template>
       </div>
-      <div class="mt-20 text-center" v-html="$prismic.asHtml(data.text)"/>
+      <prismic-rich-text :field="data.text" :htmlSerializer="htmlSerializer" class="mt-20 text-center"/>
     </container>
   </footer>
 </template>
@@ -22,6 +22,13 @@ export default {
       data: state => state.settings.footer
     })
   },
+  methods:{
+    htmlSerializer(type, element, content, children){
+      if (content && content.indexOf('{{year}}') > 0){
+        return content.replace('{{year}}', new Date().getFullYear())
+      }
+    }
+  }
 }
 </script>
 

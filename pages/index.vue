@@ -1,5 +1,5 @@
 <template lang="html">
-  <main id="page">
+  <main id="page" ref="page">
 
     <home-landing :data="data"/>
 
@@ -28,7 +28,11 @@ export default {
     data: [],
   }),
   mounted(){
-    this.$loaded('#page',{background: true},()=> this.$bus.$emit('LOADED'))
+
+    this.$nextTick(()=>{
+      this.$loaded('.image',{background: true},()=> this.$bus.$emit('LOADED'))
+    })
+
   },
   computed:{
     slices(){

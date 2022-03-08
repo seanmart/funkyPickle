@@ -5,7 +5,7 @@
       <template v-for="item in data.items">
         <div class="sponsors__sponsor--wrapper p-5px flex flex-row items-stretch">
           <div class="sponsors__sponsor rounded-lg h-full w-full p-20 flex justify-center items-center">
-            <img class="w-full opacity-60" :src="item.logo.url"/>
+            <img class="w-full opacity-60 image" :src="item.logo.url"/>
           </div>
         </div>
       </template>
