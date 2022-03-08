@@ -27,7 +27,7 @@ export default {
       { src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/ScrollTrigger.min.js" },
       { src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollToPlugin.min.js" },
       {src:"https://unpkg.com/swiper@8/swiper-bundle.min.js"},
-      {async:true, defer:true, src:"https://static.cdn.prismic.io/prismic.js?new=true&repo=funkypickle"}
+      {async:true, defer:true, src:"https://static.cdn.prismic.io/prismic.js?new=true&repo=funkypickle",body: true}
     ],
   },
   css: ['@/assets/main.css'],
@@ -41,7 +41,7 @@ export default {
   prismic: {
     endpoint: process.env.PRISMIC_END_POINT,
     modern: true,
-    preview: false,
+    preview: '/preview',
     apiOptions: {
       accessToken: process.env.PRISMIC_ACCESS_TOKEN,
     },
