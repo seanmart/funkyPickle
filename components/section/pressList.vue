@@ -58,16 +58,7 @@ export default {
   destroyed() {
     this.swiper && this.swiper.destroy(true, true);
   },
-  methods:{formatDate},
-  computed: {
-    theTitle() {
-      return "In The Press";
-    },
-    pressItems() {
-
-      return []
-    },
-  },
+  methods:{formatDate}
 };
 </script>
 

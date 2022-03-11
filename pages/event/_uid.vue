@@ -8,7 +8,7 @@
 
     <div id="content" ref="content">
 
-      <container>
+      <container :last="sections.length == 0">
         <div class="flex flex-row flex-wrap -m-05 lg:text-12 text-center font-bold" :style="{fill:colors.primary}">
           <event-dates :data="data" class="flex-auto m-05"/>
           <event-weather :uid="uid" class="flex-auto m-05"/>
@@ -17,8 +17,8 @@
         </div>
       </container>
 
-      <container noTop last id="sections">
-        <div class="flex flex-col lg:flex-row" v-if="sections.length > 0">
+      <container noTop last id="sections" v-if="sections.length > 0">
+        <div class="flex flex-col lg:flex-row">
 
           <div class="flex-auto">
             <template v-for="(section,i) in sections">
@@ -33,10 +33,6 @@
             <event-sidebar trigger="#sections" :sections="sections" :colors="colors" :offset="150"/>
           </div>
 
-        </div>
-
-        <div v-else class="text-center font-header uppercase font-bold text-pink text-30">
-          Event Content coming soon!
         </div>
 
       </container>
