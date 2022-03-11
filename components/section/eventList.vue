@@ -51,13 +51,6 @@ import { mapState } from "vuex";
 import query from "@/assets/eventListQuery";
 export default {
   props:['data'],
-  fetchKey: "event-list",
-  async fetch() {
-    if (this.$store.state.lists.events.length == 0) {
-      let data = await query(this.$prismic);
-      this.$store.commit("LIST", ["events", data.results]);
-    }
-  },
   computed: {
     ...mapState({
       eventsData: (state) => state.lists.events,

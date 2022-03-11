@@ -1,7 +1,7 @@
 <template lang="html">
-  <section class="relative z-10" :class="classes">
+  <div class="container relative z-10" :class="classes">
     <slot />
-  </section>
+  </div>
 </template>
 
 <script>
@@ -39,27 +39,27 @@ export default {
 </script>
 
 <style lang="css">
-  section.is-first{
+  .container.is-first{
     padding-top: theme('spacing.nav-top');
   }
-  section.is-first.pt-space{
+  .container.is-first.pt-space{
     padding-top: theme('spacing.space-2x');
   }
-  section.is-last.pb-space{
+  .container.is-last.pb-space{
     padding-bottom: theme('spacing.space-2x');
   }
-  section.is-last.mb-space{
+  .container.is-last.mb-space{
     margin-bottom: 0px;
   }
-  section.is-first.mt-space{
+  .container.is-first.mt-space{
     margin-top: 0px;
   }
 
   @media screen and (max-width:theme('screens.md')){
-    section.is-first{
+    .container.is-first{
       padding-top: theme('spacing.nav-top');
     }
-    section.is-first.pt-space{
+    .container.is-first.pt-space{
       padding-top: calc(theme('spacing.space-2x') + theme('spacing.nav-top'));
     }
   }

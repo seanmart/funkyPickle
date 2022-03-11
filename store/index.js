@@ -1,4 +1,5 @@
 import weather from "@/assets/weather.json";
+import { getDateOffset } from "@/assets/helpers";
 
 export default{
   state:()=>({
@@ -23,6 +24,33 @@ export default{
     LIST:(state,[key,data]) => state.lists[key] = data
   },
   actions:{
+    async EVENTS_LIST({commit}){
+
+      let date = getDateOffset(1);
+      let res = await this.$prismic.api.query([
+        this.$prismic.predicates.at("document.type", "event"),
+        this.$prismic.predicates.date.after("my.event.start_date", date)
+      ], {
+        graphQuery: `{
+        event
+        {
+        title
+        state
+        city
+        logo
+        image
+        ball_image
+        uid
+        start_date
+        end_date
+        }
+        }`,
+        orderings: "[my.event.start_date]",
+      });
+
+      commit("LIST", ["events", res.results]);
+
+    },
     async SETTINGS({commit}){
       let res = await this.$prismic.api.getSingle("settings");
       if (!res) return
@@ -51,6 +79,7 @@ export default{
     },
     async nuxtServerInit({dispatch,commit}){
       await dispatch('SETTINGS')
+      await dispatch('EVENTS_LIST')
       commit('WEATHER',weather)
     }
   }
