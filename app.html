@@ -11,7 +11,7 @@
       window.isMobile = mobileCheck.test(userAgent) || (platform === "MacIntel" && maxTouchPoints > 1);
       document.documentElement.classList.add(window.isMobile ? 'is-mobile' : 'is-desktop')
       document.documentElement.classList.remove('no-js')
-      //document.documentElement.style.opacity = 0
+      document.documentElement.style.opacity = 0
 
     </script>
     {{ HEAD }}
