@@ -1,0 +1,49 @@
+{
+  "id": "events",
+  "type": "SharedSlice",
+  "name": "Events",
+  "description": "Events",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "Events",
+      "primary": {
+        "publish": {
+          "config": {
+            "label": "Publish",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": true
+          },
+          "type": "Boolean"
+        },
+        "title": {
+          "config": {
+            "label": "Title",
+            "placeholder": "Events Section Title"
+          },
+          "type": "Text"
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "single": "paragraph",
+            "label": "Description",
+            "placeholder": "A nice description of your product"
+          }
+        },
+        "count": {
+          "config": {
+            "label": "Number of Events to Display",
+            "placeholder": ""
+          },
+          "type": "Number"
+        }
+      },
+      "items": {}
+    }
+  ]
+}

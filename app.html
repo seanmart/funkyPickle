@@ -1,16 +1,17 @@
+<!DOCTYPE html>
 <html {{ HTML_ATTRS }} class="no-js">
   <head {{ HEAD_ATTRS }}>
     <script id="js-check" type="text/javascript">
 
       let { userAgent, maxTouchPoints, platform } = navigator
       let mobileCheck = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
+
+      document.getElementById('js-check').remove()
+
       window.isMobile = mobileCheck.test(userAgent) || (platform === "MacIntel" && maxTouchPoints > 1);
       document.documentElement.classList.add(window.isMobile ? 'is-mobile' : 'is-desktop')
       document.documentElement.classList.remove('no-js')
-
-      document.documentElement.style.opacity = 0
-
-      document.getElementById('js-check').remove()
+      //document.documentElement.style.opacity = 0
 
     </script>
     {{ HEAD }}

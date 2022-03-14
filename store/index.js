@@ -29,7 +29,7 @@ export default{
       let date = getDateOffset(1);
       let res = await this.$prismic.api.query([
         this.$prismic.predicates.at("document.type", "event"),
-        this.$prismic.predicates.date.after("my.event.start_date", date)
+        this.$prismic.predicates.date.after("my.event.date", date)
       ], {
         graphQuery: `{
         event
@@ -37,15 +37,14 @@ export default{
         title
         state
         city
-        logo
-        image
-        ball_image
+        banner
+        background
+        ball
         uid
-        start_date
-        end_date
+        date
         }
         }`,
-        orderings: "[my.event.start_date]",
+        orderings: "[my.event.date]",
       });
 
       commit("LIST", ["events", res.results]);
@@ -55,25 +54,10 @@ export default{
       let res = await this.$prismic.api.getSingle("settings");
       if (!res) return
 
-      let signup = {
-        title: res.data.signup_title,
-        form: res.data.form[0].items,
-        submit: res.data.form[0].primary.submit
-      }
+      let links = res.data.slices1
+      let signup = { title: res.data['signup-title'],form:res.data.slices2}
+      let footer = {text: res.data.footer}
 
-      let footer = {
-        text: res.data.footer_text,
-        social: res.data.social
-      }
-
-      let links = res.data.links.map((item) => {
-        let {link_type,type,url,uid} = item.primary.link
-        return {
-          href: link_type == "Web" ? url : null,
-          to: link_type == "Document" ? `/${type == 'page' ? uid : type}` : null,
-          label: item.primary.label
-        }
-      })
 
       commit('SETTINGS',{links,signup,footer})
     },

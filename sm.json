@@ -1,0 +1,7 @@
+{
+	"_latest": "0.3.1",
+	"apiEndpoint": "https://funky-pickle.prismic.io/api/v2",
+	"libraries": [
+		"@/slices"
+	]
+}

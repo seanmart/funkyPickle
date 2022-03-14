@@ -1,84 +1,75 @@
 <template lang="html">
-  <div id="site" class="text-16 md:text-14 xl:text-12 md:pl-nav-side">
-    <layout-navigation/>
-    <transition mode="out-in" @beforeEnter="beforeEnter">
+  <div class="md:pl-nav-side">
+
+    <NavMobile/>
+    <NavSide/>
+
+    <transition
+      mode="out-in"
+      @leave="leave"
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @after-enter="afterEnter"
+    >
       <nuxt :key="$route.path"/>
     </transition>
-    <layout-signup/>
-    <layout-footer/>
-    <layout-svg-gradients/>
-    <layout-background/>
-    <layout-preloader @complete="$bus.$emit('REVEAL')"/>
+
+    <Signup/>
+    <EndMatter/>
+    <Background/>
+
   </div>
 </template>
 
 <script>
-
-let linksIndex = {}
-let transitionProps = {dir:'y',val:-50}
-
 export default {
   created(){
-    if(process.server) return
-    this.initGsap()
-    this.initBus()
-    this.initResize()
-    this.initLinksIndex()
+    if (process.server) return
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollToPlugin);
   },
-  mounted(){
-    document.documentElement.style.opacity = 1
-  },
-  methods:{
-    initBus(){
-      this.$bus.$once('LOADED',()=> this.$bus.$on('LOADED',this.handleLoaded))
-      this.$bus.$on('REVEAL',this.handleReveal)
-    },
-    initGsap(){
-      gsap.registerPlugin(ScrollTrigger);
-      gsap.registerPlugin(ScrollToPlugin);
-    },
-    initResize(){
-      let timeout = null
-      let html = document.documentElement
-      window.addEventListener('resize',()=>{
-        timeout && clearTimeout(timeout)
-        timeout = setTimeout(()=> html.classList.remove('is-resizing'),100)
-        html.classList.add('is-resizing')
-      })
-    },
-    initLinksIndex(){
-      linksIndex = {'/':1}
-      this.$store.state.settings.links.forEach((l,i) => linksIndex[l.to] = i + 2 )
-    },
-    handleLoaded(){
-      gsap.timeline({onComplete:()=>this.$bus.$emit('REVEAL')})
-      .to('#page',.5,{[transitionProps.dir]:0,opacity:1,ease:'power2.out'})
-      .set('#page',{clearProps:'all'})
-    },
-    handleReveal(){
-      ScrollTrigger.getAll().length > 0 && ScrollTrigger.refresh(true)
-    },
-    beforeEnter(el){
-      gsap.set(el,{[transitionProps.dir]:transitionProps.val * -1,opacity:0})
+  data:()=>({
+    to:null,
+    from:null,
+  }),
+  watch:{
+    $route(to,from){
+      let dir = 'y'
+      let val = 50
+      let fromIndex = this.pages[from.path] || 1000
+      let toIndex = this.pages[to.path] || 1000
+
+      if(fromIndex > 999 || toIndex > 999) dir = 'x'
+
+      this.from = {[dir]: fromIndex < toIndex ? -val : val }
+      this.to = {[dir]: fromIndex < toIndex ? val : -val }
+
     }
   },
-  middleware({from,route}){
-    if (process.server) return
-    return new Promise((res)=>{
-
-      let fx = linksIndex[from.path]
-      let tx = linksIndex[route.path]
-
-      transitionProps = {
-        dir: !tx || !fx ? 'x' :'y',
-        val: !tx || tx > fx ? -50 : 50
-      }
-
-      gsap.to('#page',.5,{[transitionProps.dir]:transitionProps.val,opacity:0,ease:'power2.in',onComplete:()=>{
-        window.scrollTo(0,0)
-        res()
-      }})
-    })
+  computed:{
+    pages(){
+      if(!this.$store.state.settings.links) return {}
+      let pages = {'/':1}
+      this.$store.state.settings.links.forEach((l,i) => {
+        pages[`/${l.primary.link.uid}`] = i + 2
+      })
+      return pages
+    }
+  },
+  methods:{
+    leave(el,done){
+      gsap.to(el,.5,{...this.from,ease:'power2.in',opacity:0,onComplete:done})
+    },
+    beforeEnter(el){
+      window.scrollTo(0,0)
+      gsap.set(el,{...this.to,opacity:0})
+    },
+    enter(el,done){
+      gsap.to(el,.5,{x:0,y:0,opacity:1,ease:'power2.out',onComplete:done})
+    },
+    afterEnter(el){
+      gsap.set(el,{clearProps:'all'})
+    }
   }
 }
 </script>

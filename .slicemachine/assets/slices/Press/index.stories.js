@@ -1,0 +1,26 @@
+import MyComponent from '../../../../slices/Press';
+import SliceZone from 'vue-slicezone'
+
+export default {
+  title: 'slices/Press'
+}
+
+
+export const _Default = () => ({
+  components: {
+    MyComponent,
+    SliceZone
+  },
+  methods: {
+    resolve() {
+      return MyComponent
+    }
+  },
+  data() {
+    return {
+      mock: {"variation":"default","name":"Default","slice_type":"press","items":[{"image":{"dimensions":{"width":900,"height":500},"alt":"Placeholder image","copyright":null,"url":"https://images.unsplash.com/photo-1586952518485-11b180e92764?w=900&h=500&fit=crop"},"date":"2013-07-15","headline":[{"type":"heading3","text":"Synthesize next-generation e-tailers","spans":[]}],"source":"monetize intuitive content","link":{"link_type":"Web","url":"http://twitter.com"}},{"image":{"dimensions":{"width":900,"height":500},"alt":"Placeholder image","copyright":null,"url":"https://images.unsplash.com/photo-1471897488648-5eae4ac6686b?w=900&h=500&fit=crop"},"date":"2020-06-30","headline":[{"type":"heading3","text":"Recontextualize proactive interfaces","spans":[]}],"source":"exploit 24/365 applications","link":{"link_type":"Web","url":"https://prismic.io"}},{"image":{"dimensions":{"width":900,"height":500},"alt":"Placeholder image","copyright":null,"url":"https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=900&h=500&fit=crop"},"date":"2019-08-14","headline":[{"type":"heading3","text":"Architect magnetic e-services","spans":[]}],"source":"engage collaborative niches","link":{"link_type":"Web","url":"https://slicemachine.dev"}}],"primary":{"publish":true,"title":"iterate sexy eyeballs","description":[{"type":"paragraph","text":"Nostrud adipisicing elit deserunt sit ullamco. Officia dolore ea fugiat minim. Voluptate ex in magna.","spans":[]}]},"id":"_Default"}
+    }
+  },
+  template: '<SliceZone :slices="[mock]" :resolver="resolve" />'
+})
+_Default.storyName = 'Default'

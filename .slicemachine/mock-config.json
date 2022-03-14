@@ -1,0 +1,102 @@
+{
+  "_cts": {
+    "events": {},
+    "home": {},
+    "event": {},
+    "settings": {
+      "signup-title": {
+        "config": {
+          "patternType": "HEADING",
+          "blocks": 1
+        }
+      },
+      "footer": {
+        "config": {
+          "patternType": "PARAGRAPH",
+          "blocks": 1
+        }
+      }
+    },
+    "page": {
+      "title": {
+        "config": {
+          "patternType": "HEADING",
+          "blocks": 1
+        }
+      }
+    }
+  },
+  "slices": {
+    "Events": {
+      "default": {
+        "primary": {}
+      }
+    },
+    "Table": {
+      "default": {
+        "primary": {}
+      }
+    },
+    "Sponsors": {
+      "default": {
+        "primary": {}
+      }
+    },
+    "Press": {
+      "default": {
+        "primary": {},
+        "items": {
+          "headline": {
+            "config": {
+              "patternType": "HEADING",
+              "blocks": 1
+            }
+          }
+        }
+      }
+    },
+    "Link": {
+      "default": {
+        "primary": {}
+      }
+    },
+    "Form": {
+      "default": {
+        "primary": {
+          "description": {
+            "config": {
+              "patternType": "PARAGRAPH",
+              "blocks": 1
+            }
+          }
+        },
+        "items": {}
+      }
+    },
+    "Text": {
+      "default": {
+        "primary": {
+          "text": {
+            "config": {
+              "patternType": "PARAGRAPH",
+              "blocks": 1
+            }
+          }
+        },
+        "items": {}
+      }
+    },
+    "Introduction": {
+      "default": {
+        "primary": {
+          "title": {
+            "config": {
+              "patternType": "HEADING",
+              "blocks": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

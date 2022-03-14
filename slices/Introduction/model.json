@@ -1,0 +1,42 @@
+{
+  "id": "introduction",
+  "type": "SharedSlice",
+  "name": "Introduction",
+  "description": "Introduction",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "Introduction",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Title",
+            "placeholder": "This is where it all begins...",
+            "allowTargetBlank": false,
+            "single": "heading1,strong,em"
+          }
+        },
+        "background": {
+          "config": {
+            "label": "Background",
+            "placeholder": "",
+            "options": [
+              "lime",
+              "white",
+              "black",
+              "pink",
+              "green"
+            ],
+            "default_value": "lime"
+          },
+          "type": "Select"
+        }
+      },
+      "items": {}
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "id": "form",
+  "type": "SharedSlice",
+  "name": "Form",
+  "description": "Form",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "Form",
+      "primary": {
+        "publish": {
+          "config": {
+            "label": "Publish",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": true
+          },
+          "type": "Boolean"
+        },
+        "inline": {
+          "config": {
+            "label": "Form is Inlined",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          },
+          "type": "Boolean"
+        },
+        "title": {
+          "config": {
+            "label": "Title",
+            "placeholder": ""
+          },
+          "type": "Text"
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "placeholder": "A nice description for your form",
+            "allowTargetBlank": true,
+            "single": "paragraph"
+          }
+        },
+        "action": {
+          "config": {
+            "label": "Google Sheet Link",
+            "placeholder": ""
+          },
+          "type": "Text"
+        },
+        "background": {
+          "config": {
+            "label": "Background",
+            "placeholder": "",
+            "options": [
+              "white",
+              "pink",
+              "black",
+              "lime",
+              "none"
+            ],
+            "default_value": "white"
+          },
+          "type": "Select"
+        }
+      },
+      "items": {
+        "type": {
+          "config": {
+            "label": "Type",
+            "placeholder": "",
+            "options": [
+              "text",
+              "email",
+              "phone",
+              "textarea",
+              "dropdown"
+            ],
+            "default_value": "text"
+          },
+          "type": "Select"
+        },
+        "required": {
+          "config": {
+            "label": "Required",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          },
+          "type": "Boolean"
+        },
+        "label": {
+          "config": {
+            "label": "Label",
+            "placeholder": ""
+          },
+          "type": "Text"
+        },
+        "column": {
+          "config": {
+            "label": "Google Sheet Column Name",
+            "placeholder": ""
+          },
+          "type": "Text"
+        },
+        "placeholder": {
+          "config": {
+            "label": "Placeholder",
+            "placeholder": "If Dropdown: separate by comma"
+          },
+          "type": "Text"
+        }
+      }
+    }
+  ]
+}

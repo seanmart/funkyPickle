@@ -1,0 +1,21 @@
+{
+  "id": "96e24f7d-dc77-40fa-9cf4-3f0b71f969d2",
+  "uid": "provident-deserunt-quibusdam",
+  "type": "settings",
+  "data": {
+    "signup-title": [
+      {
+        "type": "heading3",
+        "text": "Engineer user-centric interfaces",
+        "spans": []
+      }
+    ],
+    "footer": [
+      {
+        "type": "paragraph",
+        "text": "Ea eiusmod esse mollit consequat minim pariatur et eiusmod nulla cillum.",
+        "spans": []
+      }
+    ]
+  }
+}
