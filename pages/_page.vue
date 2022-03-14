@@ -28,6 +28,9 @@ export default {
     data: {},
     resolver
   }),
+  mounted(){
+    this.$bus.$emit('LOADED')
+  },
   computed:{
     header(){
       if(!this.data.header) return false

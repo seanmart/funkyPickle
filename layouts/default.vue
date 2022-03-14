@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="md:pl-nav-side">
-
+    <Preloader/>
     <NavMobile/>
     <NavSide/>
 
@@ -27,6 +27,17 @@ export default {
     if (process.server) return
     gsap.registerPlugin(ScrollTrigger);
     gsap.registerPlugin(ScrollToPlugin);
+
+    let timeout = null
+    let html = document.documentElement
+    window.addEventListener('resize',()=>{
+      timeout && clearTimeout(timeout)
+      timeout = setTimeout(()=> html.classList.remove('is-resizing'),100)
+      html.classList.add('is-resizing')
+    })
+  },
+  mounted(){
+    document.documentElement.style.opacity = 1
   },
   data:()=>({
     to:null,

@@ -1,4 +1,4 @@
-# funkypickle-website-2
+# funkypickle-website
 
 ## Build Setup
 
