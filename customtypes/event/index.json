@@ -1,0 +1,172 @@
+{
+  "id": "event",
+  "label": "Event",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "config": {
+          "label": "Uid",
+          "placeholder": ""
+        },
+        "type": "UID"
+      },
+      "title": {
+        "config": {
+          "label": "Title",
+          "placeholder": ""
+        },
+        "type": "Text"
+      },
+      "date": {
+        "config": {
+          "label": "Date",
+          "placeholder": ""
+        },
+        "type": "Date"
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "sponsors": {
+              "type": "SharedSlice"
+            },
+            "form": {
+              "type": "SharedSlice"
+            },
+            "text": {
+              "type": "SharedSlice"
+            },
+            "table": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    },
+    "Location": {
+      "address": {
+        "config": {
+          "label": "Address",
+          "placeholder": ""
+        },
+        "type": "Text"
+      },
+      "city": {
+        "config": {
+          "label": "City",
+          "placeholder": ""
+        },
+        "type": "Text"
+      },
+      "state": {
+        "config": {
+          "label": "State",
+          "placeholder": "",
+          "options": [
+            "Alabama",
+            "Alaska",
+            "Arizona",
+            "Arkansas",
+            "California",
+            "Colorado",
+            "Connecticut",
+            "Delaware",
+            "Florida",
+            "Georgia",
+            "Hawaii",
+            "Idaho",
+            "Illinois",
+            "Indiana",
+            "Iowa",
+            "Kansas",
+            "Kentucky",
+            "Louisiana",
+            "Maine",
+            "Maryland",
+            "Massachusetts",
+            "Michigan",
+            "Minnesota",
+            "Mississippi",
+            "Missouri",
+            "Montana",
+            "Nebraska",
+            "Nevada",
+            "New Hampshire",
+            "New Jersey",
+            "New Mexico",
+            "New York",
+            "North Carolina",
+            "North Dakota",
+            "Ohio",
+            "Oklahoma",
+            "Oregon",
+            "Pennsylvania",
+            "Rhode Island",
+            "South Carolina",
+            "South Dakota",
+            "Tennessee",
+            "Texas",
+            "Utah",
+            "Vermont",
+            "Virginia",
+            "Washington",
+            "West Virginia",
+            "Wisconsin",
+            "Wyoming"
+          ]
+        },
+        "type": "Select"
+      },
+      "location": {
+        "config": {
+          "label": "Location"
+        },
+        "type": "GeoPoint"
+      }
+    },
+    "Media": {
+      "primary": {
+        "config": {
+          "label": "Primary (Darker Color)",
+          "placeholder": ""
+        },
+        "type": "Color"
+      },
+      "secondary": {
+        "config": {
+          "label": "Secondary (Lighter Color)",
+          "placeholder": ""
+        },
+        "type": "Color"
+      },
+      "ball": {
+        "config": {
+          "label": "Ball",
+          "constraint": {},
+          "thumbnails": []
+        },
+        "type": "Image"
+      },
+      "banner": {
+        "config": {
+          "label": "Banner",
+          "constraint": {},
+          "thumbnails": []
+        },
+        "type": "Image"
+      },
+      "background": {
+        "config": {
+          "label": "Background",
+          "constraint": {},
+          "thumbnails": []
+        },
+        "type": "Image"
+      }
+    }
+  }
+}

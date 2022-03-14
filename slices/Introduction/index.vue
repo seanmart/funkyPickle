@@ -1,0 +1,70 @@
+<template lang="html">
+
+  <Container doubleTop doubleBottom outerBottom :class="containerClasses">
+    <div class="relative z-10 py-space w-full overflow-hidden" ref="trigger">
+
+      <prismic-rich-text :field="slice.primary.title" class="intro-title font-header font-bold uppercase leading-09 text-center lg:text-left"/>
+
+      <div class="absolute inset-0 flex flex-row justify-center lg:justify-end z-back-1">
+        <icon ball :class="ballClasses" ref="ball"/>
+      </div>
+
+    </div>
+  </Container>
+
+</template>
+
+<script>
+export default {
+  props:['slice'],
+  mounted(){
+    this.anim = gsap.to(this.$refs.ball.$el,{rotate:180,ease:'none', scrollTrigger:{
+      trigger: this.$refs.trigger,
+      scrub: 1,
+      start: 0,
+      end: 'bottom top'
+    }})
+  },
+  destroyed(){
+    this.anim && this.anim.kill()
+  },
+  computed:{
+    containerClasses(){
+      let bg = this.slice.primary.background
+      return{
+        'bg-white shadow-b-blue': bg == 'white' || bg == null,
+        'bg-lime': bg == 'lime',
+        'bg-green': bg == 'green',
+        'bg-pink': bg == 'pink',
+        'bg-black': bg == 'black'
+      }
+    },
+    ballClasses(){
+      let bg = this.slice.primary.background
+      return{
+        'fill-lime': bg != 'lime',
+        'fill-white': bg == 'lime'
+      }
+    }
+  }
+}
+</script>
+
+<style lang="css">
+  .intro-title{
+    font-size: 10vw
+  }
+  .intro-title strong{
+    color: theme('colors.pink');
+  }
+  @media screen and (min-width: theme('screens.sm')){
+    .intro-title{
+      font-size: 3.5rem;
+    }
+  }
+  @media screen and (min-width: theme('screens.md')){
+    .intro-title{
+      font-size: calc((100vw - theme('spacing.nav-side')) / 14 );
+    }
+  }
+</style>

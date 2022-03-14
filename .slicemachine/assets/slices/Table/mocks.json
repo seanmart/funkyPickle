@@ -1,0 +1,25 @@
+[
+  {
+    "variation": "default",
+    "name": "Default",
+    "slice_type": "table",
+    "items": [],
+    "primary": {
+      "publish": true,
+      "title": [
+        {
+          "type": "heading1",
+          "text": "Deliver open-source interfaces",
+          "spans": []
+        }
+      ],
+      "description": [
+        {
+          "type": "paragraph",
+          "text": "Ullamco eiusmod fugiat sint laborum proident cupidatat non.",
+          "spans": []
+        }
+      ]
+    }
+  }
+]

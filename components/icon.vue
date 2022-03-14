@@ -1,9 +1,9 @@
 <template lang="html">
-  <svg v-if="arrow || icon == 'arrow'" class="arrow" :class="classes" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 371.45 371.43">
+  <svg v-if="arrow || icon == 'arrow'" class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 371.45 371.43">
     <path d="M43.83,0V37.77H307L0,344.73l26.71,26.7,307-307V327.6h37.77V0Z" />
   </svg>
 
-  <svg v-else-if="arrows || icon == 'arrows'" class="arrows" :class="classes" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 84.5 603.57">
+  <svg v-else-if="arrows || icon == 'arrows'" class="arrows" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 84.5 603.57">
     <polygon class="cls-1" points="42.25 603.57 84.5 531.14 0 531.14 42.25 603.57" />
     <polygon class="cls-1" points="42.25 470.79 84.5 398.36 0 398.36 42.25 470.79" />
     <polygon class="cls-1" points="42.25 338 84.5 265.57 0 265.57 42.25 338" />
@@ -11,11 +11,11 @@
     <polygon class="cls-1" points="84.5 0 0 0 42.25 72.43 84.5 0" />
   </svg>
 
-  <svg v-else-if="wayfinder || icon == 'wayfinder'" class="wayfinder" :class="classes" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900.08 1199.9">
+  <svg v-else-if="wayfinder || icon == 'wayfinder'" class="wayfinder" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900.08 1199.9">
     <path d="M450,0C201.83,0,0,199.35,0,450c0,262.5,225,531,389.1,719.77,37.67,40.28,84.45,40,121.84,0C675.08,981.07,900.08,712.57,900.08,450,900.08,199.35,698.22,0,450,0Zm.06,628c-103.43,0-187.5-84.07-187.5-187.5,10.24-248.76,364.8-248.68,375,0C637.57,543.91,553.5,628,450.07,628Z" />
   </svg>
 
-  <svg v-else-if="calendar || icon == 'calendar'" class="calendar" :class="classes" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 442.6 470.26">
+  <svg v-else-if="calendar || icon == 'calendar'" class="calendar" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 442.6 470.26">
     <rect x="72.56" y="206.39" width="85.83" height="85.83" />
     <rect x="72.56" y="312.22" width="85.83" height="85.82" />
     <rect x="178.39" y="206.39" width="85.82" height="85.83" />
@@ -171,27 +171,6 @@ export default {
     mist: Boolean,
     ball: Boolean,
     icon: { type: String, default: null },
-  },
-  methods: {
-    classes() {
-      return {
-        "rainbow-hover": this.rainbowHover,
-        "is-rainbow": this.rainbow,
-      };
-    },
-  },
+  }
 };
 </script>
-
-<style lang="css">
-svg.is-rainbow {
-  fill: url(#rainbow-move);
-}
-.rainbow-hover--parent:hover svg.rainbow-hover {
-  fill: url(#rainbow-move);
-}
-
-svg.rainbow-hover:hover {
-  fill: url(#rainbow-move);
-}
-</style>

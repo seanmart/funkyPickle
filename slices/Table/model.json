@@ -1,0 +1,43 @@
+{
+  "id": "table",
+  "type": "SharedSlice",
+  "name": "Table",
+  "description": "Table",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "Table",
+      "primary": {
+        "publish": {
+          "config": {
+            "label": "Publish",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": true
+          },
+          "type": "Boolean"
+        },
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "single": "heading1",
+            "label": "Title",
+            "placeholder": "This is where it all begins..."
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "single": "paragraph",
+            "label": "Description",
+            "placeholder": "A nice description of your product"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

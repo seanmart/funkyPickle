@@ -1,71 +1,5 @@
 html{
-  background:white;
-  font-size: 10px;
-}
-
-#site{
-  width: 100vw;
-}
-
-#page{
-  min-height: 400px;
-}
-
-#scroller{
-  transform-origin: center top
-}
-
-.is-resizing *{
-  transition: none !important;
-}
-
-.light-blue{
-  background: rgba(theme('colors.bluergb'),.06);
-}
-
-.flex-divider{
-  flex: 0 0 1px;
-  background: theme('colors.blue');
-  opacity: .2;
-  border-radius: 1px;
-}
-
-.swiper-pagination-bullet-active{
-  background: theme('colors.pink');
-}
-
-.swiper-pagination-bullet{
-  height:8px;
-  width: 8px;
-  border-radius: 50%;
-  margin: 4px;
-}
-
-@media screen and (min-width: theme('screens.md')){
-  html{
-    font-size: calc(10px + (100vw - 550px)/160);
-  }
-  body{
-    font-size: 1.3rem;
-  }
-}
-
-.gradient-90glp{
-  background: linear-gradient(90deg, theme('colors.green') 0%, theme('colors.lime') 50%, theme('colors.pink') 100%);
-}
-.gradient-0glp{
-  background: linear-gradient(0deg, theme('colors.green') 0%, theme('colors.lime') 50%, theme('colors.pink') 100%);
-}
-.gradient-45glp{
-  background: linear-gradient(45deg, theme('colors.green') 0%, theme('colors.lime') 50%, theme('colors.pink') 100%);
-}
-.gradient-0gbp{
-  background: linear-gradient(45deg, theme('colors.green') 0%, theme('colors.black') 50%, theme('colors.pink') 100%);
-}
-
-.clip{
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+  font-size: 14px;
 }
 
 .gutter-left {
@@ -73,6 +7,51 @@ html{
 }
 .gutter-right {
   padding-right: 5vw;
+}
+
+input,
+textarea,
+select{
+  display: block;
+  font-size: 1.6rem;
+  padding: .75rem  1.25rem;
+  border-radius: .25rem;
+  box-shadow: 0px 1px 3px rgba(theme('colors.bluergb'),.3);
+  border: 1px solid rgba(theme('colors.bluergb'),.2);
+  width:100%;
+  margin: 0px;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.error input,
+.error textarea,
+.error select{
+  border: 1px solid theme('colors.pink');
+  box-shadow: 0px 1px 3px rgba(theme('colors.pinkrgb'),.3);
+}
+
+.error label{
+  color: theme('colors.pink')
+}
+
+.button{
+  white-space: nowrap;
+  cursor: pointer;
+  padding: 1rem 1.5rem;
+  display: inline-block;
+  border-radius: .25rem;
+  width: auto;
+  font-weight: bold;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 @media screen and (min-width: theme("screens.sm")) {
@@ -84,6 +63,11 @@ html{
   }
 }
 @media screen and (min-width: theme("screens.md")) {
+
+  html{
+    font-size: 16px;
+  }
+
   .gutter-left {
     padding-left: calc((100vw - (theme("screens.md") - 250px)) / 5);
   }
@@ -97,7 +81,7 @@ html{
   100%{transform: translateX(-100%)}
 }
 
-@keyframes rotate{
+@keyframes spin{
   0%{transform: rotate(0deg)}
   50%{transform: rotate(180deg)}
   100%{transform: rotate(360deg)}

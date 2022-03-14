@@ -1,0 +1,18 @@
+[
+  {
+    "variation": "default",
+    "name": "Default",
+    "slice_type": "introduction",
+    "items": [],
+    "primary": {
+      "title": [
+        {
+          "type": "heading1",
+          "text": "Benchmark wireless web services",
+          "spans": []
+        }
+      ],
+      "background": "lime"
+    }
+  }
+]

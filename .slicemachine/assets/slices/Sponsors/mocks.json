@@ -1,0 +1,65 @@
+[
+  {
+    "variation": "default",
+    "name": "Default",
+    "slice_type": "sponsors",
+    "items": [
+      {
+        "logo": {
+          "dimensions": {
+            "width": 900,
+            "height": 500
+          },
+          "alt": "Placeholder image",
+          "copyright": null,
+          "url": "https://images.unsplash.com/photo-1587905069134-008460d7a636?w=900&h=500&fit=crop"
+        },
+        "link": {
+          "link_type": "Web",
+          "url": "http://twitter.com"
+        }
+      },
+      {
+        "logo": {
+          "dimensions": {
+            "width": 900,
+            "height": 500
+          },
+          "alt": "Placeholder image",
+          "copyright": null,
+          "url": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=900&h=500&fit=crop"
+        },
+        "link": {
+          "link_type": "Web",
+          "url": "http://google.com"
+        }
+      },
+      {
+        "logo": {
+          "dimensions": {
+            "width": 900,
+            "height": 500
+          },
+          "alt": "Placeholder image",
+          "copyright": null,
+          "url": "https://images.unsplash.com/photo-1560762484-813fc97650a0?w=900&h=500&fit=crop"
+        },
+        "link": {
+          "link_type": "Web",
+          "url": "http://google.com"
+        }
+      }
+    ],
+    "primary": {
+      "publish": true,
+      "title": "utilize robust networks",
+      "description": [
+        {
+          "type": "paragraph",
+          "text": "Adipisicing magna cillum deserunt do cillum fugiat sunt sint.",
+          "spans": []
+        }
+      ]
+    }
+  }
+]

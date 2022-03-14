@@ -1,0 +1,86 @@
+{
+  "id": "text",
+  "type": "SharedSlice",
+  "name": "Text",
+  "description": "Text",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "Text",
+      "primary": {
+        "publish": {
+          "config": {
+            "label": "Publish",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": true
+          },
+          "type": "Boolean"
+        },
+        "title": {
+          "config": {
+            "label": "Title",
+            "placeholder": ""
+          },
+          "type": "Text"
+        },
+        "background": {
+          "config": {
+            "label": "Background",
+            "placeholder": "",
+            "options": [
+              "white",
+              "pink",
+              "green",
+              "lime",
+              "black"
+            ],
+            "default_value": "white"
+          },
+          "type": "Select"
+        },
+        "callout": {
+          "config": {
+            "label": "Callout Color",
+            "placeholder": "",
+            "options": [
+              "pink",
+              "lime",
+              "green"
+            ],
+            "default_value": "pink"
+          },
+          "type": "Select"
+        },
+        "image": {
+          "config": {
+            "label": "Image",
+            "constraint": {},
+            "thumbnails": []
+          },
+          "type": "Image"
+        },
+        "video": {
+          "config": {
+            "label": "Video",
+            "placeholder": ""
+          },
+          "type": "Embed"
+        },
+        "text": {
+          "config": {
+            "label": "Text",
+            "placeholder": "Lorem ipsum dolor sit amet",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,list-item,o-list-item"
+          },
+          "type": "StructuredText"
+        }
+      },
+      "items": {}
+    }
+  ]
+}
