@@ -2,7 +2,9 @@
   "_cts": {
     "events": {},
     "home": {},
-    "event": {},
+    "event": {
+      "forms": {}
+    },
     "settings": {
       "signup-title": {
         "config": {
@@ -24,7 +26,9 @@
           "blocks": 1
         }
       }
-    }
+    },
+    "registration": {},
+    "form": {}
   },
   "slices": {
     "Events": {
@@ -71,6 +75,9 @@
           }
         },
         "items": {}
+      },
+      "noLink": {
+        "primary": {}
       }
     },
     "Text": {
@@ -96,6 +103,11 @@
             }
           }
         }
+      }
+    },
+    "FormField": {
+      "default": {
+        "primary": {}
       }
     }
   }

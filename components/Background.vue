@@ -1,6 +1,6 @@
 <template lang="html">
-  <div id="background" class="fixed inset-0 z-back-1 opacity-5">
-    <svg class="min-h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1020.1 863.1" style="enable-background:new 0 0 1020.1 863.1;" xml:space="preserve">
+  <div id="background" class="fixed inset-0 z-back-1 opacity-5 overflow-hidden">
+    <svg class="min-h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1020.1 863.1" style="enable-background:new 0 0 1020.1 863.1;" xml:space="preserve" ref="svg">
 
     	<path class="strip fill-pink" d="M262.8,659c0.2,72.1-15.7,139.2-39.8,204.1h-43.7c34.7-127.6,5.2-261.5,0.7-391.3c-20.1-99.9,39.4-245.9-50.3-311.4
     		C81.9,130.8,41.1,89.2,0,48.1c0,0,0-47.3,0-47.3c104.9-1.6,61.9-7.1,131.4,59c38.9,35.7,83.5-12.9,102,57.1
@@ -36,5 +36,10 @@
 
 <script>
 export default {
+  mounted(){
+    if(isMobile){
+      this.$refs.svg.style.height = `${window.innerHeight + 100}px`
+    }
+  }
 }
 </script>

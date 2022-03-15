@@ -1,0 +1,15 @@
+[
+  {
+    "variation": "default",
+    "name": "Default",
+    "slice_type": "form_field",
+    "items": [],
+    "primary": {
+      "type": "email",
+      "label": "enable front-end markets",
+      "column": "generate world-class e-markets",
+      "required": false,
+      "placeholder": "reintermediate synergistic action-items"
+    }
+  }
+]

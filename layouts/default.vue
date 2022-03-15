@@ -1,16 +1,13 @@
 <template lang="html">
-  <div class="md:pl-nav-side">
+  <div id="site" class="md:pl-nav-side">
     <Preloader/>
+
+    <NavTop/>
     <NavMobile/>
     <NavSide/>
+    <NavButton/>
 
-    <transition
-      mode="out-in"
-      @leave="leave"
-      @before-enter="beforeEnter"
-      @enter="enter"
-      @after-enter="afterEnter"
-    >
+    <transition mode="out-in" @leave="leave" @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
       <nuxt :key="$route.path"/>
     </transition>
 
@@ -22,6 +19,7 @@
 </template>
 
 <script>
+import imagesLoaded from 'imagesLoaded'
 export default {
   created(){
     if (process.server) return
@@ -44,16 +42,21 @@ export default {
     from:null,
   }),
   watch:{
-    $route(to,from){
-      let dir = 'y'
+    $route(t,f){
       let val = 50
-      let fromIndex = this.pages[from.path] || 1000
-      let toIndex = this.pages[to.path] || 1000
+      let from = this.pages[f.path] || 0
+      let to = this.pages[t.path] || 0
 
-      if(fromIndex > 999 || toIndex > 999) dir = 'x'
-
-      this.from = {[dir]: fromIndex < toIndex ? -val : val }
-      this.to = {[dir]: fromIndex < toIndex ? val : -val }
+      if (!to){
+        this.from = {x:-val}
+        this.to = {x:val}
+      } else if (!from) {
+        this.from = {x:val}
+        this.to = {x:!val}
+      } else {
+        this.from = {y:from > to ? val : -val}
+        this.to = {y:from > to ? -val : val}
+      }
 
     }
   },
@@ -76,7 +79,10 @@ export default {
       gsap.set(el,{...this.to,opacity:0})
     },
     enter(el,done){
-      gsap.to(el,.5,{x:0,y:0,opacity:1,ease:'power2.out',onComplete:done})
+      let images = document.querySelectorAll('.image')
+      imagesLoaded(images,{background: true},()=>{
+        gsap.to(el,.5,{x:0,y:0,opacity:1,ease:'power2.out',onComplete:done})
+      })
     },
     afterEnter(el){
       gsap.set(el,{clearProps:'all'})

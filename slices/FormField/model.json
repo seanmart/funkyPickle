@@ -1,0 +1,63 @@
+{
+  "id": "form_field",
+  "type": "SharedSlice",
+  "name": "FormField",
+  "description": "FormField",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "FormField",
+      "primary": {
+        "type": {
+          "config": {
+            "label": "Type",
+            "placeholder": "",
+            "options": [
+              "text",
+              "phone",
+              "email",
+              "textarea",
+              "dropdown"
+            ],
+            "default_value": "text"
+          },
+          "type": "Select"
+        },
+        "label": {
+          "config": {
+            "label": "Label",
+            "placeholder": "A label for the form field"
+          },
+          "type": "Text"
+        },
+        "column": {
+          "config": {
+            "label": "Column",
+            "placeholder": ""
+          },
+          "type": "Text"
+        },
+        "required": {
+          "config": {
+            "label": "Required",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          },
+          "type": "Boolean"
+        },
+        "placeholder": {
+          "config": {
+            "label": "Placeholder",
+            "placeholder": ""
+          },
+          "type": "Text"
+        }
+      },
+      "items": {}
+    }
+  ]
+}

@@ -20,7 +20,7 @@
 
     <input
       v-else
-      :type="type"
+      :type="type || 'text'"
       v-model="value"
       :placeholder="placeholder"
       @change="handleChange"
@@ -32,6 +32,7 @@
 
 <script>
 export default {
+  name: 'FormField',
   props:['field','id'],
   data:()=>({
     invalid: false,
@@ -67,9 +68,8 @@ export default {
     classes(){
       return{
         'error': this.invalid,
+        'flex-auto min-w-250px':this.field.type == 'text' || this.field.type == null || this.field.type == 'email',
         'flex-initial w-full':this.field.type == 'textarea',
-        'flex-auto min-w-250px':this.field.type == 'text',
-        'flex-auto min-w-300px':this.field.type == 'email',
         'flex-auto min-w-200px':this.field.ype == 'tel',
         'flex-grow':this.field.type == 'dropdown'
       }

@@ -1,19 +1,20 @@
 {
-  "id": "6a5ac8c3-22e5-4268-908d-ffee29df7713",
-  "uid": "atque-nobis-et",
+  "id": "c6c7fe5a-dd1b-4506-9741-92880d4206f9",
+  "uid": "eaque-voluptatum-natus",
   "type": "event",
   "data": {
-    "title": "embrace dynamic communities",
-    "date": "2013-11-19",
-    "address": "maximize sticky niches",
-    "city": "harness mission-critical technologies",
-    "state": "Washington",
-    "location": {
+    "title": "grow web-enabled systems",
+    "date": "2012-09-22",
+    "venue": "target front-end initiatives",
+    "address": "facilitate customized systems",
+    "city": "maximize 24/365 communities",
+    "state": "Maine",
+    "map": {
       "latitude": 48.8583736,
       "longitude": 2.2922926
     },
-    "primary": "#061a94",
-    "secondary": "#cafa4c",
+    "primary": "#bca9c0",
+    "secondary": "#c1e1b1",
     "ball": {
       "dimensions": {
         "width": 900,
@@ -21,7 +22,7 @@
       },
       "alt": "Placeholder image",
       "copyright": null,
-      "url": "https://images.unsplash.com/photo-1493119508027-2b584f234d6c?w=900&h=500&fit=crop"
+      "url": "https://images.unsplash.com/photo-1560762484-813fc97650a0?w=900&h=500&fit=crop"
     },
     "banner": {
       "dimensions": {
@@ -30,7 +31,7 @@
       },
       "alt": "Placeholder image",
       "copyright": null,
-      "url": "https://images.unsplash.com/photo-1593642532973-d31b6557fa68?w=900&h=500&fit=crop"
+      "url": "https://images.unsplash.com/photo-1587614295999-6c1c13675117?w=900&h=500&fit=crop"
     },
     "background": {
       "dimensions": {
@@ -39,7 +40,54 @@
       },
       "alt": "Placeholder image",
       "copyright": null,
-      "url": "https://images.unsplash.com/photo-1544731612-de7f96afe55f?w=900&h=500&fit=crop"
-    }
+      "url": "https://images.unsplash.com/photo-1600861194802-a2b11076bc51?w=900&h=500&fit=crop"
+    },
+    "forms": [
+      {
+        "label": "evolve back-end markets",
+        "uid": "drive extensible e-business",
+        "link": {
+          "link_type": "Web",
+          "url": "https://slicemachine.dev"
+        },
+        "sheet": "orchestrate front-end paradigms"
+      },
+      {
+        "label": "harness 24/365 markets",
+        "uid": "visualize enterprise infomediaries",
+        "link": {
+          "link_type": "Web",
+          "url": "https://slicemachine.dev"
+        },
+        "sheet": "incubate next-generation interfaces"
+      },
+      {
+        "label": "exploit integrated ROI",
+        "uid": "integrate integrated bandwidth",
+        "link": {
+          "link_type": "Web",
+          "url": "http://twitter.com"
+        },
+        "sheet": "cultivate viral eyeballs"
+      },
+      {
+        "label": "visualize cutting-edge blockchains",
+        "uid": "seize best-of-breed markets",
+        "link": {
+          "link_type": "Web",
+          "url": "https://slicemachine.dev"
+        },
+        "sheet": "benchmark vertical e-markets"
+      },
+      {
+        "label": "exploit plug-and-play channels",
+        "uid": "exploit cutting-edge schemas",
+        "link": {
+          "link_type": "Web",
+          "url": "http://twitter.com"
+        },
+        "sheet": "envisioneer compelling portals"
+      }
+    ]
   }
 }

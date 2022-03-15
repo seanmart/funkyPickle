@@ -5,40 +5,68 @@
     "slice_type": "form",
     "items": [
       {
-        "type": "text",
+        "type": "dropdown",
         "required": false,
-        "label": "revolutionize magnetic relationships",
-        "column": "utilize visionary architectures",
-        "placeholder": "target turn-key interfaces"
+        "label": "utilize distributed deliverables",
+        "column": "deploy innovative applications",
+        "placeholder": "synthesize plug-and-play metrics"
       },
       {
-        "type": "email",
+        "type": "phone",
+        "required": true,
+        "label": "brand synergistic architectures",
+        "column": "deploy distributed networks",
+        "placeholder": "engineer viral e-services"
+      },
+      {
+        "type": "dropdown",
         "required": false,
-        "label": "envisioneer rich initiatives",
-        "column": "optimize cross-media communities",
-        "placeholder": "extend innovative web services"
+        "label": "brand seamless infrastructures",
+        "column": "transform viral architectures",
+        "placeholder": "deliver efficient users"
+      },
+      {
+        "type": "textarea",
+        "required": true,
+        "label": "envisioneer innovative e-business",
+        "column": "strategize impactful relationships",
+        "placeholder": "harness user-centric schemas"
       },
       {
         "type": "text",
         "required": false,
-        "label": "integrate front-end e-commerce",
-        "column": "extend global convergence",
-        "placeholder": "innovate B2C initiatives"
+        "label": "syndicate killer e-services",
+        "column": "enhance efficient interfaces",
+        "placeholder": "evolve global web-readiness"
+      },
+      {
+        "type": "text",
+        "required": true,
+        "label": "grow end-to-end models",
+        "column": "enhance granular partnerships",
+        "placeholder": "benchmark distributed solutions"
+      },
+      {
+        "type": "dropdown",
+        "required": false,
+        "label": "seize distributed schemas",
+        "column": "synergize next-generation portals",
+        "placeholder": "enable out-of-the-box schemas"
       }
     ],
     "primary": {
       "publish": false,
       "inline": true,
-      "title": "visualize open-source models",
+      "title": "synthesize revolutionary models",
       "description": [
         {
           "type": "paragraph",
-          "text": "Dolor in ipsum occaecat est.",
+          "text": "Qui eu anim ad aute enim sunt anim deserunt.",
           "spans": []
         }
       ],
-      "action": "transition web-enabled ROI",
-      "background": "white"
+      "action": "transition transparent technologies",
+      "background": "lime"
     }
   }
 ]

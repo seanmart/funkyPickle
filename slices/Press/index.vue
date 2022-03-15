@@ -15,7 +15,7 @@
               </div>
               <div class="p-20 flex flex-col flex-auto text-14 lg:text-10 font-medium">
                 <p v-html="formatDate(article.date,'mmmm dd, yyyy')" class="mb-05"/>
-                <div class="press-title text-35 lg:text-25 font-header font-bold uppercase leading-09 flex-auto">
+                <div class="press-title text-30 lg:text-25 font-header font-bold uppercase leading-09 flex-auto">
                   <prismic-rich-text :field="article.headline"/>
                 </div>
                 <i><p v-html="article.source" class="mt-20"/></i>
@@ -32,7 +32,7 @@
         <button v-html="'>'" class="h-50px w-50px rounded-full bg-black text-white flex justify-center items-center"/>
       </div>
     </div>
-    <div class="dots mt-20"/>
+    <div class="text-center lg:text-left dots mt-20"/>
 
   </Container>
 </template>
