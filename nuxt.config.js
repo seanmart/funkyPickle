@@ -31,6 +31,7 @@ export default {
   plugins: [
     { src: "@/plugins/eventBus.js", ssr: true },
     { src: "@/plugins/screenBuddy.js", ssr: false },
+    { src: "@/plugins/imagesLoaded.js", ssr: false }
   ],
   buildModules: ['@nuxtjs/tailwindcss','@nuxtjs/prismic'],
   modules: [],

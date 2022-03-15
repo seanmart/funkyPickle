@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import imagesLoaded from 'imagesLoaded'
 export default {
   created(){
     if (process.server) return
@@ -80,7 +79,7 @@ export default {
     },
     enter(el,done){
       let images = document.querySelectorAll('.image')
-      imagesLoaded(images,{background: true},()=>{
+      this.$loaded(images,{background: true},()=>{
         gsap.to(el,.5,{x:0,y:0,opacity:1,ease:'power2.out',onComplete:done})
       })
     },
