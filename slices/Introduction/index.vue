@@ -1,12 +1,12 @@
 <template lang="html">
 
-  <Container doubleTop doubleBottom outerBottom :class="containerClasses">
-    <div class="relative z-10 py-space w-full overflow-hidden" ref="trigger">
+  <Container doubleTop doubleBottom outerBottom :class="containerClasses" class="overflow-hidden">
+    <div class="relative z-10 py-space w-full" ref="trigger">
 
       <prismic-rich-text :field="slice.primary.title" class="intro-title font-header font-bold uppercase leading-09 text-center lg:text-left"/>
 
       <div class="absolute inset-0 flex flex-row justify-center lg:justify-end z-back-1">
-        <icon ball :class="ballClasses" ref="ball"/>
+        <icon ball :class="ballClasses" ref="ball" class="flex-shrink-0 h-full"/>
       </div>
 
     </div>
@@ -52,7 +52,7 @@ export default {
 
 <style lang="css">
   .intro-title{
-    font-size: 10vw
+    font-size: 15vw
   }
   .intro-title strong{
     color: theme('colors.pink');

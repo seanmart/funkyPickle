@@ -3,6 +3,7 @@ import { getDateOffset } from "@/assets/helpers";
 
 export default{
   state:()=>({
+    forms:{},
     events:{},
     pages:{},
     weather:{},
@@ -12,11 +13,11 @@ export default{
       footer:{}
     },
     lists:{
-      articles:[],
       events:[],
     }
   }),
   mutations:{
+    FORM:(state,[key,data])=> state.forms[key] = data,
     EVENT:(state,[key,data]) => state.events[key] = data,
     PAGE:(state,[key,data]) => state.pages[key] = data,
     WEATHER:(state,data) => state.weather = data,

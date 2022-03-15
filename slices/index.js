@@ -2,6 +2,7 @@
 
 import Events from './Events';
 import Form from './Form';
+import FormField from './FormField';
 import Introduction from './Introduction';
 import Link from './Link';
 import Press from './Press';
@@ -12,6 +13,7 @@ import Text from './Text';
 export {
 	Events,
 	Form,
+	FormField,
 	Introduction,
 	Link,
 	Press,
@@ -23,6 +25,7 @@ export {
 export const components = {
 	events: Events,
 	form: Form,
+	form_field: FormField,
 	introduction: Introduction,
 	link: Link,
 	press: Press,

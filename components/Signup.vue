@@ -3,7 +3,7 @@
 
     <div class="relative z-20 flex flex-col xl:flex-row items-center">
       <div class="flex-auto text-center xl:text-left mb-20 xl:mb-0 xl:mr-20">
-        <prismic-rich-text :field="data.title" class="font-header font-bold uppercase leading-09 text-50"/>
+        <prismic-rich-text :field="data.title" class="font-header font-bold uppercase leading-09 text-40 md:text-50"/>
       </div>
       <div class="flex-initial">
         <sliceZone :slices="data.form" :resolver="resolver"/>

@@ -3,7 +3,7 @@
   <Title v-if="slice.primary.title" :value="slice.primary.title" class="mb-40"/>
   <div class="shadow-b-blue rounded-lg overflow-hidden" :class="classes">
     <prismic-image v-if="slice.primary.image.url" :field="slice.primary.image"/>
-    <div class="px-20 py-50 md:px-50 text-content max-w-800px mx-auto">
+    <div class="px-20 py-50 lg:px-50 text-content max-w-800px mx-auto">
       <prismic-rich-text :field="slice.primary.text" :htmlSerializer="serializer"/>
     </div>
   </div>
@@ -31,11 +31,11 @@ export default {
     serializer(type, element, content, children,item){
       switch(type){
         case 'heading1':
-        return `<h1 class="text-35 md:text-40 mb-35 font-bold font-header uppercase leading-09">${children}</h1>`
+        return `<h1 class="text-center text-40 mb-35 font-bold font-header uppercase leading-09">${children}</h1>`
         case 'heading2':
-        return `<h2 class="text-25 md:text-30 mb-35 font-bold font-header uppercase leading-10">${children.join('')}</h2>`
+        return `<h2 class="text-30 mb-35 font-bold font-header uppercase leading-10">${children.join('')}</h2>`
         case 'heading3':
-        return `<h3 class="text-20 md:text-25 mb-30 font-bold font-header uppercase leading-10">${children.join('')}</h3>`
+        return `<h3 class="text-25 mb-30 font-bold font-header uppercase leading-10">${children.join('')}</h3>`
         case 'heading4':
         return `<h4 class="text-15 md:text-16 mb-20 font-semibold">${children.join('')}</h4>`
         case 'heading5':

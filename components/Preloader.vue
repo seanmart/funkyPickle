@@ -40,7 +40,7 @@ export default {
           .to('#preloader .preloader-logo',1,{opacity:0,scale:.9,transformOrigin:'center',ease:'expo.inOut'},'<')
           .to('#preloader',1,{y:'-100vh',ease:'expo.out'},'<+=.5')
           .to('#preloader .preloader-logo',1,{y:'100vh',ease:'expo.out'},'<')
-          .add(()=> this.$emit('complete'),'<+=.25')
+          .add(()=> this.$bus.$emit('REVEAL'),'<+=.25')
           .add(()=> this.loop && this.loop.kill())
     }
   }

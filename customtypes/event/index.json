@@ -48,6 +48,13 @@
       }
     },
     "Location": {
+      "venue": {
+        "config": {
+          "label": "Venue",
+          "placeholder": ""
+        },
+        "type": "Text"
+      },
       "address": {
         "config": {
           "label": "Address",
@@ -121,9 +128,9 @@
         },
         "type": "Select"
       },
-      "location": {
+      "map": {
         "config": {
-          "label": "Location"
+          "label": "Map"
         },
         "type": "GeoPoint"
       }
@@ -166,6 +173,48 @@
           "thumbnails": []
         },
         "type": "Image"
+      }
+    },
+    "Forms": {
+      "forms": {
+        "config": {
+          "label": "Forms",
+          "placeholder": "",
+          "fields": {
+            "label": {
+              "config": {
+                "label": "Button Label",
+                "placeholder": "A label for the header button"
+              },
+              "type": "Text"
+            },
+            "uid": {
+              "config": {
+                "label": "Page Name",
+                "placeholder": "will be used in the URL to the form"
+              },
+              "type": "Text"
+            },
+            "link": {
+              "config": {
+                "label": "Form Link",
+                "customtypes": [
+                  "form"
+                ],
+                "select": "document"
+              },
+              "type": "Link"
+            },
+            "sheet": {
+              "config": {
+                "label": "Google Sheet Tab Name",
+                "placeholder": ""
+              },
+              "type": "Text"
+            }
+          }
+        },
+        "type": "Group"
       }
     }
   }
