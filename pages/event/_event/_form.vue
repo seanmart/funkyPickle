@@ -41,6 +41,7 @@
 import {random} from '@/assets/helpers'
 export default {
   async asyncData({store,params,$prismic,payload}){
+
     let eventId = params.event
     let formId = params.form
     let formKey = `${eventId}__${formId}`
