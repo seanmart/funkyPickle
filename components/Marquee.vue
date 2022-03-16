@@ -61,6 +61,7 @@ export default {
     white-space: nowrap;
     flex: 0 0 auto;
     animation: animate-scroll-left 40s linear infinite;
+    will-change: transform;
   }
   .marquee .text-ref > *{
     white-space: nowrap;

@@ -22,32 +22,6 @@ main{
   padding-right: 5vw;
 }
 
-input,
-textarea,
-select{
-  display: block;
-  padding: .75rem  1.25rem;
-  border-radius: .25rem;
-  box-shadow: 0px 1px 3px rgba(theme('colors.bluergb'),.3);
-  border: 1px solid rgba(theme('colors.bluergb'),.2);
-  width:100%;
-  margin: 0px;
-  font-size: 1rem;
-  line-height: 1;
-  -webkit-appearance: initial;
-}
-
-.error input,
-.error textarea,
-.error select{
-  border: 1px solid theme('colors.pink');
-  box-shadow: 0px 1px 3px rgba(theme('colors.pinkrgb'),.3);
-}
-
-.error label{
-  color: theme('colors.pink')
-}
-
 .button{
   white-space: nowrap;
   cursor: pointer;
@@ -56,11 +30,27 @@ select{
   border-radius: .25rem;
   width: auto;
   font-weight: bold;
+  transition: transform .25s;
+  transform: scale(1.0001);
+}
+
+.button:active{
+  transform: scale(.95);
 }
 
 .button-wide{
   padding-left: 5rem;
   padding-right: 5rem;
+}
+
+.button-disabled{
+  opacity: .5;
+  pointer-events: none;
+}
+
+.button-disabled.bg-pink{
+  opacity: .25;
+  background: theme('colors.black')
 }
 
 .no-scrollbar::-webkit-scrollbar {

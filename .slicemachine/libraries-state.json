@@ -171,9 +171,10 @@
                     "options": [
                       "text",
                       "email",
-                      "phone",
+                      "tel",
                       "textarea",
-                      "dropdown"
+                      "select",
+                      "radio"
                     ],
                     "default_value": "text"
                   },
@@ -195,9 +196,9 @@
                   },
                   "type": "Text"
                 },
-                "column": {
+                "key": {
                   "config": {
-                    "label": "Google Sheet Column Name",
+                    "label": "Field Key",
                     "placeholder": ""
                   },
                   "type": "Text"
@@ -205,103 +206,14 @@
                 "placeholder": {
                   "config": {
                     "label": "Placeholder",
-                    "placeholder": "If Dropdown: separate by comma"
-                  },
-                  "type": "Text"
-                }
-              }
-            },
-            {
-              "id": "noLink",
-              "name": "No Link",
-              "docURL": "...",
-              "version": "sktwi1xtmkfgx8626",
-              "description": "Form",
-              "primary": {
-                "publish": {
-                  "config": {
-                    "label": "Publish",
-                    "placeholder_false": "false",
-                    "placeholder_true": "true",
-                    "default_value": true
-                  },
-                  "type": "Boolean"
-                },
-                "title": {
-                  "config": {
-                    "label": "Title",
                     "placeholder": ""
                   },
                   "type": "Text"
                 },
-                "description": {
-                  "type": "StructuredText",
+                "options": {
                   "config": {
-                    "label": "Description",
-                    "placeholder": "A nice description for your form",
-                    "allowTargetBlank": true,
-                    "single": "paragraph"
-                  }
-                },
-                "background": {
-                  "config": {
-                    "label": "Background",
-                    "placeholder": "",
-                    "options": [
-                      "white",
-                      "pink",
-                      "black",
-                      "lime",
-                      "none"
-                    ],
-                    "default_value": "white"
-                  },
-                  "type": "Select"
-                }
-              },
-              "items": {
-                "type": {
-                  "config": {
-                    "label": "Type",
-                    "placeholder": "",
-                    "options": [
-                      "text",
-                      "email",
-                      "phone",
-                      "textarea",
-                      "dropdown"
-                    ],
-                    "default_value": "text"
-                  },
-                  "type": "Select"
-                },
-                "required": {
-                  "config": {
-                    "label": "Required",
-                    "placeholder_false": "false",
-                    "placeholder_true": "true",
-                    "default_value": false
-                  },
-                  "type": "Boolean"
-                },
-                "label": {
-                  "config": {
-                    "label": "Label",
+                    "label": "Options",
                     "placeholder": ""
-                  },
-                  "type": "Text"
-                },
-                "column": {
-                  "config": {
-                    "label": "Google Sheet Column Name",
-                    "placeholder": ""
-                  },
-                  "type": "Text"
-                },
-                "placeholder": {
-                  "config": {
-                    "label": "Placeholder",
-                    "placeholder": "If Dropdown: separate by comma"
                   },
                   "type": "Text"
                 }
@@ -316,68 +228,104 @@
             "slice_type": "form",
             "items": [
               {
-                "type": "dropdown",
-                "required": false,
-                "label": "utilize distributed deliverables",
-                "column": "deploy innovative applications",
-                "placeholder": "synthesize plug-and-play metrics"
-              },
-              {
-                "type": "phone",
-                "required": true,
-                "label": "brand synergistic architectures",
-                "column": "deploy distributed networks",
-                "placeholder": "engineer viral e-services"
-              },
-              {
-                "type": "dropdown",
-                "required": false,
-                "label": "brand seamless infrastructures",
-                "column": "transform viral architectures",
-                "placeholder": "deliver efficient users"
-              },
-              {
-                "type": "textarea",
-                "required": true,
-                "label": "envisioneer innovative e-business",
-                "column": "strategize impactful relationships",
-                "placeholder": "harness user-centric schemas"
-              },
-              {
                 "type": "text",
-                "required": false,
-                "label": "syndicate killer e-services",
-                "column": "enhance efficient interfaces",
-                "placeholder": "evolve global web-readiness"
+                "required": true,
+                "label": "reinvent scalable eyeballs",
+                "key": "mesh cross-media e-markets",
+                "placeholder": "whiteboard distributed schemas",
+                "options": "transition 24/7 e-commerce"
               },
               {
                 "type": "text",
                 "required": true,
-                "label": "grow end-to-end models",
-                "column": "enhance granular partnerships",
-                "placeholder": "benchmark distributed solutions"
+                "label": "unleash sexy networks",
+                "key": "e-enable B2C infrastructures",
+                "placeholder": "integrate web-enabled vortals",
+                "options": "strategize 24/7 e-business"
               },
               {
-                "type": "dropdown",
+                "type": "text",
                 "required": false,
-                "label": "seize distributed schemas",
-                "column": "synergize next-generation portals",
-                "placeholder": "enable out-of-the-box schemas"
+                "label": "target interactive action-items",
+                "key": "cultivate impactful models",
+                "placeholder": "harness sticky synergies",
+                "options": "brand interactive niches"
               }
             ],
             "primary": {
-              "publish": false,
-              "inline": true,
-              "title": "synthesize revolutionary models",
+              "publish": true,
+              "inline": false,
+              "title": "unleash bleeding-edge paradigms",
               "description": [
                 {
                   "type": "paragraph",
-                  "text": "Qui eu anim ad aute enim sunt anim deserunt.",
+                  "text": "Ullamco aliquip ex duis ut nisi. Incididunt proident in ea. Excepteur laboris fugiat duis non in duis eu dolore mollit fugiat ullamco sint incididunt nulla aliquip.",
                   "spans": []
                 }
               ],
-              "action": "transition transparent technologies",
-              "background": "lime"
+              "action": "deliver B2C initiatives",
+              "background": "white"
+            }
+          },
+          "noLink": {
+            "variation": "noLink",
+            "name": "No Link",
+            "slice_type": "form",
+            "items": [
+              {
+                "type": "text",
+                "required": false,
+                "label": "transform e-business users",
+                "column": "matrix turn-key ROI",
+                "placeholder": "incubate real-time relationships"
+              },
+              {
+                "type": "text",
+                "required": true,
+                "label": "maximize visionary e-markets",
+                "column": "leverage sticky portals",
+                "placeholder": "benchmark strategic networks"
+              },
+              {
+                "type": "email",
+                "required": false,
+                "label": "architect revolutionary mindshare",
+                "column": "architect world-class deliverables",
+                "placeholder": "mesh killer blockchains"
+              },
+              {
+                "type": "text",
+                "required": false,
+                "label": "reinvent enterprise mindshare",
+                "column": "unleash cutting-edge web services",
+                "placeholder": "engineer back-end partnerships"
+              },
+              {
+                "type": "text",
+                "required": true,
+                "label": "utilize ubiquitous blockchains",
+                "column": "generate sexy e-services",
+                "placeholder": "reinvent cross-media synergies"
+              },
+              {
+                "type": "text",
+                "required": false,
+                "label": "matrix impactful schemas",
+                "column": "deploy scalable vortals",
+                "placeholder": "facilitate ubiquitous supply-chains"
+              }
+            ],
+            "primary": {
+              "publish": true,
+              "title": "aggregate global synergies",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "text": "Dolor irure eu magna tempor consequat dolor aliqua ea voluptate proident pariatur ad. Do ullamco cillum dolore ut eu non. Exercitation dolore deserunt qui anim deserunt do occaecat dolore ea magna exercitation deserunt.",
+                  "spans": []
+                }
+              ],
+              "background": "black"
             }
           }
         },

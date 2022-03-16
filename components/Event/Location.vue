@@ -1,17 +1,17 @@
 <template lang="html">
-  <EventWidget class="flex flex-row flex-wrap items-center">
-    <div class="flex-initial xl:pr-20px">
-      <div class="flex flex-row items-center" v-if="venue">
+  <EventWidget full class="flex flex-row flex-wrap items-center justify-center">
+    <div class="flex-initial p-20 text-center">
+      <div class="flex flex-row items-center mb-05" v-if="venue">
         <Icon wayfinder  class="pr-10 h-20"/>
-        <h3 v-html="venue" class="mb-05 text-20 font-bold"></h3>
+        <h3 v-html="venue" class="text-20 font-bold"></h3>
       </div>
       <div class="font-normal">
         <p v-if="address" v-html="address"/>
         <p v-if="cityState" v-html="cityState"/>
       </div>
     </div>
-    <div v-if="map" class="location-map flex-grow flex-shrink-0 min-w-1/2 mt-20px xl:ml-20px xl:mt-0 rounded-md overflow-hidden">
-      <div id="map" class="w-full h-400px md:h-300px"/>
+    <div v-if="map" class="p-10 location-map flex-grow flex-shrink-0 xl:mt-0">
+      <div id="map" class="w-full min-w-300px h-400px rounded-md overflow-hidden"/>
     </div>
   </EventWidget>
 </template>

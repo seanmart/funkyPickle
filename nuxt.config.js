@@ -33,7 +33,7 @@ export default {
     { src: "@/plugins/screenBuddy.js", ssr: false },
     { src: "@/plugins/imagesLoaded.js", ssr: false }
   ],
-  buildModules: ['@nuxtjs/tailwindcss','@nuxtjs/prismic'],
+  buildModules: ['@nuxtjs/tailwindcss','@nuxtjs/prismic','@braid/vue-formulate/nuxt'],
   modules: [],
   build: {},
   prismic: {
@@ -43,6 +43,9 @@ export default {
     apiOptions: {
       accessToken: process.env.PRISMIC_ACCESS_TOKEN,
     }
+  },
+  publicRuntimeConfig: {
+    stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
   },
   generate: {
     fallback: "404.html",

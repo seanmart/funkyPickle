@@ -10,6 +10,7 @@
         <prismic-rich-text v-if="description" :field="description" class="mb-30 font-bold text-15"/>
         <DataForm :fields="slice.items" :action="this.slice.primary.action" :multiColumn="!this.slice.primary.inline"/>
       </div>
+      
     </div>
   </component>
 </template>
@@ -38,8 +39,7 @@ export default {
           'rounded-lg overflow-hidden shadow-b-blue': !inline
         },
         header:{
-          'bg-pink text-white': bg == 'white' || bg == null,
-          'bg-black text-white': bg == 'lime',
+          'bg-black text-white': bg == 'white' || bg == 'lime' || bg == null,
           'bg-lime': bg == 'black' || bg == 'pink' || bg == 'green'
         },
         content:{

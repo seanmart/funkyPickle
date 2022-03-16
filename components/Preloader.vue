@@ -1,6 +1,6 @@
 <template lang="html">
-  <div id="preloader" class="bg-white fixed inset-0 z-top flex flex-col justify-center items-center overflow-hidden shadow-bottom" v-if="render">
-    <logo color class="preloader-logo relative block w-200"/>
+  <div id="preloader" class="bg-white fixed inset-0 z-top flex justify-center items-center overflow-hidden shadow-bottom" v-if="render">
+    <logo color class="preloader-logo relative block w-200 max-w-3/4"/>
   </div>
 </template>
 
