@@ -14,8 +14,8 @@ export default {
     }
   },
   mounted(){
-    // this.stripe = Stripe(this.$config.stripePublishableKey);
-    // this.elements = stripe.elements();
+    this.stripe = Stripe(this.$config.stripePublishableKey);
+    this.elements = this.stripe.elements();
   }
 }
 </script>

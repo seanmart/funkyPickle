@@ -16,6 +16,7 @@
 
 <script>
 export default {
+  name:"IntroSlice",
   props:['slice'],
   mounted(){
     this.anim = gsap.to(this.$refs.ball.$el,{rotate:180,ease:'none', scrollTrigger:{

@@ -175,23 +175,16 @@
         "type": "Image"
       }
     },
-    "Forms": {
-      "forms": {
+    "Header": {
+      "links": {
         "config": {
-          "label": "Forms",
+          "label": "Links",
           "placeholder": "",
           "fields": {
             "label": {
               "config": {
-                "label": "Button Label",
-                "placeholder": "A label for the header button"
-              },
-              "type": "Text"
-            },
-            "uid": {
-              "config": {
-                "label": "Page Name",
-                "placeholder": "will be used in the URL to the form"
+                "label": "Event Header Button Label",
+                "placeholder": "A label for the event header button"
               },
               "type": "Text"
             },

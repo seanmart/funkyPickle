@@ -20,7 +20,7 @@
 <script>
 
 export default {
-  name: "Sponsors",
+  name: "SponsorsSlice",
   props: ['slice'],
   computed:{
     sponsors(){

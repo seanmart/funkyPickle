@@ -41,7 +41,7 @@
 import {formatDate} from '@/assets/helpers'
 import config from '@/tailwind.config.js'
 export default {
-  name: "Press",
+  name: "PressSlice",
   props: ['slice'],
   mounted() {
     this.swiper = new Swiper(this.$refs.swiper, {

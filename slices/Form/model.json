@@ -20,15 +20,6 @@
           },
           "type": "Boolean"
         },
-        "inline": {
-          "config": {
-            "label": "Form is Inlined",
-            "placeholder_false": "false",
-            "placeholder_true": "true",
-            "default_value": false
-          },
-          "type": "Boolean"
-        },
         "title": {
           "config": {
             "label": "Title",
