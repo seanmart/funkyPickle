@@ -18,7 +18,7 @@
     </div>
 
     <div class="mt-30" v-if="action">
-      <FormulateInput type="submit" class="button bg-pink text-white" :value="status || buttonLabel"/>
+      <FormulateInput type="submit" class="button-wrapper button-pink" :value="status || buttonLabel"/>
     </div>
 
   </FormulateForm>
@@ -34,6 +34,7 @@ export default {
   },
   data:()=>({
     status:null,
+    sent: false,
     errors:0
   }),
   created(){
@@ -60,6 +61,8 @@ export default {
       this.errors = this.errorsSet.size
     },
     async handleSubmit(data){
+      if (this.sent) return
+
       if(!this.action){
         this.$emit('submit',data)
       } else {
@@ -67,8 +70,9 @@ export default {
         let formData = new FormData()
         Object.keys(data).forEach(key => formData.append(key,data[key]))
         this.status = "Sending..."
-        await fetch(this.onSubmit, {method: 'POST',body:formData})
+        await fetch(this.action, {method: 'POST',body:formData})
         this.status = "Sent!"
+        this.sent = true
 
       }
     }

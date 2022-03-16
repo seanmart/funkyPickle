@@ -22,7 +22,8 @@ main{
   padding-right: 5vw;
 }
 
-.button{
+.button,
+.button-wrapper button{
   white-space: nowrap;
   cursor: pointer;
   padding: 1rem 1.5rem;
@@ -30,29 +31,36 @@ main{
   border-radius: .25rem;
   width: auto;
   font-weight: bold;
-  transition: transform .25s;
+  transition: transform .1s;
   transform: scale(1.0001);
 }
 
-.button:active{
+.button:active,
+.button-wrapper button:active{
   transform: scale(.95);
 }
 
-.button-wide{
+.button.button-pink,
+.button-wrapper.button-pink button{
+  background: theme('colors.pink');
+  color: white;
+}
+
+.button.button-wide,
+.button-wrapper.button-wide button{
   padding-left: 5rem;
   padding-right: 5rem;
 }
 
-.button-disabled{
+.button.button-disabled,
+.button-wrapper.button-disabled button{
   pointer-events: none;
-}
-
-.button-disabled{
   background: theme('colors.black');
   position: relative;
 }
 
-.button-disabled::after{
+.button.button-disabled::after,
+.button-wrapper.button-disabled button::after{
   content:'';
   position: absolute;
   top: 0px;
@@ -62,6 +70,7 @@ main{
   background: white;
   opacity: .6;
 }
+
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
