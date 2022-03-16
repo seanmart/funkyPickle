@@ -1,107 +1,112 @@
 <template lang="html">
   <main>
-
     <div class="relative z-10 pt-400px md:pt-200px">
       <div class="absolute inset-0 -bottom-100px md:-bottom-100 overflow-hidden">
-        <Landing :image="event.background" />
+        <Landing :image="eventData.background" />
       </div>
     </div>
 
-    <Container noTop class="relative z-20">
+    <Container noTop doubleBottom class="relative z-20">
       <div class="bg-white px-20 py-50 lg:px-50 shadow-b-blue rounded-lg">
 
-        <h3 v-html="event.title" :style="{color: event.primary}" class="text-15 font-bold text-center mb-20"/>
-        <Marquee>
+        <h3
+          v-html="eventData.title"
+          :style="{ color: eventData.primary }"
+          class="text-15 font-bold text-center mb-20"
+        />
+
+        <Marquee v-if="form.label">
           <h1 v-html="form.label" class="font-header font-bold uppercase leading-09 text-60 px-20"/>
         </Marquee>
 
-        <DataForm
-          multiColumn
-          class="mt-space"
-          :fields="fields"
-          :action="data.action"
-          :formData="{column:'sheet',value:form.sheet}"
-          :getSubmit="(e)=> this.handleSubmit = e"
-        />
+        <div class="overflow-hidden mt-space">
+          <div class="flex flex-row ">
+            <div class="w-full flex-shrink-0">
+              <DataForm v-if="formData.action" id="form" multiColumn :fields="fields"/>
+            </div>
+            <div class="w-full flex-shrink-0">
+              <StripeForm/>
+            </div>
+          </div>
 
-        <div class="my-40 bg-gray p-40 text-center font-bold">
-          stripe form will go here
+          <div class="mt-20 text-center">
+            <button v-html="'Prev'" class="button button-disabled bg-pink text-white"/>
+            <button v-html="'Next'" class="button bg-pink text-white"/>
+          </div>
+
         </div>
 
-        <div class="text-center">
-          <button class="button button-wide bg-pink text-white" v-html="btnLabel" @click="handleClick"/>
-        </div>
-
+        <!-- <div class="text-center" v-if="formData.action">
+          <button
+            class="button button-wide bg-pink text-white"
+            form="form"
+            v-html="status || formData.label"
+          />
+        </div> -->
       </div>
     </Container>
   </main>
 </template>
 
 <script>
-import {random} from '@/assets/helpers'
+import { random } from "@/assets/helpers";
 export default {
-  async asyncData({store,params,$prismic,payload}){
+  async asyncData({ payload, redirect, store, params, $prismic }) {
+    let eventId = params.event;
+    let formId = params.form;
+    let formKey = `${eventId}__${formId}`;
+    let eventData = store.state.events[eventId];
+    let formData = store.state.forms[formKey];
 
-    let eventId = params.event
-    let formId = params.form
-    let formKey = `${eventId}__${formId}`
-    let form = null
-    let event = null
-    let data = null
-    let res = null
-
-    if (!store.state.events[eventId]){
-      res = await $prismic.api.getByUID("event", eventId);
-      res && store.commit("EVENT", [eventId, res.data]);
-    }
-
-    event = store.state.events[eventId]
-
-    if (Array.isArray(event.forms)){
-      form = event.forms.find(f => f.uid == formId)
-      if(!store.state.forms[formKey]){
-        res = await $prismic.api.getByID(form.link.id)
-        res && store.commit("FORM", [formKey, res.data]);
+    if (!eventData) {
+      let res1 = await $prismic.api.getByUID("event", eventId);
+      if (res1) {
+        store.commit("EVENT", [eventId, res1.data]);
+        eventData = res1.data;
       }
-      data = store.state.forms[formKey]
     }
 
-    if (data) return {data,event,form}
+    if (!formData && eventData) {
+      let form = eventData.forms.find((f) => f.uid == formId);
+      if (form) {
+        let res2 = await $prismic.api.getByID(form.link.id);
+        if (res2) {
+          store.commit("FORM", [formKey, res2.data]);
+          formData = res2.data;
+        }
+      }
+    }
 
+    if (formData && eventData) return { formData, eventData };
+    redirect("/404");
   },
-  data:()=>({
-    data:{},
-    event:{},
-    form:{},
-    handleSubmit: null,
-    btnLabel: null
+  data: () => ({
+    formData: {},
+    eventData: {},
+    status: null,
   }),
-  mounted(){
-    this.$bus.$emit('LOADED')
+  mounted() {
+    this.$bus.$emit("LOADED");
 
-    this.btnLabel = this.data.label
+    if (this.eventData.primary && this.eventData.secondary) {
+      let colors = [this.eventData.primary, this.eventData.secondary];
+      gsap.to("#background .strip", 0.5, { fill: () => colors[random(0, 1)] });
+    }
+  },
+  destroyed() {
+    gsap.set("#background .strip", { clearProps: "all" });
+  },
+  computed: {
+    fields() {
+      return this.formData.slices.map((f) => f.primary);
+    },
+    form() {
+      let form = this.eventData.forms.find((f) => f.uid == this.$route.params.form);
+      return form || {};
+    },
+  },
+  methods: {
 
-    if(this.event.primary && this.event.secondary){
-      let colors = [this.event.primary,this.event.secondary]
-      gsap.to('#background .strip',.5,{fill:()=> colors[random(0,1)]})
-    }
   },
-  destroyed(){
-    gsap.set('#background .strip',{clearProps:'all'})
-  },
-  computed:{
-    fields(){
-      return this.data.slices.map(f => f.primary)
-    }
-  },
-  methods:{
-    handleClick(){
-      this.handleSubmit({
-        sending:()=> this.btnLabel = "Sending...",
-        sent:()=> this.btnLabel = "Sent!",
-        error:()=> (alert("Please correct the errors in the form and try submitting again"))
-      })
-    }
-  }
-}
+};
 </script>

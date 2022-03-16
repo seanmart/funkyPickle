@@ -1,89 +1,162 @@
 <template lang="html">
-  <form>
+  <FormulateForm :class="{'multi-column': multiColumn}" @submit="handleSubmit">
 
-    <div class="flex -mx-07" :class="classes.form">
-      <template v-for="(field,i) in fields">
-        <FormField :field="field" :id="i" @change="handleChange"/>
+    <div class="formulate-fields -m-05">
+      <template v-for="field in formFields">
+        <FormulateInput
+          :class="{'field-required':field.required}"
+          class="m-05 text-left"
+          :type="field.type"
+          :name="field.key"
+          :label="field.label"
+          :validation="field.validation"
+          :options="field.options"
+          :placeholder="field.placeholder"
+          @validation="handleValidation"
+        />
       </template>
     </div>
 
-    <div class="mt-20 text-center" :class="classes.submit" v-if="!getSubmit">
-      <input type="submit" :value="btnLabel" class="button bg-pink text-white shadow-none border-none" @click.prevent="handleClick">
+    <div class="mt-20" v-if="action">
+      <FormulateInput type="submit" class="button bg-pink text-white" :class="{'button-disabled': errors > 0}" :value="status || buttonLabel"/>
     </div>
 
-  </form>
+  </FormulateForm>
 </template>
 
 <script>
-import FormField from '../slices/FormField'
 export default {
-  components:{FormField},
   props:{
+    multiColumn:Boolean,
     fields: {type:Array, default: ()=>[]},
-    action: {type: String, default: null},
-    formData: {type: Object, default: null},
-    multiColumn: {type:Boolean, default: false},
-    getSubmit:{type:Function, default: null}
+    buttonLabel:{type:String,default:'Submit'},
+    action:{type:String,default:null}
   },
   data:()=>({
-    data:{},
-    errors:{},
-    btnLabel: 'Submit'
+    status:null,
+    errors:0
   }),
-  mounted(){
-    this.getSubmit && this.getSubmit(this.handleSubmit)
-  },
-  destroyed(){
-    this.el && this.el.removeEventListener('click',this.handleSubmit)
+  created(){
+    this.errorsSet = new Set()
   },
   computed:{
-    classes(){
-      return{
-        form:{
-          'flex-row flex-wrap':this.multiColumn,
-          'flex-col':!this.multiColumn
-        },
-        submit:{
-          'md:text-left':this.multiColumn,
-          'xl:text-left':!this.multiColumn
-        }
-      }
+    formFields(){
+      return this.fields.map(s => {
+
+        let type = s.type || 'text'
+        let options = s.options ? s.options.split(',').map(v => v.trim()) : null
+        let validation = s.required ? `required|${type}`
+                       : type == 'tel' ? "matches:/^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})/"
+                       : null
+
+        return{...s,type,options,validation}
+      })
     }
   },
   methods:{
-    handleClick(){
-      this.handleSubmit({
-        sending:()=> this.btnLabel = "Sending...",
-        sent:()=> this.btnLabel = "Sent!",
-        error:()=> (alert("Please correct the errors in the form and try submitting again"))
-      })
+    handleValidation(e){
+      e.hasErrors ? this.errorsSet.add(e.name) : this.errorsSet.delete(e.name)
+      console.log(this.errorsSet.size)
+      this.errors = this.errorsSet.size
     },
-    handleChange(c){
-      this.data[c.id] = c.data
-      this.errors[c.id] = c.error
-    },
-    async handleSubmit({sending,sent,error}){
-      let hasError = false
-
-      Object.keys(this.errors).forEach(e => {
-        if(this.errors[e]) hasError = true
-      })
-
-      if(!hasError && !!this.action){
+    async handleSubmit(data){
+      if(!this.action){
+        this.$emit('submit',data)
+      } else {
 
         let formData = new FormData()
-        let data = {...this.data}
-        if (this.formData) data.formData = this.formData
+        Object.keys(data).forEach(key => formData.append(key,data[key]))
+        this.status = "Sending..."
+        await fetch(this.onSubmit, {method: 'POST',body:formData})
+        this.status = "Sent!"
 
-        sending()
-
-        Object.keys(data).forEach(key => formData.append(data[key].column,data[key].value))
-        await fetch(this.action, {method: 'POST',body:formData})
-        sent()
-      } else {
-        error()
       }
     }
-  },
+  }
 }
 </script>
+
+<style lang="css">
+
+.formulate-form.multi-column .formulate-fields{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.formulate-form.multi-column .formulate-input[data-type="textarea"]{
+  flex: 1 1 100%;
+}
+
+.formulate-form.multi-column .formulate-input[data-type="text"],
+.formulate-form.multi-column .formulate-input[data-type="email"]{
+  flex: 1 1 300px;
+}
+
+.formulate-form.multi-column .formulate-input[data-type="tel"]{
+  flex: 1 1 200px;
+}
+
+.formulate-form.multi-column .formulate-input[data-type="select"]{
+  flex: 1 1 auto;
+}
+
+.formulate-form input,
+.formulate-form textarea,
+.formulate-form select{
+  display: block;
+  padding: .75rem  1.25rem;
+  border-radius: .25rem;
+  box-shadow: 0px 1px 3px rgba(theme('colors.bluergb'),.3);
+  border: 1px solid rgba(theme('colors.bluergb'),.2);
+  width:100%;
+  margin: 0px;
+  background: white;
+  font-size: 1rem;
+  appearance:none;
+}
+.formulate-form label{
+  margin-bottom:.5rem;
+  display: inline-block;
+}
+
+.formulate-form .formulate-input.field-required label::after{
+  content:'*';
+  color: theme('colors.pink');
+  margin-left:5px;
+}
+
+.formulate-input-element--select{
+  position: relative;
+}
+.formulate-input-element--select::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-color: #cecece transparent transparent;
+  border-style: solid;
+  border-width: 0.3em 0.3em 0;
+  top: 50%;
+  margin-top: -0.1em;
+  right: 1em;
+  position: absolute;
+}
+
+.formulate-form [data-is-showing-errors="true"] input,
+.formulate-form [data-is-showing-errors="true"] select,
+.formulate-form [data-is-showing-errors="true"] textarea{
+  border: 1px solid theme('colors.pink');
+  box-shadow: 0px 1px 3px rgba(theme('colors.pinkrgb'),.3);
+}
+.formulate-form [data-is-showing-errors="true"] label{
+  color: theme('colors.pink')
+}
+.formulate-input-errors{
+  display: none;
+}
+
+.formulate-input-element--submit--label{
+  font-weight: bold;
+}
+
+</style>

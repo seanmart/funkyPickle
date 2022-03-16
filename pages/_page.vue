@@ -13,16 +13,27 @@
 import {resolver} from '@/assets/helpers'
 export default {
   name: 'Page',
-  async asyncData({ store, route, $prismic }) {
+  async asyncData({ redirect, store, route, $prismic, payload }) {
     let res = null;
     let page = route.path.replaceAll("/", "") || 'home';
+    let data = store.state.pages[page];
 
-    if (!store.state.pages[page]) {
+    if (payload){
+      store.commit("PAGE", [page,payload.data])
+      data = payload.data
+    };
+
+    if (!data) {
       res = await $prismic.api.getByUID('page',page);
-      res && store.commit("PAGE", [page, res.data]);
+      if(res){
+        store.commit("PAGE", [page, res.data]);
+        data = res.data
+      }
     }
-    let data = store.state.pages[page] || null;
-    if (data) return { data,page };
+
+    if (data) return { data,page }
+    redirect('/404')
+
   },
   data:()=>({
     data: {},
