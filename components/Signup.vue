@@ -5,7 +5,7 @@
       <div class="flex-auto mb-20 xl:mb-0 xl:mr-20">
         <prismic-rich-text :field="data.title" class="font-header font-bold uppercase leading-09 text-40 sm:text-50"/>
       </div>
-      <div class="flex-auto w-400px">
+      <div class="flex-auto w-400px max-w-4/5">
         <sliceZone :slices="data.form" :resolver="resolver"/>
       </div>
     </div>

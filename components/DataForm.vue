@@ -4,8 +4,8 @@
     <div class="formulate-fields -m-05">
       <template v-for="field in formFields">
         <FormulateInput
-          :class="{'field-required':field.required}"
           class="m-05 text-left"
+          :class="{'field-required':field.required}"
           :type="field.type"
           :name="field.key"
           :label="field.label"

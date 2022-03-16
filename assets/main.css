@@ -44,13 +44,23 @@ main{
 }
 
 .button-disabled{
-  opacity: .5;
   pointer-events: none;
 }
 
-.button-disabled.bg-pink{
-  opacity: .25;
-  background: theme('colors.black')
+.button-disabled{
+  background: theme('colors.black');
+  position: relative;
+}
+
+.button-disabled::after{
+  content:'';
+  position: absolute;
+  top: 0px;
+  left:0px;
+  right:0px;
+  bottom:0px;
+  background: white;
+  opacity: .6;
 }
 
 .no-scrollbar::-webkit-scrollbar {
