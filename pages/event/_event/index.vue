@@ -19,13 +19,13 @@
       </Container>
 
       <StickyHeader scrollId="#event" :backgroundStyles="{background:data.primary || null}">
-        <template v-if="data.forms.length > 0">
-          <template v-for="form in data.forms">
+        <template v-if="data.links.length > 0">
+          <template v-for="link in data.links">
             <nuxt-link
               class="button bg-white"
-              :to="`/event/${uid}/${form.uid}`"
+              :to="`/event/${uid}/${link.link.uid}`"
               :style="{color: data.primary}"
-              v-html="form.label"
+              v-html="link.label"
             />
           </template>
         </template>

@@ -14,7 +14,8 @@
     "@prismicio/slice-simulator-vue": "^0.2.0",
     "core-js": "^3.15.1",
     "imagesloaded": "^5.0.0",
-    "nuxt": "^2.15.7"
+    "nuxt": "^2.15.7",
+    "stripe": "^8.209.0"
   },
   "devDependencies": {
     "@nuxtjs/prismic": "^1.4.0",

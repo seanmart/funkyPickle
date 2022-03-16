@@ -50,7 +50,7 @@
 import { getDay, getMonth } from "@/assets/helpers";
 import { mapState } from "vuex";
 export default {
-  name: "Events",
+  name: "EventsSlice",
   props:['slice'],
   computed: {
     ...mapState({

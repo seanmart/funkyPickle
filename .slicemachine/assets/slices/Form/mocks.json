@@ -6,103 +6,65 @@
     "items": [
       {
         "type": "text",
-        "required": true,
-        "label": "reinvent scalable eyeballs",
-        "key": "mesh cross-media e-markets",
-        "placeholder": "whiteboard distributed schemas",
-        "options": "transition 24/7 e-commerce"
+        "required": false,
+        "label": "expedite turn-key metrics",
+        "key": "seize e-business deliverables",
+        "placeholder": "enhance 24/365 markets",
+        "options": "redefine turn-key deliverables"
       },
       {
         "type": "text",
         "required": true,
-        "label": "unleash sexy networks",
-        "key": "e-enable B2C infrastructures",
-        "placeholder": "integrate web-enabled vortals",
-        "options": "strategize 24/7 e-business"
+        "label": "leverage impactful relationships",
+        "key": "engage B2C channels",
+        "placeholder": "leverage world-class applications",
+        "options": "matrix sticky models"
+      },
+      {
+        "type": "tel",
+        "required": false,
+        "label": "recontextualize magnetic users",
+        "key": "embrace mission-critical niches",
+        "placeholder": "streamline visionary users",
+        "options": "streamline enterprise systems"
+      },
+      {
+        "type": "select",
+        "required": true,
+        "label": "empower bricks-and-clicks metrics",
+        "key": "unleash mission-critical ROI",
+        "placeholder": "unleash sexy solutions",
+        "options": "enhance customized partnerships"
       },
       {
         "type": "text",
         "required": false,
-        "label": "target interactive action-items",
-        "key": "cultivate impactful models",
-        "placeholder": "harness sticky synergies",
-        "options": "brand interactive niches"
+        "label": "utilize value-added communities",
+        "key": "disintermediate value-added platforms",
+        "placeholder": "leverage dynamic interfaces",
+        "options": "syndicate web-enabled interfaces"
+      },
+      {
+        "type": "text",
+        "required": false,
+        "label": "implement customized supply-chains",
+        "key": "whiteboard extensible content",
+        "placeholder": "incubate intuitive networks",
+        "options": "expedite e-business portals"
       }
     ],
     "primary": {
-      "publish": true,
-      "inline": false,
-      "title": "unleash bleeding-edge paradigms",
+      "publish": false,
+      "title": "integrate global e-tailers",
       "description": [
         {
           "type": "paragraph",
-          "text": "Ullamco aliquip ex duis ut nisi. Incididunt proident in ea. Excepteur laboris fugiat duis non in duis eu dolore mollit fugiat ullamco sint incididunt nulla aliquip.",
+          "text": "In excepteur exercitation quis in dolore. Voluptate dolore dolore labore incididunt reprehenderit minim duis labore ex nostrud nisi adipisicing.",
           "spans": []
         }
       ],
-      "action": "deliver B2C initiatives",
-      "background": "white"
-    }
-  },
-  {
-    "variation": "noLink",
-    "name": "No Link",
-    "slice_type": "form",
-    "items": [
-      {
-        "type": "text",
-        "required": false,
-        "label": "transform e-business users",
-        "column": "matrix turn-key ROI",
-        "placeholder": "incubate real-time relationships"
-      },
-      {
-        "type": "text",
-        "required": true,
-        "label": "maximize visionary e-markets",
-        "column": "leverage sticky portals",
-        "placeholder": "benchmark strategic networks"
-      },
-      {
-        "type": "email",
-        "required": false,
-        "label": "architect revolutionary mindshare",
-        "column": "architect world-class deliverables",
-        "placeholder": "mesh killer blockchains"
-      },
-      {
-        "type": "text",
-        "required": false,
-        "label": "reinvent enterprise mindshare",
-        "column": "unleash cutting-edge web services",
-        "placeholder": "engineer back-end partnerships"
-      },
-      {
-        "type": "text",
-        "required": true,
-        "label": "utilize ubiquitous blockchains",
-        "column": "generate sexy e-services",
-        "placeholder": "reinvent cross-media synergies"
-      },
-      {
-        "type": "text",
-        "required": false,
-        "label": "matrix impactful schemas",
-        "column": "deploy scalable vortals",
-        "placeholder": "facilitate ubiquitous supply-chains"
-      }
-    ],
-    "primary": {
-      "publish": true,
-      "title": "aggregate global synergies",
-      "description": [
-        {
-          "type": "paragraph",
-          "text": "Dolor irure eu magna tempor consequat dolor aliqua ea voluptate proident pariatur ad. Do ullamco cillum dolore ut eu non. Exercitation dolore deserunt qui anim deserunt do occaecat dolore ea magna exercitation deserunt.",
-          "spans": []
-        }
-      ],
-      "background": "black"
+      "action": "repurpose proactive convergence",
+      "background": "lime"
     }
   }
 ]

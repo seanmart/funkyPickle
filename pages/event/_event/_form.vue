@@ -2,48 +2,39 @@
   <main>
     <div class="relative z-10 pt-400px md:pt-200px">
       <div class="absolute inset-0 -bottom-100px md:-bottom-100 overflow-hidden">
-        <Landing :image="eventData.background" />
+        <Landing :image="event.background" />
       </div>
     </div>
 
     <Container noTop doubleBottom class="relative z-20">
       <div class="bg-white px-20 py-50 lg:px-50 shadow-b-blue rounded-lg">
 
-        <h3
-          v-html="eventData.title"
-          :style="{ color: eventData.primary }"
-          class="text-15 font-bold text-center mb-20"
-        />
+        <h3 v-html="event.title" :style="{ color: event.primary }" class="text-15 font-bold text-center mb-20"/>
 
-        <Marquee v-if="form.label">
-          <h1 v-html="form.label" class="font-header font-bold uppercase leading-09 text-60 px-20"/>
+        <Marquee v-if="data.title">
+          <h1 v-html="data.title" class="font-header font-bold uppercase leading-09 text-60 px-20"/>
         </Marquee>
 
-        <div class="overflow-hidden mt-space">
-          <div class="flex flex-row ">
-            <div class="w-full flex-shrink-0">
-              <DataForm v-if="formData.action" id="form" multiColumn :fields="fields"/>
-            </div>
-            <div class="w-full flex-shrink-0">
-              <StripeForm/>
-            </div>
+        <div class="mt-space bg-white shadow-b-blue rounded-lg">
+          <div class="flex flex-row">
+            <template v-for="(slice,i) in slices">
+              <button class="flex-auto py-10 px-20 text-white" :style="{ color: event.primary }"  v-html="`Step ${i+1}`"/>
+            </template>
           </div>
-
-          <div class="mt-20 text-center">
-            <button v-html="'Prev'" class="button button-disabled bg-pink text-white"/>
-            <button v-html="'Next'" class="button bg-pink text-white"/>
+          <div class="flex flex-row overflow-hidden p-40">
+            <template v-for="slice in slices">
+              <div class="flex-shrink-0 w-full">
+                <DataForm v-if="slice.slice_type == 'form'" :fields="slice.items" multiColumn/>
+                <StripeForm v-else-if="slice.slice_type == 'stripe'" :data="slice"/>
+              </div>
+            </template>
           </div>
 
         </div>
 
-        <!-- <div class="text-center" v-if="formData.action">
-          <button
-            class="button button-wide bg-pink text-white"
-            form="form"
-            v-html="status || formData.label"
-          />
-        </div> -->
+
       </div>
+
     </Container>
   </main>
 </template>
@@ -54,42 +45,39 @@ export default {
   async asyncData({ payload, redirect, store, params, $prismic }) {
     let eventId = params.event;
     let formId = params.form;
-    let formKey = `${eventId}__${formId}`;
-    let eventData = store.state.events[eventId];
-    let formData = store.state.forms[formKey];
+    let event = store.state.events[eventId];
+    let data = store.state.forms[formId];
 
-    if (!eventData) {
+    if (!event) {
       let res1 = await $prismic.api.getByUID("event", eventId);
       if (res1) {
         store.commit("EVENT", [eventId, res1.data]);
-        eventData = res1.data;
+        event = res1.data;
       }
     }
 
-    if (!formData && eventData) {
-      let form = eventData.forms.find((f) => f.uid == formId);
-      if (form) {
-        let res2 = await $prismic.api.getByID(form.link.id);
-        if (res2) {
-          store.commit("FORM", [formKey, res2.data]);
-          formData = res2.data;
-        }
+    if (!data) {
+      let res2 = await $prismic.api.getByUID('form',formId);
+      if (res2) {
+        store.commit("FORM", [formId, res2.data]);
+        data = res2.data;
       }
     }
 
-    if (formData && eventData) return { formData, eventData };
+    if (data && event) return { data, event };
     redirect("/404");
   },
   data: () => ({
-    formData: {},
-    eventData: {},
+    data: {},
+    event: {},
     status: null,
+    step: 1
   }),
   mounted() {
     this.$bus.$emit("LOADED");
 
-    if (this.eventData.primary && this.eventData.secondary) {
-      let colors = [this.eventData.primary, this.eventData.secondary];
+    if (this.event.primary && this.event.secondary) {
+      let colors = [this.event.primary, this.event.secondary];
       gsap.to("#background .strip", 0.5, { fill: () => colors[random(0, 1)] });
     }
   },
@@ -97,12 +85,20 @@ export default {
     gsap.set("#background .strip", { clearProps: "all" });
   },
   computed: {
-    fields() {
-      return this.formData.slices.map((f) => f.primary);
+    slices(){
+      if(!this.data.slices) return []
+      let slices = []
+      this.data.slices.forEach((s,i) => {
+        (s.primary.publish || s.primary.publish == null) && slices.push(s)
+      })
+      return slices
     },
-    form() {
-      let form = this.eventData.forms.find((f) => f.uid == this.$route.params.form);
-      return form || {};
+    fields() {
+      return this.data.slices.map((f) => f.primary);
+    },
+    link() {
+      let link = this.event.links.find((l) => l.link.uid == this.$route.params.form);
+      return link || {};
     },
   },
   methods: {

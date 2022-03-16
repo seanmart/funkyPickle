@@ -17,8 +17,8 @@
       </template>
     </div>
 
-    <div class="mt-20" v-if="action">
-      <FormulateInput type="submit" class="button bg-pink text-white" :class="{'button-disabled': errors > 0}" :value="status || buttonLabel"/>
+    <div class="mt-30" v-if="action">
+      <FormulateInput type="submit" class="button bg-pink text-white" :value="status || buttonLabel"/>
     </div>
 
   </FormulateForm>
@@ -42,21 +42,21 @@ export default {
   computed:{
     formFields(){
       return this.fields.map(s => {
-
         let type = s.type || 'text'
         let options = s.options ? s.options.split(',').map(v => v.trim()) : null
-        let validation = s.required ? `required|${type}`
-                       : type == 'tel' ? "matches:/^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})/"
-                       : null
-
+        let validation = this.getValidation(type,s.required)
         return{...s,type,options,validation}
       })
     }
   },
   methods:{
+    getValidation(type,required){
+      if (required) return type == 'email' ? 'required|email' :  'required'
+      if (type == 'tel') return "matches:/^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})/"
+      return null
+    },
     handleValidation(e){
       e.hasErrors ? this.errorsSet.add(e.name) : this.errorsSet.delete(e.name)
-      console.log(this.errorsSet.size)
       this.errors = this.errorsSet.size
     },
     async handleSubmit(data){

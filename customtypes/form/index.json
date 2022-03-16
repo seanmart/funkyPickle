@@ -5,17 +5,17 @@
   "status": true,
   "json": {
     "Main": {
-      "action": {
+      "uid": {
         "config": {
-          "label": "Action",
+          "label": "Uid",
           "placeholder": ""
         },
-        "type": "Text"
+        "type": "UID"
       },
-      "label": {
+      "title": {
         "config": {
-          "label": "Form Submit Label",
-          "placeholder": "label for the form submit button"
+          "label": "Title",
+          "placeholder": ""
         },
         "type": "Text"
       },
@@ -24,7 +24,7 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "form_field": {
+            "form": {
               "type": "SharedSlice"
             }
           }
