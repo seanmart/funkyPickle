@@ -1,7 +1,7 @@
 <template lang="html">
-  <main id="page">
+  <main id="page" :key="$route.path">
     <Landing v-if="data.title" :image="data.image" :title="data.title"/>
-    <StickyHeader v-if="header" :items="header" scrollId="#page"/>
+    <StickyHeader v-if="header" :items="header" scrollId="#page" ref="header" mobileLabel="Sections"/>
     <Slices :slices="slices" class="page-content"/>
   </main>
 </template>
@@ -39,11 +39,16 @@ export default {
   },
   computed:{
     header(){
-      if(!this.data.header) return false
-
       let header = []
+      if(!this.data.header) return false
       this.slices.forEach(s => {
-        s.primary.title  && typeof s.primary.title == 'string' && header.push({label: s.primary.title,id:s.id})
+        if (s.primary.title  && typeof s.primary.title == 'string'){
+          header.push({
+            label: s.primary.title,
+            href:`#${s.id}`,
+            onClick:()=> this.scrollTo(s.id)
+          })
+        }
       })
       return header
     },
@@ -55,6 +60,12 @@ export default {
         (s.primary.publish || s.primary.publish == null) && slices.push({...s,id:`${s.slice_type}-${i}`})
       })
       return slices
+    }
+  },
+  methods:{
+    scrollTo(id){
+      let el = document.getElementById(id).childNodes[0]
+      gsap.to(window,1,{ease: 'power2.out', scrollTo:{y:el,offsetY: this.$refs.header.$el.offsetHeight + 50}})
     }
   }
 }

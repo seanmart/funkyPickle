@@ -1,6 +1,6 @@
 <template lang="html">
   <main>
-    <div class="relative z-10 pt-400px md:pt-200px">
+    <div class="relative z-10 pt-200px">
       <div class="absolute inset-0 -bottom-100px md:-bottom-100 overflow-hidden">
         <Landing :image="event.background" />
       </div>
@@ -24,7 +24,7 @@
           <div class="flex flex-row overflow-hidden p-40">
             <template v-for="slice in slices">
               <div class="flex-shrink-0 w-full">
-                <DataForm v-if="slice.slice_type == 'form'" :fields="slice.items" multiColumn/>
+                <ElementForm v-if="slice.slice_type == 'form'" :fields="slice.items" multiColumn/>
                 <StripeForm v-else-if="slice.slice_type == 'stripe'" :data="slice"/>
               </div>
             </template>
@@ -43,6 +43,7 @@
 import { random } from "@/assets/helpers";
 export default {
   async asyncData({ payload, redirect, store, params, $prismic }) {
+
     let eventId = params.event;
     let formId = params.form;
     let event = store.state.events[eventId];
@@ -75,14 +76,6 @@ export default {
   }),
   mounted() {
     this.$bus.$emit("LOADED");
-
-    if (this.event.primary && this.event.secondary) {
-      let colors = [this.event.primary, this.event.secondary];
-      gsap.to("#background .strip", 0.5, { fill: () => colors[random(0, 1)] });
-    }
-  },
-  destroyed() {
-    gsap.set("#background .strip", { clearProps: "all" });
   },
   computed: {
     slices(){

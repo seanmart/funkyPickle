@@ -1,8 +1,8 @@
 <template>
-  <nuxt-link v-if="uid" :to="`/${uid}`" :class="classes">
+  <nuxt-link class="nav-link" v-if="uid" :to="`/${uid}`" :class="classes">
     <span v-html="label"/>
   </nuxt-link>
-  <a v-else :href="url" target="_blank" :class="classes">
+  <a v-else class="nav-link" :href="url" target="_blank" :class="classes">
     <span v-html="label"/>
   </a>
 </template>
@@ -27,3 +27,10 @@ export default {
   }
 }
 </script>
+
+<style lang="css">
+  .nav-link:hover,
+  .nuxt-link-active{
+    color: theme('colors.pink')
+  }
+</style>
