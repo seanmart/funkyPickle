@@ -19,12 +19,7 @@ export default {
   name:"IntroSlice",
   props:['slice','useContainer'],
   mounted(){
-    this.anim = gsap.to(this.$refs.ball.$el,{rotate:180,ease:'none', scrollTrigger:{
-      trigger: this.$refs.trigger,
-      scrub: 1,
-      start: 0,
-      end: 'bottom top'
-    }})
+    this.$nextTick(this.initAnim)
   },
   destroyed(){
     this.anim && this.anim.kill()
@@ -46,6 +41,16 @@ export default {
         'fill-lime': bg != 'lime',
         'fill-white': bg == 'lime'
       }
+    }
+  },
+  methods:{
+    initAnim(){
+      this.anim = gsap.to(this.$refs.ball.$el,{rotate:180,ease:'none', scrollTrigger:{
+        trigger: this.$refs.trigger,
+        scrub: 1,
+        start: 0,
+        end: 'bottom top'
+      }})
     }
   }
 }
