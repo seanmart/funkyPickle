@@ -34,7 +34,7 @@
       </div>
     </Container>
 
-    <Container class="relative z-10 flex flex-row" ref="slices">
+    <Container class="relative z-10" :class="{'flex flex-row': slices}" ref="slices">
       <template v-if="slices">
         <div class="flex-auto">
           <Slices :slices="slices" class="page-content" inline/>
@@ -57,10 +57,8 @@
 
         </div>
       </template>
-      <div v-else class="text-center flex-auto flex flex-row items-center">
-        <div class="h-5px flex-auto mr-10 min-w-20px" :style="{background: data.primary}"/>
-        <h1 class="block font-header font-bold uppercase text-20 leading-09">More Information Coming Soon!</h1>
-        <div class="h-5px flex-auto ml-10 min-w-20px" :style="{background: data.primary}"/>
+      <div v-else class="text-center">
+        <h1 class="font-bold text-20" :style="{color: data.primary}">More Information Coming Soon!</h1>
       </div>
     </Container>
 
