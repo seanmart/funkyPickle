@@ -33,7 +33,14 @@
   "slices": {
     "Events": {
       "default": {
-        "primary": {}
+        "primary": {
+          "description": {
+            "config": {
+              "patternType": "PARAGRAPH",
+              "blocks": 1
+            }
+          }
+        }
       }
     },
     "Table": {

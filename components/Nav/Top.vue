@@ -20,6 +20,9 @@ export default {
     },
     hide(){
       this.toggleTopNav()
+    },
+    $route(){
+      this.pause = false
     }
   },
   mounted(){

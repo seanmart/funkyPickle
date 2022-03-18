@@ -6,7 +6,7 @@
 
     <ElementCarousel :slides="slides" v-slot="{slide}">
       <div class="press-item swiper-slide h-full min-h-300 flex flex-row items-stretch">
-        <a :href="slide.link.url" target="_blank" class="block overflow-hidden rounded-lg shadow-bottom h-full bg-lime flex flex-col lg:flex-row items-stretch w-full">
+        <a :href="slide.link.url" target="_blank" class="block overflow-hidden rounded-lg shadow-b-blue h-full bg-lime flex flex-col lg:flex-row items-stretch w-full">
           <div class="flex-shrink-0 flex-grow-0 overflow-hidden pb-2/3 lg:pb-0 lg:w-1/2 relative">
             <div class="press-image absolute inset-0 bg-cover bg-center image" :style="{ backgroundImage: `url(${slide.image.url})` }" />
           </div>

@@ -6,12 +6,12 @@
         <div
           :style="backgroundStyles"
           class="sticky-header-item flex-shrink-0 md:flex-auto flex justify-center items-center font-bold h-50 relative"
-          :class="[backgroundClasses,{'cursor-pointer':item.onClick ||item.menu, 'md:hidden': item.menu,'border-t md:border-t-0 md:border-l': i > 0}]"
+          :class="[backgroundClasses,{'cursor-pointer':item.onClick ||item.menu, 'md:hidden': item.menu,'border-t-2 md:border-t-0 md:border-l-2': i > 0}]"
           @click="()=>item.onClick && item.onClick()"
         >
           <span v-html="item.label"/>
-          <span v-if="item.onClick && !item.menu" v-html="'❯'" class="ml-10"/>
-          <button v-if="item.menu" class="ml-10 w-30px"><div v-for="i in 3" class="h-2px w-full bg-white my-3px"/></button>
+          <span v-if="item.onClick && !item.menu" v-html="'❯'" class="ml-10 text-lime"/>
+          <button v-if="item.menu" class="ml-10 w-30px"><div v-for="i in 3" class="h-2px w-full bg-lime my-3px"/></button>
         </div>
       </template>
     </div>
@@ -73,7 +73,7 @@ export default {
 
 <style lang="css">
   .sticky-header-item{
-    border-color:rgba(255,255,255,.4)
+    border-color:rgba(theme('colors.blackrgb'),.15)
   }
   .sticky-header-item *{
     position: relative;
@@ -89,7 +89,7 @@ export default {
     left:0px;
     right:0px;
     bottom:0px;
-    background: rgba(theme('colors.blackrgb'),.2);
+    background: rgba(theme('colors.blackrgb'),.15);
   }
 
 </style>
