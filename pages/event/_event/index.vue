@@ -16,19 +16,13 @@
           <h1 v-html="data.title" class="font-header font-bold text-center uppercase leading-09 text-30 md:text-50"/>
       </Container>
 
-      <StickyHeader scrollId="#event" :backgroundStyles="{background:data.primary || null}" ref="stickyHeader">
-        <template v-if="data.links.length > 0">
-          <template v-for="link in data.links">
-            <nuxt-link
-              class="button bg-white"
-              :to="`/event/${uid}/${link.link.uid}`"
-              :style="{color: data.primary}"
-              v-html="link.label"
-            />
-          </template>
-        </template>
-        <h3 v-else class="font-header font-bold uppercase text-20 leading-09 text-white" v-html="'Registration Coming Soon'"/>
-      </StickyHeader>
+      <StickyHeader
+        scrollId="#event"
+        :items="links"
+        :backgroundStyles="{background:data.primary || null}"
+        ref="stickyHeader"
+        mobileLabel="Event Links"
+      />
 
     </div>
 
@@ -65,7 +59,7 @@
       </template>
       <div v-else class="text-center flex-auto flex flex-row items-center">
         <div class="h-5px flex-auto mr-10 min-w-20px" :style="{background: data.primary}"/>
-        <h1 class="block font-header font-bold uppercase leading-09 text-15 sm:text-20 md:text-30">More Information Coming Soon!</h1>
+        <h1 class="block font-header font-bold uppercase text-20 leading-09">More Information Coming Soon!</h1>
         <div class="h-5px flex-auto ml-10 min-w-20px" :style="{background: data.primary}"/>
       </div>
     </Container>
@@ -137,6 +131,17 @@ export default {
         (s.primary.publish || s.primary.publish == null) && slices.push({...s,id:`${s.slice_type}-${i}`})
       })
       return slices
+    },
+    links(){
+      if (this.data.links.length == 0) return [
+        {label:'Registration Coming Soon'}
+      ]
+      return this.data.links.map(link => {
+        return {
+          label: link.label,
+          onClick: ()=> this.$router.push(`/event/${this.uid}/${link.link.uid}`)
+        }
+      })
     }
   },
   methods:{
