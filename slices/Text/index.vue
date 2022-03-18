@@ -20,7 +20,7 @@ export default {
       return this.slice.primary.title || null
     },
     image(){
-      return this.slice.primary.image.url || null
+      return this.slice.primary.image || null
     },
     text(){
       return this.slice.primary.text

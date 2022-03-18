@@ -49,13 +49,14 @@
         <div class="flex-initial hidden xl:block">
 
           <aside ref="sidebar" class="flex flex-col pl-20">
-            <template v-for="item in slices">
+            <template v-for="(item,i) in slices">
               <button
                 v-if="item.primary.title && item.id"
                 v-html="item.primary.title"
                 :data-id="item.id"
                 @click="()=>scrollTo(item.id)"
-                class="button bg-pink text-white mb-05"
+                class="button bg-pink text-white"
+                :class="{'mb-05':i < slices.length - 1}"
                 />
             </template>
           </aside>
@@ -105,7 +106,6 @@ export default {
   }),
   mounted(){
     this.$bus.$emit('LOADED')
-    this.space = parseInt(config.theme.spacing.space)
 
     gsap.set('#event .bg-pink',{background: this.data.primary})
     gsap.set('#event .bg-green',{background: this.data.secondary})
@@ -117,7 +117,7 @@ export default {
       this.sidebarAnim = ScrollTrigger.create({
         trigger: this.$refs.slices.$el,
         start:()=>`top top+=${sticky.offsetHeight}`,
-        end: ()=> `bottom top+=${sidebar.offsetHeight + sticky.offsetHeight + this.space * 2}`,
+        end: ()=> `bottom top+=${sidebar.offsetHeight + sticky.offsetHeight + (this.getSpace() * 2)}`,
         pin: this.$refs.sidebar,
         pinSpacing: false,
         invalidateOnRefresh:true
@@ -140,9 +140,15 @@ export default {
     }
   },
   methods:{
+    getSpace(){
+      let space = parseInt(config.theme.spacing.space)
+      let size = window.innerWidth >= parseInt(config.theme.screens.md) ? 'desktop' : 'mobile'
+      let rem = parseInt(config.theme.fontSize[size])
+      return space * rem
+    },
     scrollTo(id){
       let el = document.getElementById(id)
-      let offset = this.$refs.stickyHeader.$el.offsetHeight + this.space - 5
+      let offset = this.$refs.stickyHeader.$el.offsetHeight + this.getSpace() - 5
       gsap.to(window,1,{ease: 'power2.out', scrollTo:{y:el,offsetY:offset}})
     }
   }

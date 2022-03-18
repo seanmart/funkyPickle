@@ -59,8 +59,8 @@ export default{
     spacing:{
       "nav-top": "70px",
       "nav-side": "250px",
-      "space": "100px",
-      "space-2x": "200px",
+      "space": "5rem",
+      "space-2x": "10rem",
       ...units.px,
       ...units.rem,
       ...units.fraction,
@@ -110,7 +110,9 @@ export default{
     },
     fontSize: {
       ...units.px,
-      ...units.rem
+      ...units.rem,
+      mobile:'14px',
+      desktop:'16px'
     },
     extend:{
       backgroundColor:(theme)=>({
