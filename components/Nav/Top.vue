@@ -15,7 +15,8 @@ export default {
   }),
   watch:{
     pause(p){
-      !p && (this.hide = true)
+      this.hide = p
+      this.toggleTopNav()
     },
     hide(){
       this.toggleTopNav()

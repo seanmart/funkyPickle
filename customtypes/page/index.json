@@ -70,6 +70,9 @@
             },
             "introduction": {
               "type": "SharedSlice"
+            },
+            "carousel": {
+              "type": "SharedSlice"
             }
           }
         }

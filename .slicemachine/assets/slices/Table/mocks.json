@@ -3,23 +3,29 @@
     "variation": "default",
     "name": "Default",
     "slice_type": "table",
-    "items": [],
+    "items": [
+      {
+        "row": "facilitate mission-critical e-markets"
+      },
+      {
+        "row": "deploy compelling action-items"
+      },
+      {
+        "row": "unleash plug-and-play applications"
+      }
+    ],
     "primary": {
-      "publish": true,
-      "title": [
-        {
-          "type": "heading1",
-          "text": "Deliver open-source interfaces",
-          "spans": []
-        }
-      ],
+      "publish": false,
+      "title": "envisioneer impactful initiatives",
       "description": [
         {
           "type": "paragraph",
-          "text": "Ullamco eiusmod fugiat sint laborum proident cupidatat non.",
+          "text": "Tempor consectetur dolore esse quis sunt et deserunt consectetur aute reprehenderit magna duis cillum.",
           "spans": []
         }
-      ]
+      ],
+      "link": "disintermediate strategic e-markets",
+      "headers": "grow granular blockchains"
     }
   }
 ]

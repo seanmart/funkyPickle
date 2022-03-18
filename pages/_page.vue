@@ -1,16 +1,12 @@
 <template lang="html">
   <main id="page">
-
     <Landing v-if="data.title" :image="data.image" :title="data.title"/>
-
     <StickyHeader v-if="header" :items="header" scrollId="#page"/>
-
-    <SliceZone :slices="slices" :resolver="resolver" class="page-content"/>
+    <Slices :slices="slices" class="page-content"/>
   </main>
 </template>
 
 <script>
-import {resolver} from '@/assets/helpers'
 export default {
   name: 'Page',
   async asyncData({ redirect, store, route, $prismic, payload }) {
@@ -37,7 +33,6 @@ export default {
   },
   data:()=>({
     data: {},
-    resolver
   }),
   mounted(){
     this.$bus.$emit('LOADED')

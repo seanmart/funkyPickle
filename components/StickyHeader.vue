@@ -41,7 +41,8 @@ export default {
         pin: this.$refs.header,
         pinSpacer: this.$refs.spacer,
         pinSpacing: false,
-        onToggle:(e)=> this.$bus.$emit('PAUSE_TOP_NAV',e.isActive)
+        onToggle:(e)=> this.$bus.$emit('PAUSE_TOP_NAV',e.isActive),
+        invalidateOnRefresh:true
       })
     },
     scrollTo(id){

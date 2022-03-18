@@ -38,7 +38,8 @@
     },
     "Table": {
       "default": {
-        "primary": {}
+        "primary": {},
+        "items": {}
       }
     },
     "Sponsors": {
@@ -105,9 +106,30 @@
         }
       }
     },
-    "FormField": {
+    "Carousel": {
       "default": {
-        "primary": {}
+        "primary": {
+          "description": {
+            "config": {
+              "patternType": "PARAGRAPH",
+              "blocks": 1
+            }
+          }
+        },
+        "items": {
+          "title": {
+            "config": {
+              "patternType": "HEADING",
+              "blocks": 1
+            }
+          },
+          "description": {
+            "config": {
+              "patternType": "PARAGRAPH",
+              "blocks": 1
+            }
+          }
+        }
       }
     }
   }

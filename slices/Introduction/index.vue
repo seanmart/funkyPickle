@@ -1,6 +1,6 @@
 <template lang="html">
 
-  <Container doubleTop doubleBottom outerBottom :class="containerClasses" class="overflow-hidden">
+  <component :is="useContainer ? 'Container' : 'div'" doubleTop doubleBottom outerBottom :class="containerClasses" class="overflow-hidden">
     <div class="relative z-10 py-space w-full" ref="trigger">
 
       <prismic-rich-text :field="slice.primary.title" class="intro-title font-header font-bold uppercase leading-09 text-center lg:text-left"/>
@@ -10,14 +10,14 @@
       </div>
 
     </div>
-  </Container>
+  </component>
 
 </template>
 
 <script>
 export default {
   name:"IntroSlice",
-  props:['slice'],
+  props:['slice','useContainer'],
   mounted(){
     this.anim = gsap.to(this.$refs.ball.$el,{rotate:180,ease:'none', scrollTrigger:{
       trigger: this.$refs.trigger,

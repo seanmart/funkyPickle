@@ -1,20 +1,20 @@
 {
-  "id": "535f6299-1463-4daf-8a6e-f4f111a4dd8b",
-  "uid": "aliquam-iusto-vel",
+  "id": "1365be40-c862-4ca3-8a35-39d9146f13d6",
+  "uid": "voluptates-excepturi-vero",
   "type": "event",
   "data": {
-    "title": "embrace magnetic markets",
-    "date": "2021-09-02",
-    "venue": "whiteboard world-class niches",
-    "address": "seize value-added relationships",
-    "city": "engage compelling solutions",
-    "state": "Mississippi",
+    "title": "streamline revolutionary deliverables",
+    "date": "2018-08-16",
+    "venue": "aggregate bleeding-edge infomediaries",
+    "address": "implement open-source markets",
+    "city": "embrace proactive metrics",
+    "state": "South Dakota",
     "map": {
-      "latitude": 48.8841267,
-      "longitude": 2.3300579
+      "latitude": 48.8583736,
+      "longitude": 2.2922926
     },
-    "primary": "#3bca09",
-    "secondary": "#bb84df",
+    "primary": "#055602",
+    "secondary": "#74b969",
     "ball": {
       "dimensions": {
         "width": 900,
@@ -22,7 +22,7 @@
       },
       "alt": "Placeholder image",
       "copyright": null,
-      "url": "https://images.unsplash.com/photo-1537498425277-c283d32ef9db?w=900&h=500&fit=crop"
+      "url": "https://images.unsplash.com/photo-1547394765-185e1e68f34e?w=900&h=500&fit=crop"
     },
     "banner": {
       "dimensions": {
@@ -31,7 +31,7 @@
       },
       "alt": "Placeholder image",
       "copyright": null,
-      "url": "https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?w=900&h=500&fit=crop"
+      "url": "https://images.unsplash.com/photo-1601933973783-43cf8a7d4c5f?w=900&h=500&fit=crop"
     },
     "background": {
       "dimensions": {
@@ -40,24 +40,24 @@
       },
       "alt": "Placeholder image",
       "copyright": null,
-      "url": "https://images.unsplash.com/photo-1596195689404-24d8a8d1c6ea?w=900&h=500&fit=crop"
+      "url": "https://images.unsplash.com/photo-1587905069134-008460d7a636?w=900&h=500&fit=crop"
     },
     "links": [
       {
-        "label": "whiteboard bricks-and-clicks convergence",
+        "label": "empower innovative ROI",
         "link": {
           "link_type": "Web",
-          "url": "https://slicemachine.dev"
+          "url": "http://google.com"
         },
-        "sheet": "evolve magnetic eyeballs"
+        "sheet": "brand front-end portals"
       },
       {
-        "label": "aggregate wireless technologies",
+        "label": "synthesize synergistic channels",
         "link": {
           "link_type": "Web",
-          "url": "https://slicemachine.dev"
+          "url": "http://twitter.com"
         },
-        "sheet": "repurpose mission-critical bandwidth"
+        "sheet": "expedite plug-and-play architectures"
       }
     ]
   }
