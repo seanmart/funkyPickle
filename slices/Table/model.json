@@ -21,23 +21,45 @@
           "type": "Boolean"
         },
         "title": {
-          "type": "StructuredText",
           "config": {
-            "single": "heading1",
             "label": "Title",
-            "placeholder": "This is where it all begins..."
-          }
+            "placeholder": ""
+          },
+          "type": "Text"
         },
         "description": {
-          "type": "StructuredText",
           "config": {
-            "single": "paragraph",
             "label": "Description",
-            "placeholder": "A nice description of your product"
-          }
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          },
+          "type": "StructuredText"
+        },
+        "link": {
+          "config": {
+            "label": "Google Sheet Link",
+            "placeholder": "Import a google sheet"
+          },
+          "type": "Text"
+        },
+        "headers": {
+          "config": {
+            "label": "Headers",
+            "placeholder": "inset as comma delimited list"
+          },
+          "type": "Text"
         }
       },
-      "items": {}
+      "items": {
+        "row": {
+          "config": {
+            "label": "Row",
+            "placeholder": "insert as comma deminited list"
+          },
+          "type": "Text"
+        }
+      }
     }
   ]
 }

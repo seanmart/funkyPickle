@@ -1,6 +1,170 @@
 {
   "slices": {
     "components": {
+      "carousel": {
+        "library": "slices",
+        "id": "carousel",
+        "name": "Carousel",
+        "description": "Carousel",
+        "model": {
+          "id": "carousel",
+          "type": "SharedSlice",
+          "name": "Carousel",
+          "description": "Carousel",
+          "variations": [
+            {
+              "id": "default",
+              "name": "Default",
+              "docURL": "...",
+              "version": "sktwi1xtmkfgx8626",
+              "description": "Carousel",
+              "primary": {
+                "title": {
+                  "config": {
+                    "label": "Title",
+                    "placeholder": ""
+                  },
+                  "type": "Text"
+                },
+                "description": {
+                  "type": "StructuredText",
+                  "config": {
+                    "label": "Description",
+                    "placeholder": "A nice description",
+                    "allowTargetBlank": true,
+                    "multi": "paragraph,strong,em,hyperlink"
+                  }
+                }
+              },
+              "items": {
+                "image": {
+                  "config": {
+                    "label": "Image",
+                    "constraint": {},
+                    "thumbnails": []
+                  },
+                  "type": "Image"
+                },
+                "link": {
+                  "config": {
+                    "label": "Link",
+                    "placeholder": "",
+                    "allowTargetBlank": false
+                  },
+                  "type": "Link"
+                },
+                "title": {
+                  "config": {
+                    "label": "Title",
+                    "placeholder": "",
+                    "allowTargetBlank": true,
+                    "single": "heading1,heading2,heading3,em,strong"
+                  },
+                  "type": "StructuredText"
+                },
+                "description": {
+                  "config": {
+                    "label": "Description",
+                    "placeholder": "",
+                    "allowTargetBlank": true,
+                    "multi": "paragraph,heading4,heading5,heading6,strong,em,hyperlink,list-item,o-list-item"
+                  },
+                  "type": "StructuredText"
+                }
+              }
+            }
+          ]
+        },
+        "mocks": {
+          "default": {
+            "variation": "default",
+            "name": "Default",
+            "slice_type": "carousel",
+            "items": [
+              {
+                "image": {
+                  "dimensions": {
+                    "width": 900,
+                    "height": 500
+                  },
+                  "alt": "Placeholder image",
+                  "copyright": null,
+                  "url": "https://images.unsplash.com/photo-1601933973783-43cf8a7d4c5f?w=900&h=500&fit=crop"
+                },
+                "link": {
+                  "link_type": "Web",
+                  "url": "https://prismic.io"
+                },
+                "title": [
+                  {
+                    "type": "heading1",
+                    "text": "Implement compelling action-items",
+                    "spans": []
+                  }
+                ],
+                "description": [
+                  {
+                    "type": "paragraph",
+                    "text": "Aute mollit commodo qui eu commodo mollit anim incididunt veniam exercitation Lorem. Voluptate anim eiusmod occaecat ullamco aute do Lorem ut ipsum excepteur.",
+                    "spans": []
+                  }
+                ]
+              },
+              {
+                "image": {
+                  "dimensions": {
+                    "width": 900,
+                    "height": 500
+                  },
+                  "alt": "Placeholder image",
+                  "copyright": null,
+                  "url": "https://images.unsplash.com/photo-1589652717521-10c0d092dea9?w=900&h=500&fit=crop"
+                },
+                "link": {
+                  "link_type": "Web",
+                  "url": "http://twitter.com"
+                },
+                "title": [
+                  {
+                    "type": "heading1",
+                    "text": "Grow frictionless bandwidth",
+                    "spans": []
+                  }
+                ],
+                "description": [
+                  {
+                    "type": "paragraph",
+                    "text": "Dolor et magna sunt ut irure eu esse duis non.",
+                    "spans": []
+                  }
+                ]
+              }
+            ],
+            "primary": {
+              "title": "exploit killer functionalities",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "text": "Proident eiusmod velit pariatur velit excepteur sunt exercitation nisi ex dolore laboris. Nulla do ut id labore amet enim ipsum adipisicing deserunt aliquip.",
+                  "spans": []
+                }
+              ]
+            }
+          }
+        },
+        "meta": {
+          "fileName": "index",
+          "isDirectory": true,
+          "extension": "vue"
+        },
+        "screenshotPaths": {
+          "default": {
+            "path": "/Users/smetcalf/Documents/CODEZ/websites/funkyPickle/funkypickle-website/slices/Carousel/default/preview.png",
+            "width": 1122,
+            "height": 714
+          }
+        }
+      },
       "events": {
         "library": "slices",
         "id": "events",
@@ -290,102 +454,6 @@
         "screenshotPaths": {
           "default": {
             "path": "/Users/smetcalf/Documents/CODEZ/websites/funkyPickle/funkypickle-website/slices/Form/default/preview.png",
-            "width": 1122,
-            "height": 714
-          }
-        }
-      },
-      "form_field": {
-        "library": "slices",
-        "id": "form_field",
-        "name": "FormField",
-        "description": "FormField",
-        "model": {
-          "id": "form_field",
-          "type": "SharedSlice",
-          "name": "FormField",
-          "description": "FormField",
-          "variations": [
-            {
-              "id": "default",
-              "name": "Default",
-              "docURL": "...",
-              "version": "sktwi1xtmkfgx8626",
-              "description": "FormField",
-              "primary": {
-                "type": {
-                  "config": {
-                    "label": "Type",
-                    "placeholder": "",
-                    "options": [
-                      "text",
-                      "phone",
-                      "email",
-                      "textarea",
-                      "dropdown"
-                    ],
-                    "default_value": "text"
-                  },
-                  "type": "Select"
-                },
-                "label": {
-                  "config": {
-                    "label": "Label",
-                    "placeholder": "A label for the form field"
-                  },
-                  "type": "Text"
-                },
-                "column": {
-                  "config": {
-                    "label": "Column",
-                    "placeholder": ""
-                  },
-                  "type": "Text"
-                },
-                "required": {
-                  "config": {
-                    "label": "Required",
-                    "placeholder_false": "false",
-                    "placeholder_true": "true",
-                    "default_value": false
-                  },
-                  "type": "Boolean"
-                },
-                "placeholder": {
-                  "config": {
-                    "label": "Placeholder",
-                    "placeholder": ""
-                  },
-                  "type": "Text"
-                }
-              },
-              "items": {}
-            }
-          ]
-        },
-        "mocks": {
-          "default": {
-            "variation": "default",
-            "name": "Default",
-            "slice_type": "form_field",
-            "items": [],
-            "primary": {
-              "type": "email",
-              "label": "enable front-end markets",
-              "column": "generate world-class e-markets",
-              "required": false,
-              "placeholder": "reintermediate synergistic action-items"
-            }
-          }
-        },
-        "meta": {
-          "fileName": "index",
-          "isDirectory": true,
-          "extension": "vue"
-        },
-        "screenshotPaths": {
-          "default": {
-            "path": "/Users/smetcalf/Documents/CODEZ/websites/funkyPickle/funkypickle-website/slices/FormField/default/preview.png",
             "width": 1122,
             "height": 714
           }
@@ -898,23 +966,45 @@
                   "type": "Boolean"
                 },
                 "title": {
-                  "type": "StructuredText",
                   "config": {
-                    "single": "heading1",
                     "label": "Title",
-                    "placeholder": "This is where it all begins..."
-                  }
+                    "placeholder": ""
+                  },
+                  "type": "Text"
                 },
                 "description": {
-                  "type": "StructuredText",
                   "config": {
-                    "single": "paragraph",
                     "label": "Description",
-                    "placeholder": "A nice description of your product"
-                  }
+                    "placeholder": "",
+                    "allowTargetBlank": true,
+                    "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                  },
+                  "type": "StructuredText"
+                },
+                "link": {
+                  "config": {
+                    "label": "Google Sheet Link",
+                    "placeholder": "Import a google sheet"
+                  },
+                  "type": "Text"
+                },
+                "headers": {
+                  "config": {
+                    "label": "Headers",
+                    "placeholder": "inset as comma delimited list"
+                  },
+                  "type": "Text"
                 }
               },
-              "items": {}
+              "items": {
+                "row": {
+                  "config": {
+                    "label": "Row",
+                    "placeholder": "insert as comma deminited list"
+                  },
+                  "type": "Text"
+                }
+              }
             }
           ]
         },
@@ -923,23 +1013,29 @@
             "variation": "default",
             "name": "Default",
             "slice_type": "table",
-            "items": [],
+            "items": [
+              {
+                "row": "facilitate mission-critical e-markets"
+              },
+              {
+                "row": "deploy compelling action-items"
+              },
+              {
+                "row": "unleash plug-and-play applications"
+              }
+            ],
             "primary": {
-              "publish": true,
-              "title": [
-                {
-                  "type": "heading1",
-                  "text": "Deliver open-source interfaces",
-                  "spans": []
-                }
-              ],
+              "publish": false,
+              "title": "envisioneer impactful initiatives",
               "description": [
                 {
                   "type": "paragraph",
-                  "text": "Ullamco eiusmod fugiat sint laborum proident cupidatat non.",
+                  "text": "Tempor consectetur dolore esse quis sunt et deserunt consectetur aute reprehenderit magna duis cillum.",
                   "spans": []
                 }
-              ]
+              ],
+              "link": "disintermediate strategic e-markets",
+              "headers": "grow granular blockchains"
             }
           }
         },
@@ -948,7 +1044,13 @@
           "isDirectory": true,
           "extension": "vue"
         },
-        "screenshotPaths": {}
+        "screenshotPaths": {
+          "default": {
+            "path": "/Users/smetcalf/Documents/CODEZ/websites/funkyPickle/funkypickle-website/slices/Table/default/preview.png",
+            "width": 1122,
+            "height": 714
+          }
+        }
       },
       "text": {
         "library": "slices",

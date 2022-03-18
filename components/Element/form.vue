@@ -1,5 +1,5 @@
 <template lang="html">
-  <FormulateForm :class="{'multi-column': multiColumn}" @submit="handleSubmit">
+  <FormulateForm class="form-element" :class="{'multi-column': multiColumn}" @submit="handleSubmit">
 
     <div class="formulate-fields -m-05">
       <template v-for="field in formFields">

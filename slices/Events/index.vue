@@ -1,12 +1,12 @@
 <template>
-  <Container class="event-section" :id="slice.id || null">
+  <component  :is="useContainer ? 'Container' : 'div'" class="event-section" :id="slice.id || null">
 
-    <Title v-if="slice.primary.title" :value="slice.primary.title" class="mb-40"/>
-    <prismic-rich-text v-if="slice.primary.description.length > 0" :field="slice.primary.description" class="mb-40"/>
+    <Title v-if="title" :value="title" class="mb-40"/>
+    <prismic-rich-text v-if="description" :field="description" class="mb-40"/>
 
     <template v-for="event in events">
 
-      <nuxt-link :to="`/event/${event.uid}`" class="event-list__event bg-white overflow-hidden mb-10px rounded-lg flex flex-col items-stretch lg:flex-row lg:h-120 shadow-b-blue">
+      <nuxt-link :to="`/event/${event.uid}`" class="event-item bg-white overflow-hidden mb-10px rounded-lg flex flex-col items-stretch lg:flex-row lg:h-120 shadow-b-blue">
 
         <div class="relative h-170 flex-grow-0 flex-shrink-0 flex flex-col justify-center text-center text-white overflow-hidden pb-40 bg-black lg:pb-0 lg:pr-40 lg:h-auto lg:w-150">
           <h3 class="relative z-10 font-header font-bold leading-09 uppercase text-50 lg:text-20">
@@ -15,7 +15,7 @@
           </h3>
           <div
             v-if="event.data.background.url"
-            class="event-list__image absolute inset-0 z-0 bg-cover bg-center opacity-40 image"
+            class="event-image absolute inset-0 z-0 bg-cover bg-center opacity-40 image"
             :style="{ backgroundImage: `url(${event.data.background.url})` }"
           />
         </div>
@@ -32,7 +32,7 @@
 
         <div class="flex-auto mt-40 p-25 flex flex-col justify-center lg:mt-0 lg:ml-40 lg:p-20">
           <Marquee>
-            <h3 class="px-10 font-header uppercase font-bold text-25 leading-none" v-html="event.data.title" />
+            <h3 class="event-title px-10 font-header uppercase font-bold text-25 leading-none" v-html="event.data.title" />
           </Marquee>
           <div class="flex flex-row items-center justify-center mt-20 md:mt-10 lg:justify-start" v-if="event.data.city || event.data.state">
             <icon class="mr-05 h-10 fill-pink" wayfinder/>
@@ -43,7 +43,7 @@
       </nuxt-link>
 
     </template>
-  </Container>
+  </component>
 </template>
 
 <script>
@@ -51,12 +51,19 @@ import { getDay, getMonth } from "@/assets/helpers";
 import { mapState } from "vuex";
 export default {
   name: "EventsSlice",
-  props:['slice'],
+  props:['slice','useContainer'],
   computed: {
     ...mapState({
       eventsData: (state) => state.lists.events,
       weather: state => state.weather
     }),
+    title(){
+      return this.slice.primary.title || null
+    },
+    description(){
+      return this.slice.primary.description.length > 0
+           ? this.slice.primary.description : null
+    },
     events() {
       if (this.eventsData.length == 0) return [];
       if (this.slice.primary.count) return this.eventsData.slice(0, this.slice.primary.count);
@@ -72,3 +79,20 @@ export default {
   }
 }
 </script>
+
+<style media="screen">
+.event-section .event-image {
+  transition: transform 0.35s;
+  transform: scale(1.1);
+}
+.event-section .event-title {
+  transition: color 0.35s;
+}
+
+.event-item:hover .event-title {
+  color: theme("colors.pink");
+}
+.event-item:hover .event-image {
+  transform: scale(1.01);
+}
+</style>

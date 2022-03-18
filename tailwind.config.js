@@ -43,13 +43,6 @@ export default{
       gray: theme("colors.gray"),
       blue: theme("colors.blue")
     }),
-    boxShadow: (theme) => ({
-      'b-blue': `0px 2px 5px rgba(${theme("colors.bluergb")},.25)`,
-      'r-blue': `2px 0px 5px rgba(${theme("colors.bluergb")},.25)`,
-      't-blue': `0px -2px 5px rgba(${theme("colors.bluergb")},.25)`,
-      'l-blue': `-2px 0px 5px rgba(${theme("colors.bluergb")},.25)`,
-      'none': 'none'
-    }),
     backgroundPosition: {
       "center-top": "center top",
     },
@@ -66,8 +59,8 @@ export default{
     spacing:{
       "nav-top": "70px",
       "nav-side": "250px",
-      "space": "5rem",
-      "space-2x": "10rem",
+      "space": "100px",
+      "space-2x": "200px",
       ...units.px,
       ...units.rem,
       ...units.fraction,

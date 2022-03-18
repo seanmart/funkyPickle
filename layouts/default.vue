@@ -13,7 +13,6 @@
 
     <Signup/>
     <EndMatter/>
-    <Background/>
 
   </div>
 </template>
@@ -78,6 +77,7 @@ export default {
       gsap.set(el,{...this.to,opacity:0})
     },
     enter(el,done){
+      window.scrollTo(0,0)
       let images = document.querySelectorAll('.image')
       this.$loaded(images,{background: true},()=>{
         gsap.to(el,.5,{x:0,y:0,opacity:1,ease:'power2.out',onComplete:done})

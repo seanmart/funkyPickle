@@ -1,5 +1,5 @@
 <template lang="html">
-  <component :is="component" :id="slice.id || null" class="form-section">
+  <component :is="useContainer ? 'Container' : 'div'" :id="slice.id || null" class="form-section">
     <div :class="classes.wrapper">
 
       <div v-if="title" class="pl-20 md:pl-50 p-10" :class="classes.header">
@@ -8,9 +8,9 @@
 
       <div :class="classes.content">
         <prismic-rich-text v-if="description" :field="description" class="mb-30 font-bold text-15"/>
-        <DataForm :fields="slice.items" :action="this.slice.primary.action" :multiColumn="!this.slice.primary.inline"/>
+        <ElementForm :fields="slice.items" :action="this.slice.primary.action" :multiColumn="!this.slice.primary.inline"/>
       </div>
-      
+
     </div>
   </component>
 </template>
@@ -18,17 +18,14 @@
 <script>
 export default {
   name:"FormSlice",
-  props:['slice'],
+  props:['slice','useContainer'],
   computed:{
     title(){
-      return this.slice.primary.title
+      return this.slice.primary.title || null
     },
     description(){
       return this.slice.primary.description.length > 0
            ? this.slice.primary.description : null
-    },
-    component(){
-      return this.slice.primary.inline ? 'div' : 'Container'
     },
     classes(){
       let inline = this.slice.primary.inline

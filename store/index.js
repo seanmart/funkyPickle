@@ -57,7 +57,7 @@ export default{
 
       let links = res.data.slices1
       let signup = { title: res.data['signup-title'],form:res.data.slices2}
-      let footer = {text: res.data.footer}
+      let footer = {text: res.data.footer,social: res.data.social}
 
 
       commit('SETTINGS',{links,signup,footer})

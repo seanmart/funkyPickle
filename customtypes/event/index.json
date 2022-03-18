@@ -42,6 +42,9 @@
             },
             "table": {
               "type": "SharedSlice"
+            },
+            "carousel": {
+              "type": "SharedSlice"
             }
           }
         }
