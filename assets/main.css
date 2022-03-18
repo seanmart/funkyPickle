@@ -1,5 +1,5 @@
 html{
-  font-size: 14px;
+  font-size: theme('fontSize.mobile')
 }
 
 body{
@@ -99,7 +99,7 @@ main{
 @media screen and (min-width: theme("screens.md")) {
 
   html{
-    font-size: 16px;
+    font-size: theme('fontSize.desktop')
   }
 
   body{
