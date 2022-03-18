@@ -202,9 +202,10 @@
                 "description": {
                   "type": "StructuredText",
                   "config": {
-                    "single": "paragraph",
                     "label": "Description",
-                    "placeholder": "A nice description of your product"
+                    "placeholder": "A nice description the events",
+                    "allowTargetBlank": true,
+                    "single": "paragraph"
                   }
                 },
                 "count": {
@@ -227,15 +228,15 @@
             "items": [],
             "primary": {
               "publish": false,
-              "title": "leverage plug-and-play initiatives",
+              "title": "revolutionize web-enabled e-commerce",
               "description": [
                 {
                   "type": "paragraph",
-                  "text": "Amet ad tempor id duis pariatur excepteur excepteur eiusmod velit elit occaecat incididunt sunt magna. Labore amet ut commodo id amet id excepteur officia consectetur deserunt.",
+                  "text": "Commodo laboris esse sit.",
                   "spans": []
                 }
               ],
-              "count": 1067
+              "count": 4979
             }
           }
         },

@@ -30,9 +30,10 @@
         "description": {
           "type": "StructuredText",
           "config": {
-            "single": "paragraph",
             "label": "Description",
-            "placeholder": "A nice description of your product"
+            "placeholder": "A nice description the events",
+            "allowTargetBlank": true,
+            "single": "paragraph"
           }
         },
         "count": {
