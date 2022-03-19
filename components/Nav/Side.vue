@@ -23,5 +23,5 @@ export default {
 </script>
 
 <style lang="css">
-  .nav-shadow{box-shadow: 2px 0px 5px rgba(theme('colors.bluergb'),.25);}
+  .nav-shadow{box-shadow: 2px 0px 2px rgba(theme('colors.bluergb'),.25);}
 </style>

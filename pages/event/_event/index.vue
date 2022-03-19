@@ -9,7 +9,7 @@
       </div>
 
       <Container noTop noBottom class="relative z-20">
-        <prismic-image :field="data.banner" class="rounded-lg shadow-b-blue"/>
+        <prismic-image :field="data.banner" class="rounded-lg graphic-box"/>
       </Container>
 
       <Container>
@@ -58,7 +58,7 @@
         </div>
       </template>
       <div v-else class="text-center">
-        <h1 class="font-bold text-20 leading-12" :style="{color: data.primary}">More Information Coming Soon!</h1>
+        <h1 class="font-bold text-16 leading-12" :style="{color: data.primary}">More Information Coming Soon!</h1>
       </div>
     </Container>
 
