@@ -1,0 +1,18 @@
+[
+  {
+    "variation": "default",
+    "name": "Default",
+    "slice_type": "bio",
+    "items": [],
+    "primary": {
+      "name": "benchmark cross-platform networks",
+      "text": [
+        {
+          "type": "paragraph",
+          "text": "Nostrud sunt incididunt aliquip est adipisicing laboris aliquip id cillum pariatur dolore dolor cillum.",
+          "spans": []
+        }
+      ]
+    }
+  }
+]

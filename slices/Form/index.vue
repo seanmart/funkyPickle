@@ -2,7 +2,7 @@
   <component :is="useContainer ? 'Container' : 'div'" :id="slice.id || null" class="form-section">
     <div :class="classes.wrapper">
 
-      <div v-if="title" class="pl-20 md:pl-50 p-10" :class="classes.header">
+      <div v-if="title" class="pl-20 md:pl-50 p-10 bg-lime border-b border-black">
         <h3 v-html="title" class="font-header uppercase text-25"/>
       </div>
 
@@ -34,10 +34,6 @@ export default {
       return{
         wrapper:{
           'rounded-lg overflow-hidden graphic-box': !inline
-        },
-        header:{
-          'bg-black text-white': bg == 'white' || bg == 'lime' || bg == null,
-          'bg-lime': bg == 'black' || bg == 'pink' || bg == 'green'
         },
         content:{
           'bg-white': bg == 'white' || (bg == null && !inline),

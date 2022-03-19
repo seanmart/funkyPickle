@@ -73,6 +73,9 @@
             },
             "carousel": {
               "type": "SharedSlice"
+            },
+            "bio": {
+              "type": "SharedSlice"
             }
           }
         }
