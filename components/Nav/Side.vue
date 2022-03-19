@@ -1,5 +1,5 @@
 <template lang="html">
-  <aside class="hidden md:block fixed left-0 h-full w-nav-side bg-white shadow-r-blue p-30px z-90">
+  <aside class="hidden md:block fixed left-0 h-full w-nav-side bg-white nav-shadow p-30px z-90">
     <nuxt-link to="/" class="block mb-20px">
       <Logo spin color class="w-full"/>
     </nuxt-link>
@@ -21,3 +21,7 @@ export default {
   })
 }
 </script>
+
+<style lang="css">
+  .nav-shadow{box-shadow: 2px 0px 5px rgba(theme('colors.bluergb'),.25);}
+</style>

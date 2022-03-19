@@ -6,7 +6,7 @@
 
     <template v-for="event in events">
 
-      <nuxt-link :to="`/event/${event.uid}`" class="event-item bg-white overflow-hidden mb-10px rounded-lg flex flex-col items-stretch lg:flex-row lg:h-120 shadow-b-blue">
+      <nuxt-link :to="`/event/${event.uid}`" class="event-item bg-white overflow-hidden mb-10px rounded-lg flex flex-col items-stretch lg:flex-row lg:h-120 graphic-box">
 
         <div class="relative h-170 flex-grow-0 flex-shrink-0 flex flex-col justify-center text-center text-white overflow-hidden pb-40 bg-black lg:pb-0 lg:pr-40 lg:h-auto lg:w-150">
           <h3 class="relative z-10 font-header font-bold leading-09 uppercase text-50 lg:text-20">

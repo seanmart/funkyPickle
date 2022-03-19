@@ -33,7 +33,7 @@ export default {
 
       return{
         wrapper:{
-          'rounded-lg overflow-hidden shadow-b-blue': !inline
+          'rounded-lg overflow-hidden graphic-box': !inline
         },
         header:{
           'bg-black text-white': bg == 'white' || bg == 'lime' || bg == null,

@@ -3,7 +3,7 @@
     <Title v-if="title" :value="title" class="mb-40"/>
     <prismic-rich-text v-if="description" :field="description" class="mb-40"/>
 
-    <ElementTable :headers="headers" :rows="rows"/>
+    <ElementTable :headers="headers" :rows="rows" class="graphic-box"/>
   </component>
 </template>
 
