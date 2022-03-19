@@ -3,7 +3,7 @@
     <div class="flex-initial p-20 text-center">
       <div class="flex flex-row items-center mb-05" v-if="venue">
         <Icon wayfinder  class="pr-10 h-20"/>
-        <h3 v-html="venue" class="text-13 md:text-20 font-bold"></h3>
+        <h3 v-html="venue" class="text-13 md:text-16 font-bold"></h3>
       </div>
       <div class="font-normal">
         <p v-if="address" v-html="address"/>

@@ -19,7 +19,7 @@ export default {
   name:"IntroSlice",
   props:['slice','useContainer'],
   mounted(){
-    this.$nextTick(this.initAnim)
+    setTimeout(this.initAnim,500)
   },
   destroyed(){
     this.anim && this.anim.kill()

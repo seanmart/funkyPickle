@@ -2,7 +2,7 @@
   <EventWidget class="flex justify-center items-center">
     <div class="flex flex-row items-center">
       <Icon calendar class="pr-10 h-20 "/>
-      <h3 class="font-bold text-13 md:text-20" v-html="data.start"/>
+      <h3 class="font-bold text-13 md:text-16" v-html="data.start"/>
     </div>
   </EventWidget>
 </template>
