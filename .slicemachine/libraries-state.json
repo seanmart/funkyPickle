@@ -1,6 +1,76 @@
 {
   "slices": {
     "components": {
+      "bio": {
+        "library": "slices",
+        "id": "bio",
+        "name": "Bio",
+        "description": "Bio",
+        "model": {
+          "id": "bio",
+          "type": "SharedSlice",
+          "name": "Bio",
+          "description": "Bio",
+          "variations": [
+            {
+              "id": "default",
+              "name": "Default",
+              "docURL": "...",
+              "version": "sktwi1xtmkfgx8626",
+              "description": "Bio",
+              "primary": {
+                "name": {
+                  "config": {
+                    "label": "Name",
+                    "placeholder": ""
+                  },
+                  "type": "Text"
+                },
+                "text": {
+                  "config": {
+                    "label": "Text",
+                    "placeholder": "",
+                    "allowTargetBlank": true,
+                    "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                  },
+                  "type": "StructuredText"
+                }
+              },
+              "items": {}
+            }
+          ]
+        },
+        "mocks": {
+          "default": {
+            "variation": "default",
+            "name": "Default",
+            "slice_type": "bio",
+            "items": [],
+            "primary": {
+              "name": "benchmark cross-platform networks",
+              "text": [
+                {
+                  "type": "paragraph",
+                  "text": "Nostrud sunt incididunt aliquip est adipisicing laboris aliquip id cillum pariatur dolore dolor cillum.",
+                  "spans": []
+                }
+              ]
+            }
+          }
+        },
+        "meta": {
+          "fileName": "index",
+          "isDirectory": true,
+          "extension": "vue"
+        },
+        "screenshotPaths": {
+          "default": {
+            "path": "/Users/smetcalf/Documents/CODEZ/websites/funkyPickle/funkypickle-website/slices/Bio/default/preview.png",
+            "width": 1122,
+            "height": 714
+          }
+        }
+      },
       "carousel": {
         "library": "slices",
         "id": "carousel",
