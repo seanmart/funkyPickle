@@ -28,7 +28,7 @@ export default {
     containerClasses(){
       let bg = this.slice.primary.background
       return{
-        'bg-white shadow-b-blue': bg == 'white' || bg == null,
+        'bg-white': bg == 'white' || bg == null,
         'bg-lime': bg == 'lime',
         'bg-green': bg == 'green',
         'bg-pink': bg == 'pink',

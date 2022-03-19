@@ -111,8 +111,8 @@ export default {
   display: block;
   padding: .75rem  1.25rem;
   border-radius: .25rem;
-  box-shadow: 0px 1px 3px rgba(theme('colors.bluergb'),.3);
-  border: 1px solid rgba(theme('colors.bluergb'),.2);
+  box-shadow: 3px 3px 0px theme('colors.black');
+  outline: 1px solid theme('colors.black');
   width:100%;
   margin: 0px;
   background: white;
@@ -149,8 +149,8 @@ export default {
 .formulate-form [data-is-showing-errors="true"] input,
 .formulate-form [data-is-showing-errors="true"] select,
 .formulate-form [data-is-showing-errors="true"] textarea{
-  border: 1px solid theme('colors.pink');
-  box-shadow: 0px 1px 3px rgba(theme('colors.pinkrgb'),.3);
+  outline: 1px solid theme('colors.pink');
+  box-shadow: 3px 3px 0px theme('colors.pink');
 }
 .formulate-form [data-is-showing-errors="true"] label{
   color: theme('colors.pink')

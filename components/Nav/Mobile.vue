@@ -45,8 +45,4 @@ export default {
   #mobile-nav{
     transform: translateX(-100%);
   }
-
-  #mobile-nav .nav-link:hover{
-    color: theme('colors.lime')
-  }
 </style>
