@@ -29,8 +29,10 @@ export default {
 </script>
 
 <style lang="css">
-  .nav-link:hover,
-  .nuxt-link-active{
+  .nav-link:hover{
+    color: theme('colors.green')
+  }
+  .nav-link.nuxt-link-active{
     color: theme('colors.pink')
   }
 </style>

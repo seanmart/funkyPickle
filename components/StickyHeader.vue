@@ -1,12 +1,12 @@
 <template lang="html">
   <div class="h-50 relative z-50" ref="spacer" v-if="items.length > 0">
-    <div class="absolute inset-0 h-50 no-scrollbar flex flex-col md:flex-row" :class="{'overflow-hidden':!menuOpen}" ref="header">
+    <header class="absolute inset-0 h-50 no-scrollbar flex flex-col md:flex-row sticky-header" :class="{'overflow-hidden':!menuOpen}" ref="header">
 
       <template v-for="(item,i) in headerItems">
         <div
           :style="backgroundStyles"
           class="sticky-header-item flex-shrink-0 md:flex-auto flex justify-center items-center font-bold h-50 relative"
-          :class="[backgroundClasses,{'cursor-pointer':item.onClick ||item.menu, 'md:hidden': item.menu,'border-t-2 md:border-t-0 md:border-l-2': i > 0}]"
+          :class="[backgroundClasses,{'sticky-header-link':item.onClick ||item.menu, 'md:hidden': item.menu}]"
           @click="()=>item.onClick && item.onClick()"
         >
           <span v-html="item.label"/>
@@ -14,7 +14,7 @@
           <button v-if="item.menu" class="ml-10 w-30px"><div v-for="i in 3" class="h-2px w-full bg-lime my-3px"/></button>
         </div>
       </template>
-    </div>
+    </header>
   </div>
 </template>
 
@@ -73,7 +73,8 @@ export default {
 
 <style lang="css">
   .sticky-header-item{
-    border-color:rgba(theme('colors.blackrgb'),.15)
+    outline: 1px solid theme('colors.black');
+    /* border-color:rgba(theme('colors.blackrgb'),.15) */
   }
   .sticky-header-item *{
     position: relative;
@@ -82,14 +83,14 @@ export default {
   .sticky-header-item:last-child{
     border-right: none;
   }
-  .is-desktop .sticky-header-item.cursor-pointer:hover::after{
-    content: '';
-    position: absolute;
-    top:0px;
-    left:0px;
-    right:0px;
-    bottom:0px;
-    background: rgba(theme('colors.blackrgb'),.15);
+  .sticky-header-item.sticky-header-link{
+    cursor: pointer;
+  }
+  .sticky-header-item.sticky-header-link:hover{
+    background: theme('colors.lime');
+  }
+  .sticky-header-item.sticky-header-link:hover span{
+    color:theme('colors.black')
   }
 
 </style>
