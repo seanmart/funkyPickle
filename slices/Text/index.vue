@@ -1,7 +1,7 @@
 <template>
 <component :is="useContainer ? 'Container' : 'div'" class="text-section" :id="slice.id || null">
   <Title v-if="title" :value="title" class="mb-40"/>
-  <div class="shadow-b-blue rounded-lg overflow-hidden" :class="classes">
+  <div class="rounded-lg overflow-hidden graphic-box" :class="classes">
     <prismic-image v-if="image" :field="image"/>
     <div class="px-20 py-50 lg:px-50 text-content max-w-800px mx-auto">
       <ElementText :field="text" :calloutColor="callout"/>
