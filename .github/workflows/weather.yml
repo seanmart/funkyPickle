@@ -25,7 +25,7 @@ jobs:
           DATA: ${{steps.get-prismic-data.outputs.DATA}}
       - name: replace file
         run: |
-          if [toJson(steps.get-weather-data.outputs.DATA) != {}]; then
+          if [$(toJson(steps.get-weather-data.outputs.DATA)) != {}]; then
           echo ${{toJson(steps.get-weather-data.outputs.DATA)}} > assets/weather.json
           git add assets/weather.json
           git config --global user.name 'Sean Metcalf'
